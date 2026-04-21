@@ -25,7 +25,15 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 68px; /* account for sticky nav */
+  }
+  .hero, section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
 
   body {
     background: var(--paper);
@@ -101,6 +109,7 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--accent); font-weight: 600; }
   .nav-links a::after {
     content: '';
     position: absolute;
@@ -112,6 +121,7 @@
     transition: width 0.25s ease;
   }
   .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active::after { width: 100%; height: 2px; }
 
   /* ============ HERO ============ */
   .hero {
@@ -1946,6 +1956,182 @@
     .nav-links { gap: 16px; font-size: 11px; }
     .hero { padding: 56px 0 72px; }
     section { padding: 64px 0; }
+
+    /* ===== Mobile polish pass ===== */
+
+    /* Disable section snap on mobile — feels bad with iOS momentum scroll */
+    html { scroll-snap-type: none; }
+
+    /* Hero — collapse the meta grid, breathing room */
+    .hero-meta {
+      gap: 20px 32px;
+      padding-top: 24px;
+    }
+    .hero-meta > div { min-width: 130px; }
+
+    /* Nav — keep brand and links on one line but tighten */
+    .nav { padding: 14px 0; }
+    .nav-brand { font-size: 14px; }
+    .nav-links { gap: 14px; }
+
+    /* Live demo — the two lanes stack; make header feel natural */
+    .live-demo { padding: 32px 20px 40px; }
+    .live-demo-head {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 20px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+    }
+    .live-demo-head h3 { font-size: 26px; }
+    .run-btn {
+      padding: 16px 22px;
+      font-size: 12px;
+      width: 100%;
+    }
+    .stage { grid-template-columns: 1fr; gap: 18px; }
+    .lane { padding: 20px 18px 24px; min-height: auto; }
+    .lane-title { font-size: 17px; }
+    .lane-clock { font-size: 10px; }
+
+    /* Step lines: slightly smaller mono text, tighter padding */
+    .step { font-size: 11.5px; padding: 9px 12px; }
+
+    /* Rule rows: drop to 2 columns (id + desc) with outcome pill on its own line */
+    .rule-row {
+      grid-template-columns: auto 1fr;
+      gap: 10px 14px;
+      padding: 8px 10px;
+    }
+    .rule-row .r-out {
+      grid-column: 1 / -1;
+      justify-self: end;
+      margin-top: 2px;
+    }
+
+    /* Solve blocks — let rows stack if needed */
+    .solve-block { padding: 14px 14px; font-size: 11px; }
+    .solve-block .sb-row,
+    .solve-block .sb-result {
+      grid-template-columns: 1fr auto;
+      gap: 6px 10px;
+    }
+    .solve-block .sb-row .sb-calc,
+    .solve-block .sb-result .sb-calc {
+      grid-column: 1 / -1;
+      font-size: 10.5px;
+      color: rgba(244,239,230,0.55);
+      padding-left: 0;
+    }
+
+    /* Source-pull rows: tighter */
+    .source-pull {
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      padding: 9px 12px;
+    }
+    .source-pull .sp-val {
+      grid-column: 1 / -1;
+      justify-self: end;
+      font-size: 9.5px;
+    }
+
+    /* Deliberation — same tightening */
+    .deliberation { padding: 12px 12px; }
+    .deliberation .d-option {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .deliberation .d-option .d-score {
+      justify-self: start;
+      padding-top: 2px;
+    }
+
+    /* Quote card */
+    .quote-card .qc-head { padding: 16px 18px 12px; }
+    .quote-card .qc-body {
+      grid-template-columns: 1fr;
+      gap: 12px 16px;
+      padding: 16px 18px;
+    }
+    .quote-card .qc-premium {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .quote-card .qc-premium .qc-premium-val { font-size: 28px; }
+    .quote-card .qc-trace { padding: 10px 18px 14px; font-size: 9.5px; }
+
+    /* Race summary — stacked stats */
+    .race-stats { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .race-summary { padding: 22px 22px; margin-top: 28px; }
+
+    /* Reason header pills — let mode pill wrap */
+    .reason-header { padding: 12px 14px; font-size: 11px; }
+    .mode-pill { display: inline-block; margin-top: 6px; margin-left: 0; }
+
+    /* Tables on mobile — let them scroll horizontally rather than squish */
+    .rules {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+    .rules th, .rules td { padding: 10px 12px; }
+    .rules td.rule-out { white-space: nowrap; }
+
+    /* Modes grid — 2 columns on tablet-ish, 1 on phone */
+    .modes-grid { grid-template-columns: 1fr 1fr; }
+    .mode-cell { min-height: auto; padding: 22px 18px; }
+
+    /* Think-frame: stack */
+    .think-frame { grid-template-columns: 1fr; }
+
+    /* Ontology diagram: shrink */
+    .ont-svg { max-height: 460px; }
+  }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+
+    /* Hero tighter */
+    .hero { padding: 44px 0 60px; }
+    .hero h1 { font-size: 44px; }
+    .hero-lede { font-size: 16px; margin-bottom: 32px; }
+    .hero-meta {
+      grid-template-columns: 1fr 1fr;
+      display: grid;
+      gap: 16px 24px;
+    }
+    .hero-meta > div { min-width: 0; }
+    .hero-meta .val { font-size: 15px; }
+
+    /* Nav: allow wrap so brand and links don't collide */
+    .nav-inner { flex-wrap: wrap; gap: 10px 16px; }
+    .nav-links { gap: 12px; font-size: 10.5px; }
+
+    /* Section headings */
+    section { padding: 52px 0; }
+    .sec-title { font-size: 28px; }
+    .def-lede { font-size: 20px; }
+
+    /* Submission card: 1 column on small phones */
+    .sub-body { grid-template-columns: 1fr; gap: 16px; padding: 22px 24px; }
+    .sub-head { padding: 18px 24px; }
+    .sub-head h3 { font-size: 18px; }
+
+    /* Modes grid: single column */
+    .modes-grid { grid-template-columns: 1fr; }
+
+    /* Live demo */
+    .live-demo-head h3 { font-size: 22px; }
+    .lane { padding: 18px 16px 22px; }
+
+    /* Process tabs titles */
+    .process-tab .tab-title { font-size: 15px; }
+    .process-tab .tab-sub { font-size: 11px; }
+
+    /* Race summary: single column on small phones */
+    .race-stats { grid-template-columns: 1fr; gap: 14px; }
   }
 </style>
 </head>
@@ -1954,7 +2140,7 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="wrap nav-inner">
-    <div class="nav-brand"><span class="dot"></span>Neurosymbolic AI / Field Note</div>
+    <div class="nav-brand"><span class="dot"></span>NSAI for Insurance</div>
     <div class="nav-links">
       <a href="#define">01 Define</a>
       <a href="#reason">02 Reason</a>
@@ -1991,7 +2177,6 @@
         <div class="val">~12 minutes</div>
       </div>
     </div>
-    <div class="stamp">Working<br>Prototype<br>v 1.0</div>
   </div>
 </header>
 
@@ -2772,8 +2957,8 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <div class="brand">Neurosymbolic AI — an underwriting primer.</div>
-    <div class="meta">Prototype · v 1.0 · For internal use</div>
+    <div class="brand">NSAI for Insurance — a primer.</div>
+    <div class="meta">NSAI for Insurance</div>
   </div>
 </footer>
 
@@ -3308,6 +3493,46 @@
     el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     io.observe(el);
   });
+
+  // Scroll-spy: highlight current section in the nav
+  (function initScrollSpy() {
+    const sections = ['define', 'reason', 'ontology', 'demo']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+    const navLinks = {};
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      const id = a.getAttribute('href').replace('#', '');
+      navLinks[id] = a;
+    });
+
+    function setActive(id) {
+      Object.values(navLinks).forEach(a => a.classList.remove('active'));
+      if (id && navLinks[id]) navLinks[id].classList.add('active');
+    }
+
+    // IntersectionObserver with a narrow detection band across the middle
+    // of the viewport. Whichever section is crossing that band is "active."
+    const spy = new IntersectionObserver((entries) => {
+      // Find the entry most in view (highest intersectionRatio) among intersecting ones
+      const visible = entries.filter(e => e.isIntersecting);
+      if (visible.length > 0) {
+        visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        setActive(visible[0].target.id);
+      }
+    }, {
+      // A band from 30% below top to 60% below top — sections crossing this band
+      // are considered "in view" for spy purposes
+      rootMargin: '-30% 0px -60% 0px',
+      threshold: [0, 0.1, 0.5, 1],
+    });
+
+    sections.forEach(s => spy.observe(s));
+
+    // Clear active state when user is above all sections (e.g., in hero)
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 300) setActive(null);
+    }, { passive: true });
+  })();
 </script>
 
 </body>
