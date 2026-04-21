@@ -129,6 +129,28 @@
     position: relative;
     border-bottom: 1px solid rgba(28,37,48,0.15);
   }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+    gap: 56px;
+    align-items: start;
+    margin-bottom: 40px;
+  }
+  .hero-text { min-width: 0; }
+  .hero-visual {
+    position: relative;
+    animation: hero-fade 1.2s ease 0.2s both;
+  }
+  .hero-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 20px 40px rgba(184,68,46,0.08));
+  }
+  @keyframes hero-fade {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
   .hero-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -483,6 +505,13 @@
   }
   .think-col.system2 {
     background: linear-gradient(135deg, rgba(63,94,74,0.06) 0%, rgba(63,94,74,0.02) 100%);
+  }
+  .think-glyph {
+    width: 160px;
+    height: auto;
+    display: block;
+    margin-bottom: 18px;
+    opacity: 0.9;
   }
   .think-col .think-tag {
     font-family: 'JetBrains Mono', monospace;
@@ -1963,6 +1992,12 @@
     html { scroll-snap-type: none; }
 
     /* Hero — collapse the meta grid, breathing room */
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .hero-visual { display: none; }
     .hero-meta {
       gap: 20px 32px;
       padding-top: 24px;
@@ -2093,6 +2128,9 @@
   @media (max-width: 600px) {
     .wrap { padding: 0 18px; }
 
+    /* Shrink decorative glyphs on tight screens */
+    .think-glyph { width: 120px; margin-bottom: 12px; }
+
     /* Hero tighter */
     .hero { padding: 44px 0 60px; }
     .hero h1 { font-size: 44px; }
@@ -2153,12 +2191,154 @@
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <div class="hero-eyebrow">A Primer for Underwriting Leaders</div>
-    <h1>Thinking <em>beyond</em> the model.</h1>
-    <p class="hero-lede">
-      Generative AI reads like a brilliant intern with no memory of your rulebook.
-      Neurosymbolic AI pairs that intern with a <em>structured mind</em> — an ontology and a rule engine — so every decision is auditable, consistent with your guidelines, and defensible to a regulator. This is a working explainer, with a live commercial property submission at the end.
-    </p>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-eyebrow">A Primer for Underwriting Leaders</div>
+        <h1>Thinking <em>beyond</em> the model.</h1>
+        <p class="hero-lede">
+          Generative AI reads like a brilliant intern with no memory of your rulebook.
+          Neurosymbolic AI pairs that intern with a <em>structured mind</em> — an ontology and a rule engine — so every decision is auditable, consistent with your guidelines, and defensible to a regulator. This is a working explainer, with a live commercial property submission at the end.
+        </p>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg class="hero-svg" viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="neural-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#B8442E" stop-opacity="0.35"/>
+              <stop offset="70%" stop-color="#B8442E" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="symbolic-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#3F5E4A" stop-opacity="0.35"/>
+              <stop offset="70%" stop-color="#3F5E4A" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="bridge-grad" x1="0%" y1="50%" x2="100%" y2="50%">
+              <stop offset="0%" stop-color="#B8442E"/>
+              <stop offset="50%" stop-color="#C8A951"/>
+              <stop offset="100%" stop-color="#3F5E4A"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Ambient glows -->
+          <circle cx="115" cy="230" r="140" fill="url(#neural-glow)"/>
+          <circle cx="345" cy="230" r="140" fill="url(#symbolic-glow)"/>
+
+          <!-- LEFT: NEURAL MESH -->
+          <g opacity="0.9">
+            <g stroke="#B8442E" stroke-width="0.6" fill="none" opacity="0.35">
+              <path d="M 55,110 Q 90,140 120,160"/>
+              <path d="M 55,110 Q 75,180 90,220"/>
+              <path d="M 120,160 Q 85,210 90,220"/>
+              <path d="M 120,160 Q 150,195 140,260"/>
+              <path d="M 90,220 Q 115,250 140,260"/>
+              <path d="M 140,260 Q 110,310 95,345"/>
+              <path d="M 90,220 Q 60,290 95,345"/>
+              <path d="M 55,110 Q 40,180 60,200"/>
+              <path d="M 60,200 Q 80,230 90,220"/>
+              <path d="M 140,260 Q 175,300 160,350"/>
+              <path d="M 95,345 Q 130,360 160,350"/>
+              <path d="M 55,110 Q 30,250 60,200"/>
+              <path d="M 170,130 Q 140,140 120,160"/>
+              <path d="M 170,130 Q 185,200 140,260"/>
+              <path d="M 170,130 Q 150,90 95,80"/>
+              <path d="M 95,80 Q 70,95 55,110"/>
+            </g>
+            <circle cx="55" cy="110" r="5" fill="#B8442E"/>
+            <circle cx="120" cy="160" r="4" fill="#B8442E" opacity="0.85"/>
+            <circle cx="90" cy="220" r="6" fill="#B8442E"/>
+            <circle cx="140" cy="260" r="5" fill="#B8442E" opacity="0.9"/>
+            <circle cx="60" cy="200" r="3.5" fill="#B8442E" opacity="0.75"/>
+            <circle cx="95" cy="345" r="4.5" fill="#B8442E" opacity="0.85"/>
+            <circle cx="160" cy="350" r="3.5" fill="#B8442E" opacity="0.7"/>
+            <circle cx="170" cy="130" r="5" fill="#B8442E" opacity="0.9"/>
+            <circle cx="95" cy="80" r="3.5" fill="#B8442E" opacity="0.7"/>
+            <circle cx="45" cy="280" r="3" fill="#B8442E" opacity="0.6"/>
+            <circle cx="175" cy="220" r="3.5" fill="#B8442E" opacity="0.7"/>
+
+            <circle cx="90" cy="220" r="6" fill="none" stroke="#B8442E" stroke-width="1.5" opacity="0">
+              <animate attributeName="r" values="6;24;24" dur="4s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.8;0;0" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="140" cy="260" r="5" fill="none" stroke="#B8442E" stroke-width="1.5" opacity="0">
+              <animate attributeName="r" values="5;20;20" dur="5s" begin="1.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.7;0;0" dur="5s" begin="1.5s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <text x="55" y="400" font-family="JetBrains Mono, monospace" font-size="10" fill="#B8442E" letter-spacing="3" font-weight="600">NEURAL</text>
+          <text x="55" y="418" font-family="Fraunces, serif" font-size="11" fill="#6B6458" font-style="italic">pattern, association</text>
+
+          <!-- RIGHT: SYMBOLIC GRAPH -->
+          <g>
+            <g stroke="#3F5E4A" stroke-width="1" fill="none" opacity="0.55">
+              <line x1="345" y1="110" x2="285" y2="175"/>
+              <line x1="345" y1="110" x2="405" y2="175"/>
+              <line x1="285" y1="175" x2="260" y2="250"/>
+              <line x1="285" y1="175" x2="325" y2="250"/>
+              <line x1="405" y1="175" x2="375" y2="250"/>
+              <line x1="405" y1="175" x2="425" y2="250"/>
+              <line x1="260" y1="250" x2="250" y2="330"/>
+              <line x1="325" y1="250" x2="310" y2="330"/>
+              <line x1="325" y1="250" x2="345" y2="330"/>
+              <line x1="375" y1="250" x2="385" y2="330"/>
+              <line x1="425" y1="250" x2="420" y2="330"/>
+              <line x1="285" y1="175" x2="405" y2="175" stroke-dasharray="3,3" opacity="0.4"/>
+              <line x1="325" y1="250" x2="375" y2="250" stroke-dasharray="3,3" opacity="0.4"/>
+            </g>
+
+            <rect x="320" y="96" width="50" height="28" rx="1" fill="#3F5E4A"/>
+            <text x="345" y="115" text-anchor="middle" font-family="Fraunces, serif" font-size="10" fill="#F4EFE6" font-weight="500">Policy</text>
+
+            <rect x="258" y="163" width="54" height="24" rx="1" fill="#ECE5D6" stroke="#3F5E4A" stroke-width="1"/>
+            <text x="285" y="179" text-anchor="middle" font-family="Fraunces, serif" font-size="9" fill="#1C2530">Location</text>
+            <rect x="378" y="163" width="54" height="24" rx="1" fill="#ECE5D6" stroke="#3F5E4A" stroke-width="1"/>
+            <text x="405" y="179" text-anchor="middle" font-family="Fraunces, serif" font-size="9" fill="#1C2530">Building</text>
+
+            <rect x="236" y="240" width="48" height="20" rx="1" fill="#F4EFE6" stroke="#6B6458" stroke-width="0.8"/>
+            <text x="260" y="253" text-anchor="middle" font-family="Fraunces, serif" font-size="8" fill="#2A3340">Peril</text>
+            <rect x="301" y="240" width="48" height="20" rx="1" fill="#F4EFE6" stroke="#6B6458" stroke-width="0.8"/>
+            <text x="325" y="253" text-anchor="middle" font-family="Fraunces, serif" font-size="8" fill="#2A3340">Class</text>
+            <rect x="351" y="240" width="48" height="20" rx="1" fill="#F4EFE6" stroke="#6B6458" stroke-width="0.8"/>
+            <text x="375" y="253" text-anchor="middle" font-family="Fraunces, serif" font-size="8" fill="#2A3340">Occup</text>
+            <rect x="401" y="240" width="48" height="20" rx="1" fill="#F4EFE6" stroke="#6B6458" stroke-width="0.8"/>
+            <text x="425" y="253" text-anchor="middle" font-family="Fraunces, serif" font-size="8" fill="#2A3340">Prot</text>
+
+            <circle cx="250" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
+            <circle cx="310" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
+            <circle cx="345" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
+            <circle cx="385" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
+            <circle cx="420" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
+
+            <circle cx="345" cy="110" r="14" fill="none" stroke="#3F5E4A" stroke-width="1.2" opacity="0">
+              <animate attributeName="r" values="14;28;28" dur="4s" begin="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.7;0;0" dur="4s" begin="2s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <text x="345" y="400" font-family="JetBrains Mono, monospace" font-size="10" fill="#3F5E4A" letter-spacing="3" font-weight="600">SYMBOLIC</text>
+          <text x="345" y="418" font-family="Fraunces, serif" font-size="11" fill="#6B6458" font-style="italic">meaning, rules, proof</text>
+
+          <!-- BRIDGE -->
+          <g>
+            <line x1="195" y1="230" x2="260" y2="230" stroke="url(#bridge-grad)" stroke-width="2.5" opacity="0.9"/>
+            <circle cx="228" cy="230" r="5" fill="#C8A951" opacity="0.9"/>
+
+            <circle r="4" fill="#C8A951" opacity="0">
+              <animate attributeName="cx" values="195;260" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="230;230" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3" fill="#C8A951" opacity="0">
+              <animate attributeName="cx" values="260;195" dur="3s" begin="2s" repeatCount="indefinite"/>
+              <animate attributeName="cy" values="230;230" dur="3s" begin="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.7;0.7;0" dur="3s" begin="2s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <text x="228" y="202" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6458" letter-spacing="3" font-weight="600">WORKING</text>
+          <text x="228" y="263" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6458" letter-spacing="3" font-weight="600">TOGETHER</text>
+        </svg>
+      </div>
+    </div>
     <div class="hero-meta">
       <div>
         <div class="label">Domain</div>
@@ -2305,6 +2485,17 @@
     <!-- Thinking Fast & Slow framing -->
     <div class="think-frame">
       <div class="think-col system1">
+        <svg class="think-glyph" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Motion-streak pattern: blurred, fast, organic -->
+          <g stroke="#B8442E" fill="none" stroke-linecap="round">
+            <path d="M 10 40 Q 35 20 55 40 T 95 40 T 135 40 T 175 40" stroke-width="2" opacity="0.85"/>
+            <path d="M 14 50 Q 40 32 60 50 T 100 50 T 140 50 T 180 50" stroke-width="1.5" opacity="0.45"/>
+            <path d="M 6 30 Q 32 12 52 30 T 92 30 T 132 30 T 172 30" stroke-width="1" opacity="0.25"/>
+          </g>
+          <circle cx="175" cy="40" r="4.5" fill="#B8442E"/>
+          <circle cx="180" cy="50" r="3" fill="#B8442E" opacity="0.5"/>
+          <circle cx="172" cy="30" r="2.5" fill="#B8442E" opacity="0.3"/>
+        </svg>
         <div class="think-tag">SYSTEM 1 · KAHNEMAN</div>
         <h3>Fast. Associative. <em>Often right, sometimes dangerously wrong.</em></h3>
         <p class="think-desc">
@@ -2313,6 +2504,24 @@
         <div class="think-map">A large language model is System 1 made mechanical — a pattern engine operating at machine scale, with machine confidence.</div>
       </div>
       <div class="think-col system2">
+        <svg class="think-glyph" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Step pattern: deliberate, sequential, orderly -->
+          <g stroke="#3F5E4A" fill="none" stroke-width="2" stroke-linecap="square">
+            <path d="M 10 55 L 30 55 L 30 40 L 60 40 L 60 25 L 90 25 L 90 40 L 120 40 L 120 30 L 150 30 L 150 15 L 180 15"/>
+          </g>
+          <g fill="#3F5E4A">
+            <rect x="8" y="53" width="4" height="4"/>
+            <rect x="58" y="23" width="4" height="4"/>
+            <rect x="118" y="28" width="4" height="4"/>
+            <rect x="178" y="13" width="4" height="4"/>
+          </g>
+          <!-- Tick marks suggesting checks along the path -->
+          <g stroke="#3F5E4A" stroke-width="1" opacity="0.45">
+            <line x1="30" y1="35" x2="30" y2="45"/>
+            <line x1="90" y1="20" x2="90" y2="30"/>
+            <line x1="150" y1="10" x2="150" y2="20"/>
+          </g>
+        </svg>
         <div class="think-tag">SYSTEM 2 · KAHNEMAN</div>
         <h3>Slow. Deliberate. <em>Rule-following, multi-step, defensible.</em></h3>
         <p class="think-desc">
