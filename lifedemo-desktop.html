@@ -204,6 +204,8 @@ body {
   margin-left: var(--side-w);
   min-height: calc(100vh - var(--nav-h) - var(--cmd-h));
   background: #050c14;
+  width: calc(100% - var(--side-w));
+  overflow-x: hidden;
 }
 
 /* ── PANELS ────────────────────────────────────────────────── */
@@ -211,23 +213,28 @@ body {
 .panel.active { display: block; }
 
 .panel-header {
-  padding: 28px 44px 22px;
+  padding: 24px 44px 20px;
   border-bottom: 1px solid var(--border);
   background: #050c14;
-  display: flex; align-items: baseline; gap: 20px;
+}
+.panel-header-row {
+  display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap;
 }
 .panel-eyebrow {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
   text-transform: uppercase; color: var(--red); white-space: nowrap;
+  margin-bottom: 6px;
 }
 .panel-eyebrow.gold { color: var(--gold); }
 .panel-title {
-  font-family: var(--font-serif); font-size: clamp(22px, 2vw, 30px);
+  font-family: var(--font-serif); font-size: clamp(20px, 1.8vw, 26px);
   font-weight: 500; color: var(--cream); letter-spacing: -.3px;
 }
 .panel-sub {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px;
   color: var(--text-faint); text-transform: uppercase; margin-left: auto;
+  white-space: nowrap; flex-shrink: 0;
+}
   white-space: nowrap;
 }
 
@@ -240,7 +247,11 @@ body {
 .conn-arrow { color: var(--teal); font-family: var(--font-mono); font-size: 13px; }
 .conn-banner strong { color: var(--teal); }
 
-.panel-body { padding: 36px 44px; }
+.panel-body {
+  padding: 36px 44px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
 /* ── DESKTOP-SPECIFIC LAYOUT HELPERS ──────────────────────── */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -273,7 +284,7 @@ body {
 .comp-table td:last-child { padding-right: 0; }
 .comp-table td:first-child { font-family: var(--font-mono); font-size: 11px; color: var(--gold); padding-top: 22px; }
 .comp-table td:nth-child(2) { color: var(--text-dim); }
-.comp-tagline { margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--border); max-width: 800px; }
+.comp-tagline { margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--border); max-width:820px; }
 .comp-tagline p {
   font-family: var(--font-serif); font-size: clamp(18px, 1.8vw, 23px);
   font-style: italic; color: var(--cream); line-height: 1.55;
@@ -617,7 +628,7 @@ body {
 .footer-nav { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; align-items: center; }
 .footer-nav a { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-faint); text-decoration: none; transition: color .2s; }
 .footer-nav a:hover { color: var(--text-dim); }
-.footer-disclaimer { font-size: 12px; color: var(--text-faint); line-height: 1.65; max-width: 860px; margin-bottom: 16px; }
+.footer-disclaimer { font-size: 12px; color: var(--text-faint); line-height: 1.65; max-width:820px; margin-bottom: 16px; }
 .footer-copy { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); opacity: .5; letter-spacing: .5px; }
 
 /* ── SECTION LABEL ─────────────────────────────────────────── */
@@ -759,12 +770,14 @@ body {
     <div class="panel active" id="panel-intro">
       <div class="panel-header">
         <div class="panel-eyebrow">Life Demo &mdash; Executive Capital Management Suite</div>
-        <div class="panel-title">ALM. Portfolio. <em style="font-style:italic;color:var(--teal);">Reinsurance.</em> Acquisition.</div>
-        <div class="panel-sub">The same $4.2B block &middot; Two governed analyses &middot; One engine</div>
+        <div class="panel-header-row">
+          <div class="panel-title">ALM. Portfolio. <em style="font-style:italic;color:var(--teal);">Reinsurance.</em> Acquisition.</div>
+          
+        </div>
       </div>
       <div class="panel-body">
-        <p style="font-size:15px;color:var(--text-dim);max-width:760px;margin-bottom:10px;line-height:1.75;">Market movement does not have to be presented as a threat. The same rate move, spread move, lapse signal, or block transaction can create incremental NII, capital velocity, or acquisition upside &mdash; if the decision is governed correctly.</p>
-        <p style="font-size:15px;color:var(--text-dim);max-width:760px;margin-bottom:36px;line-height:1.75;">Use the left nav to move between modules. The command bar tracks live NII opportunity, capital releasable, RBC, guardrail status, and approved actions. Every approved decision updates the bar in real time.</p>
+        <p style="font-size:15px;color:var(--text-dim);max-width:900px;margin-bottom:10px;line-height:1.75;">Market movement does not have to be presented as a threat. The same rate move, spread move, lapse signal, or block transaction can create incremental NII, capital velocity, or acquisition upside &mdash; if the decision is governed correctly.</p>
+        <p style="font-size:15px;color:var(--text-dim);max-width:900px;margin-bottom:36px;line-height:1.75;">Use the left nav to move between modules. The command bar tracks live NII opportunity, capital releasable, RBC, guardrail status, and approved actions. Every approved decision updates the bar in real time.</p>
 
         <!-- Entity cards -->
         <div class="intro-grid">
@@ -799,7 +812,7 @@ body {
         <!-- Comparison -->
         <div style="margin-top:48px;">
           <div class="sec-marker">The case for change</div>
-          <div style="font-family:var(--font-serif);font-size:clamp(22px,2.2vw,30px);font-weight:500;color:var(--cream);max-width:580px;line-height:1.18;margin-bottom:36px;">From quarterly risk review to governed earnings engine.</div>
+          <div style="font-family:var(--font-serif);font-size:clamp(22px,2.2vw,30px);font-weight:500;color:var(--cream);max-width:820px;line-height:1.18;margin-bottom:36px;">From quarterly risk review to governed earnings engine.</div>
           <table class="comp-table">
             <thead><tr><th></th><th>Traditional actuarial &amp; capital workflow</th><th>NSAI governed decision engine</th></tr></thead>
             <tbody>
@@ -825,16 +838,18 @@ body {
     <div class="panel" id="panel-alm">
       <div class="panel-header">
         <div class="panel-eyebrow">01 / ALM</div>
-        <div class="panel-title">ALM Opportunity Dashboard</div>
-        <div class="panel-sub">Meridian Life &amp; Annuity &mdash; earnings under governed constraints</div>
+        <div class="panel-header-row">
+          <div class="panel-title">ALM Opportunity Dashboard</div>
+          
+        </div>
       </div>
       <div class="conn-banner"><span class="conn-arrow">&rarr;</span><span>Scenario outputs trigger actions in <strong>Module 02</strong>. Combined dislocation scenario triggers reinsurance evaluation in <strong>Module 03</strong>.</span></div>
-      <div class="panel-body"><p style="font-size:14px;color:var(--text-dim);max-width:680px;margin-bottom:12px;line-height:1.72;">
+      <div class="panel-body"><p style="font-size:14px;color:var(--text-dim);max-width:900px;margin-bottom:12px;line-height:1.72;">
         Market movement does not have to be presented as a threat. For life and annuity carriers, the same rate move,
         spread move, lapse signal, or block transaction can create incremental NII, capital velocity, spread capture,
         or acquisition upside — if the decision is governed correctly.
       </p>
-      <p style="font-size:14px;color:var(--text-dim);max-width:680px;margin-bottom:36px;line-height:1.72;">
+      <p style="font-size:14px;color:var(--text-dim);max-width:900px;margin-bottom:36px;line-height:1.72;">
         This dashboard shows NSAI converting ALM complexity into executable P&amp;L opportunities: what to buy,
         what to hedge, what to reprice, what to cede — with every recommendation constrained by RBC, liquidity,
         duration, concentration, and governance guardrails.
@@ -1025,11 +1040,13 @@ body {
     <div class="panel" id="panel-portfolio">
       <div class="panel-header">
         <div class="panel-eyebrow">02 / Portfolio</div>
-        <div class="panel-title">Governed P&amp;L Optimization Engine</div>
-        <div class="panel-sub">Meridian Life &amp; Annuity &mdash; earnings, capital efficiency &amp; guardrails together</div>
+        <div class="panel-header-row">
+          <div class="panel-title">Governed P&amp;L Optimization Engine</div>
+          
+        </div>
       </div>
       <div class="conn-banner"><span class="conn-arrow">&larr;</span><span>Scenarios from <strong>Module 01</strong> prioritize these actions. Approved actions update the command bar.</span></div>
-      <div class="panel-body"><p style="font-size:14px;color:var(--text-dim);max-width:680px;margin-bottom:48px;line-height:1.72;">
+      <div class="panel-body"><p style="font-size:14px;color:var(--text-dim);max-width:900px;margin-bottom:48px;line-height:1.72;">
         NSAI recommends portfolio actions that add spread income, protect capital, and keep Meridian inside
         its hard guardrails. The goal is not to trade away return for safety — it is to find the action set
         where earnings, capital efficiency, and governance all improve together.
@@ -1180,16 +1197,18 @@ body {
     <div class="panel" id="panel-reinsurance">
       <div class="panel-header">
         <div class="panel-eyebrow">03 / Reinsurance</div>
-        <div class="panel-title">Reinsurance Capital Velocity Advisor</div>
-        <div class="panel-sub">Meridian Life &amp; Annuity &mdash; sell-side capital velocity &amp; earnings redeployment</div>
+        <div class="panel-header-row">
+          <div class="panel-title">Reinsurance Capital Velocity Advisor</div>
+          
+        </div>
       </div>
       <div class="conn-banner"><span class="conn-arrow">&larr;</span><span>Triggered by combined dislocation in <strong>Module 01</strong>. Capital released updates command bar. Same block viewed by Arcadia Re in <strong>Module 04</strong>.</span></div>
-      <div class="panel-body"><p style="font-size:14px;color:var(--text-dim);max-width:680px;margin-bottom:12px;line-height:1.72;">
+      <div class="panel-body"><p style="font-size:14px;color:var(--text-dim);max-width:900px;margin-bottom:12px;line-height:1.72;">
         Meridian is not simply reducing risk. It is evaluating whether a reinsurance structure can release
         trapped capital, preserve attractive spread economics, and redeploy capital into higher-return growth.
         NSAI compares structures by economic value, capital velocity, execution certainty, and governance readiness.
       </p>
-      <p style="font-size:14px;color:var(--text-dim);max-width:680px;margin-bottom:40px;line-height:1.72;">
+      <p style="font-size:14px;color:var(--text-dim);max-width:900px;margin-bottom:40px;line-height:1.72;">
         The $4.2B legacy MYGA block was written at 2018–2021 credited rates. Current surrender pressure and
         duration mismatch make it the right reinsurance candidate. NSAI evaluates three structures and
         produces a governed recommendation with a full audit trail.
@@ -1356,16 +1375,18 @@ body {
     <div class="panel" id="panel-acquisition">
       <div class="panel-header">
         <div class="panel-eyebrow gold">04 / Acquisition &mdash; Arcadia Re</div>
-        <div class="panel-title">Block Acquisition Advisor</div>
-        <div class="panel-sub">Arcadia Re &mdash; Buy-side &middot; BSCR primary &middot; NAIC RBC for US subsidiary only</div>
+        <div class="panel-header-row">
+          <div class="panel-title">Block Acquisition Advisor</div>
+          
+        </div>
       </div>
       <div class="conn-banner" style="background:rgba(232,196,90,.03);border-color:rgba(232,196,90,.07);"><span class="conn-arrow" style="color:var(--gold);">&harr;</span><span>Same $4.2B block from <strong style="color:var(--gold);">Arcadia Re&rsquo;s</strong> buy-side perspective. Arcadia&rsquo;s own assumptions govern here.</span></div>
-      <div class="panel-body"><p style="font-size:14px;color:var(--text-dim);max-width:680px;margin-bottom:12px;line-height:1.72;">
+      <div class="panel-body"><p style="font-size:14px;color:var(--text-dim);max-width:900px;margin-bottom:12px;line-height:1.72;">
           Arcadia Re uses NSAI to identify which blocks are not just safe to assume, but accretive to ROE, IRR,
           and spread income after capital charges. The same analytics that protect against bad deals accelerate
           conviction on good deals.
         </p>
-        <p style="font-size:14px;color:var(--text-dim);max-width:680px;margin-bottom:36px;line-height:1.72;">
+        <p style="font-size:14px;color:var(--text-dim);max-width:900px;margin-bottom:36px;line-height:1.72;">
           Arcadia is Bermuda-domiciled. Primary solvency framework: BSCR monitored by the BMA.
           All RBC figures below refer to the US subsidiary through which the block assumption occurs.
         </p>
