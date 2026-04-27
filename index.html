@@ -2609,8 +2609,8 @@
       <a href="#define">01 Define</a>
       <a href="#reason">02 Reason</a>
       <a href="#ontology">03 Ontology</a>
-      <a href="#deepdives">04 Explore</a>
-      <a href="#regulators">05 Regulators</a>
+      <a href="#regulators">04 Regulators</a>
+      <a href="#deepdives">05 Explore</a>
     </div>
   </div>
 </nav>
@@ -3209,55 +3209,11 @@
   </div>
 </section>
 
-<!-- SECTION 4: DEEP DIVES -->
-<section id="deepdives">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-num">04 / EXPLORE</div>
-      <h2 class="sec-title">Deep dives by <em>line of business</em>.</h2>
-    </div>
-
-    <p class="dives-intro">The same neurosymbolic framework applies across every line &mdash; but the ontologies, the rules, and the reasoning chains differ. Explore a complete worked example in the line most relevant to you.</p>
-
-    <div class="dives-grid">
-
-      <div class="dive-card pc">
-        <div class="dive-card-tag">Property &amp; Casualty</div>
-        <h3 class="dive-card-title">Commercial Property <em>Underwriting</em></h3>
-        <p class="dive-card-desc">A mid-market commercial property submission &mdash; from ontology-driven fact extraction through accumulation breach diagnosis and constraint-satisfaction pricing. Every rule fires explicitly. Every number traces to a source.</p>
-        <ul class="dive-features">
-          <li>Commercial property ontology (COPE)</li>
-          <li>Eight-rule guideline evaluation</li>
-          <li>Live side-by-side demo: RAG vs NSAI</li>
-          <li>Constraint-satisfaction pricing</li>
-          <li>Full proof tree</li>
-        </ul>
-        <a href="pc-deepdive.html" class="dive-cta">Explore P&amp;C Deep Dive &rarr;</a>
-      </div>
-
-      <div class="dive-card la">
-        <div class="dive-card-tag">Life &amp; Annuity</div>
-        <h3 class="dive-card-title">Capital &amp; Reserve <em>Management</em></h3>
-        <p class="dive-card-desc">Actuarial modeling, reserve calculations, and capital efficiency &mdash; with deterministic proof chains that actuaries and regulators can audit. The same NSAI framework, applied to long-duration, multi-state risk.</p>
-        <ul class="dive-features">
-          <li>L&amp;A domain ontology</li>
-          <li>Reserve &amp; RBC calculation logic</li>
-          <li>Regulatory compliance chains</li>
-          <li>Capital efficiency modeling</li>
-          <li>Live L&amp;A demo</li>
-        </ul>
-        <a href="lifedemo.html" class="dive-cta">Explore L&amp;A Deep Dive &rarr;</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 5: REGULATORS -->
+<!-- SECTION 4: REGULATORS -->
 <section id="regulators">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">05 / REGULATORS</div>
+      <div class="sec-num">04 / REGULATORS</div>
       <h2 class="sec-title">What <em>regulators</em> want — and why NSAI gives it to them.</h2>
     </div>
 
@@ -3344,7 +3300,51 @@
       </div>
     </div>
   </div>
+</section><!-- SECTION 5: EXPLORE -->
+<section id="deepdives">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">05 / EXPLORE</div>
+      <h2 class="sec-title">Deep dives by <em>line of business</em>.</h2>
+    </div>
+
+    <p class="dives-intro">The same neurosymbolic framework applies across every line &mdash; but the ontologies, the rules, and the reasoning chains differ. Explore a complete worked example in the line most relevant to you.</p>
+
+    <div class="dives-grid">
+
+      <div class="dive-card pc">
+        <div class="dive-card-tag">Property &amp; Casualty</div>
+        <h3 class="dive-card-title">Commercial Property <em>Underwriting</em></h3>
+        <p class="dive-card-desc">A mid-market commercial property submission &mdash; from ontology-driven fact extraction through accumulation breach diagnosis and constraint-satisfaction pricing. Every rule fires explicitly. Every number traces to a source.</p>
+        <ul class="dive-features">
+          <li>Commercial property ontology (COPE)</li>
+          <li>Eight-rule guideline evaluation</li>
+          <li>Live side-by-side demo: RAG vs NSAI</li>
+          <li>Constraint-satisfaction pricing</li>
+          <li>Full proof tree</li>
+        </ul>
+        <a href="pc-deepdive.html" class="dive-cta">Explore P&amp;C Deep Dive &rarr;</a>
+      </div>
+
+      <div class="dive-card la">
+        <div class="dive-card-tag">Life &amp; Annuity</div>
+        <h3 class="dive-card-title">Capital &amp; Reserve <em>Management</em></h3>
+        <p class="dive-card-desc">Actuarial modeling, reserve calculations, and capital efficiency &mdash; with deterministic proof chains that actuaries and regulators can audit. The same NSAI framework, applied to long-duration, multi-state risk.</p>
+        <ul class="dive-features">
+          <li>L&amp;A domain ontology</li>
+          <li>Reserve &amp; RBC calculation logic</li>
+          <li>Regulatory compliance chains</li>
+          <li>Capital efficiency modeling</li>
+          <li>Live L&amp;A demo</li>
+        </ul>
+        <a href="lifedemo.html" class="dive-cta">Explore L&amp;A Deep Dive &rarr;</a>
+      </div>
+
+    </div>
+  </div>
 </section>
+
+
 
 <footer>
   <div class="wrap foot-inner">
@@ -3373,7 +3373,7 @@
 
   // Scroll-spy: highlight current section in the nav
   (function initScrollSpy() {
-    const sections = ['define', 'reason', 'ontology', 'deepdives', 'regulators']
+    const sections = ['define', 'reason', 'ontology', 'regulators', 'deepdives']
       .map(id => document.getElementById(id))
       .filter(Boolean);
     const navLinks = {};
