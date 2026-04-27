@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neurosymbolic AI for Insurance</title>
+<title>P&amp;C Deep Dive &mdash; Neurosymbolic AI for Insurance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -2259,98 +2259,6 @@
   }
   .bias-cell.llm li::before { color: var(--llm); }
 
-  /* ============ SECTION 4: DEEP DIVES ============ */
-  .dives-intro {
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--ink-2);
-    max-width: 62ch;
-    margin-bottom: 48px;
-  }
-  .dives-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  .dive-card {
-    background: #fff;
-    border: 1px solid rgba(28,37,48,0.2);
-    padding: 40px 40px 48px;
-    display: flex;
-    flex-direction: column;
-  }
-  .dive-card.pc { border-top: 4px solid var(--accent); }
-  .dive-card.la { border-top: 4px solid var(--accent-2); }
-  .dive-card-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    font-weight: 700;
-  }
-  .dive-card.pc .dive-card-tag { color: var(--accent); }
-  .dive-card.la .dive-card-tag { color: var(--accent-2); }
-  .dive-card-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 34px;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-    color: var(--ink);
-  }
-  .dive-card.pc .dive-card-title em { font-style: italic; color: var(--accent); }
-  .dive-card.la .dive-card-title em { font-style: italic; color: var(--accent-2); }
-  .dive-card-desc {
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--ink-2);
-    margin-bottom: 28px;
-    max-width: 52ch;
-  }
-  .dive-features {
-    list-style: none;
-    margin-bottom: 36px;
-    flex: 1;
-  }
-  .dive-features li {
-    font-size: 13.5px;
-    padding: 9px 0 9px 22px;
-    border-bottom: 1px dotted rgba(28,37,48,0.15);
-    position: relative;
-    color: var(--ink-2);
-  }
-  .dive-features li:last-child { border-bottom: none; }
-  .dive-features li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    font-weight: 700;
-  }
-  .dive-card.pc .dive-features li::before { color: var(--accent); }
-  .dive-card.la .dive-features li::before { color: var(--accent-2); }
-  .dive-cta {
-    display: inline-block;
-    padding: 16px 28px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    font-weight: 600;
-    text-decoration: none;
-    transition: filter 0.2s, transform 0.15s;
-    align-self: flex-start;
-  }
-  .dive-card.pc .dive-cta { background: var(--accent); color: var(--paper); }
-  .dive-card.la .dive-cta { background: var(--accent-2); color: var(--paper); }
-  .dive-cta:hover { filter: brightness(1.12); transform: translateY(-2px); }
-  @media (max-width: 900px) {
-    .dives-grid { grid-template-columns: 1fr; }
-    .dive-card { padding: 28px 24px 36px; }
-    .dive-card-title { font-size: 26px; }
-  }
-
   /* ============ FOOTER ============ */
   footer {
     padding: 64px 0;
@@ -2597,6 +2505,18 @@
     /* Race summary: single column on small phones */
     .race-stats { grid-template-columns: 1fr; gap: 14px; }
   }
+
+  /* ===== Deep Dive page — back/forward nav links ===== */
+  .nav-links .back-link,
+  .nav-links .fwd-link {
+    opacity: 0.65;
+    font-size: 12px;
+  }
+  .nav-links .back-link:hover,
+  .nav-links .fwd-link:hover {
+    opacity: 1;
+    color: var(--accent);
+  }
 </style>
 </head>
 <body>
@@ -2604,458 +2524,51 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="wrap nav-inner">
-    <div class="nav-brand"><span class="dot"></span>NSAI for Insurance</div>
+    <a href="index.html" class="nav-brand" style="text-decoration:none; color:inherit;"><span class="dot"></span>NSAI for Insurance</a>
     <div class="nav-links">
-      <a href="#define">01 Define</a>
-      <a href="#reason">02 Reason</a>
-      <a href="#ontology">03 Ontology</a>
-      <a href="#deepdives">04 Explore</a>
-      <a href="#regulators">05 Regulators</a>
+      <a href="index.html" class="back-link">&larr; Overview</a>
+      <a href="#pc-ontology">01 Ontology</a>
+      <a href="#going-deeper">02 Going Deeper</a>
+      <a href="#demo">03 Demo</a>
+      <a href="lifedemo.html" class="fwd-link">Life &amp; Annuity &rarr;</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
-<header class="hero">
+<header class="hero" style="padding: 64px 0 80px;">
   <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <div class="hero-eyebrow">A Primer for Insurance Leaders</div>
-        <h1>Thinking <em>beyond</em> the model.</h1>
-        <p class="hero-lede">
-          Generative AI reads like a brilliant intern with no memory of your rulebook.
-          Neurosymbolic AI pairs that intern with a <em>structured mind</em> — an ontology and a rule engine — so every decision is auditable, consistent with your guidelines, and defensible to a regulator. This primer covers the architecture, the reasoning, and the ontology; then hands off to deep dives by line of business.
-        </p>
-      </div>
-      <div class="hero-visual" aria-hidden="true">
-        <svg class="hero-svg" viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="neural-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#B8442E" stop-opacity="0.35"/>
-              <stop offset="70%" stop-color="#B8442E" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="symbolic-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#3F5E4A" stop-opacity="0.35"/>
-              <stop offset="70%" stop-color="#3F5E4A" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="bridge-grad" x1="0%" y1="50%" x2="100%" y2="50%">
-              <stop offset="0%" stop-color="#B8442E"/>
-              <stop offset="50%" stop-color="#C8A951"/>
-              <stop offset="100%" stop-color="#3F5E4A"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Ambient glows -->
-          <circle cx="115" cy="230" r="140" fill="url(#neural-glow)"/>
-          <circle cx="345" cy="230" r="140" fill="url(#symbolic-glow)"/>
-
-          <!-- LEFT: NEURAL MESH -->
-          <g opacity="0.9">
-            <g stroke="#B8442E" stroke-width="0.6" fill="none" opacity="0.35">
-              <path d="M 55,110 Q 90,140 120,160"/>
-              <path d="M 55,110 Q 75,180 90,220"/>
-              <path d="M 120,160 Q 85,210 90,220"/>
-              <path d="M 120,160 Q 150,195 140,260"/>
-              <path d="M 90,220 Q 115,250 140,260"/>
-              <path d="M 140,260 Q 110,310 95,345"/>
-              <path d="M 90,220 Q 60,290 95,345"/>
-              <path d="M 55,110 Q 40,180 60,200"/>
-              <path d="M 60,200 Q 80,230 90,220"/>
-              <path d="M 140,260 Q 175,300 160,350"/>
-              <path d="M 95,345 Q 130,360 160,350"/>
-              <path d="M 55,110 Q 30,250 60,200"/>
-              <path d="M 170,130 Q 140,140 120,160"/>
-              <path d="M 170,130 Q 185,200 140,260"/>
-              <path d="M 170,130 Q 150,90 95,80"/>
-              <path d="M 95,80 Q 70,95 55,110"/>
-            </g>
-            <circle cx="55" cy="110" r="5" fill="#B8442E"/>
-            <circle cx="120" cy="160" r="4" fill="#B8442E" opacity="0.85"/>
-            <circle cx="90" cy="220" r="6" fill="#B8442E"/>
-            <circle cx="140" cy="260" r="5" fill="#B8442E" opacity="0.9"/>
-            <circle cx="60" cy="200" r="3.5" fill="#B8442E" opacity="0.75"/>
-            <circle cx="95" cy="345" r="4.5" fill="#B8442E" opacity="0.85"/>
-            <circle cx="160" cy="350" r="3.5" fill="#B8442E" opacity="0.7"/>
-            <circle cx="170" cy="130" r="5" fill="#B8442E" opacity="0.9"/>
-            <circle cx="95" cy="80" r="3.5" fill="#B8442E" opacity="0.7"/>
-            <circle cx="45" cy="280" r="3" fill="#B8442E" opacity="0.6"/>
-            <circle cx="175" cy="220" r="3.5" fill="#B8442E" opacity="0.7"/>
-
-            <circle cx="90" cy="220" r="6" fill="none" stroke="#B8442E" stroke-width="1.5" opacity="0">
-              <animate attributeName="r" values="6;24;24" dur="4s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.8;0;0" dur="4s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="140" cy="260" r="5" fill="none" stroke="#B8442E" stroke-width="1.5" opacity="0">
-              <animate attributeName="r" values="5;20;20" dur="5s" begin="1.5s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.7;0;0" dur="5s" begin="1.5s" repeatCount="indefinite"/>
-            </circle>
-          </g>
-
-          <text x="55" y="400" font-family="JetBrains Mono, monospace" font-size="10" fill="#B8442E" letter-spacing="3" font-weight="600">NEURAL</text>
-          <text x="55" y="418" font-family="Fraunces, serif" font-size="11" fill="#6B6458" font-style="italic">pattern, association</text>
-
-          <!-- RIGHT: SYMBOLIC GRAPH -->
-          <g>
-            <g stroke="#3F5E4A" stroke-width="1" fill="none" opacity="0.55">
-              <line x1="345" y1="110" x2="285" y2="175"/>
-              <line x1="345" y1="110" x2="405" y2="175"/>
-              <line x1="285" y1="175" x2="260" y2="250"/>
-              <line x1="285" y1="175" x2="325" y2="250"/>
-              <line x1="405" y1="175" x2="375" y2="250"/>
-              <line x1="405" y1="175" x2="425" y2="250"/>
-              <line x1="260" y1="250" x2="250" y2="330"/>
-              <line x1="325" y1="250" x2="310" y2="330"/>
-              <line x1="325" y1="250" x2="345" y2="330"/>
-              <line x1="375" y1="250" x2="385" y2="330"/>
-              <line x1="425" y1="250" x2="420" y2="330"/>
-              <line x1="285" y1="175" x2="405" y2="175" stroke-dasharray="3,3" opacity="0.4"/>
-              <line x1="325" y1="250" x2="375" y2="250" stroke-dasharray="3,3" opacity="0.4"/>
-            </g>
-
-            <rect x="320" y="96" width="50" height="28" rx="1" fill="#3F5E4A"/>
-            <text x="345" y="115" text-anchor="middle" font-family="Fraunces, serif" font-size="10" fill="#F4EFE6" font-weight="500">Policy</text>
-
-            <rect x="258" y="163" width="54" height="24" rx="1" fill="#ECE5D6" stroke="#3F5E4A" stroke-width="1"/>
-            <text x="285" y="179" text-anchor="middle" font-family="Fraunces, serif" font-size="9" fill="#1C2530">Location</text>
-            <rect x="378" y="163" width="54" height="24" rx="1" fill="#ECE5D6" stroke="#3F5E4A" stroke-width="1"/>
-            <text x="405" y="179" text-anchor="middle" font-family="Fraunces, serif" font-size="9" fill="#1C2530">Building</text>
-
-            <rect x="236" y="240" width="48" height="20" rx="1" fill="#F4EFE6" stroke="#6B6458" stroke-width="0.8"/>
-            <text x="260" y="253" text-anchor="middle" font-family="Fraunces, serif" font-size="8" fill="#2A3340">Peril</text>
-            <rect x="301" y="240" width="48" height="20" rx="1" fill="#F4EFE6" stroke="#6B6458" stroke-width="0.8"/>
-            <text x="325" y="253" text-anchor="middle" font-family="Fraunces, serif" font-size="8" fill="#2A3340">Class</text>
-            <rect x="351" y="240" width="48" height="20" rx="1" fill="#F4EFE6" stroke="#6B6458" stroke-width="0.8"/>
-            <text x="375" y="253" text-anchor="middle" font-family="Fraunces, serif" font-size="8" fill="#2A3340">Occup</text>
-            <rect x="401" y="240" width="48" height="20" rx="1" fill="#F4EFE6" stroke="#6B6458" stroke-width="0.8"/>
-            <text x="425" y="253" text-anchor="middle" font-family="Fraunces, serif" font-size="8" fill="#2A3340">Prot</text>
-
-            <circle cx="250" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
-            <circle cx="310" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
-            <circle cx="345" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
-            <circle cx="385" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
-            <circle cx="420" cy="330" r="3.5" fill="#3F5E4A" opacity="0.6"/>
-
-            <circle cx="345" cy="110" r="14" fill="none" stroke="#3F5E4A" stroke-width="1.2" opacity="0">
-              <animate attributeName="r" values="14;28;28" dur="4s" begin="2s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.7;0;0" dur="4s" begin="2s" repeatCount="indefinite"/>
-            </circle>
-          </g>
-
-          <text x="345" y="400" font-family="JetBrains Mono, monospace" font-size="10" fill="#3F5E4A" letter-spacing="3" font-weight="600">SYMBOLIC</text>
-          <text x="345" y="418" font-family="Fraunces, serif" font-size="11" fill="#6B6458" font-style="italic">meaning, rules, proof</text>
-
-          <!-- BRIDGE -->
-          <g>
-            <line x1="195" y1="230" x2="260" y2="230" stroke="url(#bridge-grad)" stroke-width="2.5" opacity="0.9"/>
-            <circle cx="228" cy="230" r="5" fill="#C8A951" opacity="0.9"/>
-
-            <circle r="4" fill="#C8A951" opacity="0">
-              <animate attributeName="cx" values="195;260" dur="3s" begin="0.5s" repeatCount="indefinite"/>
-              <animate attributeName="cy" values="230;230" dur="3s" begin="0.5s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="0.5s" repeatCount="indefinite"/>
-            </circle>
-            <circle r="3" fill="#C8A951" opacity="0">
-              <animate attributeName="cx" values="260;195" dur="3s" begin="2s" repeatCount="indefinite"/>
-              <animate attributeName="cy" values="230;230" dur="3s" begin="2s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0;0.7;0.7;0" dur="3s" begin="2s" repeatCount="indefinite"/>
-            </circle>
-          </g>
-
-          <text x="228" y="202" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6458" letter-spacing="3" font-weight="600">WORKING</text>
-          <text x="228" y="263" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6458" letter-spacing="3" font-weight="600">TOGETHER</text>
-        </svg>
-      </div>
-    </div>
+    <div class="hero-eyebrow">Property &amp; Casualty / Commercial Lines</div>
+    <h1>Commercial property, <em>fully reasoned</em>.</h1>
+    <p class="hero-lede">
+      A step-by-step walkthrough &mdash; ontology-driven fact extraction, rule evaluation, accumulation breach diagnosis, and constraint-satisfaction pricing, applied to a mid-market commercial property submission. Every rule fires explicitly. Every number traces to a named source.
+    </p>
     <div class="hero-meta">
       <div>
-        <div class="label">Domain</div>
+        <div class="label">Line</div>
         <div class="val">Commercial Property</div>
       </div>
       <div>
-        <div class="label">Format</div>
-        <div class="val">Interactive Explainer</div>
+        <div class="label">Submission</div>
+        <div class="val">Meridian Fabrication</div>
       </div>
       <div>
-        <div class="label">Audience</div>
-        <div class="val">Business & Technical</div>
+        <div class="label">TIV</div>
+        <div class="val">$ 84.5M</div>
       </div>
       <div>
-        <div class="label">Reading Time</div>
-        <div class="val">~12 minutes</div>
+        <div class="label">Result</div>
+        <div class="val">Priced &amp; Placed</div>
       </div>
     </div>
   </div>
 </header>
 
-<!-- SECTION 1: DEFINITION -->
-<section id="define">
+<!-- SECTION 1: P&C ONTOLOGY -->
+<section id="pc-ontology">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">01 / DEFINE</div>
-      <h2 class="sec-title">What <em>neurosymbolic AI</em> actually is.</h2>
-    </div>
-
-    <div class="def-grid">
-      <div></div>
-      <div>
-        <p class="def-lede">
-          Neurosymbolic AI is a <em>hybrid architecture</em> that combines the pattern recognition of neural networks with the logical rigor of symbolic reasoning.
-        </p>
-
-        <div class="def-body">
-          <p>
-            Large language models are neural networks — statistical engines that learn from vast amounts of text. They are brilliant at reading unstructured documents, understanding intent, and producing fluent language. But they reason <em>probabilistically</em>, not logically. Two runs of the same question can produce two different answers, and the model cannot show its work in a way a regulator would accept.
-          </p>
-          <p>
-            Symbolic AI is the older tradition — knowledge graphs, ontologies, rule engines, and formal logic. It is rigid, explicit, and fully auditable, but it cannot read a broker email or interpret a loss-run PDF on its own.
-          </p>
-          <p>
-            Neurosymbolic systems use the neural side to <em>perceive</em> — extracting structured facts from messy inputs — and the symbolic side to <em>decide</em> — applying your underwriting guidelines, regulatory requirements, and portfolio rules with deterministic precision. The neural model proposes. The symbolic engine disposes.
-          </p>
-        </div>
-
-        <div class="pillars">
-          <div class="pillar">
-            <div class="pillar-num">01 — NEURAL</div>
-            <h3>Perceive</h3>
-            <p>Extract entities, relationships, and intent from unstructured submissions — emails, ACORD forms, loss runs, inspection reports, news, geospatial imagery.</p>
-          </div>
-          <div class="pillar">
-            <div class="pillar-num">02 — ONTOLOGY</div>
-            <h3>Represent</h3>
-            <p>Map every extracted fact into a formal domain model: what a <em>Risk</em> is, what a <em>Coverage</em> is, how a <em>Claim</em> relates to a <em>Peril</em> and a <em>Policy</em>.</p>
-          </div>
-          <div class="pillar">
-            <div class="pillar-num">03 — SYMBOLIC</div>
-            <h3>Reason</h3>
-            <p>Apply underwriting guidelines, capacity limits, regulatory constraints, and reinsurance treaty rules as executable logic — with every inference traceable to a rule and a fact.</p>
-          </div>
-          <div class="pillar">
-            <div class="pillar-num">04 — NEURAL (again)</div>
-            <h3>Explain</h3>
-            <p>Generate human-readable narratives, referral memos, and broker responses grounded in the reasoner's output — never hallucinated, always traceable.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 2: HOW THEY REASON -->
-<section id="reason">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-num">02 / REASON</div>
-      <h2 class="sec-title">How the two systems actually <em>think</em>.</h2>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 40px; margin-bottom: 48px;">
-      <div></div>
-      <p class="reason-intro">
-        The difference isn't about accuracy on any single task — it's about the kind of cognition each system performs. An LLM generates the <em>most plausible next token</em>. A symbolic reasoner evaluates the <em>truth value</em> of propositions against a formal knowledge base. Understanding this gap is the key to knowing where to apply each.
-      </p>
-    </div>
-
-    <div class="reason-compare">
-      <div class="reason-col llm">
-        <div class="reason-col-tag">Large Language Model</div>
-        <h3>Statistical next-token prediction</h3>
-        <p class="tagline">"Based on what I've read, this pattern usually leads to that outcome."</p>
-        <ul>
-          <li><strong>Mechanism</strong>Transformer architecture predicts the next token given the preceding context. Reasoning is an emergent side-effect of scale, not a guarantee.</li>
-          <li><strong>Knowledge</strong>Implicit. Compressed into billions of weights. Impossible to inspect, version, or selectively update without retraining.</li>
-          <li><strong>Consistency</strong>Probabilistic. The same input can yield different outputs, especially at non-zero temperature.</li>
-          <li><strong>Traceability</strong>None. The model cannot cite which training example or which weight produced its conclusion.</li>
-          <li><strong>Strength</strong>Unstructured text, nuance, language fluency, summarization, and intent recognition.</li>
-          <li><strong>Weakness</strong>Arithmetic, multi-step logic, rare edge cases, regulatory reasoning, hallucinations under ambiguity.</li>
-        </ul>
-      </div>
-
-      <div class="reason-col nsai">
-        <div class="reason-col-tag">Neurosymbolic System</div>
-        <h3>Logic over a knowledge graph</h3>
-        <p class="tagline">"Given these facts and these rules, this conclusion follows — here is the proof."</p>
-        <ul>
-          <li><strong>Mechanism</strong>Neural extraction feeds an ontology; a reasoner applies first-order logic or rule systems (Datalog, OWL, RETE) to derive conclusions.</li>
-          <li><strong>Knowledge</strong>Explicit. Concepts, relationships, and rules live in a knowledge base you can read, version, and edit like source code.</li>
-          <li><strong>Consistency</strong>Deterministic. Same facts plus same rules always produce the same conclusion. Reproducible across runs.</li>
-          <li><strong>Traceability</strong>Complete. Every inference chains back to specific facts and named rules — a proof tree ready for audit.</li>
-          <li><strong>Strength</strong>Policy compliance, capacity rules, multi-constraint optimization, portfolio accumulation, regulatory defense.</li>
-          <li><strong>Weakness</strong>Brittle on unstructured input without a neural front-end. Requires investment in ontology and rule authoring.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- RAG: addressing the most common objection -->
-    <div class="rag-block">
-      <div class="rag-eyebrow">BUT WHAT ABOUT RAG?</div>
-      <h3>"Isn't RAG the <em>deterministic</em> version of an LLM?"</h3>
-      <p class="rag-intro">
-        The short answer is no — retrieval is deterministic, but generation still isn't. Retrieval-Augmented Generation pairs an LLM with a search engine over your documents. It grounds the model in your actual content, which dramatically reduces hallucination on factual questions. But the final answer is still produced by an LLM generating tokens. RAG improves an LLM; it doesn't turn an LLM into a reasoner. Here's how the three approaches handle the same underwriting submission.
-      </p>
-
-      <div class="flow-grid">
-        <div class="flow-card llm">
-          <div class="fc-tag">LLM</div>
-          <h4>Direct prompting</h4>
-          <ul class="flow-steps">
-            <li>Submission → prompt</li>
-            <li>Transformer inference</li>
-            <li>Sample tokens</li>
-          </ul>
-          <div class="flow-output">
-            <strong>Output</strong>
-            A fluent recommendation drawn from training-data patterns. Fast. Often plausible. No grounding in your specific rulebook.
-          </div>
-        </div>
-        <div class="flow-card rag">
-          <div class="fc-tag">RAG + LLM</div>
-          <h4>Retrieval-augmented</h4>
-          <ul class="flow-steps">
-            <li>Submission → query</li>
-            <li>Search underwriting docs</li>
-            <li>Inject top-k passages into prompt</li>
-            <li>Transformer inference</li>
-            <li>Sample tokens</li>
-          </ul>
-          <div class="flow-output">
-            <strong>Output</strong>
-            A recommendation <em>citing</em> retrieved passages. Better grounded, but the model can still misread, paraphrase incorrectly, or ignore the retrieved text in favor of training-data priors.
-          </div>
-        </div>
-        <div class="flow-card nsai">
-          <div class="fc-tag">NEUROSYMBOLIC</div>
-          <h4>Ontology + reasoner</h4>
-          <ul class="flow-steps">
-            <li>Submission → extract to ontology</li>
-            <li>Enrich across domains</li>
-            <li>Rule engine evaluates guidelines</li>
-            <li>Reasoner derives decision</li>
-            <li>Narrative generated from proof tree</li>
-          </ul>
-          <div class="flow-output">
-            <strong>Output</strong>
-            A derivation — not a generation. Every conclusion chains to specific facts and named rules. Same inputs → same decision, always.
-          </div>
-        </div>
-      </div>
-
-      <div class="myth-reality">
-        <div class="myth-cell myth">
-          <div class="mc-label">THE MYTH</div>
-          <p><strong>"RAG makes LLMs deterministic."</strong></p>
-          <p>The retrieval step is deterministic — the same query returns the same documents. But the generation step that uses those documents is still a probabilistic neural model, not a logical inference. Two runs can produce two different summaries, emphasize different clauses, or miss the same regulatory constraint.</p>
-        </div>
-        <div class="myth-cell reality">
-          <div class="mc-label">THE REALITY</div>
-          <p><strong>RAG improves factual grounding. It does not add reasoning.</strong></p>
-          <p>An LLM reading a retrieved underwriting manual is still an LLM. It cannot guarantee that rule <em>CP-ACC-02</em> fires every time the accumulation threshold is crossed. It cannot do multi-step constraint-satisfaction. It cannot emit a proof. RAG is a <em>better</em> LLM — NSAI is a <em>different kind of system</em>.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Thinking Fast & Slow framing -->
-    <div class="think-frame">
-      <div class="think-col system1">
-        <svg class="think-glyph" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- Motion-streak pattern: blurred, fast, organic -->
-          <g stroke="#B8442E" fill="none" stroke-linecap="round">
-            <path d="M 10 40 Q 35 20 55 40 T 95 40 T 135 40 T 175 40" stroke-width="2" opacity="0.85"/>
-            <path d="M 14 50 Q 40 32 60 50 T 100 50 T 140 50 T 180 50" stroke-width="1.5" opacity="0.45"/>
-            <path d="M 6 30 Q 32 12 52 30 T 92 30 T 132 30 T 172 30" stroke-width="1" opacity="0.25"/>
-          </g>
-          <circle cx="175" cy="40" r="4.5" fill="#B8442E"/>
-          <circle cx="180" cy="50" r="3" fill="#B8442E" opacity="0.5"/>
-          <circle cx="172" cy="30" r="2.5" fill="#B8442E" opacity="0.3"/>
-        </svg>
-        <div class="think-tag">SYSTEM 1 · KAHNEMAN</div>
-        <h3>Fast. Associative. <em>Often right, sometimes dangerously wrong.</em></h3>
-        <p class="think-desc">
-          System 1 is pattern recognition at speed. It's the brain's autopilot — fluent, confident, and excellent for familiar problems. It's also where cognitive bias lives. When the pattern matches something common, System 1 is fast and accurate. When the situation is ambiguous, novel, or hinges on precise rules, it produces a confident answer that can be materially wrong.
-        </p>
-        <div class="think-map">A large language model is System 1 made mechanical — a pattern engine operating at machine scale, with machine confidence. <em>RAG doesn't change the kind of thinking; it gives System 1 a better reference library. Faster recall, richer associations — but still not deliberation.</em></div>
-      </div>
-      <div class="think-col system2">
-        <svg class="think-glyph" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- Step pattern: deliberate, sequential, orderly -->
-          <g stroke="#3F5E4A" fill="none" stroke-width="2" stroke-linecap="square">
-            <path d="M 10 55 L 30 55 L 30 40 L 60 40 L 60 25 L 90 25 L 90 40 L 120 40 L 120 30 L 150 30 L 150 15 L 180 15"/>
-          </g>
-          <g fill="#3F5E4A">
-            <rect x="8" y="53" width="4" height="4"/>
-            <rect x="58" y="23" width="4" height="4"/>
-            <rect x="118" y="28" width="4" height="4"/>
-            <rect x="178" y="13" width="4" height="4"/>
-          </g>
-          <!-- Tick marks suggesting checks along the path -->
-          <g stroke="#3F5E4A" stroke-width="1" opacity="0.45">
-            <line x1="30" y1="35" x2="30" y2="45"/>
-            <line x1="90" y1="20" x2="90" y2="30"/>
-            <line x1="150" y1="10" x2="150" y2="20"/>
-          </g>
-        </svg>
-        <div class="think-tag">SYSTEM 2 · KAHNEMAN</div>
-        <h3>Slow. Deliberate. <em>Rule-following, multi-step, defensible.</em></h3>
-        <p class="think-desc">
-          System 2 is effortful thinking — the kind you use to apply regulations, work through a multi-step calculation, or weigh alternatives under constraints. It's slower and more expensive, but it's also the only kind of thinking that produces an auditable trail of why a decision was made. Underwriting is a System 2 discipline.
-        </p>
-        <div class="think-map">A neurosymbolic system operationalizes System 2 — and can apply several distinct modes of formal reasoning, the right one for the question.</div>
-      </div>
-    </div>
-
-    <div class="modes-head">
-      <div class="modes-eyebrow">REASONING MODES</div>
-      <div>
-        <h3>Different questions demand <em>different kinds</em> of thinking.</h3>
-        <p>Because a neurosymbolic system has an explicit model of the world, it can apply the reasoning mode that fits the question — not just probabilistic association. Each of these shows up somewhere in the underwriting pipeline. The rule engine does deductive work. Classifying a risk is abductive. Pricing involves causal reasoning. Structuring a placement is constraint-satisfaction. Stress-testing is counterfactual.</p>
-      </div>
-    </div>
-
-    <div class="modes-grid">
-      <div class="mode-cell">
-        <div class="m-glyph">∴</div>
-        <div class="m-tag">MODE 01</div>
-        <h4>Deductive</h4>
-        <div class="m-desc">Given facts and rules, derive what must be true. Certainty, not probability. This is what rule engines and description logics do — and what regulators and auditors expect.</div>
-        <div class="m-example"><strong>In Underwriting</strong>If TIV &gt; $50M and underwriter authority is $50M, <em>referral is required</em>. No judgment call — a logical consequence.</div>
-      </div>
-      <div class="mode-cell">
-        <div class="m-glyph">?</div>
-        <div class="m-tag">MODE 02</div>
-        <h4>Abductive</h4>
-        <div class="m-desc">Given observations, infer the best explanation. Used to classify — map a NAICS code or an address to the right concept in the ontology, resolve which peril regime applies.</div>
-        <div class="m-example"><strong>In Underwriting</strong>NAICS 332710 + welding equipment observed → <em>best classification is HighHazard_Welding</em>, not generic light manufacturing.</div>
-      </div>
-      <div class="mode-cell">
-        <div class="m-glyph">→</div>
-        <div class="m-tag">MODE 03</div>
-        <h4>Causal</h4>
-        <div class="m-desc">Reason about cause and effect, not just correlation. Knowing what drives what lets the system trace pricing loads to their origin — and predict how a change propagates.</div>
-        <div class="m-example"><strong>In Underwriting</strong>Tier 1 location → elevated wind exposure → NWS deductible needed → <em>premium rate load of +12%</em>. Each link traceable.</div>
-      </div>
-      <div class="mode-cell">
-        <div class="m-glyph">∩</div>
-        <div class="m-tag">MODE 04</div>
-        <h4>Constraint-satisfaction</h4>
-        <div class="m-desc">Find a solution that satisfies many constraints simultaneously. Price, capacity, regulatory filings, appetite, treaty terms — all must hold. Solvers find the option that clears every test.</div>
-        <div class="m-example"><strong>In Underwriting</strong>What deductible + sublimit + cession structure <em>keeps retained accumulation &lt; 80%</em> while maximizing margin?</div>
-      </div>
-      <div class="mode-cell">
-        <div class="m-glyph">~</div>
-        <div class="m-tag">MODE 05</div>
-        <h4>Counterfactual</h4>
-        <div class="m-desc">Ask what-if. With a structured world model the system can simulate changes — what happens to the portfolio if this bind goes through, if the treaty renews at different terms, if the book shifts.</div>
-        <div class="m-example"><strong>In Underwriting</strong>If we cede 40% via quota-share instead of 25%, <em>retained PML drops by $3.8M</em> — reshaping the bind decision.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 3: ONTOLOGY -->
-<section id="ontology">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-num">03 / ONTOLOGY</div>
+      <div class="sec-num">01 / ONTOLOGY</div>
       <h2 class="sec-title">An ontology is a <em>shared mental model</em> — for machines.</h2>
     </div>
 
@@ -3065,16 +2578,16 @@
           Think of an ontology as the <em>vocabulary and grammar</em> of your business, written in a form a computer can reason over.
         </p>
         <p>
-          When an underwriter or actuary reasons about a risk — whether it's a commercial building, a group health policy, or a life annuity portfolio — they draw on a web of interconnected concepts. A risk has characteristics. Those characteristics relate to exposures, coverages, and rules. The human mind holds this web implicitly; an ontology makes it explicit and machine-readable.
+          When an underwriter says &ldquo;a joisted-masonry building in a protected Class 4 town with a sprinkler system in a light manufacturing occupancy,&rdquo; every word is loaded with meaning &mdash; and every word connects to other concepts. Construction class implies vulnerability to wind and fire. Protection class modifies that vulnerability. Occupancy shapes exposure. The underwriter&rsquo;s brain holds this web of concepts.
         </p>
         <p>
-          An ontology names the <em>classes</em> (Policy, Party, Risk, Coverage, Claim), the <em>properties</em> (effective date, coverage limits, exposure amounts), and the <em>relationships</em> (a Policy <em>covers</em> a Risk, is <em>issuedTo</em> a Party, <em>includes</em> Coverage that <em>settles</em> Claims).
+          An ontology makes that web explicit. It names the <em>classes</em> (Location, Building, Occupancy, Peril), the <em>properties</em> (TIV, year built, construction type), and the <em>relationships</em> (a Building <em>hasProtection</em>, is <em>exposedTo</em> Perils, <em>isLocatedIn</em> a CatZone).
         </p>
         <div class="callout">
           Without an ontology, the LLM knows the <em>words</em>. With an ontology, the system knows the <em>meaning</em>.
         </div>
         <p>
-          Once the world is modeled this way, rules become composable and inheritable. A rule that applies to "all combustible-construction buildings" automatically applies to anything the ontology classifies as combustible — frame, heavy timber, ordinary. You don't write the rule four times. You write it once, against the concept.
+          Once the world is modeled this way, rules become composable and inheritable. A rule that applies to &ldquo;all combustible-construction buildings&rdquo; automatically applies to anything the ontology classifies as combustible &mdash; frame, heavy timber, ordinary. You don&rsquo;t write the rule four times. You write it once, against the concept.
         </p>
         <p>
           Most importantly, ontologies compose across domains. A location ontology plugs into a peril ontology plugs into a reinsurance ontology. The same structure that supports underwriting supports claims, portfolio management, and regulatory reporting.
@@ -3082,8 +2595,48 @@
       </div>
 
       <div class="ont-viz">
-        <div class="ont-viz-label">Fig. 01 — Insurance Domain Ontology · Universal Core Classes</div>
-        <svg class="ont-svg" viewBox="0 0 520 470" xmlns="http://www.w3.org/2000/svg">
+        <div class="ont-viz-label">Fig. 01 &mdash; Minimal Commercial Property Ontology</div>
+        <svg class="ont-svg" viewBox="0 0 520 540" xmlns="http://www.w3.org/2000/svg">
+          <!-- Edges -->
+          <g>
+            <!-- Policy -> Location -->
+            <path class="ont-edge" d="M 260 95 L 260 145" marker-end="url(#arr)"/>
+            <text class="ont-edge-label" x="288" y="125">covers</text>
+
+            <!-- Location -> Building -->
+            <path class="ont-edge" d="M 260 195 L 260 245" marker-end="url(#arr)"/>
+            <text class="ont-edge-label" x="289" y="225">contains</text>
+
+            <!-- Building -> Construction -->
+            <path class="ont-edge" d="M 200 285 L 110 330" marker-end="url(#arr)"/>
+            <text class="ont-edge-label" x="125" y="300">hasClass</text>
+
+            <!-- Building -> Occupancy -->
+            <path class="ont-edge" d="M 260 295 L 260 335" marker-end="url(#arr)"/>
+            <text class="ont-edge-label" x="296" y="320">hasUse</text>
+
+            <!-- Building -> Protection -->
+            <path class="ont-edge" d="M 320 285 L 410 330" marker-end="url(#arr)"/>
+            <text class="ont-edge-label" x="400" y="300">hasProtection</text>
+
+            <!-- Location -> Peril -->
+            <path class="ont-edge" d="M 335 170 L 430 170" marker-end="url(#arr)"/>
+            <text class="ont-edge-label" x="382" y="162">exposedTo</text>
+
+            <!-- Location -> CatZone -->
+            <path class="ont-edge" d="M 185 170 L 90 170" marker-end="url(#arr)"/>
+            <text class="ont-edge-label" x="138" y="162">inZone</text>
+
+            <!-- Building -> TIV -->
+            <path class="ont-edge" d="M 260 295 L 260 430" marker-end="url(#arr)" stroke-dasharray="3,3"/>
+            <text class="ont-edge-label" x="286" y="400">hasValue</text>
+
+            <!-- Peril -> modifies rule -->
+            <path class="ont-edge" d="M 460 195 L 460 280" stroke-dasharray="3,3"/>
+            <text class="ont-edge-label" x="482" y="245">modifies</text>
+            <path class="ont-edge" d="M 460 280 L 380 335" marker-end="url(#arr)" stroke-dasharray="3,3"/>
+          </g>
+
           <!-- Arrow marker -->
           <defs>
             <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
@@ -3091,99 +2644,64 @@
             </marker>
           </defs>
 
-          <!-- Edges -->
-          <g>
-            <!-- Policy → Party (issuedTo) -->
-            <path class="ont-edge" d="M 225 100 L 100 165" marker-end="url(#arr)"/>
-            <text class="ont-edge-label" x="148" y="126">issuedTo</text>
-
-            <!-- Policy → Coverage (includes) -->
-            <path class="ont-edge" d="M 260 100 L 260 165" marker-end="url(#arr)"/>
-            <text class="ont-edge-label" x="293" y="132">includes</text>
-
-            <!-- Policy → Risk (covers) -->
-            <path class="ont-edge" d="M 295 100 L 420 165" marker-end="url(#arr)"/>
-            <text class="ont-edge-label" x="374" y="126">covers</text>
-
-            <!-- Party → Premium (pays) -->
-            <path class="ont-edge" d="M 75 215 L 75 305" marker-end="url(#arr)"/>
-            <text class="ont-edge-label" x="106" y="260">pays</text>
-
-            <!-- Coverage → Claim (settles) -->
-            <path class="ont-edge" d="M 260 215 L 260 305" marker-end="url(#arr)"/>
-            <text class="ont-edge-label" x="291" y="260">settles</text>
-
-            <!-- Risk → Peril (exposedTo) -->
-            <path class="ont-edge" d="M 445 215 L 445 305" marker-end="url(#arr)"/>
-            <text class="ont-edge-label" x="478" y="260">exposedTo</text>
-
-            <!-- Peril → Claim (triggers, dashed) -->
-            <path class="ont-edge" d="M 385 330 L 320 330" marker-end="url(#arr)" stroke-dasharray="3,3"/>
-            <text class="ont-edge-label" x="352" y="322">triggers</text>
-
-            <!-- Claim → Limit (subjectTo, dashed attr) -->
-            <path class="ont-edge" d="M 260 355 L 260 405" marker-end="url(#arr)" stroke-dasharray="3,3"/>
-            <text class="ont-edge-label" x="292" y="382">subjectTo</text>
-          </g>
-
-          <!-- Level 1: Policy -->
+          <!-- Nodes -->
           <g class="ont-node core">
             <rect x="200" y="50" width="120" height="50" rx="2"/>
             <text x="260" y="75">Policy</text>
           </g>
 
-          <!-- Level 2: Party, Coverage, Risk -->
-          <g class="ont-node">
-            <rect x="15" y="165" width="120" height="50" rx="2"/>
-            <text x="75" y="184">Party</text>
-            <text x="75" y="200" style="font-size: 9px; fill: #6B6458;">Insured · Carrier · Broker</text>
+          <g class="ont-node core">
+            <rect x="185" y="145" width="150" height="50" rx="2"/>
+            <text x="260" y="170">Location</text>
           </g>
 
           <g class="ont-node core">
-            <rect x="200" y="165" width="120" height="50" rx="2"/>
-            <text x="260" y="184">Coverage</text>
-            <text x="260" y="200" style="font-size: 9px; fill: #ECE5D6;">Lines · Limits · Perils</text>
+            <rect x="200" y="245" width="120" height="50" rx="2"/>
+            <text x="260" y="270">Building</text>
           </g>
 
           <g class="ont-node">
-            <rect x="385" y="165" width="120" height="50" rx="2"/>
-            <text x="445" y="184">Risk</text>
-            <text x="445" y="200" style="font-size: 9px; fill: #6B6458;">Location · Asset · Life</text>
-          </g>
-
-          <!-- Level 3: Premium, Claim, Peril -->
-          <g class="ont-node">
-            <rect x="15" y="305" width="120" height="50" rx="2"/>
-            <text x="75" y="324">Premium</text>
-            <text x="75" y="340" style="font-size: 9px; fill: #6B6458;">Rate × Factors</text>
-          </g>
-
-          <g class="ont-node core">
-            <rect x="200" y="305" width="120" height="50" rx="2"/>
-            <text x="260" y="324">Claim</text>
-            <text x="260" y="340" style="font-size: 9px; fill: #ECE5D6;">Loss · IBNR · Reserves</text>
+            <rect x="0" y="145" width="90" height="48" rx="2"/>
+            <text x="45" y="169">CatZone</text>
           </g>
 
           <g class="ont-node">
-            <rect x="385" y="305" width="120" height="50" rx="2"/>
-            <text x="445" y="324">Peril</text>
-            <text x="445" y="340" style="font-size: 9px; fill: #6B6458;">Wind · Fire · Mortality</text>
+            <rect x="430" y="145" width="80" height="48" rx="2"/>
+            <text x="470" y="162">Peril</text>
+            <text x="470" y="180" style="font-size: 9px; fill: #6B6458;">Wind &middot; Fire &middot; Flood</text>
           </g>
 
-          <!-- Level 4: Limit (attribute) -->
+          <g class="ont-node">
+            <rect x="30" y="330" width="140" height="48" rx="2"/>
+            <text x="100" y="348">Construction</text>
+            <text x="100" y="364" style="font-size: 9px; fill: #6B6458;">Frame &middot; Joisted &middot; Fire-Rsv</text>
+          </g>
+
+          <g class="ont-node">
+            <rect x="200" y="335" width="120" height="48" rx="2"/>
+            <text x="260" y="353">Occupancy</text>
+            <text x="260" y="369" style="font-size: 9px; fill: #6B6458;">NAICS-mapped</text>
+          </g>
+
+          <g class="ont-node">
+            <rect x="350" y="335" width="150" height="48" rx="2"/>
+            <text x="425" y="353">Protection</text>
+            <text x="425" y="369" style="font-size: 9px; fill: #6B6458;">Sprinkler &middot; PC &middot; FD</text>
+          </g>
+
           <g class="ont-node attr">
-            <rect x="200" y="405" width="120" height="40" rx="2"/>
-            <text x="260" y="425">Limit / Deductible</text>
+            <rect x="200" y="430" width="120" height="40" rx="2"/>
+            <text x="260" y="450">TIV (USD)</text>
           </g>
 
           <!-- Legend -->
           <g>
-            <rect x="20" y="438" width="14" height="14" fill="#3F5E4A"/>
-            <text x="42" y="449" style="font-size: 10px; fill: #2A3340; text-anchor: start;">Core class</text>
-            <rect x="130" y="438" width="14" height="14" fill="#ECE5D6" stroke="#2A3340"/>
-            <text x="152" y="449" style="font-size: 10px; fill: #2A3340; text-anchor: start;">Characteristic / enumeration</text>
-            <rect x="340" y="438" width="14" height="14" fill="#FFFFFF" stroke="#2A3340"/>
-            <text x="362" y="449" style="font-size: 10px; fill: #2A3340; text-anchor: start;">Attribute</text>
+            <rect x="20" y="500" width="14" height="14" fill="#3F5E4A"/>
+            <text x="42" y="511" style="font-size: 10px; fill: #2A3340; text-anchor: start;">Core class</text>
+            <rect x="130" y="500" width="14" height="14" fill="#ECE5D6" stroke="#2A3340"/>
+            <text x="152" y="511" style="font-size: 10px; fill: #2A3340; text-anchor: start;">Characteristic / enumeration</text>
+            <rect x="340" y="500" width="14" height="14" fill="#FFFFFF" stroke="#2A3340"/>
+            <text x="362" y="511" style="font-size: 10px; fill: #2A3340; text-anchor: start;">Attribute</text>
           </g>
         </svg>
       </div>
@@ -3193,154 +2711,473 @@
       <div class="why-cell">
         <div class="why-num">I.</div>
         <h4>Meaning, not matching</h4>
-        <p>An LLM might see "whole life" and "permanent life insurance" as similar strings. An ontology knows they are the same concept — and knows exactly which reserve requirements, regulatory filings, and coverage rules attach to it.</p>
+        <p>An LLM might see &ldquo;frame construction&rdquo; and &ldquo;wood frame&rdquo; as similar strings. An ontology knows they are the same concept, and knows that concept is classified as <em>combustible</em> under ISO CC-1.</p>
       </div>
       <div class="why-cell">
         <div class="why-num">II.</div>
         <h4>Rules follow concepts</h4>
-        <p>A rule attached to <em>HighRisk</em> automatically applies to every subtype the ontology places under it — without re-authoring. Your guidelines become a small, maintainable hierarchy instead of a sprawling document.</p>
+        <p>A rule attached to <em>Combustible Construction</em> automatically applies to every subtype &mdash; without re-authoring. Your underwriting manual becomes a small, maintainable tree instead of a sprawling document.</p>
       </div>
       <div class="why-cell">
         <div class="why-num">III.</div>
         <h4>Cross-domain consistency</h4>
-        <p>The same <em>Location</em> concept anchors underwriting, claims, portfolio, and reinsurance. One broker address resolves to one entity everywhere — the foundation of clean accumulation and PML analysis.</p>
+        <p>The same <em>Location</em> concept anchors underwriting, claims, portfolio, and reinsurance. One broker address resolves to one entity everywhere &mdash; the foundation of clean accumulation and PML analysis.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 4: DEEP DIVES -->
-<section id="deepdives">
+<!-- SECTION 2: GOING DEEPER -->
+<section id="going-deeper">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">04 / EXPLORE</div>
-      <h2 class="sec-title">Deep dives by <em>line of business</em>.</h2>
+      <div class="sec-num">02 / DEEPER</div>
+      <h2 class="sec-title">What&rsquo;s happening <em>inside</em> each system.</h2>
     </div>
-
-    <p class="dives-intro">The same neurosymbolic framework applies across every line &mdash; but the ontologies, the rules, and the reasoning chains differ. Explore a complete worked example in the line most relevant to you.</p>
-
-    <div class="dives-grid">
-
-      <div class="dive-card pc">
-        <div class="dive-card-tag">Property &amp; Casualty</div>
-        <h3 class="dive-card-title">Commercial Property <em>Underwriting</em></h3>
-        <p class="dive-card-desc">A mid-market commercial property submission &mdash; from ontology-driven fact extraction through accumulation breach diagnosis and constraint-satisfaction pricing. Every rule fires explicitly. Every number traces to a source.</p>
-        <ul class="dive-features">
-          <li>Commercial property ontology (COPE)</li>
-          <li>Eight-rule guideline evaluation</li>
-          <li>Live side-by-side demo: RAG vs NSAI</li>
-          <li>Constraint-satisfaction pricing</li>
-          <li>Full proof tree</li>
-        </ul>
-        <a href="pc-deepdive.html" class="dive-cta">Explore P&amp;C Deep Dive &rarr;</a>
+    <div class="deep-dive open" style="margin-top: 0;">
+      <div class="deep-dive-body">
+        <div class="deep-dive-body-inner">
+          <div>
+            <h5>Inside an LLM</h5>
+            <p>A submission comes in as text. The model tokenizes it and passes the tokens through dozens of transformer layers, each applying attention across the sequence. At each position, the model produces a probability distribution over its vocabulary and samples the next token.</p>
+            <p>There is no separate &ldquo;reasoning step.&rdquo; What looks like reasoning &mdash; chain-of-thought, for example &mdash; is the model generating text that resembles reasoning it has seen in training data. It often gets the answer right because that pattern is well-represented in the corpus. It sometimes gets it confidently wrong for the same reason.</p>
+            <p>The model has no persistent representation of your underwriting manual. Even if you paste the manual into context, the model&rsquo;s attention to it is probabilistic; there is no guarantee rule <code>CP-ACC-02</code> will be applied when it should be.</p>
+          </div>
+          <div>
+            <h5>Inside RAG + LLM</h5>
+            <p>The submission triggers a retrieval step first. The system embeds the query, searches a vector index over your documents, and pulls back the top-k most relevant passages. This is deterministic &mdash; the same query returns the same passages.</p>
+            <p>Those passages are injected into the prompt. Now the LLM generates with your actual guidelines visible in its context window. Citations in the output refer to retrieved passages, which is a real improvement: hallucinated facts are much rarer, and the model&rsquo;s answers are grounded in your content.</p>
+            <p>But the generation step is <em>still</em> an LLM. It can misread a retrieved clause, paraphrase it incorrectly, or let its training-data priors override what the passage actually says. And retrieval only works on documents &mdash; not on live portfolio data, APIs, or structured operational systems.</p>
+          </div>
+          <div>
+            <h5>Inside a Neurosymbolic System</h5>
+            <p>The same submission arrives as text. A neural extractor (often an LLM itself, constrained) parses it into structured facts: <code>Location(id=L1, address=&quot;Galveston, TX&quot;, construction=JoistedMasonry, occupancy=MetalFabrication, tiv=USD 38M)</code>.</p>
+            <p>These facts are asserted into a knowledge graph built on an ontology. A reasoner &mdash; a rules engine or a description-logic inference engine &mdash; then evaluates every applicable rule. Rule <code>CP-ACC-02</code> is represented as executable logic: <code>IF post_bind_accum &gt; 0.80 &times; cap THEN breach</code>.</p>
+            <p>The conclusion isn&rsquo;t generated &mdash; it&rsquo;s <em>derived</em>. Every derivation produces a proof: the fact, the rule, and the binding. That proof is what makes the output auditable, consistent, and defensible.</p>
+          </div>
+        </div>
       </div>
-
-      <div class="dive-card la">
-        <div class="dive-card-tag">Life &amp; Annuity</div>
-        <h3 class="dive-card-title">Capital &amp; Reserve <em>Management</em></h3>
-        <p class="dive-card-desc">Actuarial modeling, reserve calculations, and capital efficiency &mdash; with deterministic proof chains that actuaries and regulators can audit. The same NSAI framework, applied to long-duration, multi-state risk.</p>
-        <ul class="dive-features">
-          <li>L&amp;A domain ontology</li>
-          <li>Reserve &amp; RBC calculation logic</li>
-          <li>Regulatory compliance chains</li>
-          <li>Capital efficiency modeling</li>
-          <li>Live L&amp;A demo</li>
-        </ul>
-        <a href="lifedemo.html" class="dive-cta">Explore L&amp;A Deep Dive &rarr;</a>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: REGULATORS -->
-<section id="regulators">
+<!-- SECTION 3: DEMO -->
+<section id="demo">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">05 / REGULATORS</div>
-      <h2 class="sec-title">What <em>regulators</em> want — and why NSAI gives it to them.</h2>
+      <div class="sec-num">03 / DEMO</div>
+      <h2 class="sec-title">A live commercial property <em>underwriting decision</em>.</h2>
     </div>
 
-    <div class="reg-frame">
-      <p class="reg-lede">
-        Insurance regulators, state DOIs, NAIC working groups, and the EU AI Act don't care about model architecture. They care about three things: <em>auditability</em>, <em>explainability</em>, and <em>bias</em>. Each is harder to deliver with an LLM than with a neurosymbolic system.
+    <p class="demo-intro">
+      A broker submits a mid-market commercial property risk. Below is the actual submission. Then: how the process <em>traditionally</em> runs, how a <em>RAG-augmented LLM</em> would handle it (with the underwriting manual indexed for retrieval), and how a <em>neurosymbolic system</em> handles it — not just gating the referral but <em>reasoning across the enterprise ontology</em> to derive a priced, structured quote. The NSAI pipeline runs in five stages: extract facts from the submission, enrich with ontology-driven joins, evaluate underwriting rules, compose an explanation, and finally <em>reason across pricing, reinsurance, portfolio, claims, and regulatory ontologies</em> to produce the actual terms and premium. Every number traceable to its source.
+    </p>
+
+    <!-- SUBMISSION CARD -->
+    <div class="submission">
+      <div class="sub-head">
+        <h3>Submission · Meridian Fabrication, Inc.</h3>
+        <div class="sub-id">SUB-2026-047193 · Broker: Hanley &amp; Co.</div>
+      </div>
+      <div class="sub-body">
+        <div class="sub-field">
+          <div class="label">Named Insured</div>
+          <div class="val">Meridian Fabrication, Inc.</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Coverage</div>
+          <div class="val">Building + BPP + BI</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Effective Date</div>
+          <div class="val">06 / 01 / 2026</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Locations</div>
+          <div class="val">3 (TX, OK, LA)</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Primary Location</div>
+          <div class="val">Galveston, TX 77551</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Construction</div>
+          <div class="val">Joisted Masonry (1987)</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Occupancy</div>
+          <div class="val">Metal Fabrication (NAICS 332710)</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Protection</div>
+          <div class="val">Sprinklered · PC 4 · Central Station</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Total TIV</div>
+          <div class="val warn">$ 84,500,000</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">5-Yr Loss History</div>
+          <div class="val warn">2 losses · $ 412k incurred</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Prior Carrier</div>
+          <div class="val">Non-renewed (capacity)</div>
+        </div>
+        <div class="sub-field">
+          <div class="label">Broker Note</div>
+          <div class="val good">Quick turn requested — bind 05/25</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROCESS TABS -->
+    <div class="process-tabs">
+      <button class="process-tab active" data-tab="baseline" onclick="switchTab('baseline')">
+        <span class="tab-num">A / BASELINE</span>
+        <span class="tab-title">Traditional Underwriting Workflow</span>
+        <span class="tab-sub">How the process runs today</span>
+      </button>
+      <button class="process-tab" data-tab="llm" onclick="switchTab('llm')">
+        <span class="tab-num">B / RAG + LLM</span>
+        <span class="tab-title">Retrieval-Augmented Generation</span>
+        <span class="tab-sub">Retrieve → inject → generate</span>
+      </button>
+      <button class="process-tab" data-tab="nsai" onclick="switchTab('nsai')">
+        <span class="tab-num">C / NEUROSYMBOLIC</span>
+        <span class="tab-title">Ontology + Rule Engine</span>
+        <span class="tab-sub">Extract → enrich → infer → explain → reason</span>
+      </button>
+    </div>
+
+    <!-- PANEL A: BASELINE -->
+    <div class="process-panel active" id="panel-baseline">
+      <p class="panel-intro">
+        Before introducing any AI, here's the traditional workflow a commercial property underwriter runs on a submission of this size. The process is sound — but it's slow, uneven across underwriters, and heavily dependent on manual interpretation.
       </p>
 
-      <div class="reg-pillars">
-        <div class="reg-pillar">
-          <div class="reg-pillar-num">I.</div>
-          <h4>Auditability</h4>
-          <p>Regulators increasingly ask carriers to produce, on demand, the exact reasoning behind an individual decision — why this risk was accepted, declined, or priced as it was. Not a narrative. A trace.</p>
-          <p>An LLM cannot produce this. A neurosymbolic system produces it by construction: the proof tree <em>is</em> the audit record. Every rule firing, every fact, every binding.</p>
-          <div class="reg-frameworks">
-            <strong>Relevant frameworks</strong>
-            NAIC Model Bulletin on AI<br>
-            Colorado SB21-169<br>
-            EU AI Act Art. 13<br>
-            NYDFS Circular Letter No. 1
-          </div>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="step-n">STEP 01</div>
+          <strong>Intake &amp; Clearance</strong>
+          <p>Check for conflicts, prior submissions, sanctioned entities. Verify appetite fit.</p>
         </div>
-
-        <div class="reg-pillar">
-          <div class="reg-pillar-num">II.</div>
-          <h4>Explainability</h4>
-          <p>When a consumer asks why their claim was denied or their rate was high, carriers must be able to explain. Post-hoc LLM narratives are plausible text — they are not actual explanations of the model's internal state.</p>
-          <p>A neurosymbolic system's explanation <em>is</em> the reasoning. The narrative is generated from the proof, not fabricated alongside it. Same answer, every time, reconstructable years later.</p>
-          <div class="reg-frameworks">
-            <strong>Relevant frameworks</strong>
-            GDPR Art. 22 (automated decisions)<br>
-            NAIC Unfair Trade Practices<br>
-            Fair Credit Reporting Act<br>
-            EU AI Act Art. 14 (human oversight)
-          </div>
+        <div class="flow-step">
+          <div class="step-n">STEP 02</div>
+          <strong>COPE Assessment</strong>
+          <p>Review Construction, Occupancy, Protection, Exposure for each location.</p>
         </div>
+        <div class="flow-step">
+          <div class="step-n">STEP 03</div>
+          <strong>Loss &amp; Exposure Analysis</strong>
+          <p>Evaluate loss runs, CAT exposure, accumulation vs portfolio limits.</p>
+        </div>
+        <div class="flow-step">
+          <div class="step-n">STEP 04</div>
+          <strong>Pricing &amp; Authority</strong>
+          <p>Run rating model, compare to authority grid, determine referral need.</p>
+        </div>
+        <div class="flow-step">
+          <div class="step-n">STEP 05</div>
+          <strong>Decision &amp; Terms</strong>
+          <p>Accept, decline, or quote with subjectivities. Issue terms to broker.</p>
+        </div>
+      </div>
 
-        <div class="reg-pillar">
-          <div class="reg-pillar-num">III.</div>
-          <h4>Bias &amp; fairness</h4>
-          <p>Regulators test for disparate impact across protected classes — race, ZIP code, gender, age. For an LLM, bias testing is statistical inference after the fact, and mitigation is retraining.</p>
-          <p>For a neurosymbolic system, the rulebook is the inspectable artifact. You can read every rule, test each one for bias, version-control changes, and prove a particular decision never used a forbidden attribute.</p>
-          <div class="reg-frameworks">
-            <strong>Relevant frameworks</strong>
-            CO Division of Insurance Reg 10-1-1<br>
-            NAIC Market Conduct Exams<br>
-            FIO Climate Insurance Equity<br>
-            NY DFS Circular Letter No. 1
+      <div class="decision">
+        <div class="decision-label">Observed Pain Points</div>
+        <h4>Slow, inconsistent, and hard to defend</h4>
+        <p>A submission this size typically takes 5–8 business days across multiple handoffs. Two underwriters looking at the same risk routinely produce different terms. When a decision is challenged — by a broker, a regulator, or internal audit — the rationale often lives in one underwriter's email thread or handwritten notes. Accumulation exposure is checked manually against stale portfolio extracts.</p>
+        <ul class="issue-list">
+          <li>Inconsistent application of guidelines across the desk</li>
+          <li>Manual portfolio checks miss aggregation risk in real time</li>
+          <li>Decisions are defensible only where documentation is strong — and documentation is uneven</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PANEL B: RAG + LLM -->
+    <div class="process-panel" id="panel-llm">
+      <p class="panel-intro">
+        The realistic deployment today: a RAG-augmented LLM with the underwriting manual, appetite guide, and CAT classifications indexed for retrieval. The model sees the submission, <em>searches your actual documents</em>, and generates a cited recommendation. This is materially better than a bare LLM — but still fundamentally different from a reasoner.
+      </p>
+
+      <div class="trace">
+        <div class="trace-head">
+          <span>RAG + LLM · RETRIEVAL-AUGMENTED</span>
+          <span>3 retrievals &middot; 14 passages &middot; 9.8k ctx &middot; 8.2s</span>
+        </div>
+        <div class="trace-body">
+          <div class="trace-line comment"><span class="num">01</span><span class="code"># Pipeline: query \u2192 vector search across docs \u2192 inject top-k \u2192 generate</span></div>
+          <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-key">Analysis (grounded):</span> <span class="trace-val">Risk fits standard Tier 1 metal fabrication profile.</span></span></div>
+          <div class="trace-line"><span class="num">03</span><span class="code">Per <span class="trace-key">[UW-Manual-\u00a73.2]</span>, joisted masonry + PC4 + sprinklered is acceptable construction.</span></div>
+          <div class="trace-line"><span class="num">04</span><span class="code">Per <span class="trace-key">[Appetite-2026-Q2]</span>, NAICS 332710 (metal fabrication) is in appetite with hot-work warranty.</span></div>
+          <div class="trace-line"><span class="num">05</span><span class="code">Per <span class="trace-key">[CAT-Zones-TX]</span>, Galveston is Tier 1; standard 5% NWS deductible applies.</span></div>
+          <div class="trace-line"><span class="num">06</span><span class="code"><span class="trace-key">Recommendation:</span> <span class="trace-pass">QUOTE</span> with referral for TIV; 5% NWS ded; hot-work warranty; flood sublimit $5M.</span></div>
+          <div class="trace-line"><span class="num">07</span><span class="code"><span class="trace-key">Suggested Deductible:</span> $25,000 AOP.</span></div>
+          <div class="trace-line comment"><span class="num">08</span><span class="code"># Narrative cites retrieved passages throughout</span></div>
+        </div>
+      </div>
+
+      <div class="decision llm">
+        <div class="decision-label">What RAG improved &mdash; and what it still can't do</div>
+        <h4>Better grounded. Still not reasoning.</h4>
+        <p>RAG is a real improvement over a bare LLM. With the manual retrievable, the model correctly identifies metal fabrication as a hot-work hazard, knows Galveston is Tier 1, and suggests a 5% NWS deductible. These are the <em>in-document</em> facts RAG excels at. But RAG is still an LLM at the core &mdash; and LLMs cannot execute multi-step reasoning across systems, query live data, or derive a proof. Here is what retrieval can't fix:</p>
+        <ul class="issue-list">
+          <li><strong>No portfolio awareness:</strong> The underwriting manual is in the retrieval corpus. Your <em>live portfolio accumulation</em> is not. RAG doesn't know Gulf Tier 1 retained accumulation is at 79.0% of the 80% cap &mdash; and has no way to check.</li>
+          <li><strong>No accumulation math:</strong> Even if the retrieval surfaced the CP-ACC-02 rule text, RAG cannot do the multi-step calculation to determine that binding at default cession pushes accumulation to 80.4%. LLMs are unreliable on chained arithmetic.</li>
+          <li><strong>No constraint-satisfaction:</strong> Finding the cession structure that clears every rule simultaneously is not something RAG can solve. It can describe the tradeoffs &mdash; it cannot optimize across them.</li>
+          <li><strong>Treaty-structure blind:</strong> The reinsurance treaty ontology (default 50% cession, 25&ndash;75% variable band, commission schedule) is operational data in another system. RAG retrieves from documents, not from APIs.</li>
+          <li><strong>Probabilistic, not deterministic:</strong> Same submission tomorrow, same retrieved passages &mdash; the generated narrative will be subtly different each time. Retrieval is deterministic; generation is not.</li>
+          <li><strong>Citations, not proofs:</strong> A citation says "I consulted this passage." A proof says "here is the logical chain from facts to conclusion." Regulators increasingly want the latter.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PANEL C: NSAI -->
+    <div class="process-panel" id="panel-nsai">
+      <p class="panel-intro">
+        The neurosymbolic system runs the submission through four stages: <em>neural extraction</em> into the ontology, <em>symbolic enrichment</em> from external sources, <em>rule-engine evaluation</em> of underwriting guidelines, and <em>neural explanation</em> of the derived decision. Every step is inspectable.
+      </p>
+
+      <div class="mini-ont">
+        <div class="mini-ont-label">Stage 01 / Neural extraction — submission text parsed into ontology instances</div>
+        <div class="trace" style="margin-top:0; border:none; background:transparent;">
+          <div class="trace-body" style="padding: 8px 0;">
+            <div class="trace-line"><span class="num">01</span><span class="code"><span class="trace-key">Policy</span>(id=P1, insured=<span class="trace-val">"Meridian Fabrication"</span>, effective=2026-06-01)</span></div>
+            <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-key">Location</span>(id=L1, address=<span class="trace-val">"Galveston, TX 77551"</span>, primary=true)</span></div>
+            <div class="trace-line"><span class="num">03</span><span class="code"><span class="trace-key">Building</span>(id=B1, locatedAt=L1, yearBuilt=1987, tiv=<span class="trace-val">USD 38.2M</span>)</span></div>
+            <div class="trace-line"><span class="num">04</span><span class="code"><span class="trace-key">Construction</span>(B1, <span class="trace-val">JoistedMasonry</span>) ⊑ ISO_CC_3</span></div>
+            <div class="trace-line"><span class="num">05</span><span class="code"><span class="trace-key">Occupancy</span>(B1, NAICS=<span class="trace-val">332710</span>) → resolves to <span class="trace-val">MetalFabrication</span></span></div>
+            <div class="trace-line"><span class="num">06</span><span class="code"><span class="trace-key">Protection</span>(B1, sprinklered=true, PC=<span class="trace-val">4</span>, alarmType=CentralStation)</span></div>
+            <div class="trace-line"><span class="num">07</span><span class="code"><span class="trace-key">Loss</span>(P1, count=2, incurred=USD 412k, period=5y)</span></div>
           </div>
         </div>
       </div>
 
-      <div class="reg-quote">
-        <div class="reg-quote-mark">&ldquo;</div>
-        <blockquote>
-          The carrier must be able, on request, to demonstrate the <em>specific factual and regulatory basis</em> for any adverse underwriting or claims decision produced with the assistance of an artificial intelligence system.
-        </blockquote>
-        <cite>— paraphrase of the consistent regulatory posture across NAIC, NYDFS, and EU AI Act</cite>
+      <div class="mini-ont">
+        <div class="mini-ont-label">Stage 02 / Symbolic enrichment — ontology auto-derives and joins to external knowledge</div>
+        <div class="trace" style="margin-top:0; border:none; background:transparent;">
+          <div class="trace-body" style="padding: 8px 0;">
+            <div class="trace-line"><span class="num">01</span><span class="code"><span class="trace-key">Location</span>(L1).<span class="trace-key">catZone</span> ← lookup(FIPS=48167) → <span class="trace-val">Tier1_NamedWindstorm · FEMA_AE_Flood</span></span></div>
+            <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-key">MetalFabrication</span> ⊑ <span class="trace-val">HighHazard_Welding</span> ⊑ <span class="trace-val">FireHazardClass_4</span></span></div>
+            <div class="trace-line"><span class="num">03</span><span class="code"><span class="trace-key">JoistedMasonry</span> ⊑ <span class="trace-val">NonCombustibleExterior · CombustibleInterior</span></span></div>
+            <div class="trace-line"><span class="num">04</span><span class="code"><span class="trace-key">Portfolio</span>(Gulf_T1_retained) = USD 568.8M / 720M cap → <span class="trace-val">79.0%</span></span></div>
+            <div class="trace-line"><span class="num">05</span><span class="code"><span class="trace-key">PriorCarrier</span>.nonRenewalReason=<span class="trace-val">"capacity"</span> → <span class="trace-warn">flag for disclosure review</span></span></div>
+          </div>
+        </div>
       </div>
 
-      <div class="bias-grid">
-        <div class="bias-cell llm">
-          <div class="bc-tag">WITH AN LLM (or LLM + RAG)</div>
-          <h4>Bias is a statistical property you test for</h4>
-          <p>The model's biases live in billions of weights learned from training data. You cannot inspect which weight encodes which correlation. Mitigation requires adversarial probing, disparate-impact testing, and retraining.</p>
-          <ul>
-            <li>Bias detection is post-hoc and probabilistic</li>
-            <li>Mitigation is slow, expensive, and incomplete</li>
-            <li>"Did this model use race?" is an empirical question</li>
-            <li>Regulatory defense requires a statistical argument</li>
-          </ul>
+      <div class="mini-ont">
+        <div class="mini-ont-label">Stage 03 / Rule engine evaluation — every applicable guideline fires deterministically</div>
+        <table class="rules">
+          <thead>
+            <tr>
+              <th style="width:14%;">Rule</th>
+              <th>Condition</th>
+              <th style="width:22%;">Inputs</th>
+              <th style="width:14%; text-align:right;">Outcome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rule-id">CP-APT-01</td>
+              <td>Named insured must pass clearance &amp; appetite screen</td>
+              <td>Metal Fab · NAICS 332710</td>
+              <td class="rule-out"><span class="pill pass">In Appetite</span></td>
+            </tr>
+            <tr>
+              <td class="rule-id">CP-TIV-03</td>
+              <td>If TIV &gt; USD 50M, route to senior authority</td>
+              <td>TIV = USD 84.5M</td>
+              <td class="rule-out"><span class="pill warn">Refer</span></td>
+            </tr>
+            <tr>
+              <td class="rule-id">CP-CAT-12</td>
+              <td>If location in Tier 1 named-wind zone, require 5% NWS deductible</td>
+              <td>L1 ∈ Tier1_NamedWindstorm</td>
+              <td class="rule-out"><span class="pill warn">Subject To</span></td>
+            </tr>
+            <tr>
+              <td class="rule-id">CP-CAT-18</td>
+              <td>If FEMA flood zone ∈ {A*, V*}, require flood sublimit or exclusion</td>
+              <td>L1 ∈ FEMA_AE</td>
+              <td class="rule-out"><span class="pill warn">Subject To</span></td>
+            </tr>
+            <tr>
+              <td class="rule-id">CP-HAZ-07</td>
+              <td>HighHazard_Welding occupancies require hot-work permit warranty</td>
+              <td>B1 ⊑ HighHazard_Welding</td>
+              <td class="rule-out"><span class="pill warn">Warranty</span></td>
+            </tr>
+            <tr>
+              <td class="rule-id">CP-ACC-02</td>
+              <td>Gulf Tier 1 accumulation must remain &lt; 80% of treaty capacity</td>
+              <td>Post-bind: 79.0% → 80.4%</td>
+              <td class="rule-out"><span class="pill fail">Breach</span></td>
+            </tr>
+            <tr>
+              <td class="rule-id">CP-LOSS-04</td>
+              <td>Loss ratio &lt; 40% over 5 yr — no load required</td>
+              <td>LR ≈ 11% (est.)</td>
+              <td class="rule-out"><span class="pill pass">Pass</span></td>
+            </tr>
+            <tr>
+              <td class="rule-id">CP-DISC-09</td>
+              <td>Prior non-renewal requires written disclosure from broker</td>
+              <td>Non-renewal flagged</td>
+              <td class="rule-out"><span class="pill warn">Subject To</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mini-ont">
+        <div class="mini-ont-label">Stage 04 / Neural explanation — initial decision narrative grounded in the proof tree</div>
+        <div class="trace" style="margin-top:0; border:none; background:transparent;">
+          <div class="trace-body" style="padding: 8px 0;">
+            <div class="trace-line comment"><span class="num">01</span><span class="code"># Narrative generated from rule firings — every claim cites a rule ID</span></div>
+            <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-val">Initial screen:</span> <span class="trace-warn">REFER · 6 SUBJECTIVITIES · 1 BREACH</span></span></div>
+            <div class="trace-line"><span class="num">03</span><span class="code">Risk is in appetite [<span class="trace-key">CP-APT-01</span>] with acceptable loss history [<span class="trace-key">CP-LOSS-04</span>].</span></div>
+            <div class="trace-line"><span class="num">04</span><span class="code">Binding at default 50% cession pushes Gulf T1 accumulation to 80.4%, breaching</span></div>
+            <div class="trace-line"><span class="num">05</span><span class="code">the 80% treaty cap [<span class="trace-key">CP-ACC-02</span>] — cession structure must be re-reasoned.</span></div>
+            <div class="trace-line"><span class="num">06</span><span class="code">Quote to include: 5% NWS deductible [<span class="trace-key">CP-CAT-12</span>], flood</span></div>
+            <div class="trace-line"><span class="num">07</span><span class="code">sublimit USD 5M [<span class="trace-key">CP-CAT-18</span>], hot-work warranty [<span class="trace-key">CP-HAZ-07</span>],</span></div>
+            <div class="trace-line"><span class="num">08</span><span class="code">prior non-renewal disclosure [<span class="trace-key">CP-DISC-09</span>], senior UW authority [<span class="trace-key">CP-TIV-03</span>].</span></div>
+          </div>
         </div>
-        <div class="bias-cell nsai">
-          <div class="bc-tag">WITH A NEUROSYMBOLIC SYSTEM</div>
-          <h4>Bias is a property of the rulebook you inspect</h4>
-          <p>The knowledge base and rule set are explicit, readable artifacts. You can diff them like source code, test each rule in isolation, and prove — by construction — that a specific decision never consulted a forbidden attribute.</p>
-          <ul>
-            <li>Bias detection is deterministic and direct</li>
-            <li>Mitigation is editing a rule and re-running</li>
-            <li>"Did this decision use race?" has a yes/no answer</li>
-            <li>Regulatory defense is a proof, not a statistic</li>
-          </ul>
+      </div>
+
+      <div class="mini-ont">
+        <div class="mini-ont-label">Stage 05 / Cross-domain reasoning — compose a priced, placed quote</div>
+        <div class="trace" style="margin-top:0; border:none; background:transparent;">
+          <div class="trace-body" style="padding: 8px 0;">
+            <div class="trace-line comment"><span class="num">01</span><span class="code"># Query enterprise ontology for resolution levers &amp; pricing inputs</span></div>
+            <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-key">ReinsuranceTreaty</span>(ABC-Gulf-2026).variableBand = [<span class="trace-val">25%, 75%</span>] retention</span></div>
+            <div class="trace-line"><span class="num">03</span><span class="code"><span class="trace-key">PricingOntology</span>.bookRate(MetalFab · PC4 · Tier1) = <span class="trace-val">$0.248 / $100 TIV</span></span></div>
+            <div class="trace-line"><span class="num">04</span><span class="code"><span class="trace-key">ClaimsOntology</span>.severityCurve(welding, 5y) → blended expected loss</span></div>
+            <div class="trace-line"><span class="num">05</span><span class="code"><span class="trace-key">RegFilingsOntology</span>.texas = NWS ded minimum OK · filing approved</span></div>
+            <div class="trace-line comment"><span class="num">06</span><span class="code"># Constraint-satisfaction · find retention that clears CP-ACC-02</span></div>
+            <div class="trace-line"><span class="num">07</span><span class="code">solve(retention ∈ [0.25, 0.75] | accumulation_post_bind ≤ 0.80 × cap)</span></div>
+            <div class="trace-line"><span class="num">08</span><span class="code">→ retention = <span class="trace-val">0.25</span> (75% ceded) · post-bind = <span class="trace-pass">79.7% ✓</span></span></div>
+            <div class="trace-line comment"><span class="num">09</span><span class="code"># Causal pricing derivation · base × loads × credits</span></div>
+            <div class="trace-line"><span class="num">10</span><span class="code">premium = base × (1 + welding + NWS + credit) × retained + commission</span></div>
+            <div class="trace-line"><span class="num">11</span><span class="code"><span class="trace-val">Final recommendation:</span> <span class="trace-pass">BIND · 25% RETENTION · NET PREMIUM $104,109</span></span></div>
+          </div>
         </div>
+      </div>
+
+      <div class="decision nsai">
+        <div class="decision-label">What the neurosymbolic system produced</div>
+        <h4>A decision, a proof, a structure, and a price.</h4>
+        <p>Unlike the LLM, the NSAI system didn't stop at a fluent answer. It caught every compliance flag, diagnosed the accumulation breach with real math, then <em>reasoned across six enterprise ontologies</em> — treaty, portfolio, pricing, claims, regulatory filings, and commission — to find a cession structure that resolves the breach and arrive at a defensible net premium. Every value here has a named source.</p>
+        <ul class="issue-list">
+          <li><strong>Caught the CAT exposure</strong> through ontology-driven enrichment — not left to the model's attention.</li>
+          <li><strong>Caught the occupancy hazard</strong> via NAICS-to-hazard-class inheritance in the ontology.</li>
+          <li><strong>Diagnosed the accumulation breach</strong> at default cession with explicit portfolio math — 79.0% + gross add at 50% retention → 80.4%.</li>
+          <li><strong>Resolved it by constraint-satisfaction</strong> — flexed retention to 25% within the treaty band, lands at 79.7%, clears the 80% cap.</li>
+          <li><strong>Priced the risk causally</strong> — base rate loaded for welding and NWS, credited for protection, netted for cession.</li>
+          <li><strong>Every number traces to a source</strong> — the proof tree is the compliance record.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- LIVE DEMO — click to watch both models run -->
+    <div class="live-demo" id="liveDemo">
+      <div class="live-demo-head">
+        <div>
+          <div class="live-demo-eyebrow">LIVE · WATCH BOTH MODELS RUN</div>
+          <h3>See it for <em>yourself</em>.</h3>
+          <p>Press <strong>Run</strong>. Both systems receive the Meridian Fabrication submission at the same moment. Watch RAG retrieve, cite, and produce a grounded-sounding recommendation — while the neurosymbolic reasoner extracts, enriches, evaluates rules, composes an explanation, and then <em>reasons across the enterprise ontology</em> — deductively, causally, and by constraint-satisfaction — to structure and price the actual quote. Every number traced to a source.</p>
+        </div>
+        <button class="run-btn" id="runBtn" onclick="runDemo()">RUN BOTH MODELS</button>
+      </div>
+
+      <div class="stage">
+        <!-- LLM LANE -->
+        <div class="lane llm" id="laneLLM">
+          <div class="lane-head">
+            <div>
+              <div class="lane-tag">RAG + LLM · RETRIEVAL-AUGMENTED</div>
+              <div class="lane-title">Generative AI with Retrieval</div>
+            </div>
+            <div class="lane-clock"><span class="status"></span><span id="clockLLM">0.0s</span></div>
+          </div>
+          <div class="lane-body" id="bodyLLM"></div>
+        </div>
+
+        <!-- NSAI LANE -->
+        <div class="lane nsai" id="laneNSAI">
+          <div class="lane-head">
+            <div>
+              <div class="lane-tag">NEUROSYMBOLIC · ONTOLOGY + RULES</div>
+              <div class="lane-title">Hybrid Reasoner</div>
+            </div>
+            <div class="lane-clock"><span class="status"></span><span id="clockNSAI">0.0s</span></div>
+          </div>
+          <div class="lane-body" id="bodyNSAI"></div>
+        </div>
+      </div>
+
+      <div class="race-summary" id="raceSummary">
+        <h4>Same submission. <em>Very different thinking.</em></h4>
+        <div class="sub">Side-by-side: what each system produced on this run.</div>
+        <div class="race-stats">
+          <div class="race-stat">
+            <div class="rs-label">Decision</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Quote · binds a breach</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">Priced &amp; placed</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Critical factors caught</div>
+            <div class="rs-pair">
+              <div class="rs-llm">5 of 8</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">8 of 8</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Reasoning across domains</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Documents only</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">6 ontologies</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Audit trail</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Citations</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">Proof tree</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCORECARD -->
+    <div class="scorecard">
+      <div class="score-col llm">
+        <h4>RAG + LLM Approach</h4>
+        <div class="score-metric"><span class="m-label">Decision accuracy on this risk</span><span class="m-val">Partial</span></div>
+        <div class="score-metric"><span class="m-label">Reproducibility across runs</span><span class="m-val">Probabilistic</span></div>
+        <div class="score-metric"><span class="m-label">Auditable rationale</span><span class="m-val">Citations</span></div>
+        <div class="score-metric"><span class="m-label">Guideline update cost</span><span class="m-val">Re-index docs</span></div>
+        <div class="score-metric"><span class="m-label">Portfolio awareness</span><span class="m-val">None</span></div>
+        <div class="score-metric"><span class="m-label">Regulatory defensibility</span><span class="m-val">Moderate</span></div>
+      </div>
+      <div class="score-col nsai">
+        <h4>Neurosymbolic Approach</h4>
+        <div class="score-metric"><span class="m-label">Decision accuracy on this risk</span><span class="m-val">Correct</span></div>
+        <div class="score-metric"><span class="m-label">Reproducibility across runs</span><span class="m-val">Deterministic</span></div>
+        <div class="score-metric"><span class="m-label">Auditable rationale</span><span class="m-val">Proof tree</span></div>
+        <div class="score-metric"><span class="m-label">Guideline update cost</span><span class="m-val">Edit rule</span></div>
+        <div class="score-metric"><span class="m-label">Portfolio awareness</span><span class="m-val">Real-time</span></div>
+        <div class="score-metric"><span class="m-label">Regulatory defensibility</span><span class="m-val">Strong</span></div>
       </div>
     </div>
   </div>
@@ -3348,12 +3185,536 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <div class="brand">NSAI for Insurance — a primer.</div>
-    <div class="meta">NSAI for Insurance</div>
+    <div class="brand">NSAI for Insurance &mdash; P&amp;C Deep Dive.</div>
+    <div class="meta">
+      <a href="index.html" style="color:rgba(244,239,230,0.6); text-decoration:none; margin-right:24px;">&larr; Overview</a>
+      <a href="lifedemo.html" style="color:rgba(244,239,230,0.6); text-decoration:none;">Life &amp; Annuity &rarr;</a>
+    </div>
   </div>
 </footer>
 
 <script>
+  function switchTab(name) {
+    document.querySelectorAll('.process-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.process-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector('.process-tab[data-tab="' + name + '"]').classList.add('active');
+    document.getElementById('panel-' + name).classList.add('active');
+  }
+
+  function toggleDeepDive() {
+    // Going Deeper is always expanded on this page
+  }
+
+  // ============ LIVE DEMO RUNNER ============
+  // RAG + LLM pipeline: query → retrieve → inject → generate.
+  // RAG is noticeably smarter than a bare LLM — it can cite the underwriting
+  // manual and avoid the NAICS mis-classification — but it still can't do
+  // multi-step portfolio reasoning or constraint-satisfaction.
+  const LLM_SCRIPT = [
+    { label: "Query formulation",   text: 'Parsing submission \u2192 building retrieval query...',                                     wait: 400 },
+    { label: "Retrieve · Pass 1",   text: 'Vector search (underwriting manual) \u2192 <span class="ok">7 passages</span>',               wait: 500 },
+    { label: "Retrieve · Pass 2",   text: 'Vector search (appetite guide) \u2192 <span class="ok">4 passages</span>',                     wait: 500 },
+    { label: "Retrieve · Pass 3",   text: 'Vector search (CAT classifications) \u2192 <span class="ok">3 passages</span>',                wait: 500 },
+    { label: "Context injection",   text: 'Top 14 passages injected into prompt (9.8k tokens)...',                                       wait: 500 },
+    { label: "Grounded generation", text: 'Cites [UW-Manual-§3.2] \u2192 joisted masonry acceptable, PC4 with sprinklers standard',      wait: 550 },
+    { label: "Grounded generation", text: 'Cites [Appetite-2026-Q2] \u2192 metal fabrication in appetite with hot-work warranty',       wait: 550 },
+    { label: "Grounded generation", text: 'Cites [CAT-Zones-TX] \u2192 Galveston Tier 1 \u2192 standard 5% NWS deductible',               wait: 550 },
+    { label: "Forming recommendation", text: 'Drafting narrative response from retrieved context...',                                   wait: 650 },
+  ];
+
+  const LLM_VERDICT = {
+    headline: 'Recommendation: <em>QUOTE with referral</em> &middot; 5% NWS ded &middot; hot-work warranty &middot; standard terms.',
+    body: 'Well-cited, well-structured, and grounded in the actual manual. But no portfolio context, no accumulation math, no treaty awareness &mdash; all the retrieved passages are about <em>this</em> risk in isolation. The carrier binds this, then discovers post-bind that CP-ACC-02 has breached.',
+  };
+
+  // NSAI runs four stages, with stage 3 being a rule-by-rule evaluation
+  const NSAI_STAGE_1 = [
+    { label: "Stage 01 · Extract",  text: '<span class="k">Policy</span>(id=P1, insured=<span class="v">"Meridian Fabrication"</span>)',  wait: 450 },
+    { label: "Stage 01 · Extract",  text: '<span class="k">Location</span>(id=L1, address=<span class="v">"Galveston, TX 77551"</span>)', wait: 450 },
+    { label: "Stage 01 · Extract",  text: '<span class="k">Building</span>(B1, tiv=<span class="v">USD 38.2M</span>, year=1987)',          wait: 450 },
+    { label: "Stage 01 · Extract",  text: '<span class="k">Occupancy</span>(B1, NAICS=<span class="v">332710</span>)',                    wait: 450 },
+  ];
+  const NSAI_STAGE_2 = [
+    { label: "Stage 02 · Enrich", text: '<span class="k">Location</span>.catZone \u2190 lookup(FIPS=48167) = <span class="flag">Tier1_NamedWindstorm</span>', wait: 500 },
+    { label: "Stage 02 · Enrich", text: '<span class="k">MetalFab</span> \u2291 <span class="flag">HighHazard_Welding</span> \u2291 FireHazardClass_4',        wait: 500 },
+    { label: "Stage 02 · Enrich", text: '<span class="k">Portfolio</span>(Gulf_T1) = <span class="flag">71% of treaty</span>',                                wait: 500 },
+    { label: "Stage 02 · Enrich", text: '<span class="k">PriorCarrier</span>.nonRenewal = <span class="flag">flag for disclosure review</span>',              wait: 500 },
+  ];
+  // Stage 3 — rule engine firings (animated specially)
+  const NSAI_RULES = [
+    { id: "CP-APT-01",  desc: "Clearance & appetite screen",                       result: "pass", out: "IN APPETITE" },
+    { id: "CP-TIV-03",  desc: "TIV > $50M routes to senior authority",             result: "warn", out: "REFER" },
+    { id: "CP-CAT-12",  desc: "Tier 1 named-wind requires 5% NWS deductible",      result: "warn", out: "SUBJECT TO" },
+    { id: "CP-CAT-18",  desc: "FEMA flood zone requires sublimit or exclusion",    result: "warn", out: "SUBJECT TO" },
+    { id: "CP-HAZ-07",  desc: "Welding requires hot-work permit warranty",         result: "warn", out: "WARRANTY" },
+    { id: "CP-ACC-02",  desc: "Gulf T1 accumulation must stay < 80% of treaty",    result: "fail", out: "BREACH" },
+    { id: "CP-LOSS-04", desc: "Loss ratio < 40% over 5y — no load required",       result: "pass", out: "PASS" },
+    { id: "CP-DISC-09", desc: "Prior non-renewal requires broker disclosure",      result: "warn", out: "SUBJECT TO" },
+  ];
+
+  const NSAI_VERDICT = {
+    headline: '<em>6 subjectivities flagged. 1 breach (CP-ACC-02).</em> Proceeding to reason across the organization...',
+    body: 'Rule engine complete. Every flag traces to a named guideline. The breach is solvable — cession structure is the lever. Moving to Stage 5.',
+  };
+
+  // ===== Stage 5: Reason across the ontology to a priced quote =====
+  // Knowledge sources pulled from other parts of the enterprise ontology
+  const NSAI_SOURCES = [
+    { domain: 'Reinsurance treaty ontology', detail: 'Treaty ABC-Gulf-2026 · default cession 50% · variable band 25–75%',    value: 'BAND AVAILABLE' },
+    { domain: 'Portfolio ontology',          detail: 'Gulf Tier 1 — retained accumulation 71.0% of 80% cap · PML @ 250yr',     value: 'HEADROOM 9.0%' },
+    { domain: 'Pricing ontology',            detail: 'Book rate for MetalFab · PC4 · Tier1_NWS · 2-loss 5y frequency',          value: 'BASE $0.248' },
+    { domain: 'Claims ontology',             detail: 'Severity curve for welding occupancies · 5y rolling mean & tail',         value: 'SEV BLENDED' },
+    { domain: 'Pricing ontology · loads',    detail: 'Hazard, CAT, protection, and sprinkler credit rate factors',              value: 'LOADS RESOLVED' },
+    { domain: 'Reg filings ontology',        detail: 'Texas admitted filings — rate floor, NWS ded minimums, form approvals',  value: 'FILING OK' },
+  ];
+
+  // Options deliberated — the reasoner considers cession structures under CP-ACC-02
+  const NSAI_DELIBERATION = {
+    label: 'Constraint-satisfaction — find cession structure that clears CP-ACC-02 and maximizes net margin',
+    options: [
+      { text: 'Decline the risk — avoid the accumulation issue entirely',                                score: 'EV  −$47k', status: 'rejected', reason: 'forgoes a profitable account' },
+      { text: 'Bind at default 50% cession · retain 50% · standard terms',                                score: 'EV +$84k',  status: 'rejected', reason: 'still breaches CP-ACC-02 (accum 80.4%)' },
+      { text: 'Retain 25% (cede 75%) on this risk · 5% NWS ded · $5M flood sublimit · hot-work warranty', score: 'EV +$60k',  status: 'chosen',   reason: 'clears accum (79.7%), all filings & rules satisfied' },
+      { text: 'Bind at 75% retention · negotiate fac reinsurance for NWS layer above $10M',               score: 'EV +$108k', status: 'rejected', reason: 'fac market soft this quarter · timing risk for 06/01' },
+    ],
+  };
+
+  // The derived quote — every value has a reasoning trace
+  const NSAI_QUOTE = {
+    title: 'Derived quote — <em>priced, structured, and fully traced</em>',
+    terms: [
+      { k: 'Coverage',                     v: 'Building + BPP + BI · 3 locations' },
+      { k: 'Policy form',                  v: 'Special, replacement cost' },
+      { k: 'All-other-perils deductible',  v: '$25,000' },
+      { k: 'Named-windstorm deductible',   v: '<em>5% of TIV per location</em>' },
+      { k: 'Flood sublimit',               v: '$5,000,000 · Tier 1 location only' },
+      { k: 'Hot-work warranty',            v: 'Required · 48-hr fire watch' },
+      { k: 'Reinsurance structure',        v: '<em>75% ceded</em> · 25% retained · Treaty ABC-Gulf-2026' },
+      { k: 'Authority',                    v: 'Senior UW referral (TIV > $50M)' },
+    ],
+    premium: {
+      value: '$ 104,109',
+      reason: 'Base rate $0.248/$100 TIV · +18% welding hazard · +12% Tier 1 NWS load · −22% PC/sprinkler credit · net of 75% QS cession + 28% ceding commission',
+    },
+    trace: [
+      'Base rate → <span class="cite">Pricing ontology / MetalFab · PC4 · Tier1</span>',
+      'NWS deductible → <span class="cite">CP-CAT-12</span> · Flood sublimit → <span class="cite">CP-CAT-18</span>',
+      'Hot-work warranty → <span class="cite">CP-HAZ-07</span> · Cession 75% → <span class="cite">Treaty ABC-Gulf-2026 variable band</span>',
+      'Accumulation resolution → <span class="cite">CP-ACC-02 solved · retained 79.7% post-bind</span>',
+      'Expected loss → <span class="cite">Claims ontology / severity curve · 5y</span>',
+    ],
+  };
+
+  // State
+  let running = false;
+  let clockLLM = 0, clockNSAI = 0;
+  let tickLLM = null, tickNSAI = null;
+
+  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+  function $(id) { return document.getElementById(id); }
+
+  function addStep(laneId, step, extraClass = "") {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "step " + extraClass;
+    el.innerHTML = '<span class="s-label">' + step.label + '</span>' + step.text;
+    body.appendChild(el);
+    // Let layout settle then animate in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    // Only keep NSAI lane in view (LLM is shorter and finishes fast)
+    if (laneId === "bodyNSAI") keepInView(el);
+    return el;
+  }
+
+  function addRuleRow(laneId, rule) {
+    const body = $(laneId);
+    const wrapper = body.querySelector(".rule-ticker") || (() => {
+      const div = document.createElement("div");
+      div.className = "rule-ticker";
+      const head = document.createElement("div");
+      head.className = "step";
+      head.innerHTML = '<span class="s-label">Stage 03 · Rule engine</span>Evaluating underwriting guidelines...';
+      body.appendChild(head);
+      requestAnimationFrame(() => head.classList.add("visible"));
+      body.appendChild(div);
+      if (laneId === "bodyNSAI") keepInView(head);
+      return div;
+    })();
+    const row = document.createElement("div");
+    row.className = "rule-row evaluating";
+    row.innerHTML =
+      '<div class="r-id">' + rule.id + '</div>' +
+      '<div class="r-desc">' + rule.desc + '</div>' +
+      '<div class="r-out">' + rule.out + '</div>';
+    wrapper.appendChild(row);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => row.classList.add("visible"));
+    });
+    if (laneId === "bodyNSAI") keepInView(row);
+    return row;
+  }
+
+  function setVerdict(laneId, kind, v) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "verdict " + kind;
+    el.innerHTML =
+      '<div class="v-label">FINAL OUTPUT</div>' +
+      '<div class="v-headline">' + v.headline + '</div>' +
+      '<div class="v-body">' + v.body + '</div>';
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+  }
+
+  // Scroll helper — ensures the most recent element stays visible as NSAI grows
+  function keepInView(el) {
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    // If the element is below the 75% line of the viewport, scroll it up
+    const triggerLine = vh * 0.75;
+    if (rect.bottom > triggerLine) {
+      const targetOffset = rect.bottom - triggerLine + 60; // gentle lead
+      window.scrollBy({ top: targetOffset, behavior: 'smooth' });
+    }
+  }
+
+  function addReasonHeader(laneId, label, text) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "reason-header";
+    el.innerHTML = '<span class="rh-label">' + label + '</span>' + text;
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  function addSourcePull(laneId, source, letter) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "source-pull loading";
+    el.innerHTML =
+      '<div class="sp-icon">' + letter + '</div>' +
+      '<div class="sp-domain"><strong>' + source.domain + '</strong> — ' + source.detail + '</div>' +
+      '<div class="sp-val">QUERYING...</div>';
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  function addDeliberation(laneId, delib) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "deliberation";
+    let html = '<span class="d-label">' + delib.label + '</span>';
+    delib.options.forEach((opt, i) => {
+      html += '<div class="d-option" data-idx="' + i + '">' +
+              '<div class="d-text">' + opt.text + '</div>' +
+              '<div class="d-score">' + opt.score + '</div>' +
+              '</div>';
+    });
+    el.innerHTML = html;
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  function addQuoteCard(laneId, quote) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "quote-card";
+    let terms = '';
+    quote.terms.forEach(t => {
+      terms += '<div class="qc-row"><div class="qc-k">' + t.k + '</div><div class="qc-v">' + t.v + '</div></div>';
+    });
+    let trace = '';
+    quote.trace.forEach(line => { trace += '<div>' + line + '</div>'; });
+    el.innerHTML =
+      '<div class="qc-head">' +
+        '<div class="qc-label">DERIVED DECISION · STAGE 05 OUTPUT</div>' +
+        '<div class="qc-title">' + quote.title + '</div>' +
+      '</div>' +
+      '<div class="qc-body">' +
+        terms +
+        '<div class="qc-premium">' +
+          '<div>' +
+            '<div class="qc-premium-label">ANNUAL PREMIUM (NET)</div>' +
+            '<div class="qc-premium-reason">' + quote.premium.reason + '</div>' +
+          '</div>' +
+          '<div class="qc-premium-val">' + quote.premium.value + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="qc-trace">' +
+        '<div class="qc-trace-label">Reasoning trace — every value derived from a named source</div>' +
+        trace +
+      '</div>';
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  // Solve block — shows a multi-line math resolution (e.g., CP-ACC-02 breach being resolved)
+  function addSolveBlock(laneId, cfg) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "solve-block";
+    let rowsHtml = '';
+    cfg.rows.forEach(r => {
+      rowsHtml += '<div class="sb-row">' +
+                    '<div class="sb-k">' + r.k + '</div>' +
+                    '<div class="sb-calc">' + r.calc + '</div>' +
+                    '<div class="sb-val">' + r.val + '</div>' +
+                  '</div>';
+    });
+    el.innerHTML =
+      '<span class="sb-label">' + cfg.label + '</span>' +
+      (cfg.headline ? '<div class="sb-headline">' + cfg.headline + '</div>' : '') +
+      rowsHtml +
+      (cfg.result ? '<div class="sb-divider"></div>' +
+        '<div class="sb-result">' +
+          '<div class="sb-k">' + cfg.result.k + '</div>' +
+          '<div class="sb-calc">' + cfg.result.calc + '</div>' +
+          '<div class="sb-val">' + cfg.result.val + '</div>' +
+        '</div>' : '');
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  // Update an existing rule row's status — used when the reasoner resolves a breach
+  function updateRuleStatus(ruleId, newStatus, newLabel) {
+    const rows = document.querySelectorAll("#bodyNSAI .rule-row");
+    for (const row of rows) {
+      const idEl = row.querySelector(".r-id");
+      if (idEl && idEl.textContent.trim() === ruleId) {
+        row.classList.remove("pass", "warn", "fail");
+        row.classList.add(newStatus);
+        row.querySelector(".r-out").textContent = newLabel;
+        row.style.transition = "all 0.5s ease";
+        // Brief highlight
+        const origBg = row.style.background;
+        row.style.background = "rgba(124,176,145,0.2)";
+        setTimeout(() => { row.style.background = origBg; }, 900);
+        return row;
+      }
+    }
+    return null;
+  }
+
+  function startClock(which) {
+    const laneEl = which === "llm" ? $("laneLLM") : $("laneNSAI");
+    const clockEl = which === "llm" ? $("clockLLM") : $("clockNSAI");
+    laneEl.classList.add("running");
+    const start = performance.now();
+    const ticker = setInterval(() => {
+      const elapsed = (performance.now() - start) / 1000;
+      clockEl.textContent = elapsed.toFixed(1) + "s";
+      if (which === "llm") clockLLM = elapsed;
+      else clockNSAI = elapsed;
+    }, 50);
+    if (which === "llm") tickLLM = ticker;
+    else tickNSAI = ticker;
+  }
+
+  function stopClock(which) {
+    const laneEl = which === "llm" ? $("laneLLM") : $("laneNSAI");
+    if (which === "llm") { clearInterval(tickLLM); tickLLM = null; }
+    else { clearInterval(tickNSAI); tickNSAI = null; }
+    laneEl.classList.remove("running");
+    laneEl.classList.add("done");
+  }
+
+  async function runLLM() {
+    $("laneLLM").classList.remove("done");
+    startClock("llm");
+    // First step immediately
+    for (const step of LLM_SCRIPT) {
+      addStep("bodyLLM", step);
+      await wait(step.wait);
+    }
+    setVerdict("bodyLLM", "llm", LLM_VERDICT);
+    await wait(400);
+    stopClock("llm");
+  }
+
+  async function runNSAI() {
+    $("laneNSAI").classList.remove("done");
+    startClock("nsai");
+    // Stage 1
+    for (const step of NSAI_STAGE_1) {
+      addStep("bodyNSAI", step);
+      await wait(step.wait);
+    }
+    // Stage 2
+    for (const step of NSAI_STAGE_2) {
+      addStep("bodyNSAI", step, "warn");
+      await wait(step.wait);
+    }
+    // Stage 3 — rules
+    for (const rule of NSAI_RULES) {
+      const row = addRuleRow("bodyNSAI", rule);
+      await wait(520);
+      row.classList.remove("evaluating");
+      row.classList.add(rule.result);
+      row.classList.add("done");
+      await wait(180);
+    }
+    // Stage 4 — narrative
+    addStep("bodyNSAI", {
+      label: "Stage 04 · Explain",
+      text: 'Decision narrative generated from proof tree; every claim cites a rule ID.',
+    }, "pass");
+    await wait(500);
+    setVerdict("bodyNSAI", "nsai", NSAI_VERDICT);
+    await wait(900);
+
+    // ===== STAGE 5 — REASON TO A PRICED QUOTE =====
+    addReasonHeader("bodyNSAI",
+      'Stage 05 · Reason across the organization <span class="mode-pill">CONSTRAINT-SATISFACTION</span>',
+      "One blocking breach remains: CP-ACC-02. Before pricing anything, the reasoner diagnoses the breach by the numbers, then searches for a cession structure that clears it while satisfying every other constraint."
+    );
+    await wait(700);
+
+    // ---- Breach diagnosis: show the math at default cession ----
+    addSolveBlock("bodyNSAI", {
+      label: "Diagnose · CP-ACC-02 at default treaty terms",
+      headline: 'Treaty ABC-Gulf-2026 default cession is <em>50%</em>. The question: does binding at 50% retention fit under the 80% accumulation cap?',
+      rows: [
+        { k: "gross accum add",    calc: "Tier 1 exposed TIV × CAT factor  =  $67.1M × 0.30",                val: "$ 20.13M" },
+        { k: "retained add",       calc: "gross × (1 − cession)    =  $20.13M × 0.50",                       val: "$ 10.07M" },
+        { k: "treaty cap",         calc: "80% of $900M gross treaty limit",                                 val: "$ 720M" },
+        { k: "retained pre-bind",  calc: "portfolio accumulation (from Stage 02)",                          val: "$ 568.8M (79.0%)" },
+      ],
+      result: {
+        k: "POST-BIND",
+        calc: "($ 568.8M + $ 10.07M) / $ 720M cap  →  breach of 0.4%",
+        val: "80.4%  ✗",
+      },
+    });
+    await wait(1400);
+
+    // ---- Source pulls: query the broader ontology ----
+    addReasonHeader("bodyNSAI",
+      'Query enterprise ontology for resolution levers <span class="mode-pill">CAUSAL + DEDUCTIVE</span>',
+      "The reasoner pulls from every ontology that could produce a solution — cession structure, pricing, claims severity, and regulatory filings."
+    );
+    await wait(500);
+
+    const letters = ['R', 'P', '$', 'C', 'L', 'F'];
+    for (let i = 0; i < NSAI_SOURCES.length; i++) {
+      const src = NSAI_SOURCES[i];
+      const el = addSourcePull("bodyNSAI", src, letters[i]);
+      await wait(420);
+      el.classList.remove("loading");
+      el.classList.add("loaded");
+      el.querySelector(".sp-val").textContent = src.value;
+      await wait(180);
+    }
+    await wait(400);
+
+    // ---- Deliberation: weigh alternatives ----
+    addReasonHeader("bodyNSAI",
+      'Weigh placement options <span class="mode-pill">COUNTERFACTUAL</span>',
+      "Four structures simulated. Each option priced for expected value and tested against every rule — appetite, accumulation, filings, treaty terms, and operational feasibility."
+    );
+    await wait(500);
+
+    const delibEl = addDeliberation("bodyNSAI", NSAI_DELIBERATION);
+    await wait(1100);
+    const optionEls = delibEl.querySelectorAll(".d-option");
+    const order = [0, 1, 3, 2]; // reject in order, chosen (idx 2) last
+    for (let k = 0; k < order.length; k++) {
+      const idx = order[k];
+      const opt = NSAI_DELIBERATION.options[idx];
+      optionEls[idx].classList.add(opt.status);
+      await wait(520);
+    }
+    await wait(700);
+
+    // ---- Resolution math: prove the chosen option clears CP-ACC-02 ----
+    addSolveBlock("bodyNSAI", {
+      label: "Resolve · CP-ACC-02 at chosen cession structure",
+      headline: 'Flex retention on this risk from the default 50% down to <em>25%</em> (treaty variable band: 25–75%). Recompute the accumulation.',
+      rows: [
+        { k: "retention",         calc: "flexed from default 50% → chosen 25%",                               val: "25%" },
+        { k: "retained add",      calc: "$ 20.13M × 0.25",                                                    val: "$ 5.03M" },
+        { k: "retained post-bind", calc: "$ 568.8M + $ 5.03M  =  $ 573.83M",                                   val: "$ 573.8M" },
+        { k: "as % of cap",       calc: "$ 573.8M / $ 720M",                                                  val: "79.7%" },
+      ],
+      result: {
+        k: "POST-BIND",
+        calc: "79.7% vs 80% cap  →  0.30% headroom · CP-ACC-02 cleared",
+        val: "79.7%  ✓",
+      },
+    });
+    await wait(700);
+
+    // Flip CP-ACC-02 in the rule ticker from BREACH → RESOLVED
+    updateRuleStatus("CP-ACC-02", "pass", "RESOLVED");
+    await wait(900);
+
+    addReasonHeader("bodyNSAI",
+      'Compose priced quote <span class="mode-pill">DEDUCTIVE</span>',
+      "All constraints satisfied. Every rule passes or is addressed by a subjectivity. Pricing is derived from the book rate, loaded for causally-linked hazards, credited for protection, and netted for the chosen cession."
+    );
+    await wait(500);
+
+    // ---- Final quote card: the payoff ----
+    addQuoteCard("bodyNSAI", NSAI_QUOTE);
+    await wait(500);
+
+    stopClock("nsai");
+  }
+
+  async function runDemo() {
+    if (running) return;
+    running = true;
+    const btn = $("runBtn");
+    // Reset if re-running
+    $("bodyLLM").innerHTML = "";
+    $("bodyNSAI").innerHTML = "";
+    $("laneLLM").classList.remove("done");
+    $("laneNSAI").classList.remove("done");
+    $("raceSummary").classList.remove("visible");
+    btn.classList.remove("finished");
+    btn.classList.add("running");
+    btn.textContent = "RUNNING BOTH MODELS...";
+    btn.querySelector && (btn.textContent = "RUNNING BOTH MODELS...");
+
+    // Run both concurrently
+    await Promise.all([runLLM(), runNSAI()]);
+
+    // Reveal the summary
+    await wait(400);
+    $("raceSummary").classList.add("visible");
+
+    btn.classList.remove("running");
+    btn.classList.add("finished");
+    btn.textContent = "RUN AGAIN";
+    running = false;
+  }
+  window.runDemo = runDemo;
+
   // Fade-in on scroll
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -3373,15 +3734,13 @@
 
   // Scroll-spy: highlight current section in the nav
   (function initScrollSpy() {
-    const sections = ['define', 'reason', 'ontology', 'deepdives', 'regulators']
+    const sections = ['pc-ontology', 'going-deeper', 'demo']
       .map(id => document.getElementById(id))
       .filter(Boolean);
     const navLinks = {};
     document.querySelectorAll('.nav-links a').forEach(a => {
-      const href = a.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        navLinks[href.replace('#', '')] = a;
-      }
+      const id = a.getAttribute('href').replace('#', '');
+      navLinks[id] = a;
     });
 
     function setActive(id) {
@@ -3389,23 +3748,30 @@
       if (id && navLinks[id]) navLinks[id].classList.add('active');
     }
 
+    // IntersectionObserver with a narrow detection band across the middle
+    // of the viewport. Whichever section is crossing that band is "active."
     const spy = new IntersectionObserver((entries) => {
+      // Find the entry most in view (highest intersectionRatio) among intersecting ones
       const visible = entries.filter(e => e.isIntersecting);
       if (visible.length > 0) {
         visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
         setActive(visible[0].target.id);
       }
     }, {
+      // A band from 30% below top to 60% below top — sections crossing this band
+      // are considered "in view" for spy purposes
       rootMargin: '-30% 0px -60% 0px',
       threshold: [0, 0.1, 0.5, 1],
     });
 
     sections.forEach(s => spy.observe(s));
 
+    // Clear active state when user is above all sections (e.g., in hero)
     window.addEventListener('scroll', () => {
       if (window.scrollY < 300) setActive(null);
     }, { passive: true });
   })();
+
 </script>
 
 </body>
