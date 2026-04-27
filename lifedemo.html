@@ -1,22 +1,2149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NSAI4insurance — Life Demo</title>
-<style>
-  body { margin:0; background:#050c14; display:flex; align-items:center; justify-content:center; height:100vh; }
-  p { font-family: monospace; font-size: 12px; color: #5a7a9a; letter-spacing: 1px; }
-</style>
-<script>
-  (function() {
-    var mobile = window.innerWidth <= 1024 ||
-                 /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-    window.location.replace(mobile ? '/lifedemo-mobile.html' : '/lifedemo-desktop.html');
-  })();
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life &amp; Annuity Capital Management — NSAI for Insurance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────────────
+       DESIGN TOKENS  (match nsai4insurance.com)
+    ───────────────────────────────────────────── */
+    :root {
+      --red:        #c0392b;
+      --red-light:  #e74c3c;
+      --ink:        #1a1a1a;
+      --ink-mid:    #444;
+      --ink-light:  #777;
+      --rule:       #e0e0e0;
+      --bg:         #fafaf8;
+      --bg-section: #f4f3f0;
+
+      /* demo dark palette */
+      --d-bg:       #0d0f12;
+      --d-surface:  #141720;
+      --d-border:   #252830;
+      --d-border2:  #1e2128;
+      --d-ink:      #e8e8e8;
+      --d-ink-mid:  #9ca3af;
+      --d-ink-dim:  #6b7280;
+      --d-accent:   #c0392b;
+      --d-green:    #22c55e;
+      --d-amber:    #f59e0b;
+      --d-blue:     #3b82f6;
+
+      --font-serif: 'Lora', Georgia, serif;
+      --font-sans:  'DM Sans', system-ui, sans-serif;
+      --font-mono:  'JetBrains Mono', 'Courier New', monospace;
+
+      --max-w:      1100px;
+      --col-w:      680px;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    em { font-style: italic; }
+    strong { font-weight: 500; }
+
+    /* ─────────────────────────────────────────────
+       NAV  (match existing site)
+    ───────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+    }
+
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-light);
+      letter-spacing: 0.02em;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-links a.active { color: var(--ink); font-weight: 500; }
+
+    /* ─────────────────────────────────────────────
+       PAGE HEADER
+    ───────────────────────────────────────────── */
+    .page-header {
+      padding: 80px 40px 64px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .page-meta {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .meta-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-light);
+    }
+
+    .meta-value {
+      font-size: 13px;
+      color: var(--ink-mid);
+      font-weight: 400;
+    }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 600;
+      line-height: 1.18;
+      color: var(--ink);
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+
+    .page-title em {
+      color: var(--red);
+      font-style: italic;
+    }
+
+    .page-lede {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--ink-mid);
+      max-width: var(--col-w);
+      font-weight: 300;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION STRUCTURE
+    ───────────────────────────────────────────── */
+    .section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 72px 40px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section:last-of-type { border-bottom: none; }
+
+    .section-marker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 600;
+      line-height: 1.22;
+      color: var(--ink);
+      max-width: 680px;
+      margin-bottom: 36px;
+    }
+
+    .section-heading em { font-style: italic; }
+
+    .prose {
+      max-width: var(--col-w);
+    }
+
+    .prose p {
+      margin-bottom: 20px;
+      font-weight: 300;
+      color: var(--ink-mid);
+    }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose strong { color: var(--ink); font-weight: 500; }
+
+    .prose em { color: var(--ink); }
+
+    /* pull quote / thesis box */
+    .thesis {
+      margin: 44px 0;
+      padding: 28px 32px;
+      border-left: 3px solid var(--red);
+      background: #fdf5f4;
+    }
+
+    .thesis p {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      line-height: 1.6;
+      color: var(--ink);
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* value categories — inline numbered items */
+    .value-item {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .value-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .value-item-head {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .value-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--red);
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+    }
+
+    .value-title {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
+
+    .value-body {
+      padding-left: 36px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink-mid);
+      font-weight: 300;
+    }
+
+    /* section 03 — stack list */
+    .stack-list {
+      max-width: var(--col-w);
+      margin: 32px 0;
+    }
+
+    .stack-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0 24px;
+      padding: 14px 0;
+      border-top: 1px solid var(--rule);
+      font-size: 15px;
+    }
+
+    .stack-item:last-child { border-bottom: 1px solid var(--rule); }
+
+    .stack-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-light);
+      letter-spacing: 0.06em;
+      padding-top: 2px;
+    }
+
+    .stack-value {
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* section 04 — failure modes */
+    .failure-item {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 0 20px;
+      margin-bottom: 28px;
+      align-items: start;
+    }
+
+    .failure-n {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--red);
+      margin-top: 3px;
+    }
+
+    .failure-body { font-weight: 300; color: var(--ink-mid); }
+
+    .failure-body strong { color: var(--ink); }
+
+    /* section 05 — pillars */
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      max-width: var(--max-w);
+      border: 1px solid var(--rule);
+      margin: 40px 0;
+    }
+
+    .pillar {
+      padding: 32px 28px;
+      border-right: 1px solid var(--rule);
+    }
+
+    .pillar:last-child { border-right: none; }
+
+    .pillar-n {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .pillar-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    .pillar-body {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink-mid);
+      font-weight: 300;
+    }
+
+    /* summary bar */
+    .summary-bar {
+      background: var(--bg-section);
+      border: 1px solid var(--rule);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .sum-item { display: flex; flex-direction: column; gap: 3px; }
+
+    .sum-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+    }
+
+    .sum-val {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--ink);
+      font-family: var(--font-serif);
+    }
+
+    /* ─────────────────────────────────────────────
+       DEMO BAND  (dark container)
+    ───────────────────────────────────────────── */
+    .demo-band {
+      background: var(--d-bg);
+      padding: 72px 0;
+    }
+
+    .demo-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .demo-band-header {
+      margin-bottom: 36px;
+    }
+
+    .demo-band-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .demo-band-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 600;
+      color: var(--d-ink);
+      line-height: 1.25;
+    }
+
+    .demo-band-sub {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--d-ink-mid);
+      font-weight: 300;
+      max-width: 640px;
+    }
+
+    /* ─────────────────────────────────────────────
+       DEMO CONTAINER
+    ───────────────────────────────────────────── */
+    .demo-container {
+      background: var(--d-surface);
+      border: 1px solid var(--d-border);
+      overflow: hidden;
+    }
+
+    /* header row */
+    .demo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--d-border);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .demo-header-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--d-ink-mid);
+      text-transform: uppercase;
+    }
+
+    .demo-header-title span {
+      color: var(--d-ink);
+      font-weight: 500;
+    }
+
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--d-green);
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--d-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* tab strip */
+    .tab-strip {
+      display: flex;
+      border-bottom: 1px solid var(--d-border);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .tab-strip::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      flex-shrink: 0;
+      padding: 12px 22px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--d-ink-dim);
+      background: none;
+      border: none;
+      border-right: 1px solid var(--d-border2);
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: var(--d-ink); background: rgba(255,255,255,0.03); }
+
+    .tab-btn.active {
+      color: var(--d-ink);
+      background: rgba(255,255,255,0.04);
+      border-bottom: 2px solid var(--red);
+    }
+
+    /* module panels */
+    .module { display: none; }
+    .module.active { display: block; }
+
+    /* module caption */
+    .module-caption {
+      padding: 16px 20px;
+      background: rgba(0,0,0,0.25);
+      border-bottom: 1px solid var(--d-border);
+      font-size: 13px;
+      color: var(--d-ink-mid);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    .module-caption strong { color: var(--d-ink); font-weight: 500; }
+
+    /* module body */
+    .module-body {
+      padding: 20px;
+    }
+
+    /* card inside module */
+    .m-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--d-border);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+
+    .m-card:last-child { margin-bottom: 0; }
+
+    .m-card-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--d-ink-mid);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .m-card-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+
+    .badge-green { background: rgba(34,197,94,0.15); color: var(--d-green); }
+    .badge-amber { background: rgba(245,158,11,0.15); color: var(--d-amber); }
+    .badge-red   { background: rgba(192,57,43,0.15);  color: #f87171; }
+    .badge-blue  { background: rgba(59,130,246,0.15); color: var(--d-blue); }
+
+    .m-headline {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--d-ink);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .m-sub {
+      font-size: 12px;
+      color: var(--d-ink-dim);
+      margin-bottom: 14px;
+    }
+
+    /* 3-col metric row */
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--d-border);
+      border: 1px solid var(--d-border);
+      margin-bottom: 16px;
+    }
+
+    .metric-cell {
+      background: var(--d-surface);
+      padding: 12px 14px;
+    }
+
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--d-ink-dim);
+      margin-bottom: 5px;
+    }
+
+    .metric-val {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--d-ink);
+      line-height: 1.2;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      color: var(--d-ink-dim);
+      margin-top: 3px;
+    }
+
+    .metric-val.pos { color: var(--d-green); }
+    .metric-val.neg { color: #f87171; }
+
+    /* recommendation block */
+    .rec-block {
+      background: rgba(192,57,43,0.07);
+      border-left: 2px solid var(--red);
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+
+    .rec-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      margin-bottom: 6px;
+    }
+
+    .rec-text {
+      font-size: 13px;
+      color: var(--d-ink);
+      line-height: 1.55;
+    }
+
+    /* cross-module note */
+    .cross-note {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--d-blue);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .cross-note::before { content: '↗'; }
+
+    /* action row */
+    .action-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-expand {
+      background: none;
+      border: 1px solid var(--d-border);
+      color: var(--d-ink-mid);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .btn-expand:hover { border-color: var(--d-ink-mid); color: var(--d-ink); }
+
+    .btn-approve {
+      background: var(--red);
+      border: 1px solid var(--red);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 9px 20px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-approve:hover { background: var(--red-light); }
+
+    .btn-approve.approved {
+      background: rgba(34,197,94,0.15);
+      border-color: var(--d-green);
+      color: var(--d-green);
+      cursor: default;
+    }
+
+    /* expanded detail */
+    .expanded-detail {
+      display: none;
+      margin-top: 14px;
+    }
+
+    .expanded-detail.open { display: block; }
+
+    .detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .detail-table th {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--d-ink-dim);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--d-border);
+      font-weight: 400;
+    }
+
+    .detail-table td {
+      padding: 8px 12px;
+      color: var(--d-ink-mid);
+      border-bottom: 1px solid var(--d-border2);
+    }
+
+    .detail-table td.emph { color: var(--d-ink); }
+
+    .guardrail-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--d-border2);
+      font-size: 12px;
+    }
+
+    .guardrail-row:last-child { border-bottom: none; }
+
+    .guardrail-name { color: var(--d-ink-mid); }
+
+    .grd-pass  { font-family: var(--font-mono); font-size: 10px; color: var(--d-green); letter-spacing: 0.08em; }
+    .grd-act   { font-family: var(--font-mono); font-size: 10px; color: var(--d-amber); letter-spacing: 0.08em; }
+    .grd-esc   { font-family: var(--font-mono); font-size: 10px; color: #f87171; letter-spacing: 0.08em; }
+
+    .audit-footer {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--d-ink-dim);
+      padding: 10px 12px;
+      border-top: 1px solid var(--d-border);
+      line-height: 1.8;
+    }
+
+    /* scenario picker */
+    .scenario-picker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .scenario-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--d-ink-dim);
+      flex-shrink: 0;
+    }
+
+    .scenario-select {
+      background: var(--d-bg);
+      border: 1px solid var(--d-border);
+      color: var(--d-ink);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 10px;
+      cursor: pointer;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .scenario-select option { background: var(--d-bg); }
+
+    /* slider */
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .slider-label-l, .slider-label-r {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--d-ink-dim);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+      max-width: 100px;
+    }
+
+    .slider-label-r { text-align: right; }
+
+    input[type=range] {
+      flex: 1;
+      appearance: none;
+      height: 2px;
+      background: var(--d-border);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    /* option radio */
+    .option-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--d-border);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .option-row:hover { border-color: var(--d-ink-dim); }
+
+    .option-row.selected { border-color: var(--red); }
+
+    .option-radio {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--d-border);
+      margin-top: 2px;
+      flex-shrink: 0;
+      transition: border-color 0.15s;
+    }
+
+    .option-row.selected .option-radio {
+      border-color: var(--red);
+      background: var(--red);
+    }
+
+    .option-content { flex: 1; }
+
+    .option-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--d-ink);
+      margin-bottom: 3px;
+    }
+
+    .option-desc {
+      font-size: 12px;
+      color: var(--d-ink-mid);
+      line-height: 1.5;
+    }
+
+    .preferred-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--d-green);
+      border: 1px solid rgba(34,197,94,0.3);
+      padding: 1px 6px;
+      margin-left: 8px;
+    }
+
+    /* diligence flags */
+    .diligence-flags {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .diligence-flag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--d-amber);
+      padding: 8px 12px;
+      border: 1px solid rgba(245,158,11,0.2);
+      background: rgba(245,158,11,0.05);
+    }
+
+    .diligence-flag::before { content: '⚠'; font-size: 12px; }
+
+    /* earnings bridge */
+    .bridge {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--d-border);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .bridge-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--d-ink-dim);
+      margin-bottom: 10px;
+    }
+
+    .bridge-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 13px;
+      color: var(--d-ink-mid);
+    }
+
+    .bridge-row.total {
+      border-top: 1px solid var(--d-border);
+      margin-top: 6px;
+      padding-top: 8px;
+      color: var(--d-ink);
+      font-weight: 500;
+    }
+
+    .bridge-val { font-family: var(--font-mono); font-size: 12px; }
+    .bridge-val.pos { color: var(--d-green); }
+    .bridge-val.neg { color: #f87171; }
+
+    /* actions checklist */
+    .action-list { margin-bottom: 14px; }
+
+    .action-check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--d-border2);
+      font-size: 13px;
+    }
+
+    .action-check-item:last-child { border-bottom: none; }
+
+    .check-icon { color: var(--d-green); font-size: 13px; flex-shrink: 0; }
+
+    .action-name { flex: 1; color: var(--d-ink); }
+
+    .action-nii {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--d-green);
+    }
+
+    /* routing choice */
+    .routing-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .routing-choice {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid var(--d-border);
+      font-size: 12px;
+    }
+
+    .routing-choice.active { border-color: var(--red); }
+
+    .routing-choice-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--d-ink-dim);
+      margin-bottom: 6px;
+    }
+
+    .routing-choice-val {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--d-ink);
+      margin-bottom: 4px;
+    }
+
+    .routing-choice-desc { color: var(--d-ink-mid); line-height: 1.45; }
+
+    /* status strip */
+    .status-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      border-top: 1px solid var(--d-border);
+      background: rgba(0,0,0,0.3);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--d-ink-dim);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status-entity { color: var(--d-ink); font-weight: 500; }
+    .status-rbc { color: var(--d-amber); }
+    .status-guardrails { }
+    .status-approved { color: var(--d-green); }
+    .status-nii { color: var(--d-green); }
+    .status-capital { color: var(--d-blue); }
+
+    /* ─────────────────────────────────────────────
+       SECTION 07 / CLOSING
+    ───────────────────────────────────────────── */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 40px 0;
+    }
+
+    .outcome-cell {
+      background: var(--bg);
+      padding: 28px 24px;
+    }
+
+    .outcome-num {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .outcome-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+    }
+
+    .outcome-desc {
+      font-size: 14px;
+      color: var(--ink-mid);
+      font-weight: 300;
+      line-height: 1.55;
+    }
+
+    /* CTA */
+    .cta-block {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 80px 40px;
+      text-align: center;
+      border-top: 1px solid var(--rule);
+    }
+
+    .cta-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      margin-bottom: 16px;
+    }
+
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    .cta-sub {
+      font-size: 16px;
+      color: var(--ink-mid);
+      font-weight: 300;
+      margin-bottom: 36px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      padding: 14px 36px;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s;
+      text-transform: uppercase;
+    }
+
+    .cta-btn:hover { background: var(--red); }
+
+    /* ─────────────────────────────────────────────
+       DISCLOSURE
+    ───────────────────────────────────────────── */
+    .disclosure {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px 40px;
+    }
+
+    .disclosure p {
+      font-size: 12px;
+      color: var(--ink-light);
+      line-height: 1.65;
+      border-top: 1px solid var(--rule);
+      padding-top: 24px;
+      font-style: italic;
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100%;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-brand-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--ink-light);
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+
+      .page-header, .section { padding-left: 20px; padding-right: 20px; }
+      .page-header { padding-top: 48px; padding-bottom: 40px; }
+      .section { padding-top: 48px; padding-bottom: 48px; }
+
+      .pillar-grid { grid-template-columns: 1fr; }
+      .pillar { border-right: none; border-bottom: 1px solid var(--rule); }
+      .pillar:last-child { border-bottom: none; }
+
+      .outcomes-grid { grid-template-columns: 1fr; }
+
+      .stack-item { grid-template-columns: 1fr; gap: 4px; }
+      .stack-label { font-size: 10px; }
+
+      .demo-inner { padding: 0 16px; }
+      .demo-band { padding: 48px 0; }
+
+      .metric-row { grid-template-columns: 1fr; }
+
+      .diligence-flags { grid-template-columns: 1fr; }
+
+      .routing-row { flex-direction: column; }
+
+      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+
+      .cta-block { padding: 56px 20px; }
+
+      .disclosure { padding: 0 20px 32px; }
+
+      .summary-bar { padding: 16px 20px; gap: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .tab-btn { padding: 10px 14px; font-size: 10px; }
+      .m-headline { font-size: 18px; }
+      .action-row { flex-direction: column; }
+      .btn-expand, .btn-approve { width: 100%; text-align: center; }
+      .demo-band-title { font-size: 20px; }
+    }
+  </style>
 </head>
 <body>
-  <p>Loading...</p>
+
+  <!-- ══════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════ -->
+  <nav>
+    <a href="/" class="nav-brand">
+      <span class="nav-brand-dot"></span>
+      NSAI for Insurance
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#define">01 Define</a></li>
+      <li><a href="/#reason">02 Reason</a></li>
+      <li><a href="/#demo">03 Demo</a></li>
+      <li><a href="/life" class="active">Life &amp; Annuity</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════ -->
+  <header class="page-header">
+    <div class="page-meta">
+      <div class="meta-item">
+        <span class="meta-label">Domain</span>
+        <span class="meta-value">Life &amp; Annuity Capital Management</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Format</span>
+        <span class="meta-value">Interactive Explainer</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Audience</span>
+        <span class="meta-value">CFO · CRO · Appointed Actuary · Head of ALM</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Reading Time</span>
+        <span class="meta-value">~10 minutes</span>
+      </div>
+    </div>
+    <h1 class="page-title">The governed engine for<br /><em>long-duration capital decisions.</em></h1>
+    <p class="page-lede">Large U.S. life and annuity carriers don't lack capital management sophistication. What they lack is a system that integrates the views, runs scenarios on demand, and produces the audit trail that makes the decision defensible. NSAI is that system.</p>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       01 / THE HANDOFF FROM P&C
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s01">
+    <div class="section-marker">01 / The handoff from P&C</div>
+    <h2 class="section-heading">Same governed engine.<br />Different liability physics.</h2>
+    <div class="prose">
+      <p>The P&amp;C demos on this site showed NSAI operating inside the fast cycle of commercial property underwriting — submissions arriving, rules firing, decisions returning in minutes. The rhythm is days and weeks. A bound policy runs for a year; a claim closes in months.</p>
+      <p>Life and annuity is the harder problem. A fixed annuity sold today carries a liability that the carrier must fund in 2055. A ULSG issued in 2012 still sits on the balance sheet, still consuming capital, still driving the ALM desk's duration targets. Decisions made in a quarterly capital committee in 2018 are still shaping returns in 2026. The compounding of good and bad decisions is not a metaphor — it is the P&amp;L.</p>
+      <p>The challenge changes. The liability duration is longer, the capital intensity is higher, and the decisions interact in ways that take years to resolve. But the underlying problem — <em>how do you ensure that the right decision gets made, documented, and executed, consistently, at the speed the opportunity requires</em> — is exactly the same one NSAI was built to solve.</p>
+      <p>What follows is not a new product. It is the same governed decision engine applied to a domain where the stakes for getting it right are larger, and the cost of the current workflow's limitations is correspondingly higher.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       02 / WHERE THE VALUE SITS
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s02">
+    <div class="section-marker">02 / Where the value sits in L&amp;A</div>
+    <h2 class="section-heading">What's at stake.<br />Precisely.</h2>
+    <div class="prose">
+      <p>Before we talk about how NSAI helps, let's be specific about what's at stake. At a typical $15–20B life and annuity carrier, the following categories of value are recurring, quantifiable, and currently undercaptured.</p>
+    </div>
+
+    <div style="margin-top: 40px; max-width: var(--col-w);">
+
+      <div class="value-item">
+        <div class="value-item-head">
+          <span class="value-num">01</span>
+          <span class="value-title">Reinvestment timing</span>
+        </div>
+        <div class="value-body">
+          <p>Maturities roll into a market that has moved. New money goes to work weeks later than it could, and on a $20B general account, even 30bps of reinvestment lag costs roughly $6M annually per percent of book turning over. At normal turnover rates of 8–12% per year, the recurring annual cost sits in the $10–20M range — not a rounding error, a line item large enough to fund a small asset management team.</p>
+        </div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-item-head">
+          <span class="value-num">02</span>
+          <span class="value-title">Spread dislocation capture</span>
+        </div>
+        <div class="value-body">
+          <p>When spreads widen, carriers with sufficient liquidity and authorization buy. Carriers running quarterly approval cycles miss the window. The differential is <em>permanent</em> NII for the next decade on every dollar deployed during the window — not a timing difference, a permanent one. A two-week cycle delay during a 50bps dislocation event costs roughly $5–10M of locked-in annual spread on a $300M deployment sleeve, compounding forward for the life of the position.</p>
+        </div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-item-head">
+          <span class="value-num">03</span>
+          <span class="value-title">Liability repricing signals</span>
+        </div>
+        <div class="value-body">
+          <p>Lapse signals are pricing signals. Elevated surrenders in a fixed annuity book are not just a liquidity event — they are a segmentation signal. Hot-money policyholders behave differently from relationship policyholders; treating them identically in crediting-rate decisions costs margin. A carrier that reprices its crediting-rate tiers in response to lapse cohort data captures $5–8M annually on a typical fixed annuity book, relative to one running a uniform repricing calendar.</p>
+        </div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-item-head">
+          <span class="value-num">04</span>
+          <span class="value-title">Capital velocity</span>
+        </div>
+        <div class="value-body">
+          <p>Reinsurance evaluations that take six months are reinsurance evaluations that miss favorable pricing windows. Capital that sits trapped in legacy in-force blocks for an extra two quarters is capital not redeploying at hurdle rates into new business. On a $4B legacy block, two quarters of delay on a 50% cession represents approximately $35M of foregone redeployment income — capital present, but idle, while the market moves.</p>
+        </div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-item-head">
+          <span class="value-num">05</span>
+          <span class="value-title">PRT pricing speed</span>
+        </div>
+        <div class="value-body">
+          <p>Pension risk transfer is a structurally attractive market — limited competition at the top, long-duration assets that fit GA portfolios, and mortality improvement that accrues to the carrier. But PRT is a bid market, and win rate on tenders is sensitive to speed and precision. Faster mortality data, faster asset matching, faster price-back to the broker. A 10-percentage-point improvement in tender win rate at typical PRT margins is worth $8–15M annually for an active PRT writer — a return with essentially no additional capital consumption.</p>
+        </div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-item-head">
+          <span class="value-num">06</span>
+          <span class="value-title">Entity routing</span>
+        </div>
+        <div class="value-body">
+          <p>Multi-entity carriers — a U.S. operating company alongside a Bermuda reinsurer affiliate, or a captive — leave value on the table when routing decisions are made by tradition or the path of least resistance rather than by capital efficiency. A modeled BSCR-vs-NAIC routing analysis on every material transaction can shift 10–15% of capital deployment to higher-efficiency entities. At a multi-entity $20B carrier, suboptimal routing creates $5–15M of annual ROE drag that shows up nowhere except in the spread between where the carrier thinks it's performing and where the capital model says it should be.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="summary-bar">
+      <div class="sum-item">
+        <span class="sum-label">Aggregate annual value at stake</span>
+        <span class="sum-val">$40–80M</span>
+      </div>
+      <div class="sum-item">
+        <span class="sum-label">Carrier profile</span>
+        <span class="sum-val">$15–20B GA</span>
+      </div>
+      <div class="sum-item">
+        <span class="sum-label">Nature</span>
+        <span class="sum-val" style="font-size:15px; font-family: var(--font-sans); font-weight: 400;">Recurring. Quantifiable. Currently undercaptured.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       03 / WHAT CARRIERS ALREADY HAVE
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s03">
+    <div class="section-marker">03 / What carriers already have</div>
+    <h2 class="section-heading">Sophisticated tools.<br />Sophisticated teams.</h2>
+    <div class="prose">
+      <p>Most large life and annuity carriers do not lack capital management sophistication. This is not a market of unsophisticated actors waiting to be told what ALM is.</p>
+    </div>
+
+    <div class="stack-list">
+      <div class="stack-item">
+        <span class="stack-label">Actuarial</span>
+        <span class="stack-value">Prophet, AXIS, MG-ALFA, Polysystems, RAFM, GGY-AXIS — often multiple in parallel, heavily customized over decades.</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-label">Asset management</span>
+        <span class="stack-value">Aladdin, BlackRock Solutions, or proprietary systems managing duration targets, sector allocation, and daily liquidity.</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-label">Capital modeling</span>
+        <span class="stack-value">Custom internal RBC and economic capital tools, sometimes built over fifteen years by teams that know the book better than any vendor does.</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-label">ALM function</span>
+        <span class="stack-value">Dedicated teams, often led by senior actuaries with 20+ years of experience and deep familiarity with the specific liability profile of the company.</span>
+      </div>
+      <div class="stack-item">
+        <span class="stack-label">Governance</span>
+        <span class="stack-value">Board-level capital management committees with independent actuarial review, rating agency relationships, and regulatory reporting infrastructure already in place.</span>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top: 20px;">
+      <p>These are not gaps. The teams running them are sophisticated, often hired specifically for this work, and the tools are heavily customized to the particular liability structure of the company. Anyone arguing that large life and annuity carriers need to be taught capital management is not a credible counterparty — and will be recognized as such immediately.</p>
+      <p>But the question is not whether carriers have capability. The question is whether that capability is <em>integrated, fast, and auditable enough to capture the value identified in Section 02.</em></p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       04 / WHY THE VALUE STILL LEAKS
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s04">
+    <div class="section-marker">04 / Why the value still leaks</div>
+    <h2 class="section-heading">Four failure modes<br />in an otherwise capable system.</h2>
+
+    <div style="margin-top: 36px; max-width: var(--col-w);">
+
+      <div class="failure-item">
+        <span class="failure-n">01</span>
+        <div class="failure-body">
+          <p><strong>The integration is human.</strong> Every quarter, a senior actuary, a portfolio manager, and a capital officer sit in a meeting room with three different reports. The integrated view exists nowhere except in the discussion. When the meeting ends, the integrated view ends with it. The next meeting reconstructs it from the same three reports, slightly updated, with whoever attended the last meeting trying to remember what was decided and why.</p>
+        </div>
+      </div>
+
+      <div class="failure-item">
+        <span class="failure-n">02</span>
+        <div class="failure-body">
+          <p><strong>The cycle time is the meeting cadence.</strong> Quarterly capital committee. Monthly ALM. Decisions move at the speed of the calendar, not the speed of the market. By the time the committee approves a response to last quarter's data, the market has moved twice. The spread window that was live in October is closed by December. The reinsurance pricing that was favorable in Q1 has tightened by Q3. This is not a process failure — it is the structural consequence of running a quarterly decision cycle in a market that moves continuously.</p>
+        </div>
+      </div>
+
+      <div class="failure-item">
+        <span class="failure-n">03</span>
+        <div class="failure-body">
+          <p><strong>The audit trail is institutional memory.</strong> When the senior actuary leaves — and after 25 years, they do leave — the rationale for why the duration target was set at 4.2 years in 2019 leaves with them. The replacement inherits a number, an Excel file, and the notes from the last committee meeting. The reasoning is not retrievable. This matters for rating agencies, for regulators, and for the board — all of whom increasingly ask not just <em>what</em> the decision was, but <em>why</em>.</p>
+        </div>
+      </div>
+
+      <div class="failure-item">
+        <span class="failure-n">04</span>
+        <div class="failure-body">
+          <p><strong>The opportunity surface is whatever the team had time to model.</strong> Three to five scenarios per quarter — the ones there was time to prepare, sign off, and distribute before the meeting. The other forty potential value-creation paths are not rejected. They are invisible. The question "what would we do if spreads widened 75bps before the next committee?" is never asked before spreads widen 75bps, because nobody has the bandwidth to ask it proactively. By the time the question is asked, the answer is no longer useful.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="thesis">
+      <p>Capturing the value identified in Section 02 requires a system that integrates the views automatically, runs scenarios on demand, retains the rationale for every decision, and surfaces opportunities the cycle-time-driven workflow cannot see. That system is what we built.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       05 / WHAT NSAI CHANGES
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s05">
+    <div class="section-marker">05 / What NSAI changes</div>
+    <h2 class="section-heading">Three capabilities.<br />One integrated system.</h2>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-n">Pillar 01</div>
+        <div class="pillar-title">Opportunities surfaced you don't currently see</div>
+        <div class="pillar-body">NSAI runs continuously across the integrated liability, asset, capital, and reinsurance view. It doesn't wait for the quarterly committee to ask a question. It surfaces reinvestment timing windows, spread dislocations, liability repricing signals, entity routing efficiencies, and reinsurance pricing windows — with the recommended action, the constraints respected, and the alternatives considered — before the meeting is called.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">Pillar 02</div>
+        <div class="pillar-title">Decisions executable in days instead of quarters</div>
+        <div class="pillar-body">When the integrated view exists in real time, the cycle is no longer: quarterly committee → request analysis → review next quarter. The cycle is: NSAI surfaces opportunity → committee reviews recommendation packet → decision approved or overridden. Measured in days, with the full audit trail produced as a byproduct of the workflow rather than a separate deliverable assembled after the fact.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">Pillar 03</div>
+        <div class="pillar-title">Audit trail produced as a byproduct</div>
+        <div class="pillar-body">Every fact loaded, every constraint applied, every recommendation generated, every override registered — timestamped, attributed, retained, producible for board, rating agency, or regulator. Not a compliance step. A natural output of the engine. The institutional memory problem disappears because there is no longer institutional memory — there is auditable system state.</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>What this looks like in practice is a single dashboard that the capital management function reviews together. The demo below shows a representative Monday morning view at a fictional $20B carrier.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       06 / DEMO BAND (dark)
+  ══════════════════════════════════════════ -->
+  <div class="demo-band" id="s06">
+    <div class="demo-inner">
+
+      <div class="demo-band-header">
+        <div class="demo-band-eyebrow">06 / The demo</div>
+        <div class="demo-band-title">NSAI Capital Management Engine —<br />Monday morning view, Meridian L&amp;A</div>
+        <div class="demo-band-sub">Four modules. One integrated capital management view. All data is fictional and for illustrative purposes only.</div>
+      </div>
+
+      <div class="demo-container">
+
+        <!-- demo header row -->
+        <div class="demo-header">
+          <div class="demo-header-title">LIVE DEMO · <span>NSAI Capital Management Engine</span></div>
+          <div class="live-badge"><span class="live-dot"></span> Live illustration</div>
+        </div>
+
+        <!-- tab strip -->
+        <div class="tab-strip">
+          <button class="tab-btn active" data-tab="m01" onclick="switchTab('m01')">01 / ALM</button>
+          <button class="tab-btn" data-tab="m02" onclick="switchTab('m02')">02 / Portfolio</button>
+          <button class="tab-btn" data-tab="m03" onclick="switchTab('m03')">03 / Reinsurance</button>
+          <button class="tab-btn" data-tab="m04" onclick="switchTab('m04')">04 / Acquisition</button>
+        </div>
+
+        <!-- ── MODULE 01: ALM ── -->
+        <div class="module active" id="m01">
+          <div class="module-caption">
+            <strong>ALM Opportunity Dashboard.</strong> A +100bps rate move over the past quarter creates an $11M annual NII opportunity. NSAI sizes the swap overlay needed to keep duration inside Meridian's ±1.5-year guardrail. Net captured after hedge cost: $10M annually.
+          </div>
+          <div class="module-body">
+
+            <div class="scenario-picker">
+              <span class="scenario-label">Scenario</span>
+              <select class="scenario-select" id="alm-scenario" onchange="changeScenario(this.value)">
+                <option value="s1" selected>Higher-Rate Reinvestment Opportunity (+100bps)</option>
+                <option value="s2">Spread Dislocation Window</option>
+                <option value="s3">Liability Repricing Signal (lapse uptick)</option>
+                <option value="s4">Market Dislocation Action Plan (combined stress)</option>
+                <option value="s5">Longer-Duration PRT Opportunity</option>
+              </select>
+            </div>
+
+            <div id="alm-content">
+              <!-- populated by JS -->
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── MODULE 02: PORTFOLIO ── -->
+        <div class="module" id="m02">
+          <div class="module-caption">
+            <strong>Governed P&amp;L Optimization.</strong> NSAI identifies five portfolio actions that together add $13.0M annual NII and protect $20M of rate upside while bringing all guardrails clear.
+          </div>
+          <div class="module-body">
+
+            <div class="slider-row">
+              <span class="slider-label-l">Maximize immediate NII</span>
+              <input type="range" min="0" max="2" step="1" value="2" id="opt-slider" oninput="updateSlider(this.value)" />
+              <span class="slider-label-r">Maximize governed economic value</span>
+            </div>
+
+            <div class="m-card">
+              <div class="m-card-title">
+                Governed P&amp;L Optimization
+                <span class="m-card-badge badge-green">7/7 guardrails clear</span>
+              </div>
+              <div class="m-headline">+$13.0M annual NII</div>
+              <div class="m-sub">+$20.0M rate upside protected · All five actions approved</div>
+
+              <div class="action-list" id="action-list">
+                <!-- populated by JS -->
+              </div>
+
+              <div class="action-row">
+                <button class="btn-expand" onclick="toggleExpand('port-expand', this)">▾ See full table with overrides</button>
+                <button class="btn-approve" id="btn-m02" onclick="approveModule('m02')">Approve all →</button>
+              </div>
+
+              <div class="expanded-detail" id="port-expand">
+                <br />
+                <table class="detail-table">
+                  <thead>
+                    <tr>
+                      <th>Action</th>
+                      <th>NII impact</th>
+                      <th>Execution</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="emph">Long-duration IG infrastructure debt</td><td>+$8.6M</td><td>3–5 days</td><td><span class="grd-pass">APPROVED</span></td></tr>
+                    <tr><td class="emph">Rotate seasoned CMBS → private credit</td><td>+$1.1M</td><td>10–14 days</td><td><span class="grd-pass">APPROVED</span></td></tr>
+                    <tr><td class="emph">Receiver-swap overlay (5yr, $400M)</td><td>+$20M protected</td><td>1–2 days</td><td><span class="grd-pass">APPROVED</span></td></tr>
+                    <tr><td class="emph">T-bill liquidity sleeve build</td><td>+$2.4M</td><td>2–3 days</td><td><span class="grd-pass">APPROVED</span></td></tr>
+                    <tr><td class="emph">Trim single-name; redeploy diversified IG</td><td>+$0.9M</td><td>5–7 days</td><td><span class="grd-pass">APPROVED</span></td></tr>
+                  </tbody>
+                </table>
+
+                <div class="audit-footer">
+                  Model: NSAI-PORT-3.1 · Constraints: NAIC RBC Schedule D, internal sector limits · Run: 2026-04-21T07:14:33Z · Analyst: system
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── MODULE 03: REINSURANCE ── -->
+        <div class="module" id="m03">
+          <div class="module-caption">
+            <strong>Reinsurance Capital Velocity.</strong> NSAI evaluates three structures for the $4.2B legacy MYGA block. Option B — 50% coinsurance on a funds-withheld basis — releases $140M of capital. The argument is capital velocity: redeployed at Meridian's hurdle rate, the released capital produces more long-run value than the retained spread economics.
+          </div>
+          <div class="module-body">
+
+            <div id="rein-options">
+              <div class="option-row" id="opt-a" onclick="selectOption('a')">
+                <div class="option-radio"></div>
+                <div class="option-content">
+                  <div class="option-title">Option A — Retain &amp; hedge</div>
+                  <div class="option-desc">$0 capital freed · Full spread retained · Duration hedge via receiver swaps · No RBC relief · Preserves full economics</div>
+                </div>
+              </div>
+              <div class="option-row selected" id="opt-b" onclick="selectOption('b')">
+                <div class="option-radio"></div>
+                <div class="option-content">
+                  <div class="option-title">Option B — 50% coinsurance / funds-withheld <span class="preferred-tag">Preferred</span></div>
+                  <div class="option-desc">$140M capital released · 50% of spread economics ceded · Assets remain with Meridian (Meridian retains C1 asset risk) · Ceding commission ~$35M · RBC 410% → 427%</div>
+                </div>
+              </div>
+              <div class="option-row" id="opt-c" onclick="selectOption('c')">
+                <div class="option-radio"></div>
+                <div class="option-content">
+                  <div class="option-title">Option C — Full ModCo</div>
+                  <div class="option-desc">$280M capital freed · Full spread ceded · Assets and risk transfer to reinsurer · 9–18 month execution timeline · Maximum capital relief, maximum execution complexity</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="m-card" style="margin-top: 14px;">
+              <div class="m-card-title">
+                Option B selected — Earnings bridge, Year 1
+                <span class="m-card-badge badge-green">RBC +17pts</span>
+              </div>
+
+              <div class="bridge">
+                <div class="bridge-title">Meridian MYGA Block · $4.2B · Year 1 income bridge</div>
+                <div class="bridge-row"><span>Current block earnings</span><span class="bridge-val">$78M</span></div>
+                <div class="bridge-row"><span>Less: spread ceded (50%)</span><span class="bridge-val neg">−$30M</span></div>
+                <div class="bridge-row"><span>Plus: ceding commission</span><span class="bridge-val pos">+$35M</span></div>
+                <div class="bridge-row"><span>Less: administration fee</span><span class="bridge-val neg">−$6M</span></div>
+                <div class="bridge-row"><span>Plus: capital redeployed at hurdle</span><span class="bridge-val pos">+$8M</span></div>
+                <div class="bridge-row total"><span>Year 1 post-cession earnings</span><span class="bridge-val">$85M</span></div>
+              </div>
+
+              <div class="rec-block">
+                <div class="rec-label">Strategic argument</div>
+                <div class="rec-text">$140M redeployed at Meridian's 6% hurdle adds $8.4M of permanent annual income. Capital velocity exceeds the value of retained spread. Option B is preferred over retain-and-hedge (Option A) and preferred over full ModCo (Option C) given execution timeline risk at current pricing.</div>
+              </div>
+
+              <div class="action-row">
+                <button class="btn-expand" onclick="toggleExpand('rein-expand', this)">▾ Compare all three structures</button>
+                <button class="btn-approve" id="btn-m03" onclick="approveModule('m03')">Proceed to term sheet →</button>
+              </div>
+
+              <div class="expanded-detail" id="rein-expand">
+                <br />
+                <table class="detail-table">
+                  <thead>
+                    <tr>
+                      <th>Metric</th>
+                      <th>Option A (Retain)</th>
+                      <th>Option B (50% Coins.)</th>
+                      <th>Option C (Full ModCo)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Capital freed</td><td>$0</td><td class="emph">$140M</td><td>$280M</td></tr>
+                    <tr><td>RBC post-transaction</td><td>410%</td><td class="emph">427%</td><td>441%</td></tr>
+                    <tr><td>Spread retained</td><td>100%</td><td class="emph">50%</td><td>0%</td></tr>
+                    <tr><td>Assets with Meridian</td><td>Yes</td><td class="emph">Yes (FW)</td><td>No</td></tr>
+                    <tr><td>Ceding commission</td><td>—</td><td class="emph">$28–42M</td><td>Negotiated</td></tr>
+                    <tr><td>Execution timeline</td><td>2–4 weeks</td><td class="emph">60–90 days</td><td>9–18 months</td></tr>
+                    <tr><td>Year 1 net earnings</td><td>$78M</td><td class="emph">$85M</td><td>$52M</td></tr>
+                  </tbody>
+                </table>
+                <div class="audit-footer">
+                  Model: NSAI-REIN-2.4 · Block: $4.2B MYGA legacy · Sensitivity: 20% pricing haircut tested — Option B remains preferred · Run: 2026-04-21T07:14:33Z
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── MODULE 04: ACQUISITION ── -->
+        <div class="module" id="m04">
+          <div class="module-caption">
+            <strong>Block Acquisition — $2.8B FIA Block.</strong> A regional carrier exiting the FIA market has placed a $2.8B block. Meridian's distribution and private credit capacity make this a fit. NSAI runs the buy-side analysis under Meridian's own assumptions and surfaces the entity routing question — Meridian US or Meridian Re Bermuda.
+          </div>
+          <div class="module-body">
+
+            <div class="m-card">
+              <div class="m-card-title">
+                Block Acquisition · $2.8B FIA Block
+                <span class="m-card-badge badge-green">Above hurdle</span>
+              </div>
+              <div class="m-headline">Proceed at ≤$32M ceding commission</div>
+              <div class="m-sub">13.4% Year-1 ROE · 14.6% 5-yr IRR · 12% hurdle rate</div>
+
+              <div class="rec-block">
+                <div class="rec-label">Meridian's assumptions govern — not seller's projections</div>
+                <div class="rec-text" style="font-family: var(--font-mono); font-size: 11px; line-height: 1.8;">
+                  Lapse 9.8% (vs seller 7.5%) &nbsp;·&nbsp; Discount 5.10% &nbsp;·&nbsp; Stress mult 2.2×<br />
+                  Reinvestment yield 5.20% &nbsp;·&nbsp; Commission cap $32M
+                </div>
+              </div>
+
+              <div class="routing-row" style="margin-bottom: 14px;">
+                <div class="routing-choice">
+                  <div class="routing-choice-title">Meridian US (RBC framework)</div>
+                  <div class="routing-choice-val">341% RBC post-close</div>
+                  <div class="routing-choice-desc" style="font-size: 12px; color: var(--d-ink-mid);">NAIC SAP capital treatment · Established regulatory relationship · Higher long-duration C3 charges</div>
+                </div>
+                <div class="routing-choice active">
+                  <div class="routing-choice-title" style="color: var(--red);">Meridian Re Bermuda (BSCR primary) ← preferred</div>
+                  <div class="routing-choice-val">178% BSCR ratio</div>
+                  <div class="routing-choice-desc" style="font-size: 12px; color: var(--d-ink-mid);">BSCR economic-capital treatment of long-duration FIA reserves releases ~$24M additional deployable capital vs. US routing. Subject to BMA filing and rating-agency notice.</div>
+                </div>
+              </div>
+
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--d-ink-dim); margin-bottom: 8px;">Diligence required before binding offer</div>
+                <div class="diligence-flags">
+                  <div class="diligence-flag">Lapse cohort data</div>
+                  <div class="diligence-flag">Capital plan flexibility</div>
+                  <div class="diligence-flag">Concentration limit usage</div>
+                  <div class="diligence-flag">Seller dynamic-lapse model</div>
+                </div>
+              </div>
+
+              <div class="action-row" style="margin-top: 14px;">
+                <button class="btn-expand" onclick="toggleExpand('acq-expand', this)">▾ Run pricing sensitivity</button>
+                <button class="btn-approve" id="btn-m04" onclick="approveModule('m04')">Approve term sheet →</button>
+              </div>
+
+              <div class="expanded-detail" id="acq-expand">
+                <br />
+                <table class="detail-table">
+                  <thead>
+                    <tr>
+                      <th>Assumption</th>
+                      <th>Seller projection</th>
+                      <th>Meridian base</th>
+                      <th>Meridian stress</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Lapse rate</td><td>7.5%</td><td class="emph">9.8%</td><td>12.5%</td></tr>
+                    <tr><td>Reinvest yield</td><td>5.55%</td><td class="emph">5.20%</td><td>4.80%</td></tr>
+                    <tr><td>Discount rate</td><td>4.75%</td><td class="emph">5.10%</td><td>5.40%</td></tr>
+                    <tr><td>Stress multiplier</td><td>1.8×</td><td class="emph">2.2×</td><td>2.8×</td></tr>
+                    <tr><td>Commission (max)</td><td>$45M</td><td class="emph">$32M</td><td>$22M</td></tr>
+                    <tr><td>Year-1 ROE</td><td>16.2%</td><td class="emph">13.4%</td><td>9.1%</td></tr>
+                    <tr><td>5-yr IRR</td><td>17.8%</td><td class="emph">14.6%</td><td>10.2%</td></tr>
+                  </tbody>
+                </table>
+
+                <div class="guardrail-row"><span class="guardrail-name">RBC post-close ≥ 300% (US entity)</span><span class="grd-pass">PASS — 341%</span></div>
+                <div class="guardrail-row"><span class="guardrail-name">BSCR post-close ≥ 150% (Bermuda entity)</span><span class="grd-pass">PASS — 178%</span></div>
+                <div class="guardrail-row"><span class="guardrail-name">FIA concentration ≤ 40% of GA</span><span class="grd-act">ACTION — 38% → 41%</span></div>
+                <div class="guardrail-row"><span class="guardrail-name">IRR ≥ 12% hurdle (Meridian assumptions)</span><span class="grd-pass">PASS — 14.6%</span></div>
+
+                <div class="audit-footer">
+                  Model: NSAI-ACQ-1.9 · Seller: [Regional carrier, NDA] · BMA notice required · Concentration guardrail breach — committee escalation required before binding · Run: 2026-04-21T07:14:33Z
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- status strip -->
+        <div class="status-strip" id="status-strip">
+          <span><span class="status-entity">Meridian L&amp;A</span></span>
+          <span class="status-rbc" id="s-rbc">410% RBC</span>
+          <span class="status-guardrails" id="s-guardrails">6/7 guardrails</span>
+          <span class="status-approved" id="s-approved">0 actions approved</span>
+          <span class="status-nii" id="s-nii"></span>
+          <span class="status-capital" id="s-capital"></span>
+        </div>
+
+      </div><!-- /demo-container -->
+
+    </div><!-- /demo-inner -->
+  </div><!-- /demo-band -->
+
+  <!-- ══════════════════════════════════════════
+       07 / WHAT THIS LOOKS LIKE IN PRACTICE
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s07">
+    <div class="section-marker">07 / What this looks like in practice</div>
+    <h2 class="section-heading">The results a representative<br />carrier should expect.</h2>
+
+    <div class="outcomes-grid">
+      <div class="outcome-cell">
+        <div class="outcome-label">Incremental annual NII</div>
+        <div class="outcome-num">$30–50M</div>
+        <div class="outcome-desc">Through faster reinvestment execution, spread dislocation capture, and portfolio rotation into higher-yielding sectors within existing guardrails.</div>
+      </div>
+      <div class="outcome-cell">
+        <div class="outcome-label">Capital released from legacy blocks</div>
+        <div class="outcome-num">$100–150M</div>
+        <div class="outcome-desc">Through accelerated reinsurance evaluation cycles, redeployed into new business at hurdle rates rather than sitting in in-force blocks consuming capital.</div>
+      </div>
+      <div class="outcome-cell">
+        <div class="outcome-label">Cycle time compression</div>
+        <div class="outcome-num">Quarters → Days</div>
+        <div class="outcome-desc">The board reviews recommendations rather than assembling them. The capital management function shifts from coordination overhead to decision-making.</div>
+      </div>
+      <div class="outcome-cell">
+        <div class="outcome-label">Audit trail completeness</div>
+        <div class="outcome-num">100%</div>
+        <div class="outcome-desc">Every decision — approved, overridden, or deferred — timestamped and retained. Producible for the board, the rating agency, or the regulator. Not an afterthought.</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>Governance is the reason the board approves this. Speed and dollar value are the reasons the CFO funds it. The two are not in tension — governance is what makes the speed safe, and what makes the decisions defensible when the results are scrutinized by people who weren't in the room when they were made.</p>
+      <p>The carriers that capture the value described in Section 02 will be the ones that have an integrated, auditable decision layer across their capital management function — not the ones with the most sophisticated individual tools. The tools are already in place. The layer is what's missing.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CTA
+  ══════════════════════════════════════════ -->
+  <div class="cta-block">
+    <div class="cta-eyebrow">Next step</div>
+    <h2 class="cta-title">Request a session with<br />our L&amp;A team.</h2>
+    <p class="cta-sub">We work directly with CFOs, CROs, and appointed actuaries at large U.S. carriers. Bring your current stack and your open questions.</p>
+    <button class="cta-btn" onclick="alert('Contact form — connect this to your CRM or mailto.')">Request a session</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       DISCLOSURE
+  ══════════════════════════════════════════ -->
+  <div class="disclosure">
+    <p>Meridian Life &amp; Annuity and Meridian Re Bermuda are entirely fictional entities created for illustrative purposes only. All financial figures, projections, scenarios, constraint values, and analytical outputs are hypothetical and do not represent the position, performance, or strategy of any real company. This page is a product demonstration only and does not constitute financial, actuarial, regulatory, or investment advice.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-brand">
+      <span class="footer-brand-dot"></span>
+      NSAI for Insurance
+    </div>
+    <div class="footer-copy">© 2026 NSAI for Insurance. All rights reserved.</div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       JAVASCRIPT
+  ══════════════════════════════════════════ -->
+  <script>
+    /* ── State ────────────────────────────────── */
+    const state = {
+      approvals: { m01: false, m02: false, m03: false, m04: false },
+      currentScenario: 's1',
+      currentOption: 'b',
+    };
+
+    /* ── ALM Scenarios ─────────────────────────── */
+    const scenarios = {
+      s1: {
+        badge: 'badge-green',
+        badgeText: '7/7 guardrails clear',
+        title: 'Higher-Rate Reinvestment Opportunity (+100bps)',
+        headline: '+$10M annual NII captured',
+        sub: 'After receiver-swap overlay · all guardrails clear',
+        metrics: [
+          { label: 'Reinvest yield', val: '5.55%', sub: 'vs 5.20% prior' },
+          { label: 'Annual NII', val: '+$10M net', sub: '+$11M gross' },
+          { label: 'Duration gap', val: '+1.0yr', sub: 'within ±1.5yr limit' },
+        ],
+        rec: 'Add $400M 5-yr receiver swap. Reprice new MYGA issues at current rate. Duration gap closes within 3 days. RBC stable at 408%.',
+        crossNote: null,
+        guardrails: [
+          ['Duration ±1.5yr limit', 'pass'], ['RBC ≥ 375%', 'pass'], ['Liquidity ≥ 5%', 'pass'],
+          ['Credit quality ≥ A-', 'pass'], ['Sector concentration', 'pass'], ['Derivative notional limit', 'pass'], ['Board authority', 'pass'],
+        ],
+      },
+      s2: {
+        badge: 'badge-amber',
+        badgeText: '6/7 guardrails — 1 action',
+        title: 'Spread Dislocation Window',
+        headline: '+$14M permanent NII if deployed within 10 days',
+        sub: 'IG corp spreads +65bps · deployment window open · liquidity sleeve required',
+        metrics: [
+          { label: 'Spread opportunity', val: '+65bps', sub: 'vs 90-day avg' },
+          { label: 'NII if deployed', val: '+$14M', sub: 'annualized, permanent' },
+          { label: 'Window estimate', val: '8–12 days', sub: 'historical analog' },
+        ],
+        rec: 'Deploy $300M from T-bill liquidity sleeve into IG corporates. Requires committee pre-approval for size. Rebuild liquidity sleeve over 45 days from cash flow. Liquidity guardrail temporarily at floor — escalation required.',
+        crossNote: null,
+        guardrails: [
+          ['Duration ±1.5yr limit', 'pass'], ['RBC ≥ 375%', 'pass'], ['Liquidity ≥ 5%', 'action'], ['Credit quality ≥ A-', 'pass'],
+          ['Sector concentration', 'pass'], ['Derivative notional limit', 'pass'], ['Board authority', 'pass'],
+        ],
+      },
+      s3: {
+        badge: 'badge-amber',
+        badgeText: '6/7 guardrails — 1 action',
+        title: 'Liability Repricing Signal (lapse uptick)',
+        headline: '+$6M recoverable via crediting-rate repricing',
+        sub: 'Q2 lapse rate +180bps · hot-money cohort identified · repricing indicated',
+        metrics: [
+          { label: 'Lapse rate (Q2)', val: '11.2%', sub: '+1.8pts vs budget' },
+          { label: 'Hot-money cohort', val: '$1.4B', sub: '34% of MYGA book' },
+          { label: 'NII recoverable', val: '+$6M', sub: 'via differential repricing' },
+        ],
+        rec: 'Reduce crediting rate on hot-money cohort (AV < $150K, < 2yr surrender) by 40bps. Maintain rate for relationship segment. Monitor lapse for 60 days. Repricing action requires product actuary sign-off.',
+        crossNote: null,
+        guardrails: [
+          ['Duration ±1.5yr limit', 'pass'], ['RBC ≥ 375%', 'pass'], ['Liquidity ≥ 5%', 'action'], ['Credit quality ≥ A-', 'pass'],
+          ['Sector concentration', 'pass'], ['Derivative notional limit', 'pass'], ['Board authority', 'pass'],
+        ],
+      },
+      s4: {
+        badge: 'badge-red',
+        badgeText: '5/7 guardrails — 2 escalate',
+        title: 'Market Dislocation Action Plan (combined stress)',
+        headline: 'Combined stress — action plan required',
+        sub: '+100bps rates, +75bps spreads, lapse uptick simultaneously',
+        metrics: [
+          { label: 'Opportunity NII', val: '+$18M', sub: 'if executed within 2wks' },
+          { label: 'Capital buffer', val: '403% RBC', sub: '−7pts from current' },
+          { label: 'Liquidity position', val: '4.8%', sub: 'below 5% guardrail' },
+        ],
+        rec: 'Combined scenario: three simultaneous actions required. Prioritize liquidity guardrail resolution. Pre-authorize deployment of $250M into IG corporates. This scenario triggered the reinsurance evaluation in Module 03.',
+        crossNote: 'This scenario triggered the reinsurance evaluation in Module 03.',
+        guardrails: [
+          ['Duration ±1.5yr limit', 'pass'], ['RBC ≥ 375%', 'pass'], ['Liquidity ≥ 5%', 'escalate'],
+          ['Credit quality ≥ A-', 'pass'], ['Sector concentration', 'pass'], ['Derivative notional limit', 'escalate'], ['Board authority', 'pass'],
+        ],
+      },
+      s5: {
+        badge: 'badge-green',
+        badgeText: '7/7 guardrails clear',
+        title: 'Longer-Duration PRT Opportunity',
+        headline: '+$9M NII + win-rate improvement on active pipeline',
+        sub: 'Three tenders in pipeline · duration match optimal · mortality load validated',
+        metrics: [
+          { label: 'PRT pipeline', val: '$780M', sub: '3 tenders, Q3 close' },
+          { label: 'NII at win rate', val: '+$9M', sub: 'at 35% win rate' },
+          { label: 'Mortality load', val: 'IMP-2024', sub: 'updated, validated' },
+        ],
+        rec: 'Submit priced bids on all three tenders using updated IMP-2024 mortality and current 5.40% matching yield. Duration extended to 14.2yr average — within ±1.5yr guardrail. Bid response turnaround: 48hr target.',
+        crossNote: null,
+        guardrails: [
+          ['Duration ±1.5yr limit', 'pass'], ['RBC ≥ 375%', 'pass'], ['Liquidity ≥ 5%', 'pass'],
+          ['Credit quality ≥ A-', 'pass'], ['Sector concentration', 'pass'], ['Derivative notional limit', 'pass'], ['Board authority', 'pass'],
+        ],
+      },
+    };
+
+    /* ── Portfolio actions ─────────────────────── */
+    const portfolioActions = [
+      { name: 'Add long-duration IG infrastructure debt', nii: '+$8.6M' },
+      { name: 'Rotate seasoned CMBS into private credit', nii: '+$1.1M' },
+      { name: 'Receiver-swap overlay (5yr, $400M notional)', nii: '+$20M protected' },
+      { name: 'Build T-bill liquidity sleeve', nii: '+$2.4M' },
+      { name: 'Trim single-name; redeploy diversified IG', nii: '+$0.9M' },
+    ];
+
+    /* ── Render ALM content ────────────────────── */
+    function renderALM(s) {
+      const d = scenarios[s];
+      const gBadgeClass = d.badge;
+      const guardrailHtml = d.guardrails.map(([name, status]) => {
+        const cls = status === 'pass' ? 'grd-pass' : status === 'action' ? 'grd-act' : 'grd-esc';
+        const label = status === 'pass' ? 'PASS' : status === 'action' ? 'ACTION' : 'ESCALATE';
+        return `<div class="guardrail-row"><span class="guardrail-name">${name}</span><span class="${cls}">${label}</span></div>`;
+      }).join('');
+
+      const crossNoteHtml = d.crossNote
+        ? `<div class="cross-note" onclick="switchTab('m03')">${d.crossNote}</div>`
+        : '';
+
+      const expandId = 'alm-expand-' + s;
+      const isApproved = state.approvals.m01;
+
+      document.getElementById('alm-content').innerHTML = `
+        <div class="m-card">
+          <div class="m-card-title">
+            ${d.title}
+            <span class="m-card-badge ${gBadgeClass}">${d.badgeText}</span>
+          </div>
+          <div class="m-headline">${d.headline}</div>
+          <div class="m-sub">${d.sub}</div>
+
+          <div class="metric-row">
+            ${d.metrics.map(m => `
+              <div class="metric-cell">
+                <div class="metric-label">${m.label}</div>
+                <div class="metric-val">${m.val}</div>
+                <div class="metric-sub">${m.sub}</div>
+              </div>
+            `).join('')}
+          </div>
+
+          ${crossNoteHtml}
+
+          <div class="rec-block">
+            <div class="rec-label">NSAI recommendation</div>
+            <div class="rec-text">${d.rec}</div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn-expand" onclick="toggleExpand('${expandId}', this)">▾ See full analysis</button>
+            <button class="btn-approve ${isApproved ? 'approved' : ''}" id="btn-m01" onclick="approveModule('m01')">${isApproved ? '✓ Approved' : 'Approve →'}</button>
+          </div>
+
+          <div class="expanded-detail" id="${expandId}">
+            <br />
+            <div style="font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--d-ink-dim); margin-bottom: 8px; padding: 0 12px;">Guardrail evaluation</div>
+            ${guardrailHtml}
+            <div class="audit-footer">
+              Model: NSAI-ALM-4.2 · Scenario: ${d.title} · Constraints loaded: 7 · Run: 2026-04-21T07:14:33Z · Data as of: 2026-04-18
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ── Render portfolio actions ──────────────── */
+    function renderPortfolio() {
+      const el = document.getElementById('action-list');
+      el.innerHTML = portfolioActions.map(a => `
+        <div class="action-check-item">
+          <span class="check-icon">✓</span>
+          <span class="action-name">${a.name}</span>
+          <span class="action-nii">${a.nii}</span>
+        </div>
+      `).join('');
+    }
+
+    /* ── Tab switching ─────────────────────────── */
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+      document.querySelectorAll('.module').forEach(m => m.classList.toggle('active', m.id === tab));
+    }
+
+    /* ── Scenario change ───────────────────────── */
+    function changeScenario(val) {
+      state.currentScenario = val;
+      renderALM(val);
+    }
+
+    /* ── Slider (visual only in compressed view) ─ */
+    function updateSlider(val) {
+      // V1: slider is decorative — all three positions show same five actions
+    }
+
+    /* ── Reinsurance option select ─────────────── */
+    function selectOption(opt) {
+      ['a', 'b', 'c'].forEach(o => {
+        const row = document.getElementById('opt-' + o);
+        row.classList.toggle('selected', o === opt);
+      });
+      state.currentOption = opt;
+    }
+
+    /* ── Expand/collapse ───────────────────────── */
+    function toggleExpand(id, btn) {
+      const el = document.getElementById(id);
+      const isOpen = el.classList.toggle('open');
+      btn.textContent = isOpen ? '▴ Hide detail' : '▾ ' + btn.textContent.replace('▴ Hide detail', '').replace('▾ ', '');
+      if (!isOpen) {
+        btn.textContent = btn.textContent.startsWith('▴') ? btn.textContent.replace('▴', '▾') : '▾ ' + btn.textContent.trim().replace(/^▾?\s*/, '');
+      }
+    }
+
+    /* ── Approve module ────────────────────────── */
+    function approveModule(mod) {
+      state.approvals[mod] = true;
+      const btn = document.getElementById('btn-' + mod);
+      if (btn) {
+        btn.classList.add('approved');
+        btn.textContent = '✓ Approved';
+      }
+      updateStatus();
+    }
+
+    /* ── Status strip ──────────────────────────── */
+    function updateStatus() {
+      const a = state.approvals;
+      const count = Object.values(a).filter(Boolean).length;
+
+      let rbc = '410%';
+      let guardrails = '6/7 guardrails';
+      let nii = '';
+      let capital = '';
+
+      if (a.m01) { rbc = '408% RBC'; guardrails = '7/7 guardrails'; nii = '+$10M NII'; }
+      if (a.m02) { nii = '+$23M NII'; }
+      if (a.m03) { rbc = '427% RBC'; capital = '$140M capital freed'; }
+      if (a.m01 && a.m02 && a.m03) { nii = '+$33M NII'; }
+      if (a.m01 && a.m02 && a.m03 && a.m04) {
+        rbc = '427% RBC'; guardrails = '7/7 guardrails'; nii = '+$33M NII'; capital = '$140M capital freed';
+      }
+
+      document.getElementById('s-rbc').textContent = rbc;
+      document.getElementById('s-guardrails').textContent = guardrails;
+      document.getElementById('s-approved').textContent = count + (count === 1 ? ' action approved' : ' actions approved');
+      document.getElementById('s-nii').textContent = nii;
+      document.getElementById('s-capital').textContent = capital;
+    }
+
+    /* ── Init ──────────────────────────────────── */
+    renderALM('s1');
+    renderPortfolio();
+  </script>
+
 </body>
 </html>
