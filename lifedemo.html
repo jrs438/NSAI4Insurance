@@ -53,7 +53,7 @@
     z-index: 1;
   }
     a{color:inherit;text-decoration:none}em{font-style:italic}strong{font-weight:500}
-    nav{position:sticky;top:0;z-index:100;background:rgba(244,239,230,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(28,37,48,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px}
+    nav{position:sticky;top:0;z-index:100;background:rgba(244,239,230,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(28,37,48,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;flex-wrap:wrap}
     .nav-brand{font-family:'Fraunces',serif;font-weight:600;font-size:17px;letter-spacing:-0.01em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
     .nav-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent-2);flex-shrink:0;transform:translateY(-1px)}
     .nav-links{display:flex;gap:24px;list-style:none;font-size:13px;letter-spacing:0.02em}
@@ -396,7 +396,9 @@
         .section{scroll-margin-top:68px}
     @media(max-width:768px){
       html{scroll-snap-type:none}
-      nav{padding:0 20px}.nav-links{display:none}
+      nav{padding:12px 20px;height:auto;gap:4px}
+      .nav-links{display:flex;gap:16px;font-size:11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;width:100%;padding-bottom:2px}
+      .nav-links::-webkit-scrollbar{display:none}
       .page-header,.section{padding-left:20px;padding-right:20px}
       .page-header{padding-top:48px;padding-bottom:40px}.section{padding-top:48px;padding-bottom:48px}
       .pillar-grid,.ont-grid{grid-template-columns:1fr}
