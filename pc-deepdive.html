@@ -2517,9 +2517,58 @@
     opacity: 1;
     color: var(--accent);
   }
+
+  /* ===== Floating navigation buttons ===== */
+  .float-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .float-nav-left { left: 16px; }
+  .float-nav-right { right: 16px; }
+  .float-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(63, 94, 74, 0.88);
+    color: #F4EFE6;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    backdrop-filter: blur(6px);
+    opacity: 0.82;
+  }
+  .float-btn:hover {
+    background: rgba(63, 94, 74, 1);
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    .float-nav { display: none; }
+  }
 </style>
 </head>
 <body>
+<!-- Floating navigation buttons -->
+<div class="float-nav float-nav-left">
+  <a href="index.html" class="float-btn">&larr; NSAI Home</a>
+</div>
+<div class="float-nav float-nav-right">
+  <a href="lifedemo.html" class="float-btn">L&amp;A &rarr;</a>
+</div>
+
 
 <!-- NAV -->
 <nav class="nav">
@@ -2530,7 +2579,7 @@
       <a href="#pc-ontology">01 Ontology</a>
       <a href="#going-deeper">02 Going Deeper</a>
       <a href="#demo">03 Demo</a>
-      <a href="lifedemo.html" class="fwd-link">Life &amp; Annuity &rarr;</a>
+      <a href="lifedemo.html" class="fwd-link">L&amp;A &rarr;</a>
     </div>
   </div>
 </nav>

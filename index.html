@@ -2597,9 +2597,68 @@
     /* Race summary: single column on small phones */
     .race-stats { grid-template-columns: 1fr; gap: 14px; }
   }
+
+  /* ===== Cross-page navigation links ===== */
+  .nav-links .back-link,
+  .nav-links .fwd-link {
+    opacity: 0.65;
+    font-size: 12px;
+  }
+  .nav-links .back-link:hover,
+  .nav-links .fwd-link:hover {
+    opacity: 1;
+    color: var(--accent-2);
+  }
+
+  /* ===== Floating navigation buttons ===== */
+  .float-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .float-nav-left { left: 16px; }
+  .float-nav-right { right: 16px; }
+  .float-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(63, 94, 74, 0.88);
+    color: #F4EFE6;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    backdrop-filter: blur(6px);
+    opacity: 0.82;
+  }
+  .float-btn:hover {
+    background: rgba(63, 94, 74, 1);
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    .float-nav { display: none; }
+  }
 </style>
 </head>
 <body>
+<!-- Floating navigation buttons -->
+<div class="float-nav float-nav-right">
+  <a href="pc-deepdive.html" class="float-btn">P&amp;C &rarr;</a>
+  <a href="lifedemo.html" class="float-btn">L&amp;A &rarr;</a>
+</div>
+
 
 <!-- NAV -->
 <nav class="nav">
@@ -2611,6 +2670,8 @@
       <a href="#ontology">03 Ontology</a>
       <a href="#regulators">04 Regulators</a>
       <a href="#deepdives">05 Explore</a>
+      <a href="pc-deepdive.html" class="fwd-link">P&amp;C &rarr;</a>
+      <a href="lifedemo.html" class="fwd-link">L&amp;A &rarr;</a>
     </div>
   </div>
 </nav>
