@@ -223,6 +223,40 @@
     .term-key{color:var(--d-mid)}.term-val{font-family:var(--fm);font-size:12px;color:var(--d-ink)}.term-val.warn{color:var(--d-amb)}
     .modal-actions{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--d-brd);flex-wrap:wrap}
     .status-strip{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid var(--d-brd);background:rgba(0,0,0,.35);font-family:var(--fm);font-size:11px;color:var(--d-dim);flex-wrap:wrap;gap:6px}
+    /* reasoning diagram */
+    .reasoning-diagram{max-width:860px;margin:0 auto}
+    .rd-layer{border:1px solid var(--rule);background:var(--bg)}
+    .rd-layer-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-light);padding:10px 20px 8px;border-bottom:1px solid var(--rule);background:var(--bg-s)}
+    .rd-layer-content{padding:16px 20px}
+    .rd-ontology{border-color:#c8b8f0;background:#faf8ff}
+    .rd-ontology .rd-layer-label{background:#f3effc;color:#6b46c1;border-bottom-color:#c8b8f0}
+    .rd-rules{border-color:#a8c8f0;background:#f8fbff}
+    .rd-rules .rd-layer-label{background:#edf4fc;color:#1d4ed8;border-bottom-color:#a8c8f0}
+    .rd-output{border-color:#a8e0b8;background:#f8fff9}
+    .rd-output .rd-layer-label{background:#edfaf1;color:#166534;border-bottom-color:#a8e0b8}
+    .rd-input-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .rd-input-chip{background:var(--bg-s);border:1px solid var(--rule);padding:8px 12px;font-size:13px;color:var(--ink);font-weight:500;line-height:1.3}
+    .rd-input-chip span{display:block;font-family:var(--fm);font-size:10px;color:var(--ink-light);font-weight:400;margin-top:3px;letter-spacing:.02em}
+    .rd-arrow{display:flex;align-items:center;justify-content:center;padding:6px 20px;position:relative}
+    .rd-arrow-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);text-align:center;display:flex;align-items:center;gap:8px}
+    .rd-arrow-label::before,.rd-arrow-label::after{content:'';flex:1;height:1px;background:var(--rule);width:60px}
+    .rd-arrow-down{font-size:12px;color:var(--ink-light);text-align:center;display:block;line-height:1;margin:2px 0}
+    .rd-ont-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+    .rd-ont-row:last-child{margin-bottom:0}
+    .rd-ont-node{flex:1;background:rgba(107,70,193,.07);border:1px solid rgba(107,70,193,.2);padding:8px 12px;font-size:13px;font-weight:500;color:#4c1d95;line-height:1.3}
+    .rd-ont-node span.rd-ont-type{display:block;font-family:var(--fm);font-size:10px;color:#6b46c1;font-weight:400;margin-top:3px;letter-spacing:.02em}
+    .rd-ont-rel{font-family:var(--fm);font-size:11px;color:var(--ink-light);white-space:nowrap;flex-shrink:0}
+    .rd-rule-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .rd-rule-row:last-child{margin-bottom:0}
+    .rd-rule-tag{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;flex-shrink:0;background:rgba(29,78,216,.1);color:#1d4ed8;border-radius:2px}
+    .rd-rule-text{font-size:13px;color:var(--ink-mid)}
+    .rd-rule-text code{font-family:var(--fm);font-size:12px;color:#1d4ed8;background:rgba(29,78,216,.06);padding:2px 6px}
+    .rd-output-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .rd-out-rec{padding:14px 16px;background:rgba(22,101,52,.06);border:1px solid rgba(22,101,52,.2)}
+    .rd-out-audit{padding:14px 16px;background:rgba(22,101,52,.03);border:1px solid rgba(22,101,52,.15)}
+    .rd-out-tag{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#166534;margin-bottom:8px}
+    .rd-out-text{font-size:13px;color:var(--ink-mid);line-height:1.6;font-weight:300}
+    .section{scroll-margin-top:56px}
     @media(max-width:768px){
       nav{padding:0 20px}.nav-links{display:none}
       .page-header,.section{padding-left:20px;padding-right:20px}
@@ -230,7 +264,10 @@
       .pillar-grid,.ont-grid{grid-template-columns:1fr}
       .pillar{border-right:none;border-bottom:1px solid var(--rule)}.pillar:last-child{border-bottom:none}
       .outcomes-grid{grid-template-columns:1fr}.stack-item{grid-template-columns:1fr;gap:4px}
-      .carrier-stats{grid-template-columns:repeat(3,1fr)}.demo-inner{padding:0 16px}.demo-band{padding:48px 0}
+      .carrier-stats{grid-template-columns:repeat(2,1fr)}.demo-inner{padding:0 16px}.demo-band{padding:48px 0}
+      .carrier-section{padding:0 20px}.compare-grid{grid-template-columns:1fr}
+      .rd-input-grid{grid-template-columns:repeat(2,1fr)}.rd-ont-row{flex-direction:column;align-items:stretch}.rd-ont-rel{text-align:center}
+      .rd-output-row{grid-template-columns:1fr}
       .metric-row,.diligence-grid,.routing-grid{grid-template-columns:1fr}
       footer{padding:24px 20px;flex-direction:column;align-items:flex-start}
       .cta-block,.disclosure{padding-left:20px;padding-right:20px}.modal-overlay{padding:12px}
@@ -244,11 +281,12 @@
 <body>
 <nav>
   <a href="/" class="nav-brand"><span class="nav-dot"></span>NSAI for Insurance</a>
-  <ul class="nav-links">
-    <li><a href="/#define">01 Define</a></li>
-    <li><a href="/#reason">02 Reason</a></li>
-    <li><a href="/#demo">03 Demo</a></li>
-    <li><a href="/life" class="active">Life &amp; Annuity</a></li>
+  <ul class="nav-links" id="main-nav">
+    <li><a href="#s02" data-section="s02">01 / Value at stake</a></li>
+    <li><a href="#s03" data-section="s03">02 / Current stack</a></li>
+    <li><a href="#s05b" data-section="s05b">03 / How it reasons</a></li>
+    <li><a href="#s05" data-section="s05">04 / Meridian</a></li>
+    <li><a href="#s06" data-section="s06">05 / Demo</a></li>
   </ul>
 </nav>
 
@@ -263,19 +301,8 @@
   <p class="page-lede">Large U.S. life and annuity carriers don&rsquo;t lack capital management sophistication. What they lack is a system that integrates the views, runs scenarios continuously, and produces the audit trail that makes every decision defensible. NSAI is that system.</p>
 </header>
 
-<section class="section" id="s01">
-  <div class="section-marker">01 / The handoff from P&amp;C</div>
-  <h2 class="section-heading">Same governed engine.<br/>Different liability physics.</h2>
-  <div class="prose">
-    <p>The P&amp;C demos on this site showed NSAI operating inside the fast cycle of commercial property underwriting &mdash; submissions arriving, rules firing, decisions returning in minutes. The rhythm is days and weeks. A bound policy runs for a year; a claim closes in months.</p>
-    <p>Life and annuity is the harder problem. A fixed annuity sold today carries a liability the carrier must fund in 2055. A ULSG issued in 2012 still sits on the balance sheet, still consuming capital, still driving the ALM desk&rsquo;s duration targets. The compounding of good and bad decisions is not a metaphor &mdash; it is the P&amp;L.</p>
-    <p>The challenge changes. The liability duration is longer, the capital intensity is higher, and the decisions interact in ways that take years to resolve. But the underlying problem &mdash; <em>how do you ensure the right decision gets made, documented, and executed, consistently, at the speed the opportunity requires</em> &mdash; is exactly the one NSAI was built to solve.</p>
-    <p>What follows is not a new product. It is the same governed decision engine applied to a domain where the stakes are larger, and the cost of the current workflow&rsquo;s limitations is correspondingly higher.</p>
-  </div>
-</section>
-
 <section class="section" id="s02">
-  <div class="section-marker">02 / Where the value sits in L&amp;A</div>
+  <div class="section-marker">01 / Where the value sits in L&amp;A</div>
   <h2 class="section-heading">What&rsquo;s at stake.<br/>Precisely.</h2>
   <div class="prose"><p>Before we talk about how NSAI helps, let&rsquo;s be specific about what&rsquo;s at stake. At a typical $15&ndash;20B life and annuity carrier, the following categories of value are recurring, quantifiable, and currently undercaptured.</p></div>
   <div style="margin-top:40px">
@@ -294,7 +321,7 @@
 </section>
 
 <section class="section" id="s03">
-  <div class="section-marker">03 / What carriers already have</div>
+  <div class="section-marker">02 / What carriers already have</div>
   <h2 class="section-heading">Sophisticated tools.<br/>Sophisticated teams.</h2>
   <div class="prose"><p>Most large life and annuity carriers do not lack capital management sophistication. This is not a market of unsophisticated actors waiting to be taught ALM.</p></div>
   <div class="stack-list">
@@ -310,64 +337,144 @@
   </div>
 </section>
 
-<section class="section" id="s04">
-  <div class="section-marker">04 / Why the value still leaks</div>
-  <h2 class="section-heading">Four failure modes<br/>in an otherwise capable system.</h2>
-  <div style="margin-top:36px">
-    <div class="failure-item"><span class="failure-num">01</span><div class="failure-body"><p><strong>The integration is human.</strong> Every quarter, a senior actuary, a portfolio manager, and a capital officer sit in a meeting room with three different reports. The integrated view exists nowhere except in the discussion. When the meeting ends, the integrated view ends with it.</p></div></div>
-    <div class="failure-item"><span class="failure-num">02</span><div class="failure-body"><p><strong>The cycle time is the meeting cadence.</strong> Quarterly capital committee. Monthly ALM. Decisions move at the speed of the calendar, not the speed of the market. The spread window that was live in October is closed by December.</p></div></div>
-    <div class="failure-item"><span class="failure-num">03</span><div class="failure-body"><p><strong>The audit trail is institutional memory.</strong> When the senior actuary leaves, the rationale for why the duration target was set where it was in 2019 leaves with them. The replacement inherits a number, an Excel file, and notes from the last meeting. The reasoning is not retrievable.</p></div></div>
-    <div class="failure-item"><span class="failure-num">04</span><div class="failure-body"><p><strong>The opportunity surface is whatever the team had time to model.</strong> Three to five scenarios per quarter. The other forty potential value-creation paths are not rejected. They are invisible. The question &ldquo;what would we do if spreads widened 75bps before the next committee?&rdquo; is never asked before it happens.</p></div></div>
-  </div>
-  <div class="thesis"><p>Capturing the value identified in Section 02 requires a system that integrates the views automatically, runs scenarios continuously, retains the rationale for every decision, and surfaces opportunities the cycle-time-driven workflow cannot see. That system is what we built.</p></div>
-</section>
 
-<section class="section" id="s05">
-  <div class="section-marker">05 / What NSAI changes</div>
-  <h2 class="section-heading">Three capabilities.<br/>One integrated system.</h2>
-  <div class="pillar-grid">
-    <div class="pillar"><div class="pillar-n">Pillar 01</div><div class="pillar-title">Opportunities surfaced you don&rsquo;t currently see</div><div class="pillar-body">NSAI runs continuously across the integrated liability, asset, capital, and reinsurance view. It surfaces reinvestment timing windows, spread dislocations, liability repricing signals, cross-entity optimization opportunities, and reinsurance pricing windows &mdash; with the recommended action, constraints respected, and alternatives considered &mdash; before the meeting is called.</div></div>
-    <div class="pillar"><div class="pillar-n">Pillar 02</div><div class="pillar-title">Decisions executable in days, not quarters</div><div class="pillar-body">When the integrated view exists in real time, the cycle is no longer: quarterly committee &rarr; request analysis &rarr; review next quarter. The cycle is: NSAI surfaces opportunity &rarr; committee reviews recommendation packet &rarr; decision approved or overridden. Measured in days, with the full audit trail as a byproduct.</div></div>
-    <div class="pillar"><div class="pillar-n">Pillar 03</div><div class="pillar-title">Audit trail as a natural byproduct</div><div class="pillar-body">Every fact loaded, every constraint applied, every recommendation generated, every override registered &mdash; timestamped, attributed, retained, producible for board, rating agency, or regulator. Not a compliance step. The institutional memory problem disappears because there is no longer institutional memory &mdash; there is auditable system state.</div></div>
+<div class="carrier-section" id="s05">
+  <div class="carrier-section-inner">
+    <div class="section-marker">03 / Representative carrier</div>
+    <h2 class="section-heading">Meridian Life &amp; Annuity.<br/>A carrier NSAI knows cold.</h2>
+    <div class="prose" style="margin-bottom:32px"><p>Founded in Des Moines in 1961 as a mutual insurer, Meridian completed its demutualization in 1997 and has since built one of the Midwest&rsquo;s most recognized fixed annuity franchises. Its general account is managed against a conservative investment policy statement, with a long-standing preference for private credit and infrastructure debt over public IG peers. The Bermuda affiliate, Meridian Re Bermuda Ltd., was established in 2019 to support reinsurance capital optimization. The Monday morning view below is what the NSAI engine surfaces for Meridian at session open.</p></div>
   </div>
-</section>
-
-<section class="section" id="s05b">
-  <div class="section-marker">05b / How NSAI is configured for L&amp;A</div>
-  <h2 class="section-heading">Ontology and reasoning:<br/>how the engine understands your business.</h2>
-  <div class="prose">
-    <p>Before NSAI can surface an opportunity or evaluate a constraint, it must have a formal model of the carrier&rsquo;s world &mdash; one that a rule engine can reason over, not just a document a language model can search. For a life and annuity carrier, that model is the L&amp;A ontology: an explicit representation of what a <em>Block</em> is, how a <em>MYGA</em> relates to a <em>CreditingRateTier</em>, how <em>RBC charges</em> are computed from C1 through C4 components, and how a <em>FundsWithheld</em> reinsurance structure differs from a <em>ModifiedCoinsurance</em> at the level of accounting and regulatory capital.</p>
-    <p>Configuration for a specific carrier involves loading that carrier&rsquo;s constraint set into the rule engine &mdash; duration guardrails, sector concentration limits, RBC floor targets, reinsurance treaty parameters, entity capital thresholds &mdash; as executable rules rather than as documents. When NSAI evaluates a scenario, it doesn&rsquo;t retrieve relevant passages and generate a recommendation. It derives one: the conclusion follows from the facts and the rules, and the proof is the audit record.</p>
+  <div class="carrier-card">
+    <div class="carrier-head">
+      <div>
+        <div class="carrier-name">Meridian Life &amp; Annuity <span style="font-family:var(--fm);font-size:11px;font-weight:400;color:var(--ink-light);margin-left:10px">est. 1961 &middot; Des Moines, IA</span></div>
+        <div class="carrier-tag">Fictional entity &mdash; illustrative purposes only &middot; Iowa domicile &middot; Bermuda affiliate: Meridian Re Bermuda Ltd.</div>
+      </div>
+      <div class="carrier-meta">NSAI session: 2026-04-21 &middot; 07:14 CDT<br/>Ontology: L&amp;A v4.2 &middot; 47 active rules</div>
+    </div>
+    <div class="carrier-stats" style="grid-template-columns:repeat(6,1fr)">
+      <div class="cs"><div class="cs-label">General account AUM</div><div class="cs-val">$20.4B</div><div class="cs-sub">+4.2% YoY net flows</div></div>
+      <div class="cs"><div class="cs-label">Annuity premium (2025)</div><div class="cs-val">$3.1B</div><div class="cs-sub">#14 U.S. by fixed annuity premium</div></div>
+      <div class="cs"><div class="cs-label">Avg. policy size</div><div class="cs-val">$187K</div><div class="cs-sub">Bank channel dominant (62% of new sales)</div></div>
+      <div class="cs"><div class="cs-label">In-force policies</div><div class="cs-val">141,000</div><div class="cs-sub">MYGA, FIA, ULSG, PRT</div></div>
+      <div class="cs"><div class="cs-label">RBC ratio</div><div class="cs-val">410%</div><div class="cs-sub">SAP &middot; Iowa DOI &middot; floor 375%</div></div>
+      <div class="cs"><div class="cs-label">Net investment yield</div><div class="cs-val">5.18%</div><div class="cs-sub">GA portfolio &middot; Q1 2026</div></div>
+    </div>
   </div>
-  <div class="ont-grid">
-    <div class="ont-cell"><div class="ont-step">Step 01 &mdash; Perceive</div><div class="ont-title">Extract structured facts</div><div class="ont-body">Market data, portfolio positions, liability cashflows, lapse cohort data, and reinsurance terms are extracted and asserted into the ontology as typed facts. A Block has a TIV, a ProductType, a DurationProfile, and a set of RBCCharges. Enrichment is automatic &mdash; CUSIP to C1 charge class, block age to surrender schedule.</div></div>
-    <div class="ont-cell"><div class="ont-step">Step 02 &mdash; Represent</div><div class="ont-title">Map to the L&amp;A domain model</div><div class="ont-body">The ontology knows that a MYGA is a FixedAnnuity, that a FixedAnnuity has CreditingRateTiers, that each Tier has a SurrenderChargePeriod, and that PolicyholderBehavior in each Tier follows different LapseCurves. The carrier&rsquo;s own guardrails are loaded as typed constraint objects &mdash; not policy documents.</div></div>
-    <div class="ont-cell"><div class="ont-step">Step 03 &mdash; Reason</div><div class="ont-title">Derive decisions, not generate them</div><div class="ont-body">The rule engine evaluates every applicable constraint: duration guardrails fire on derived duration gaps; RBC floor rules fire on modeled post-action ratios; concentration limits fire on aggregate sector weights. Same inputs always produce the same decision, with a full proof trace &mdash; not a plausible-sounding answer.</div></div>
+  <div style="max-width:var(--mw);padding:0;margin:0 auto">
+    <div class="section-marker" style="padding:40px 0 0 0">05b / What changes with NSAI</div>
+    <h2 class="section-heading" style="padding:12px 0 0 0">Before and after.<br/>The same carrier. Different decisions.</h2>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head before">Without NSAI &mdash; current process</div>
+        <div class="compare-row"><div class="compare-icon x">&#x2715;</div><div class="compare-text"><strong>Integration is human.</strong> ALM, asset management, and capital views exist in separate systems. The integrated view only exists during the quarterly committee meeting.</div></div>
+        <div class="compare-row"><div class="compare-icon x">&#x2715;</div><div class="compare-text"><strong>Cycle time is the calendar.</strong> Monthly ALM. Quarterly capital committee. Spread windows, reinsurance pricing, and acquisition opportunities move faster than the cycle.</div></div>
+        <div class="compare-row"><div class="compare-icon x">&#x2715;</div><div class="compare-text"><strong>Opportunity surface is whatever got modeled.</strong> Three to five scenarios per quarter. The other forty value-creation paths are invisible &mdash; not rejected, just never evaluated.</div></div>
+        <div class="compare-row"><div class="compare-icon x">&#x2715;</div><div class="compare-text"><strong>Audit trail is institutional memory.</strong> When the senior actuary leaves, the rationale leaves too. The replacement inherits a number and a spreadsheet.</div></div>
+      </div>
+      <div class="compare-col nsai">
+        <div class="compare-head after">With NSAI &mdash; governed engine</div>
+        <div class="compare-row"><div class="compare-icon ok">&#x2713;</div><div class="compare-text"><strong>Integration is continuous and automatic.</strong> Liability, asset, capital, and reinsurance views are unified in the ontology. The integrated view is always current, not just during the meeting.</div></div>
+        <div class="compare-row"><div class="compare-icon ok">&#x2713;</div><div class="compare-text"><strong>Decisions execute in days.</strong> NSAI surfaces the opportunity with the recommendation already pre-cleared against all guardrails. The committee reviews and decides &mdash; it doesn&rsquo;t assemble the analysis.</div></div>
+        <div class="compare-row"><div class="compare-icon ok">&#x2713;</div><div class="compare-text"><strong>Full opportunity surface evaluated continuously.</strong> Every scenario type runs on every market condition. Opportunities are surfaced when they become actionable &mdash; not when the team had time to model them.</div></div>
+        <div class="compare-row"><div class="compare-icon ok">&#x2713;</div><div class="compare-text"><strong>Audit trail is a byproduct of the engine.</strong> Every fact, every rule, every decision &mdash; timestamped and retained. Producible for board, rating agency, or regulator on demand. No additional compliance step.</div></div>
+      </div>
+    </div>
   </div>
-  <div class="prose"><p>The demo below shows this reasoning operating on a representative carrier &mdash; Meridian Life &amp; Annuity &mdash; across four capital management domains simultaneously. Every recommendation traces to a specific rule and a specific fact.</p></div>
-</section>
+  <div style="padding-bottom:48px"></div>
+</div>
 
-<div class="demo-band" id="s06">
-  <div class="demo-inner">
-    <div class="demo-eyebrow">06 / The demo</div>
-    <div class="demo-title">NSAI Capital Management Engine &mdash;<br/>Monday morning view at Meridian L&amp;A</div>
-    <div class="demo-sub">Four modules. One integrated capital management view. All entities, figures, and scenarios are fictional and for illustrative purposes only.</div>
-
-    <div class="carrier-card">
-      <div class="carrier-head">
-        <div>
-          <div class="carrier-name">Meridian Life &amp; Annuity</div>
-          <div class="carrier-tag">Fictional entity &mdash; illustrative purposes only &middot; Iowa domicile &middot; Bermuda affiliate: Meridian Re Bermuda Ltd.</div>
+<section class="section" id="s05b" style="scroll-margin-top:56px">
+  <div class="section-marker">04 / How NSAI reasons</div>
+  <h2 class="section-heading">Not retrieval. Not generation.<br/>Derivation.</h2>
+  <div class="prose" style="margin-bottom:48px">
+    <p>Every NSAI recommendation traces to a specific fact and a specific rule. The engine doesn&rsquo;t summarize documents or generate plausible-sounding answers. It loads the carrier&rsquo;s world as a typed ontology &mdash; blocks, crediting rate tiers, RBC charge components, treaty structures &mdash; then evaluates that world against executable constraint rules. The same inputs always produce the same output, with a full proof trace as the byproduct.</p>
+  </div>
+  <div class="reasoning-diagram">
+    <div class="rd-layer rd-inputs">
+      <div class="rd-layer-label">Inputs</div>
+      <div class="rd-layer-content">
+        <div class="rd-input-grid">
+          <div class="rd-input-chip">Market data <span>rates, spreads, vol</span></div>
+          <div class="rd-input-chip">Portfolio positions <span>cusips, durations, C1 classes</span></div>
+          <div class="rd-input-chip">Liability cashflows <span>lapse curves, surrender schedules</span></div>
+          <div class="rd-input-chip">Reinsurance terms <span>treaty parameters, cession rates</span></div>
+          <div class="rd-input-chip">Capital ratios <span>RBC, BSCR, entity thresholds</span></div>
+          <div class="rd-input-chip">Carrier constraints <span>board-approved guardrails</span></div>
         </div>
-        <div class="carrier-meta">NSAI config loaded: 2026-04-21<br/>Ontology: L&amp;A v4.2 &middot; Rules: 47 active</div>
       </div>
-      <div class="carrier-stats">
-        <div class="cs"><div class="cs-label">General account</div><div class="cs-val">$20.4B</div><div class="cs-sub">Fixed ann., ULSG, PRT, FIA</div></div>
-        <div class="cs"><div class="cs-label">RBC ratio</div><div class="cs-val">410%</div><div class="cs-sub">SAP basis &middot; Iowa DOI &middot; floor 375%</div></div>
-        <div class="cs"><div class="cs-label">Active guardrails</div><div class="cs-val">7 / 7</div><div class="cs-sub">All passing at session open</div></div>
-        <div class="cs"><div class="cs-label">Duration target</div><div class="cs-val">4.2 yr</div><div class="cs-sub">&plusmn;1.5yr board-approved band</div></div>
-        <div class="cs"><div class="cs-label">Committee cadence</div><div class="cs-val">Monthly</div><div class="cs-sub">ALM &middot; Quarterly capital cmte.</div></div>
+    </div>
+    <div class="rd-arrow"><div class="rd-arrow-label">asserted as typed facts</div></div><div class="rd-arrow-down">▼</div>
+    <div class="rd-layer rd-ontology">
+      <div class="rd-layer-label">L&amp;A Ontology</div>
+      <div class="rd-layer-content">
+        <div class="rd-ont-row">
+          <div class="rd-ont-node">Block <span class="rd-ont-type">FixedAnnuity | ULSG | PRT | FIA</span></div>
+          <div class="rd-ont-rel">&rarr; has &rarr;</div>
+          <div class="rd-ont-node">CreditingRateTier <span class="rd-ont-type">SurrenderPeriod &middot; LapseCurve</span></div>
+        </div>
+        <div class="rd-ont-row">
+          <div class="rd-ont-node">RBCCharge <span class="rd-ont-type">C1 asset &middot; C2 mortality &middot; C3 interest &middot; C4 business</span></div>
+          <div class="rd-ont-rel">&rarr; loads into &rarr;</div>
+          <div class="rd-ont-node">CapitalPosition <span class="rd-ont-type">entity-level &middot; SAP | BSCR basis</span></div>
+        </div>
+        <div class="rd-ont-row">
+          <div class="rd-ont-node">ReinsStructure <span class="rd-ont-type">FundsWithheld | FullCoinsurance | ModCo</span></div>
+          <div class="rd-ont-rel">&rarr; maps to &rarr;</div>
+          <div class="rd-ont-node">EarningsBridge <span class="rd-ont-type">ceded economics &middot; commission &middot; RBC relief</span></div>
+        </div>
       </div>
+    </div>
+    <div class="rd-arrow"><div class="rd-arrow-label">evaluated against</div></div><div class="rd-arrow-down">▼</div>
+    <div class="rd-layer rd-rules">
+      <div class="rd-layer-label">Constraint rules</div>
+      <div class="rd-layer-content">
+        <div class="rd-rule-row">
+          <div class="rd-rule-tag">GUARDRAIL</div>
+          <div class="rd-rule-text"><code>IF duration_gap &gt; board_limit THEN action_required</code></div>
+        </div>
+        <div class="rd-rule-row">
+          <div class="rd-rule-tag">GUARDRAIL</div>
+          <div class="rd-rule-text"><code>IF rbc_ratio &lt; floor_375pct THEN escalate_immediately</code></div>
+        </div>
+        <div class="rd-rule-row">
+          <div class="rd-rule-tag">AUTHORITY</div>
+          <div class="rd-rule-text"><code>IF deployment &gt; $750M THEN committee_approval_required</code></div>
+        </div>
+        <div class="rd-rule-row">
+          <div class="rd-rule-tag">EFFICIENCY</div>
+          <div class="rd-rule-text"><code>IF spread_per_rbc &lt; 0.60× THEN flag_for_reinsurance_review</code></div>
+        </div>
+      </div>
+    </div>
+    <div class="rd-arrow"><div class="rd-arrow-label">derives</div></div><div class="rd-arrow-down">▼</div>
+    <div class="rd-layer rd-output">
+      <div class="rd-layer-label">Output</div>
+      <div class="rd-layer-content">
+        <div class="rd-output-row">
+          <div class="rd-out-block rd-out-rec">
+            <div class="rd-out-tag">Recommendation</div>
+            <div class="rd-out-text">Add $400M 5yr receiver swap. Close duration gap +1.2yr &rarr; +0.7yr. Enables $600M infrastructure debt allocation. Net NII: +$10M.</div>
+          </div>
+          <div class="rd-out-block rd-out-audit">
+            <div class="rd-out-tag">Audit record</div>
+            <div class="rd-out-text">Facts: duration_gap=+1.2yr, board_limit=±1.5yr. Rule fired: GUARDRAIL-DUR-01. Constraint: within standing authority. Timestamp: 2026-04-21T07:14:33Z.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="prose" style="margin-top:40px"><p>The demo below shows this chain running live across four capital management domains for Meridian. Every recommendation in the demo is traceable to the layer above it.</p></div>
+</section>
+
+<div class="demo-band" id="s06" style="scroll-margin-top:56px">
+  <div class="demo-inner">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">
+      <div>
+        <div class="demo-eyebrow">06 / The demo</div>
+        <div class="demo-title">NSAI Capital Management Engine</div>
+      </div>
+      <div style="font-family:var(--fm);font-size:11px;color:var(--d-dim);letter-spacing:.04em">Meridian Life &amp; Annuity &middot; All figures fictional &middot; Illustrative only</div>
     </div>
 
     <div class="demo-container">
@@ -404,12 +511,6 @@
       <div class="module" id="m02">
         <div class="module-caption"><strong>Governed P&amp;L Optimization.</strong> NSAI identifies five portfolio actions adding $13.0M annual NII and protecting $20M of rate upside. Each action shows what Meridian currently holds, what is being proposed, and why &mdash; derived from the integrated liability, capital, and market view.</div>
         <div class="module-body">
-          <div class="slider-display">
-            <span class="slider-end">Maximize immediate NII</span>
-            <div class="slider-track"><div class="slider-fill"></div><div class="slider-thumb"></div></div>
-            <span class="slider-end" style="text-align:right">Maximize governed economic value</span>
-          </div>
-          <div style="font-family:var(--fm);font-size:10px;color:var(--d-dim);text-align:right;margin-top:-10px;margin-bottom:14px;letter-spacing:.04em">&bull; Current optimization: maximize governed economic value</div>
           <div class="card">
             <div class="card-title">Governed P&amp;L Optimization &mdash; 5 actions identified<span class="badge bg-g">7/7 guardrails clear</span></div>
             <div class="card-headline">+$13.0M annual NII &middot; +$20M rate upside protected</div>
@@ -808,6 +909,32 @@ function closeTSBg(e){if(e.target===document.getElementById('ts-modal'))closeTer
 renderALM('s1');
 renderPortfolio();
 renderReinDetail('b');
+
+// ── ToC active tracking ──
+(function(){
+  const sections = [
+    {id:'s02',el:null},{id:'s03',el:null},{id:'s05b',el:null},{id:'s05',el:null},{id:'s06',el:null}
+  ];
+  sections.forEach(s=>{ s.el = document.getElementById(s.id); });
+  const links = document.querySelectorAll('#main-nav a[data-section]');
+  function setActive(id){
+    links.forEach(a=>{
+      a.classList.toggle('active', a.dataset.section===id);
+    });
+  }
+  function onScroll(){
+    const scrollY = window.scrollY + 80;
+    let active = sections[0].id;
+    sections.forEach(s=>{
+      if(s.el && s.el.getBoundingClientRect().top + window.scrollY <= scrollY){
+        active = s.id;
+      }
+    });
+    setActive(active);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
 </script>
 </body>
 </html>
