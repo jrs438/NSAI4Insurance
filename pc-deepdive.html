@@ -95,6 +95,7 @@
     margin-right: 8px;
     transform: translateY(-2px);
   }
+  .nav-sub { font-weight: 400; font-size: 14px; letter-spacing: 0; color: var(--muted); }
   .nav-links {
     display: flex;
     gap: 28px;
@@ -270,7 +271,7 @@
   }
   .sec-title em {
     font-style: italic;
-    color: var(--accent-2);
+    color: var(--accent);
   }
   .sec-sub {
     font-family: 'JetBrains Mono', monospace;
@@ -712,7 +713,7 @@
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--accent-2);
+    color: var(--accent);
     padding-top: 6px;
   }
   .modes-head h3 {
@@ -724,7 +725,7 @@
     max-width: 24ch;
     color: var(--ink);
   }
-  .modes-head h3 em { font-style: italic; color: var(--accent-2); }
+  .modes-head h3 em { font-style: italic; color: var(--accent); }
   .modes-head p {
     font-size: 14.5px;
     color: var(--ink-2);
@@ -2102,7 +2103,7 @@
     color: var(--ink);
     grid-column: 2;
   }
-  .reg-lede em { font-style: italic; color: var(--accent-2); }
+  .reg-lede em { font-style: italic; color: var(--accent); }
 
   /* Three pillars of regulator comfort */
   .reg-pillars {
@@ -2122,7 +2123,7 @@
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 40px;
-    color: var(--accent-2);
+    color: var(--accent);
     line-height: 1;
     margin-bottom: 14px;
   }
@@ -2152,7 +2153,7 @@
     display: block;
     font-size: 9.5px;
     letter-spacing: 0.15em;
-    color: var(--accent-2);
+    color: var(--accent);
     text-transform: uppercase;
     margin-bottom: 6px;
     font-family: 'JetBrains Mono', monospace;
@@ -2517,20 +2518,69 @@
     opacity: 1;
     color: var(--accent);
   }
+
+  /* ===== Floating navigation buttons ===== */
+  .float-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .float-nav-left { left: 16px; }
+  .float-nav-right { right: 16px; }
+  .float-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(63, 94, 74, 0.88);
+    color: #F4EFE6;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    backdrop-filter: blur(6px);
+    opacity: 0.82;
+  }
+  .float-btn:hover {
+    background: rgba(63, 94, 74, 1);
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    .float-nav { display: none; }
+  }
 </style>
 </head>
 <body>
+<!-- Floating navigation buttons -->
+<div class="float-nav float-nav-left">
+  <a href="index.html" class="float-btn">&larr; NSAI Home</a>
+</div>
+<div class="float-nav float-nav-right">
+  <a href="lifedemo.html" class="float-btn">L&amp;A &rarr;</a>
+</div>
+
 
 <!-- NAV -->
 <nav class="nav">
   <div class="wrap nav-inner">
-    <a href="index.html" class="nav-brand" style="text-decoration:none; color:inherit;"><span class="dot"></span>NSAI for Insurance</a>
+    <a href="index.html" class="nav-brand" style="text-decoration:none; color:inherit;"><span class="dot"></span>NSAI for Insurance<span class="nav-sub">: P&amp;C</span></a>
     <div class="nav-links">
       <a href="index.html" class="back-link">&larr; Overview</a>
       <a href="#pc-ontology">01 Ontology</a>
       <a href="#going-deeper">02 Going Deeper</a>
       <a href="#demo">03 Demo</a>
-      <a href="lifedemo.html" class="fwd-link">Life &amp; Annuity &rarr;</a>
+      <a href="lifedemo.html" class="fwd-link">L&amp;A &rarr;</a>
     </div>
   </div>
 </nav>

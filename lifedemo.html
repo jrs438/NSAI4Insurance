@@ -6,65 +6,112 @@
   <title>Life &amp; Annuity Capital Management — NSAI for Insurance</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --red:#c0392b;--red-light:#e74c3c;
-      --ink:#1a1a1a;--ink-mid:#444;--ink-light:#777;
-      --rule:#e0e0e0;--bg:#fafaf8;--bg-s:#f4f3f0;
+      /* === pc-deepdive aligned variables === */
+      --ink: #0F1419;
+      --ink-2: #2A3340;
+      --paper: #F4EFE6;
+      --paper-2: #ECE5D6;
+      --rule: rgba(28,37,48,0.15);
+      --accent: #B8442E;        /* terracotta */
+      --accent-2: #3F5E4A;      /* deep moss — L&A green */
+      --accent-3: #C8A951;      /* muted brass */
+      --muted: #6B6458;
+      --soft: #D9D1BF;
+      /* L&A uses green as the primary accent */
+      --la-green: #3F5E4A;
+      --la-green-light: #4a7a5a;
+      /* Keep semantic aliases for existing classes */
+      --red: #3F5E4A;           /* was red, now green */
+      --red-light: #4a7a5a;     /* was red-light, now green-light */
+      --ink-mid: #4a5568;
+      --ink-light: #6B6458;
+      --bg: #F4EFE6;
+      --bg-s: #ECE5D6;
+      /* dark section vars unchanged */
       --d-bg:#0d0f12;--d-sur:#141720;--d-brd:#252830;--d-brd2:#1e2128;
       --d-ink:#e8e8e8;--d-mid:#9ca3af;--d-dim:#6b7280;
       --d-grn:#22c55e;--d-amb:#f59e0b;--d-blu:#3b82f6;--d-red:#f87171;
-      --fs:'Lora',Georgia,serif;--fn:'DM Sans',system-ui,sans-serif;--fm:'JetBrains Mono','Courier New',monospace;
+      --fs:'Fraunces',Georgia,serif;--fn:'Inter Tight',-apple-system,system-ui,sans-serif;--fm:'JetBrains Mono','Courier New',monospace;
       --mw:1100px;--cw:680px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:var(--fn);font-size:17px;line-height:1.75;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+    html{scroll-behavior:smooth;scroll-padding-top:68px;scroll-snap-type:y proximity}
+    body{font-family:var(--fn);font-size:16px;line-height:1.55;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  /* Paper grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(0,0,0,0.015) 1px, transparent 1px),
+      radial-gradient(circle at 80% 70%, rgba(0,0,0,0.015) 1px, transparent 1px);
+    background-size: 3px 3px, 4px 4px;
+    pointer-events: none;
+    z-index: 1;
+  }
     a{color:inherit;text-decoration:none}em{font-style:italic}strong{font-weight:500}
-    nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px}
-    .nav-brand{font-family:var(--fm);font-size:13px;font-weight:500;letter-spacing:.03em;color:var(--ink);display:flex;align-items:center;gap:8px}
-    .nav-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0}
-    .nav-links{display:flex;gap:32px;list-style:none}
-    .nav-links a{font-size:13px;color:var(--ink-light);letter-spacing:.02em;transition:color .15s}
-    .nav-links a:hover{color:var(--ink)}.nav-links a.active{color:var(--ink);font-weight:500}
-    .page-header{padding:80px 40px 64px;max-width:var(--mw);margin:0 auto;border-bottom:1px solid var(--rule)}
+    nav{position:sticky;top:0;z-index:100;background:rgba(244,239,230,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(28,37,48,0.15);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;flex-wrap:wrap}
+    .nav-brand{font-family:'Fraunces',serif;font-weight:600;font-size:17px;letter-spacing:-0.01em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:0}
+    .nav-sub{font-weight:400;font-size:14px;letter-spacing:0;color:var(--muted)}
+    .nav-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent-2);flex-shrink:0;transform:translateY(-1px);margin-right:8px}
+    .nav-links{display:flex;gap:24px;list-style:none;font-size:13px;letter-spacing:0.02em}
+    .nav-links a{color:var(--ink-2);text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s}
+    .nav-links a:hover{color:var(--accent-2)}.nav-links a.active{color:var(--accent-2);font-weight:600}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent-2);transition:width 0.25s ease}
+    .nav-links a:hover::after{width:100%}.nav-links a.active::after{width:100%;height:2px}
+    .nav-links .back-link,.nav-links .fwd-link{opacity:0.65;font-size:12px}
+    .nav-links .back-link:hover,.nav-links .fwd-link:hover{opacity:1;color:var(--accent-2)}
+    .page-header{padding:80px 40px 80px;max-width:var(--mw);margin:0 auto;border-bottom:1px solid rgba(28,37,48,0.15);position:relative;z-index:2}
     .meta-row{display:flex;gap:32px;margin-bottom:32px;flex-wrap:wrap}
     .meta-item{display:flex;flex-direction:column;gap:3px}
     .meta-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-light)}
     .meta-value{font-size:13px;color:var(--ink-mid)}
-    .page-title{font-family:var(--fs);font-size:clamp(30px,4vw,48px);font-weight:600;line-height:1.18;color:var(--ink);max-width:780px;margin-bottom:24px}
-    .page-title em{color:var(--red)}
-    .page-lede{font-size:18px;line-height:1.7;color:var(--ink-mid);max-width:var(--cw);font-weight:300}
-    .section{max-width:var(--mw);margin:0 auto;padding:72px 40px;border-bottom:1px solid var(--rule)}
-    .section-marker{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
-    .section-heading{font-family:var(--fs);font-size:clamp(22px,3vw,34px);font-weight:600;line-height:1.22;color:var(--ink);max-width:680px;margin-bottom:36px}
+    .page-title{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(44px,6vw,80px);line-height:1.0;letter-spacing:-0.025em;color:var(--ink);max-width:820px;margin-bottom:28px}
+    .page-title em{color:var(--accent-2);font-style:italic}
+    .page-lede{font-size:19px;line-height:1.65;color:var(--ink-2);max-width:64ch;font-weight:300}
+    .section{max-width:var(--mw);margin:0 auto;padding:72px 40px;border-bottom:1px solid rgba(28,37,48,0.15);position:relative;z-index:2;scroll-snap-align:start;scroll-snap-stop:normal}
+    .section-marker{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);margin-bottom:20px}
+    .section-heading{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(26px,3.5vw,42px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink);max-width:680px;margin-bottom:36px}
     .prose{max-width:var(--cw)}.prose p{margin-bottom:20px;font-weight:300;color:var(--ink-mid)}
     .prose p:last-child{margin-bottom:0}.prose strong{color:var(--ink);font-weight:500}
-    .thesis{margin:44px 0;padding:28px 32px;border-left:3px solid var(--red);background:#fdf5f4}
+    .thesis{margin:44px 0;padding:28px 32px;border-left:3px solid var(--accent-2);background:rgba(63,94,74,0.05)}
     .thesis p{font-family:var(--fs);font-size:19px;line-height:1.6;color:var(--ink);font-style:italic;margin:0}
-    .value-item{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--rule);max-width:var(--cw)}
-    .value-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-    .value-head{display:flex;align-items:baseline;gap:16px;margin-bottom:12px}
-    .value-num{font-family:var(--fm);font-size:11px;font-weight:500;color:var(--red);letter-spacing:.08em;flex-shrink:0}
-    .value-title{font-size:15px;font-weight:500;color:var(--ink)}
-    .value-body{padding-left:36px;font-size:16px;line-height:1.7;color:var(--ink-mid);font-weight:300}
+    /* ── P&C-aligned hero & section headers ── */
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--fm);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:32px}
+    .hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--accent-2);flex-shrink:0}
+    .hero-meta{display:flex;gap:48px;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(28,37,48,0.15);margin-top:44px}
+    .hero-meta .h-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+    .hero-meta .h-val{font-family:'Fraunces',serif;font-weight:500;font-size:17px;color:var(--ink)}
+    .sec-head{display:grid;grid-template-columns:120px 1fr;gap:40px;margin-bottom:52px;align-items:start}
+    .sec-num{font-family:var(--fm);font-size:12px;letter-spacing:.15em;color:var(--accent-2);padding-top:16px;border-top:2px solid var(--accent-2);line-height:1.5;text-transform:uppercase}
+    .sec-title{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(28px,3.8vw,46px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink)}
+    .sec-title em{font-style:italic;color:var(--accent-2)}
+    .value-list{max-width:var(--cw);border-top:1px solid var(--rule)}
+    .value-item{padding:22px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:36px 1fr;gap:0 20px}
+    .value-num{font-family:var(--fm);font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.1em;padding-top:3px}
+    .value-content{}
+    .value-title{font-size:14px;font-weight:600;color:var(--ink);letter-spacing:-.01em;margin-bottom:5px}
+    .value-body{font-size:14.5px;line-height:1.65;color:var(--ink-mid);font-weight:300}
+    .value-body p{margin:0}
     .stack-list{max-width:var(--cw);margin:32px 0}
     .stack-item{display:grid;grid-template-columns:140px 1fr;gap:0 24px;padding:14px 0;border-top:1px solid var(--rule)}
     .stack-item:last-child{border-bottom:1px solid var(--rule)}
     .stack-label{font-family:var(--fm);font-size:11px;color:var(--ink-light);letter-spacing:.06em;padding-top:2px}
     .stack-value{color:var(--ink-mid);font-weight:300;line-height:1.5;font-size:15px}
     .failure-item{display:grid;grid-template-columns:28px 1fr;gap:0 20px;margin-bottom:28px;align-items:start;max-width:var(--cw)}
-    .failure-num{font-family:var(--fm);font-size:12px;font-weight:500;color:var(--red);margin-top:3px}
+    .failure-num{font-family:var(--fm);font-size:12px;font-weight:500;color:var(--accent-2);margin-top:3px}
     .failure-body{font-weight:300;color:var(--ink-mid)}.failure-body strong{color:var(--ink)}
     .pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);margin:40px 0}
     .pillar{padding:32px 28px;border-right:1px solid var(--rule)}.pillar:last-child{border-right:none}
-    .pillar-n{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--red);margin-bottom:12px}
+    .pillar-n{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-2);margin-bottom:12px}
     .pillar-title{font-family:var(--fs);font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:14px}
     .pillar-body{font-size:14px;line-height:1.65;color:var(--ink-mid);font-weight:300}
     .ont-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:40px 0}
     .ont-cell{background:var(--bg);padding:24px 22px}
-    .ont-step{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--red);margin-bottom:10px}
+    .ont-step{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-2);margin-bottom:10px}
     .ont-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:8px}
     .ont-body{font-size:13px;color:var(--ink-mid);font-weight:300;line-height:1.6}
     .summary-bar{background:var(--bg-s);border:1px solid var(--rule);padding:20px 28px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;margin:40px 0}
@@ -81,20 +128,24 @@
     .cta-title{font-family:var(--fs);font-size:clamp(24px,3vw,38px);font-weight:600;color:var(--ink);margin-bottom:16px;line-height:1.25}
     .cta-sub{font-size:16px;color:var(--ink-mid);font-weight:300;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
     .cta-btn{display:inline-block;background:var(--ink);color:#fff;font-family:var(--fm);font-size:13px;letter-spacing:.08em;padding:14px 36px;cursor:pointer;border:none;transition:background .15s;text-transform:uppercase}
-    .cta-btn:hover{background:var(--red)}
+    .cta-btn:hover{background:var(--accent-2)}
     .disclosure{max-width:var(--mw);margin:0 auto;padding:0 40px 40px}
     .disclosure p{font-size:12px;color:var(--ink-light);line-height:1.65;border-top:1px solid var(--rule);padding-top:24px;font-style:italic}
-    footer{border-top:1px solid var(--rule);padding:32px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+    footer{border-top:1px solid rgba(28,37,48,0.15);padding:32px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:var(--paper-2)}
     .footer-brand{font-family:var(--fm);font-size:12px;color:var(--ink-light);display:flex;align-items:center;gap:8px}
-    .footer-dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+    .footer-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
     .footer-copy{font-size:12px;color:var(--ink-light)}
+    /* carrier section — same geometry as .section */
+    .carrier-section{border-bottom:1px solid rgba(28,37,48,0.15);position:relative;z-index:2;scroll-snap-align:start;scroll-snap-stop:normal}
+    .carrier-section-inner{max-width:var(--mw);margin:0 auto;padding:72px 40px 36px}
+    .carrier-content{max-width:var(--mw);margin:0 auto;padding:0 40px 64px}
     /* DEMO */
-    .demo-band{background:var(--d-bg);padding:72px 0}
+    .demo-band{background:var(--d-bg);padding:72px 0;scroll-snap-align:start;scroll-snap-stop:normal}
     .demo-inner{max-width:var(--mw);margin:0 auto;padding:0 40px}
-    .demo-eyebrow{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--red);margin-bottom:10px}
+    .demo-eyebrow{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-2);margin-bottom:10px}
     .demo-title{font-family:var(--fs);font-size:clamp(20px,2.5vw,28px);font-weight:600;color:var(--d-ink);line-height:1.25}
     .demo-sub{margin-top:8px;font-size:14px;color:var(--d-mid);font-weight:300;max-width:640px;margin-bottom:32px}
-    .carrier-card{max-width:820px;margin:0 auto;border:1px solid var(--rule);background:#fff;padding:28px 32px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    .carrier-card{border:1px solid var(--rule);background:#fff;padding:28px 32px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
     .carrier-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:22px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--rule)}
     .carrier-name{font-family:var(--fs);font-size:24px;font-weight:600;color:#0a0a0a;letter-spacing:-.01em}
     .carrier-est{font-family:var(--fm);font-size:11px;color:var(--ink-mid);margin-top:5px;letter-spacing:.02em}
@@ -106,30 +157,30 @@
     .cs-val{font-size:20px;font-weight:600;color:#0a0a0a;line-height:1.1;font-family:var(--fs);letter-spacing:-.01em}
     .cs-sub{font-size:11px;color:var(--ink-mid);margin-top:5px;line-height:1.4}
     /* sub-labels above carrier card and comparison */
-    .carrier-sub-label{max-width:820px;margin:48px auto 14px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--red);font-weight:500}
+    .carrier-sub-label{margin:48px 0 14px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-2);font-weight:500}
     .carrier-sub-label:first-of-type{margin-top:0}
-    .carrier-narrative{max-width:820px;margin:24px auto 0;padding:0}
+    .carrier-narrative{margin:24px 0 0;padding:0}
     .carrier-narrative p{font-size:15px;line-height:1.7;color:var(--ink-mid);font-weight:300}
     /* interactive comparison tiles */
-    .compare-hint{max-width:820px;margin:8px auto 16px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);text-align:center}
-    .compare-tiles{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+    .compare-hint{margin:8px 0 16px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);text-align:center}
+    .compare-tiles{display:flex;flex-direction:column;gap:10px}
     .ctile{background:#fff;border:1px solid var(--rule);cursor:pointer;transition:border-color .2s,box-shadow .2s;overflow:hidden}
     .ctile:hover{border-color:var(--ink-light);box-shadow:0 2px 8px rgba(0,0,0,.04)}
-    .ctile.open{border-color:var(--red);box-shadow:0 2px 12px rgba(192,57,43,.08)}
+    .ctile.open{border-color:var(--accent-2);box-shadow:0 2px 12px rgba(63,94,74,.12)}
     .ctile-header{display:flex;align-items:center;justify-content:space-between;padding:16px 22px 12px;gap:16px}
     .ctile-label{font-family:var(--fs);font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-.005em}
     .ctile-expand{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:18px;color:var(--ink-light);background:var(--bg-s);border:1px solid var(--rule);transition:all .2s;flex-shrink:0;line-height:1;font-weight:300}
-    .ctile.open .ctile-expand{background:var(--red);color:#fff;border-color:var(--red);transform:rotate(45deg)}
+    .ctile.open .ctile-expand{background:var(--accent-2);color:#fff;border-color:var(--accent-2);transform:rotate(45deg)}
     .ctile-pair{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:0;padding:6px 22px 18px}
     .ctile-before,.ctile-after{display:flex;flex-direction:column;gap:4px;padding:10px 16px}
     .ctile-before{background:var(--bg-s);border:1px solid var(--rule);text-align:left}
-    .ctile-after{background:rgba(192,57,43,.05);border:1px solid rgba(192,57,43,.2);text-align:left}
-    .ctile.open .ctile-after{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35)}
+    .ctile-after{background:rgba(63,94,74,.05);border:1px solid rgba(63,94,74,.2);text-align:left}
+    .ctile.open .ctile-after{background:rgba(63,94,74,.08);border-color:rgba(63,94,74,.35)}
     .ctile-tag{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light)}
-    .ctile-after .ctile-tag{color:var(--red)}
+    .ctile-after .ctile-tag{color:var(--accent-2)}
     .ctile-metric{font-family:var(--fs);font-size:18px;font-weight:600;color:var(--ink);line-height:1.15;letter-spacing:-.01em}
     .ctile-arrow{font-family:var(--fm);font-size:18px;color:var(--ink-light);padding:0 18px;line-height:1;flex-shrink:0}
-    .ctile.open .ctile-arrow{color:var(--red)}
+    .ctile.open .ctile-arrow{color:var(--accent-2)}
     .ctile-detail{display:none;border-top:1px solid var(--rule);background:var(--bg-s);padding:0}
     .ctile.open .ctile-detail{display:block}
     .ctile-detail-row{display:grid;grid-template-columns:90px 1fr;gap:18px;padding:16px 22px;border-bottom:1px solid var(--rule);align-items:start}
@@ -137,7 +188,7 @@
     .ctile-detail-row:nth-child(2){background:rgba(192,57,43,.025)}
     .ctile-detail-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:500;padding-top:2px}
     .ctile-detail-label.before-l{color:var(--ink-light)}
-    .ctile-detail-label.after-l{color:var(--red)}
+    .ctile-detail-label.after-l{color:var(--accent-2)}
     .ctile-detail-text{font-size:14px;line-height:1.65;color:var(--ink-mid);font-weight:300}
     .ctile-detail-row:nth-child(2) .ctile-detail-text{color:var(--ink)}
     /* Phase 2 — M02 status link strip */
@@ -147,25 +198,28 @@
     .sls-status{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-grn);background:rgba(34,197,94,.12);padding:2px 8px}
     .sls-jump{margin-left:auto;background:none;border:1px solid var(--d-brd);color:var(--d-blu);font-family:var(--fm);font-size:10px;letter-spacing:.06em;padding:5px 10px;cursor:pointer;text-transform:uppercase}
     .sls-jump:hover{border-color:var(--d-blu);color:var(--d-ink)}
-    /* Phase 2 — M02 rich action items */
-    .action-item-rich{display:block;padding:14px 0;border-bottom:1px solid var(--d-brd2)}
+    /* M02 rich action items */
+    .action-item-rich{display:flex!important;flex-direction:column!important;padding:14px 0;border-bottom:1px solid var(--d-brd2)}
     .action-item-rich:last-child{border-bottom:none}
-    .action-item-rich.aapr{background:rgba(34,197,94,.04)}
-    .action-row-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
-    .aapr-check{color:var(--d-grn)!important}
-    .btn-approve-mini{background:var(--red);border:1px solid var(--red);color:#fff;font-family:var(--fm);font-size:10px;letter-spacing:.04em;padding:5px 11px;cursor:pointer;flex-shrink:0;margin-top:1px;text-transform:uppercase}
-    .btn-approve-mini:hover:not(.approved){background:var(--red-light)}
+    .action-item-rich.aapr{background:rgba(34,197,94,.03)}
+    .action-row-top{display:flex;align-items:center;gap:10px}
+    .action-check{opacity:.18;transition:opacity .2s}
+    .action-item-rich.aapr .action-check{opacity:1}
+    .btn-approve-mini{background:var(--accent-2);border:1px solid var(--accent-2);color:#fff;font-family:var(--fm);font-size:10px;letter-spacing:.04em;padding:5px 11px;cursor:pointer;flex-shrink:0;text-transform:uppercase;margin-left:auto}
+    .btn-approve-mini:hover:not(.approved){background:var(--la-green-light)}
     .btn-approve-mini.approved{background:rgba(34,197,94,.15);border-color:var(--d-grn);color:var(--d-grn);cursor:default}
-    .action-securities{display:flex;align-items:flex-start;gap:10px;padding:8px 12px 0 24px;font-size:11px;line-height:1.55}
-    .action-sec-label{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);flex-shrink:0;padding-top:2px;width:60px}
+    .action-securities{display:flex;align-items:flex-start;gap:10px;padding:5px 0 0 22px;font-size:11px;line-height:1.55}
+    .action-sec-label{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);flex-shrink:0;padding-top:2px;width:56px}
     .action-sec-text{color:var(--d-mid);font-family:var(--fm);font-size:11px}
+    /* separator above Approve all row */
+    #port-action-list + .action-row{margin-top:14px;padding-top:12px;border-top:1px solid var(--d-brd2)}
     /* Phase 2 — M04 routing clickable */
     .routing-section-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);margin-bottom:8px}
     .routing-choice.clickable{display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:border-color .15s}
     .routing-choice.clickable:hover{border-color:var(--d-mid)}
-    .routing-choice.clickable.selected{border-color:var(--red);background:rgba(192,57,43,.04)}
+    .routing-choice.clickable.selected{border-color:var(--accent-2);background:rgba(63,94,74,.04)}
     .routing-radio{width:14px;height:14px;border-radius:50%;border:2px solid var(--d-brd);margin-top:3px;flex-shrink:0;transition:all .15s}
-    .routing-choice.clickable.selected .routing-radio{border-color:var(--red);background:var(--red)}
+    .routing-choice.clickable.selected .routing-radio{border-color:var(--accent-2);background:var(--accent-2)}
     .routing-content{flex:1}
     /* Phase 2 — M04 resolution paths */
     .resolution-paths{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
@@ -212,7 +266,7 @@
     .tab-strip::-webkit-scrollbar{display:none}
     .tab-btn{flex-shrink:0;padding:11px 20px;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--d-dim);background:none;border:none;border-right:1px solid var(--d-brd2);cursor:pointer;transition:color .15s,background .15s;white-space:nowrap}
     .tab-btn:hover{color:var(--d-ink);background:rgba(255,255,255,.03)}
-    .tab-btn.active{color:var(--d-ink);background:rgba(255,255,255,.04);border-bottom:2px solid var(--red)}
+    .tab-btn.active{color:var(--d-ink);background:rgba(255,255,255,.04);border-bottom:2px solid var(--accent-2)}
     .module{display:none}.module.active{display:block}
     .module-caption{padding:14px 20px;background:rgba(0,0,0,.25);border-bottom:1px solid var(--d-brd);font-size:13px;color:var(--d-mid);line-height:1.55;font-weight:300}
     .module-caption strong{color:var(--d-ink);font-weight:500}
@@ -232,15 +286,15 @@
     .req-panel{background:rgba(255,255,255,.02);border:1px solid var(--d-brd);padding:14px 16px;margin-bottom:14px;font-size:12px;line-height:1.7;color:var(--d-mid)}
     .req-panel-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);margin-bottom:8px}
     .req-panel p{margin-bottom:8px}.req-panel p:last-child{margin-bottom:0}
-    .rec-block{background:rgba(192,57,43,.07);border-left:2px solid var(--red);padding:12px 16px;margin-bottom:14px}
-    .rec-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:6px}
+    .rec-block{background:rgba(63,94,74,.07);border-left:2px solid var(--accent-2);padding:12px 16px;margin-bottom:14px}
+    .rec-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-2);margin-bottom:6px}
     .rec-text{font-size:13px;color:var(--d-ink);line-height:1.6}
     .cross-note{font-family:var(--fm);font-size:10px;color:var(--d-blu);letter-spacing:.04em;cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;text-decoration:underline;text-underline-offset:2px}
-    .action-row{display:flex;gap:10px;flex-wrap:wrap}
+    .action-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
     .btn-expand{background:none;border:1px solid var(--d-brd);color:var(--d-mid);font-family:var(--fm);font-size:11px;letter-spacing:.06em;padding:9px 16px;cursor:pointer;transition:border-color .15s,color .15s}
     .btn-expand:hover{border-color:var(--d-mid);color:var(--d-ink)}
-    .btn-approve{background:var(--red);border:1px solid var(--red);color:#fff;font-family:var(--fm);font-size:11px;letter-spacing:.06em;padding:9px 20px;cursor:pointer;transition:background .15s}
-    .btn-approve:hover:not(.approved){background:var(--red-light)}
+    .btn-approve{background:var(--accent-2);border:1px solid var(--accent-2);color:#fff;font-family:var(--fm);font-size:11px;letter-spacing:.06em;padding:9px 20px;cursor:pointer;transition:background .15s}
+    .btn-approve:hover:not(.approved){background:var(--la-green-light)}
     .btn-approve.approved{background:rgba(34,197,94,.15);border-color:var(--d-grn);color:var(--d-grn);cursor:default}
     .btn-ghost{background:none;border:1px solid var(--d-brd);color:var(--d-mid);font-family:var(--fm);font-size:11px;letter-spacing:.06em;padding:9px 20px;cursor:pointer;transition:border-color .15s,color .15s}
     .btn-ghost:hover{border-color:var(--d-mid);color:var(--d-ink)}
@@ -264,9 +318,9 @@
     .scenario-select{background:var(--d-bg);border:1px solid var(--d-brd);color:var(--d-ink);font-family:var(--fm);font-size:11px;padding:6px 10px;cursor:pointer;flex:1;min-width:0}
     .scenario-select option{background:var(--d-bg)}
     .option-row{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border:1px solid var(--d-brd);margin-bottom:8px;cursor:pointer;transition:border-color .15s}
-    .option-row:hover{border-color:var(--d-mid)}.option-row.selected{border-color:var(--red)}
+    .option-row:hover{border-color:var(--d-mid)}.option-row.selected{border-color:var(--accent-2)}
     .option-radio{width:14px;height:14px;border-radius:50%;border:2px solid var(--d-brd);margin-top:3px;flex-shrink:0;transition:all .15s}
-    .option-row.selected .option-radio{border-color:var(--red);background:var(--red)}
+    .option-row.selected .option-radio{border-color:var(--accent-2);background:var(--accent-2)}
     .option-content{flex:1}.option-title{font-size:13px;font-weight:500;color:var(--d-ink);margin-bottom:3px}
     .option-desc{font-size:12px;color:var(--d-mid);line-height:1.5}
     .pref-tag{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-grn);border:1px solid rgba(34,197,94,.3);padding:1px 6px;margin-left:8px}
@@ -275,21 +329,21 @@
     .bridge-row{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;color:var(--d-mid)}
     .bridge-row.total{border-top:1px solid var(--d-brd);margin-top:6px;padding-top:8px;color:var(--d-ink);font-weight:500}
     .bridge-val{font-family:var(--fm);font-size:12px}.bridge-val.pos{color:var(--d-grn)}.bridge-val.neg{color:var(--d-red)}
-    .action-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--d-brd2)}
+    .action-item{display:flex;flex-direction:column;padding:10px 0;border-bottom:1px solid var(--d-brd2)}
     .action-item:last-child{border-bottom:none}
-    .action-check{color:var(--d-grn);font-size:12px;flex-shrink:0;margin-top:2px}
+    .action-check{color:var(--d-grn);font-size:12px;flex-shrink:0}
     .action-name{flex:1}.action-name-main{color:var(--d-ink);font-size:13px;line-height:1.4}
     .action-name-sub{font-size:11px;color:var(--d-mid);margin-top:2px}
-    .action-nii{font-family:var(--fm);font-size:11px;color:var(--d-grn);flex-shrink:0;margin-top:2px}
+    .action-nii{font-family:var(--fm);font-size:11px;color:var(--d-grn);flex-shrink:0;white-space:nowrap}
     .slider-display{display:flex;align-items:center;gap:12px;margin-bottom:16px}
     .slider-end{font-family:var(--fm);font-size:10px;color:var(--d-dim);letter-spacing:.04em;flex-shrink:0}
     .slider-track{flex:1;height:2px;background:var(--d-brd);border-radius:2px;position:relative}
-    .slider-fill{position:absolute;right:0;top:0;width:100%;height:2px;background:linear-gradient(to right,var(--d-brd),var(--red));border-radius:2px}
-    .slider-thumb{position:absolute;right:0;top:50%;transform:translate(50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--red)}
+    .slider-fill{position:absolute;right:0;top:0;width:100%;height:2px;background:linear-gradient(to right,var(--d-brd),var(--accent-2));border-radius:2px}
+    .slider-thumb{position:absolute;right:0;top:50%;transform:translate(50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--accent-2)}
     .routing-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-    .routing-choice{padding:14px 16px;border:1px solid var(--d-brd)}.routing-choice.preferred{border-color:var(--red)}
+    .routing-choice{padding:14px 16px;border:1px solid var(--d-brd)}.routing-choice.preferred{border-color:var(--accent-2)}
     .routing-title{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--d-dim);margin-bottom:6px}
-    .routing-title.pref{color:var(--red)}
+    .routing-title.pref{color:var(--accent-2)}
     .routing-val{font-size:17px;font-weight:500;color:var(--d-ink);margin-bottom:5px}
     .routing-desc{font-size:12px;color:var(--d-mid);line-height:1.45}
     .diligence-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:12px}
@@ -297,7 +351,7 @@
     .dil-item::before{content:"&#9888;";font-size:11px}
     .pipeline-list{margin-bottom:14px}
     .pipeline-item{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border-bottom:1px solid var(--d-brd2);font-size:12px}
-    .pipeline-item.active{border-left:2px solid var(--red);background:rgba(192,57,43,.05)}
+    .pipeline-item.active{border-left:2px solid var(--accent-2);background:rgba(63,94,74,.05)}
     .pipeline-item:last-child{border-bottom:none}
     .pipeline-type{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--d-dim);width:70px;flex-shrink:0;padding-top:1px}
     .pipeline-name{flex:1;color:var(--d-ink);line-height:1.4}
@@ -320,36 +374,52 @@
     .term-key{color:var(--d-mid)}.term-val{font-family:var(--fm);font-size:12px;color:var(--d-ink)}.term-val.warn{color:var(--d-amb)}
     .modal-actions{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--d-brd);flex-wrap:wrap}
     .status-strip{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid var(--d-brd);background:rgba(0,0,0,.35);font-family:var(--fm);font-size:11px;color:var(--d-dim);flex-wrap:wrap;gap:6px}
-    /* ontology figure (P&C-style) */
-    .ont-fig{margin:48px 0;border:1px solid var(--rule);background:#fff;padding:24px 24px 16px}
-    .ont-fig-label{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-light);text-align:center;margin-bottom:18px}
-    .ont-fig-svg{width:100%;max-width:860px;margin:0 auto}
-    .ont-fig-svg svg{width:100%;height:auto;display:block}
-    .ont-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:18px;padding-top:18px;border-top:1px solid var(--rule)}
-    .ont-legend-item{display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-mid)}
-    .ont-swatch{display:inline-block;width:14px;height:14px;border:1px solid var(--rule)}
-    .ont-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px}
-    .ont-pillar{padding:0}
-    .ont-pillar-num{font-family:var(--fs);font-size:24px;font-weight:600;color:var(--red);font-style:italic;margin-bottom:8px}
-    .ont-pillar-title{font-family:var(--fs);font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
-    .ont-pillar-body{font-size:14px;color:var(--ink-mid);font-weight:300;line-height:1.65}
-        .section{scroll-margin-top:56px}
+    /* ontology figure — matches pc-deepdive style */
+    .ont-viz{background:var(--paper-2);border:1px solid var(--rule);padding:24px;margin:48px 0;position:relative}
+    .ont-viz-label{font-family:var(--fm);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+    .ont-svg{width:100%;height:auto;display:block}
+    .ont-svg-desktop{display:block}.ont-svg-mobile{display:none}
+    @media(max-width:640px){.ont-svg-desktop{display:none}.ont-svg-mobile{display:block}}
+    .ont-node{cursor:pointer;transition:filter .2s}
+    .ont-node:hover{filter:brightness(1.1)}
+    .ont-node rect,.ont-node ellipse{fill:var(--paper-2);stroke:var(--ink-2);stroke-width:1.5}
+    .ont-node.core rect{fill:var(--accent-2);stroke:var(--accent-2)}
+    .ont-node.core text{fill:var(--paper);font-weight:600}
+    .ont-node.attr rect{fill:#fff}
+    .ont-node text{font-family:'Inter Tight',sans-serif;font-size:12px;text-anchor:middle;fill:var(--ink);dominant-baseline:middle;font-weight:500;pointer-events:none}
+    .ont-edge{stroke:var(--ink-2);stroke-width:1;fill:none}
+    .ont-edge-label{font-family:var(--fm);font-size:9px;fill:var(--muted);text-anchor:middle}
+    .ont-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(28,37,48,0.15);border:1px solid rgba(28,37,48,0.15);margin-top:48px}
+    .ont-pillar{background:var(--bg);padding:32px 28px}
+    .ont-pillar-num{font-family:var(--fm);font-size:11px;letter-spacing:.15em;color:var(--accent-2);margin-bottom:16px;text-transform:uppercase}
+    .ont-pillar-title{font-family:'Fraunces',serif;font-weight:500;font-size:21px;color:var(--ink);line-height:1.25;margin-bottom:14px;letter-spacing:-0.01em}
+    .ont-pillar-body{font-size:14.5px;color:var(--ink-2);font-weight:300;line-height:1.62}
+        .section{scroll-margin-top:68px}
     @media(max-width:768px){
-      nav{padding:0 20px}.nav-links{display:none}
+      html{scroll-snap-type:none}
+      nav{padding:12px 20px;height:auto;gap:4px}
+      .nav-brand{font-size:14px}
+      .nav-links{display:flex;gap:16px;font-size:11px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;width:100%;padding-bottom:2px}
+      .nav-links::-webkit-scrollbar{display:none}
       .page-header,.section{padding-left:20px;padding-right:20px}
       .page-header{padding-top:48px;padding-bottom:40px}.section{padding-top:48px;padding-bottom:48px}
       .pillar-grid,.ont-grid{grid-template-columns:1fr}
       .pillar{border-right:none;border-bottom:1px solid var(--rule)}.pillar:last-child{border-bottom:none}
       .outcomes-grid{grid-template-columns:1fr}.stack-item{grid-template-columns:1fr;gap:4px}
       .carrier-stats{grid-template-columns:repeat(2,1fr)}.demo-inner{padding:0 16px}.demo-band{padding:48px 0}
-      .carrier-section{padding:0 20px}.carrier-card{padding:20px}.carrier-sub-label{padding:0 4px}.carrier-narrative{padding:0 4px}
-      .compare-tiles{padding:0 4px}
+      .carrier-section-inner{padding:48px 20px 24px}.carrier-content{padding:0 20px 48px}
+      .carrier-card{padding:20px}.carrier-sub-label{padding:0}.carrier-narrative{padding:0}
+      .compare-tiles{padding:0}
       .ctile-pair{grid-template-columns:1fr;gap:8px;padding:6px 16px 16px}
       .ctile-arrow{transform:rotate(90deg);padding:4px 0}
       .ctile-detail-row{grid-template-columns:1fr;gap:6px;padding:14px 16px}
       .ctile-header{padding:14px 16px 10px}
-      .ont-pillars{grid-template-columns:1fr;gap:24px}
-      .ont-fig{padding:14px 14px 12px}.ont-legend{gap:10px}
+      .ont-pillars{grid-template-columns:1fr}
+      .ont-viz{padding:14px}
+      .sec-head{grid-template-columns:1fr;gap:12px}
+      .sec-num{border-top:none;border-left:2px solid var(--accent-2);padding-top:0;padding-left:10px}
+      .hero-meta{gap:28px}
+      .hero-eyebrow{margin-bottom:20px}
       .metric-row,.diligence-grid,.routing-grid{grid-template-columns:1fr}
       footer{padding:24px 20px;flex-direction:column;align-items:flex-start}
       .cta-block,.disclosure{padding-left:20px;padding-right:20px}.modal-overlay{padding:12px}
@@ -358,34 +428,88 @@
       .tab-btn{padding:10px 14px;font-size:10px}.card-headline{font-size:18px}
       .action-row{flex-direction:column}.carrier-stats{grid-template-columns:repeat(2,1fr)}
     }
-  </style>
+  
+  /* ===== Floating navigation buttons ===== */
+  .float-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .float-nav-left { left: 16px; }
+  .float-nav-right { right: 16px; }
+  .float-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(63, 94, 74, 0.88);
+    color: #F4EFE6;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    backdrop-filter: blur(6px);
+    writing-mode: horizontal-tb;
+    opacity: 0.82;
+  }
+  .float-btn:hover {
+    background: rgba(63, 94, 74, 1);
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    .float-nav { display: none; }
+  }
+</style>
 </head>
 <body>
+<!-- Floating navigation buttons -->
+<div class="float-nav float-nav-left">
+  <a href="index.html" class="float-btn">&larr; NSAI Home</a>
+</div>
+<div class="float-nav float-nav-right">
+  <a href="pc-deepdive.html" class="float-btn">P&amp;C &rarr;</a>
+</div>
+
 <nav>
-  <a href="/" class="nav-brand"><span class="nav-dot"></span>NSAI for Insurance</a>
-  <ul class="nav-links" id="main-nav">
-    <li><a href="#s01" data-section="s01">01 / Ontology</a></li>
-    <li><a href="#s02" data-section="s02">02 / Value</a></li>
-    <li><a href="#s03" data-section="s03">03 / Stack</a></li>
-    <li><a href="#s05" data-section="s05">04 / Meridian</a></li>
-    <li><a href="#s06" data-section="s06">05 / Demo</a></li>
-  </ul>
+  <a href="index.html" class="nav-brand"><span class="nav-dot"></span>NSAI for Insurance<span class="nav-sub">: L&amp;A</span></a>
+  <div class="nav-links" id="main-nav">
+    <a href="index.html" class="back-link">&larr; Overview</a>
+    <a href="#s01" data-section="s01">01 / Ontology</a>
+    <a href="#s02" data-section="s02">02 / Current State</a>
+    <a href="#s05" data-section="s05">03 / Demo</a>
+    <a href="#s07" data-section="s07">04 / Results</a>
+    <a href="pc-deepdive.html" class="fwd-link">P&amp;C &rarr;</a>
+  </div>
 </nav>
 
 <header class="page-header">
-  <div class="meta-row">
-    <div class="meta-item"><span class="meta-label">Domain</span><span class="meta-value">Life &amp; Annuity Capital Management</span></div>
-    <div class="meta-item"><span class="meta-label">Format</span><span class="meta-value">Interactive Explainer</span></div>
-    <div class="meta-item"><span class="meta-label">Audience</span><span class="meta-value">CFO &middot; CRO &middot; Appointed Actuary &middot; Head of ALM</span></div>
-    <div class="meta-item"><span class="meta-label">Reading time</span><span class="meta-value">~12 minutes</span></div>
-  </div>
+  <div class="hero-eyebrow">Life &amp; Annuity / Capital Management</div>
   <h1 class="page-title">The governed engine for<br/><em>long-duration capital decisions.</em></h1>
   <p class="page-lede">Large U.S. life and annuity carriers don&rsquo;t lack capital management sophistication. What they lack is a system that integrates the views, runs scenarios continuously, and produces the audit trail that makes every decision defensible. NSAI is that system.</p>
+  <div class="hero-meta">
+    <div><div class="h-label">Domain</div><div class="h-val">Life &amp; Annuity Capital Management</div></div>
+    <div><div class="h-label">Format</div><div class="h-val">Interactive Explainer</div></div>
+    <div><div class="h-label">Audience</div><div class="h-val">CFO &middot; CRO &middot; Appointed Actuary</div></div>
+    <div><div class="h-label">Reading time</div><div class="h-val">~12 min</div></div>
+  </div>
 </header>
 
-<section class="section" id="s01" style="scroll-margin-top:56px">
-  <div class="section-marker">01 / Ontology</div>
-  <h2 class="section-heading">An ontology is a <em>shared mental model</em> &mdash;<br/>for machines.</h2>
+<section class="section" id="s01">
+  <div class="sec-head">
+    <div class="sec-num">01 / Ontology</div>
+    <h2 class="sec-title">An ontology is a <em>shared mental model</em> &mdash; for machines.</h2>
+  </div>
   <div class="prose">
     <p>Think of an ontology as the <em>vocabulary and grammar</em> of your business, written in a form a computer can reason over.</p>
     <p>When an actuary says &ldquo;a 2014-vintage MYGA block in surrender period three with elevated lapse experience in the hot-money cohort, ceded 50% on a funds-withheld basis to a Bermuda affiliate,&rdquo; every term is loaded with meaning &mdash; and every term connects to other concepts. Vintage implies surrender schedule. Cohort implies behavior. Cession structure implies which RBC charges transfer and which stay. The actuary&rsquo;s brain holds this web of concepts.</p>
@@ -394,118 +518,229 @@
     <p>Once the world is modeled this way, rules become composable and inheritable. A guardrail that applies to &ldquo;all long-duration spread products&rdquo; automatically applies to anything the ontology classifies as such &mdash; MYGA, FIA, ULSG. Write the rule once, against the concept. And ontologies compose across domains: the same Block concept anchors ALM, capital management, reinsurance evaluation, and acquisition analysis.</p>
   </div>
 
-  <div class="ont-fig">
-    <div class="ont-fig-label">Fig. 01 &mdash; Minimal Life &amp; Annuity Capital Ontology</div>
-    <div class="ont-fig-svg">
-      <svg viewBox="0 0 860 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
-          </marker>
-        </defs>
+  <div class="ont-viz">
+    <div class="ont-viz-label">Fig. 01 &mdash; Minimal Life &amp; Annuity Capital Ontology</div>
 
-        <!-- relationship lines (drawn first so boxes overlay them) -->
-        <!-- Policy → Block -->
-        <line x1="180" y1="60" x2="180" y2="120" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="190" y="92" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">covers</text>
+    <!-- Desktop: four-column left-to-right flow -->
+    <svg class="ont-svg ont-svg-desktop" viewBox="0 0 1060 372" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="la-arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6" fill="none" stroke="#6B7A8A" stroke-width="1"/>
+        </marker>
+      </defs>
 
-        <!-- Block → CreditingRateTier -->
-        <line x1="240" y1="160" x2="380" y2="160" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="270" y="152" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">hasTier</text>
+      <!-- Column header labels -->
+      <text x="108" y="16" style="font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;fill:var(--muted);text-anchor:middle">Contract</text>
+      <text x="340" y="16" style="font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;fill:var(--muted);text-anchor:middle">Block &amp; Behavior</text>
+      <text x="592" y="16" style="font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;fill:var(--muted);text-anchor:middle">Capital &amp; Cession</text>
+      <text x="852" y="16" style="font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;fill:var(--muted);text-anchor:middle">Outcome</text>
 
-        <!-- CreditingRateTier → LapseCurve -->
-        <line x1="500" y1="190" x2="500" y2="250" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="510" y="222" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">drives</text>
+      <!-- Edges drawn first so nodes render on top -->
 
-        <!-- Block → RBCCharge -->
-        <line x1="180" y1="200" x2="180" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="190" y="232" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">generates</text>
+      <!-- E1: Policy → Block (governs) -->
+      <path class="ont-edge" d="M 186 63 L 224 63 L 224 52 L 262 52" marker-end="url(#la-arr)"/>
+      <rect x="196" y="43" width="46" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="219" y="52">governs</text>
 
-        <!-- RBCCharge → CapitalPosition -->
-        <line x1="240" y1="300" x2="380" y2="300" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="265" y="292" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">loadsInto</text>
+      <!-- E2: Entity → Block (cededTo, routed through gap between CRT and LapseCurve) -->
+      <path class="ont-edge" d="M 186 201 L 244 201 L 244 74 L 262 74" marker-end="url(#la-arr)" stroke-dasharray="4,3"/>
+      <rect x="198" y="158" width="36" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="216" y="168">owns</text>
 
-        <!-- CapitalPosition → Entity -->
-        <line x1="500" y1="340" x2="500" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="510" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">heldBy</text>
+      <!-- E3: Block → CreditingRateTier (hasTier, vertical within col 2) -->
+      <path class="ont-edge" d="M 340 80 L 340 148" marker-end="url(#la-arr)"/>
+      <rect x="344" y="106" width="38" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="363" y="116">hasTier</text>
 
-        <!-- Block → ReinsStructure -->
-        <line x1="120" y1="200" x2="120" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="20" y="232" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">reinsuredUnder</text>
+      <!-- E4: CreditingRateTier → LapseCurve (drives, vertical within col 2) -->
+      <path class="ont-edge" d="M 340 190 L 340 258" marker-end="url(#la-arr)"/>
+      <rect x="344" y="216" width="30" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="359" y="226">drives</text>
 
-        <!-- ReinsStructure → EarningsBridge -->
-        <line x1="120" y1="340" x2="120" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="20" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">producesBridge</text>
+      <!-- E5: Block → RBCCharge (routesTo, exit top-right of Block) -->
+      <path class="ont-edge" d="M 418 42 L 466 42 L 466 87 L 514 87" marker-end="url(#la-arr)"/>
+      <rect x="422" y="29" width="44" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="444" y="39">routesTo</text>
 
-        <!-- POLICY (top) -->
-        <rect x="100" y="20" width="160" height="40" rx="2" fill="#fdf5f4" stroke="#c0392b" stroke-width="1.5"/>
-        <text x="180" y="45" text-anchor="middle" font-family="Lora, serif" font-size="14" font-weight="600" fill="#1a1a1a">Policy</text>
+      <!-- E6: Block → ReinsStructure (cededTo, exit mid-right of Block) -->
+      <path class="ont-edge" d="M 418 64 L 490 64 L 490 197 L 514 197" marker-end="url(#la-arr)" stroke-dasharray="4,3"/>
+      <rect x="430" y="124" width="40" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="450" y="134">cededTo</text>
 
-        <!-- BLOCK (center-left, the hub) -->
-        <rect x="100" y="120" width="160" height="80" rx="2" fill="#fdf5f4" stroke="#c0392b" stroke-width="2"/>
-        <text x="180" y="150" text-anchor="middle" font-family="Lora, serif" font-size="14" font-weight="600" fill="#1a1a1a">Block</text>
-        <text x="180" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">MYGA &middot; FIA</text>
-        <text x="180" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">ULSG &middot; PRT</text>
+      <!-- E7: RBCCharge → CapitalPosition (loadsTo) -->
+      <path class="ont-edge" d="M 670 87 L 774 87" marker-end="url(#la-arr)"/>
+      <rect x="691" y="76" width="38" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="710" y="86">loadsTo</text>
 
-        <!-- CREDITING RATE TIER (right, top) -->
-        <rect x="380" y="120" width="240" height="70" rx="2" fill="#faf8ff" stroke="#6b46c1" stroke-width="1.5"/>
-        <text x="500" y="148" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">CreditingRateTier</text>
-        <text x="500" y="170" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">SurrenderPeriod &middot; Crediting%</text>
+      <!-- E8: ReinsStructure → Treaty (governs, vertical within col 3) -->
+      <path class="ont-edge" d="M 592 224 L 592 282" marker-end="url(#la-arr)"/>
+      <rect x="596" y="244" width="40" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="616" y="254">governs</text>
 
-        <!-- LAPSE CURVE (right, bottom of tier) -->
-        <rect x="380" y="250" width="240" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
-        <text x="500" y="278" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">LapseCurve &middot; PolicyholderBehavior</text>
+      <!-- E9: Treaty → EarningsBridge (routesTo) -->
+      <path class="ont-edge" d="M 670 303 L 722 303 L 722 222 L 774 222" marker-end="url(#la-arr)"/>
+      <rect x="674" y="291" width="44" height="14" fill="var(--paper-2)"/>
+      <text class="ont-edge-label" x="696" y="301">routesTo</text>
 
-        <!-- RBC CHARGE (under block) -->
-        <rect x="100" y="260" width="160" height="80" rx="2" fill="#f8fbff" stroke="#1d4ed8" stroke-width="1.5"/>
-        <text x="180" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">RBCCharge</text>
-        <text x="180" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">C1 asset &middot; C2 mort.</text>
-        <text x="180" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">C3 int. &middot; C4 biz</text>
+      <!-- ═══ NODES ═══ -->
 
-        <!-- CAPITAL POSITION (right of RBC) -->
-        <rect x="380" y="260" width="240" height="80" rx="2" fill="#f8fbff" stroke="#1d4ed8" stroke-width="1.5"/>
-        <text x="500" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">CapitalPosition</text>
-        <text x="500" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">SAP RBC &middot; BSCR</text>
-        <text x="500" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">entity-level ratios</text>
+      <!-- Col 1: Contract -->
+      <!-- Policy (core) -->
+      <g class="ont-node core">
+        <rect x="30" y="42" width="156" height="42" rx="2"/>
+        <text x="108" y="63">Policy</text>
+      </g>
+      <!-- Entity (attr) -->
+      <g class="ont-node attr">
+        <rect x="30" y="180" width="156" height="42" rx="2"/>
+        <text x="108" y="194" style="fill:var(--ink)">Entity</text>
+        <text x="108" y="210" style="font-size:9px;fill:#6B6458;font-weight:400">OpCo &middot; Bermuda Re</text>
+      </g>
 
-        <!-- ENTITY (under capital position) -->
-        <rect x="380" y="390" width="240" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
-        <text x="500" y="418" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">Entity &middot; US OpCo &middot; Bermuda Re</text>
+      <!-- Col 2: Block & Behavior -->
+      <!-- Block (core) -->
+      <g class="ont-node core">
+        <rect x="262" y="24" width="156" height="56" rx="2"/>
+        <text x="340" y="48">Block</text>
+        <text x="340" y="66" style="font-size:9px;fill:#ECE5D6;font-weight:400">MYGA &middot; FIA &middot; ULSG &middot; PRT</text>
+      </g>
+      <!-- CreditingRateTier -->
+      <g class="ont-node">
+        <rect x="262" y="148" width="156" height="42" rx="2"/>
+        <text x="340" y="163">CreditingRate</text>
+        <text x="340" y="179" style="font-size:9px;fill:#6B6458">Tier &middot; SurrPeriod &middot; Credit%</text>
+      </g>
+      <!-- LapseCurve (attr) -->
+      <g class="ont-node attr">
+        <rect x="262" y="258" width="156" height="42" rx="2"/>
+        <text x="340" y="273">LapseCurve</text>
+        <text x="340" y="289" style="font-size:9px;fill:#6B6458">Behavior model</text>
+      </g>
 
-        <!-- REINS STRUCTURE (left of block, below) -->
-        <rect x="640" y="120" width="200" height="70" rx="2" fill="#f8fff9" stroke="#166534" stroke-width="1.5"/>
-        <text x="740" y="148" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">ReinsStructure</text>
-        <text x="740" y="170" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">FW &middot; Coins. &middot; ModCo</text>
+      <!-- Col 3: Capital & Cession -->
+      <!-- RBCCharge -->
+      <g class="ont-node">
+        <rect x="514" y="60" width="156" height="54" rx="2"/>
+        <text x="592" y="82">RBCCharge</text>
+        <text x="592" y="100" style="font-size:9px;fill:#6B6458">C1 &middot; C2 &middot; C3 &middot; C4</text>
+      </g>
+      <!-- ReinsStructure (core) -->
+      <g class="ont-node core">
+        <rect x="514" y="170" width="156" height="54" rx="2"/>
+        <text x="592" y="192">ReinsStructure</text>
+        <text x="592" y="210" style="font-size:9px;fill:#ECE5D6;font-weight:400">FW &middot; Coins. &middot; ModCo</text>
+      </g>
+      <!-- Treaty (attr) -->
+      <g class="ont-node attr">
+        <rect x="514" y="282" width="156" height="42" rx="2"/>
+        <text x="592" y="297">Treaty</text>
+        <text x="592" y="313" style="font-size:9px;fill:#6B6458">CommissionSchedule</text>
+      </g>
 
-        <!-- ReinsStructure → Block link -->
-        <line x1="640" y1="155" x2="270" y2="160" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="380" y="148" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">cedes</text>
+      <!-- Col 4: Outcome -->
+      <!-- CapitalPosition -->
+      <g class="ont-node">
+        <rect x="774" y="58" width="156" height="54" rx="2"/>
+        <text x="852" y="80">CapitalPosition</text>
+        <text x="852" y="98" style="font-size:9px;fill:#6B6458">SAP RBC &middot; BSCR</text>
+      </g>
+      <!-- EarningsBridge -->
+      <g class="ont-node">
+        <rect x="774" y="195" width="156" height="54" rx="2"/>
+        <text x="852" y="217">EarningsBridge</text>
+        <text x="852" y="235" style="font-size:9px;fill:#6B6458">spread ceded &middot; cap. released</text>
+      </g>
 
-        <!-- EARNINGS BRIDGE (under reins) -->
-        <rect x="640" y="260" width="200" height="80" rx="2" fill="#f8fff9" stroke="#166534" stroke-width="1.5"/>
-        <text x="740" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">EarningsBridge</text>
-        <text x="740" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">spread ceded &middot; commission</text>
-        <text x="740" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">capital released</text>
+      <!-- Legend -->
+      <rect x="20" y="342" width="14" height="14" fill="#3F5E4A"/>
+      <text x="42" y="353" style="font-size:10px;fill:#2A3340;text-anchor:start">Core class</text>
+      <rect x="130" y="342" width="14" height="14" fill="#ECE5D6" stroke="#2A3340" stroke-width="1"/>
+      <text x="152" y="353" style="font-size:10px;fill:#2A3340;text-anchor:start">Characteristic / enumeration</text>
+      <rect x="370" y="342" width="14" height="14" fill="#FFFFFF" stroke="#2A3340" stroke-width="1"/>
+      <text x="392" y="353" style="font-size:10px;fill:#2A3340;text-anchor:start">Attribute</text>
+    </svg>
 
-        <!-- ReinsStructure → EarningsBridge -->
-        <line x1="740" y1="190" x2="740" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="750" y="227" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">resolvesTo</text>
+    <!-- Mobile: single vertical stack -->
+    <svg class="ont-svg ont-svg-mobile" viewBox="0 0 280 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="la-arr-m" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6" fill="none" stroke="#6B7A8A" stroke-width="1"/>
+        </marker>
+      </defs>
 
-        <!-- TREATY POLICY (under earnings bridge) -->
-        <rect x="640" y="390" width="200" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
-        <text x="740" y="418" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">Treaty &middot; CommissionSchedule</text>
-        <line x1="740" y1="340" x2="740" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="750" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">governedBy</text>
-      </svg>
-    </div>
+      <!-- Edges (vertical flow, drawn before nodes) -->
+      <path class="ont-edge" d="M 140 70 L 140 84" marker-end="url(#la-arr-m)"/>
+      <path class="ont-edge" d="M 140 134 L 140 148" marker-end="url(#la-arr-m)"/>
+      <path class="ont-edge" d="M 140 206 L 140 220" marker-end="url(#la-arr-m)"/>
+      <path class="ont-edge" d="M 140 278 L 140 292" marker-end="url(#la-arr-m)"/>
+      <path class="ont-edge" d="M 140 350 L 140 364" marker-end="url(#la-arr-m)"/>
+      <path class="ont-edge" d="M 140 422 L 140 436" marker-end="url(#la-arr-m)"/>
+      <path class="ont-edge" d="M 140 494 L 140 508" marker-end="url(#la-arr-m)"/>
+      <path class="ont-edge" d="M 140 566 L 140 580" marker-end="url(#la-arr-m)"/>
+      <path class="ont-edge" d="M 140 638 L 140 652" marker-end="url(#la-arr-m)"/>
 
-    <div class="ont-legend">
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#fdf5f4;border-color:#c0392b"></span>Core class</div>
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#faf8ff;border-color:#6b46c1"></span>Behavioral class</div>
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#f8fbff;border-color:#1d4ed8"></span>Capital class</div>
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#f8fff9;border-color:#166534"></span>Reinsurance class</div>
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#fff;border-color:#aaa;border-style:dashed"></span>Linked entity</div>
-    </div>
+      <!-- Policy (core) h=50 y=20..70 -->
+      <g class="ont-node core">
+        <rect x="20" y="20" width="240" height="50" rx="2"/>
+        <text x="140" y="45">Policy</text>
+      </g>
+      <!-- Entity (attr) h=50 y=84..134 -->
+      <g class="ont-node attr">
+        <rect x="20" y="84" width="240" height="50" rx="2"/>
+        <text x="140" y="103">Entity</text>
+        <text x="140" y="120" style="font-size:9px;fill:#6B6458">OpCo &middot; Bermuda Re</text>
+      </g>
+      <!-- Block (core) h=58 y=148..206 -->
+      <g class="ont-node core">
+        <rect x="20" y="148" width="240" height="58" rx="2"/>
+        <text x="140" y="172">Block</text>
+        <text x="140" y="190" style="font-size:9px;fill:#ECE5D6;font-weight:400">MYGA &middot; FIA &middot; ULSG &middot; PRT</text>
+      </g>
+      <!-- CreditingRateTier h=58 y=220..278 -->
+      <g class="ont-node">
+        <rect x="20" y="220" width="240" height="58" rx="2"/>
+        <text x="140" y="244">CreditingRateTier</text>
+        <text x="140" y="262" style="font-size:9px;fill:#6B6458">SurrPeriod &middot; Credit%</text>
+      </g>
+      <!-- LapseCurve (attr) h=58 y=292..350 -->
+      <g class="ont-node attr">
+        <rect x="20" y="292" width="240" height="58" rx="2"/>
+        <text x="140" y="316">LapseCurve</text>
+        <text x="140" y="334" style="font-size:9px;fill:#6B6458">Behavior model</text>
+      </g>
+      <!-- RBCCharge h=58 y=364..422 -->
+      <g class="ont-node">
+        <rect x="20" y="364" width="240" height="58" rx="2"/>
+        <text x="140" y="388">RBCCharge</text>
+        <text x="140" y="406" style="font-size:9px;fill:#6B6458">C1 &middot; C2 &middot; C3 &middot; C4</text>
+      </g>
+      <!-- ReinsStructure (core) h=58 y=436..494 -->
+      <g class="ont-node core">
+        <rect x="20" y="436" width="240" height="58" rx="2"/>
+        <text x="140" y="460">ReinsStructure</text>
+        <text x="140" y="478" style="font-size:9px;fill:#ECE5D6;font-weight:400">FW &middot; Coins. &middot; ModCo</text>
+      </g>
+      <!-- Treaty (attr) h=58 y=508..566 -->
+      <g class="ont-node attr">
+        <rect x="20" y="508" width="240" height="58" rx="2"/>
+        <text x="140" y="532">Treaty</text>
+        <text x="140" y="550" style="font-size:9px;fill:#6B6458">CommissionSchedule</text>
+      </g>
+      <!-- CapitalPosition h=58 y=580..638 -->
+      <g class="ont-node">
+        <rect x="20" y="580" width="240" height="58" rx="2"/>
+        <text x="140" y="604">CapitalPosition</text>
+        <text x="140" y="622" style="font-size:9px;fill:#6B6458">SAP RBC &middot; BSCR</text>
+      </g>
+      <!-- EarningsBridge h=58 y=652..710 — extends to viewBox edge, clipped cleanly -->
+      <g class="ont-node">
+        <rect x="20" y="652" width="240" height="34" rx="2"/>
+        <text x="140" y="669">EarningsBridge</text>
+      </g>
+
+      <!-- Legend -->
+      <rect x="20" y="500" width="0" height="0"/><!-- placeholder, legend omitted on mobile for space -->
+    </svg>
   </div>
 
   <div class="ont-pillars">
@@ -528,49 +763,54 @@
 </section>
 
 <section class="section" id="s02">
-  <div class="section-marker">02 / Where the value sits in L&amp;A</div>
-  <h2 class="section-heading">What&rsquo;s at stake.<br/>Precisely.</h2>
-  <div class="prose"><p>Before we talk about how NSAI helps, let&rsquo;s be specific about what&rsquo;s at stake. At a typical $15&ndash;20B life and annuity carrier, the following categories of value are recurring, quantifiable, and currently undercaptured.</p></div>
-  <div style="margin-top:40px">
-    <div class="value-item"><div class="value-head"><span class="value-num">01</span><span class="value-title">Reinvestment timing</span></div><div class="value-body"><p>Maturities roll into a market that has moved. New money goes to work weeks later than it could, and on a $20B general account, even 30bps of reinvestment lag costs roughly $6M annually per percent of book turning over. At normal turnover rates of 8&ndash;12% per year, the recurring annual cost sits in the $10&ndash;20M range.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">02</span><span class="value-title">Spread dislocation capture</span></div><div class="value-body"><p>When spreads widen, carriers with sufficient liquidity and authorization buy. Carriers running quarterly approval cycles miss the window. The differential is <em>permanent</em> NII for the next decade on every dollar deployed. A two-week cycle delay during a 50bps dislocation event costs roughly $5&ndash;10M of locked-in annual spread on a $300M deployment sleeve, compounding forward for the life of the position.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">03</span><span class="value-title">Liability repricing signals</span></div><div class="value-body"><p>Lapse signals are pricing signals. Elevated surrenders in a fixed annuity book are not just a liquidity event &mdash; they are a segmentation signal. Hot-money policyholders behave differently from relationship policyholders; treating them identically costs margin. A carrier that reprices crediting-rate tiers in response to lapse cohort data captures $5&ndash;8M annually on a typical fixed annuity book relative to one running a uniform repricing calendar.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">04</span><span class="value-title">Capital velocity</span></div><div class="value-body"><p>Reinsurance evaluations that take six months miss favorable pricing windows. Capital trapped in legacy in-force blocks for an extra two quarters is capital not redeploying at hurdle rates. On a $4B legacy block, two quarters of delay on a 50% cession represents approximately $35M of foregone redeployment income &mdash; capital present, but idle, while the market moves.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">05</span><span class="value-title">PRT capital efficiency</span></div><div class="value-body"><p>Pension risk transfer is structurally attractive &mdash; long-duration assets that fit GA portfolios, limited competition at the top, and mortality improvement that accrues to the carrier. PRT does consume capital: C2 mortality charges and C3 interest rate charges both apply. But PRT generates among the highest NII per dollar of RBC deployed in the product mix. The opportunity is not to avoid capital consumption &mdash; it is to win more tenders at better prices within existing capital appetite. A 10-percentage-point improvement in win rate is worth $8&ndash;15M annually for an active writer, fully utilizing existing capital rather than requiring incremental allocation.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">06</span><span class="value-title">Continuous cross-entity portfolio optimization</span></div><div class="value-body"><p>Multi-entity carriers &mdash; a U.S. operating company alongside a Bermuda affiliate or captive &mdash; have processes for entity routing, but those processes were built for a quarterly cadence and a static capital snapshot. The value is not in making a routing decision once at transaction time. It is in continuously monitoring capital efficiency across entities as positions evolve, spreads shift, and regulatory capital requirements update &mdash; and surfacing rebalancing moves as a live feed of optimization signals. Most carriers have a quarterly process for this. NSAI runs it continuously, across all live positions simultaneously. At a multi-entity $20B carrier, static quarterly routing creates $5&ndash;15M of annual ROE drag. That analysis is now always running.</p></div></div>
+  <div class="sec-head">
+    <div class="sec-num">02 / Current State</div>
+    <h2 class="sec-title">What&rsquo;s at stake. Precisely.</h2>
   </div>
-  <div class="summary-bar">
+  <div class="prose"><p>At a typical $15&ndash;20B life and annuity carrier, the following categories of value are recurring, quantifiable, and currently undercaptured.</p></div>
+  <div class="value-list" style="margin-top:32px">
+    <div class="value-item"><span class="value-num">01</span><div class="value-content"><div class="value-title">Reinvestment timing</div><div class="value-body">Maturities roll into a market that has moved. New money goes to work weeks later than it could, and on a $20B general account, even 30bps of reinvestment lag costs roughly $6M annually per percent of book turning over. At normal turnover rates of 8&ndash;12% per year, the recurring annual cost sits in the $10&ndash;20M range.</div></div></div>
+    <div class="value-item"><span class="value-num">02</span><div class="value-content"><div class="value-title">Spread dislocation capture</div><div class="value-body">When spreads widen, carriers with sufficient liquidity and authorization buy. Carriers running quarterly approval cycles miss the window. The differential is <em>permanent</em> NII for the next decade on every dollar deployed. A two-week cycle delay during a 50bps dislocation event costs roughly $5&ndash;10M of locked-in annual spread on a $300M deployment sleeve, compounding forward for the life of the position.</div></div></div>
+    <div class="value-item"><span class="value-num">03</span><div class="value-content"><div class="value-title">Liability repricing signals</div><div class="value-body">Lapse signals are pricing signals. Elevated surrenders in a fixed annuity book are not just a liquidity event &mdash; they are a segmentation signal. A carrier that reprices crediting-rate tiers in response to lapse cohort data captures $5&ndash;8M annually on a typical fixed annuity book relative to one running a uniform repricing calendar.</div></div></div>
+    <div class="value-item"><span class="value-num">04</span><div class="value-content"><div class="value-title">Capital velocity</div><div class="value-body">Reinsurance evaluations that take six months miss favorable pricing windows. Capital trapped in legacy in-force blocks for an extra two quarters is capital not redeploying at hurdle rates. On a $4B legacy block, two quarters of delay on a 50% cession represents approximately $35M of foregone redeployment income &mdash; capital present, but idle, while the market moves.</div></div></div>
+    <div class="value-item"><span class="value-num">05</span><div class="value-content"><div class="value-title">PRT capital efficiency</div><div class="value-body">Pension risk transfer is structurally attractive &mdash; long-duration assets that fit GA portfolios, limited competition at the top, and mortality improvement that accrues to the carrier. PRT generates among the highest NII per dollar of RBC deployed in the product mix. A 10-percentage-point improvement in win rate is worth $8&ndash;15M annually for an active writer, fully utilizing existing capital.</div></div></div>
+    <div class="value-item"><span class="value-num">06</span><div class="value-content"><div class="value-title">Continuous cross-entity optimization</div><div class="value-body">Multi-entity carriers have processes for entity routing, but those processes were built for a quarterly cadence and a static capital snapshot. NSAI runs this continuously, across all live positions simultaneously. At a multi-entity $20B carrier, static quarterly routing creates $5&ndash;15M of annual ROE drag.</div></div></div>
+  </div>
+  <div class="summary-bar" style="margin-top:32px">
     <div class="sum-item"><span class="sum-label">Aggregate annual value at stake</span><span class="sum-val">$40&ndash;80M</span></div>
     <div class="sum-item"><span class="sum-label">Carrier profile</span><span class="sum-val">$15&ndash;20B GA</span></div>
     <div class="sum-item"><span class="sum-label">Nature</span><span style="font-size:14px;font-family:var(--fn);font-weight:300;color:var(--ink-mid);padding-top:4px">Recurring. Quantifiable. Currently undercaptured.</span></div>
   </div>
-</section>
 
-<section class="section" id="s03">
-  <div class="section-marker">03 / What carriers already have</div>
-  <h2 class="section-heading">Sophisticated tools.<br/>Sophisticated teams.</h2>
-  <div class="prose"><p>Most large life and annuity carriers do not lack capital management sophistication. This is not a market of unsophisticated actors waiting to be taught ALM.</p></div>
-  <div class="stack-list">
-    <div class="stack-item"><span class="stack-label">Actuarial</span><span class="stack-value">Prophet, AXIS, MG-ALFA, Polysystems, RAFM, GGY-AXIS &mdash; often multiple in parallel, heavily customized over decades to match the specific liability structure of the company.</span></div>
-    <div class="stack-item"><span class="stack-label">Asset management</span><span class="stack-value">Aladdin, BlackRock Solutions, or proprietary systems managing duration targets, sector allocation, and daily liquidity across a general account spanning dozens of asset classes.</span></div>
-    <div class="stack-item"><span class="stack-label">Capital modeling</span><span class="stack-value">Custom internal RBC and economic capital tools, sometimes built over fifteen years by teams that know the book better than any vendor does.</span></div>
-    <div class="stack-item"><span class="stack-label">ALM function</span><span class="stack-value">Dedicated, often led by senior actuaries with 20+ years of experience and deep familiarity with the specific liability profile of the company.</span></div>
-    <div class="stack-item"><span class="stack-label">Governance</span><span class="stack-value">Board-level capital management committees with independent actuarial review, rating agency relationships, and regulatory reporting infrastructure already in place.</span></div>
-  </div>
-  <div class="prose" style="margin-top:20px">
-    <p>These are not gaps. Anyone arguing that large L&amp;A carriers need to be taught capital management is not a credible counterparty &mdash; and will be recognized as such immediately.</p>
-    <p>But the question is not whether carriers have capability. The question is whether that capability is <em>integrated, fast, and auditable enough to capture the value identified in Section 02.</em></p>
+  <div style="margin-top:56px;padding-top:40px;border-top:1px solid var(--rule)">
+    <div class="section-marker" style="margin-bottom:20px">What carriers already have</div>
+    <h3 style="font-family:'Fraunces',serif;font-weight:400;font-size:clamp(22px,3vw,34px);line-height:1.1;letter-spacing:-0.02em;color:var(--ink);max-width:600px;margin-bottom:24px">Sophisticated tools.<br/>Sophisticated teams.</h3>
+    <div class="prose"><p>Most large life and annuity carriers do not lack capital management sophistication. This is not a market of unsophisticated actors waiting to be taught ALM.</p></div>
+    <div class="stack-list">
+      <div class="stack-item"><span class="stack-label">Actuarial</span><span class="stack-value">Prophet, AXIS, MG-ALFA, Polysystems, RAFM, GGY-AXIS &mdash; often multiple in parallel, heavily customized over decades to match the specific liability structure of the company.</span></div>
+      <div class="stack-item"><span class="stack-label">Asset management</span><span class="stack-value">Aladdin, BlackRock Solutions, or proprietary systems managing duration targets, sector allocation, and daily liquidity across a general account spanning dozens of asset classes.</span></div>
+      <div class="stack-item"><span class="stack-label">Capital modeling</span><span class="stack-value">Custom internal RBC and economic capital tools, sometimes built over fifteen years by teams that know the book better than any vendor does.</span></div>
+      <div class="stack-item"><span class="stack-label">ALM function</span><span class="stack-value">Dedicated, often led by senior actuaries with 20+ years of experience and deep familiarity with the specific liability profile of the company.</span></div>
+      <div class="stack-item"><span class="stack-label">Governance</span><span class="stack-value">Board-level capital management committees with independent actuarial review, rating agency relationships, and regulatory reporting infrastructure already in place.</span></div>
+    </div>
+    <div class="prose" style="margin-top:20px">
+      <p>These are not gaps. Anyone arguing that large L&amp;A carriers need to be taught capital management is not a credible counterparty &mdash; and will be recognized as such immediately.</p>
+      <p>But the question is not whether carriers have capability. The question is whether that capability is <em>integrated, fast, and auditable enough to capture the value identified above.</em></p>
+    </div>
   </div>
 </section>
 
 
 <div class="carrier-section" id="s05">
   <div class="carrier-section-inner">
-    <div class="section-marker">04 / The demo: how NSAI changes the approach</div>
-    <h2 class="section-heading">How NSAI changes<br/>the capital management approach.</h2>
+    <div class="sec-head">
+      <div class="sec-num">03 / Demo</div>
+      <h2 class="sec-title">How NSAI changes the capital management approach.</h2>
+    </div>
     <div class="prose" style="margin-bottom:36px"><p>The demo runs on a representative carrier &mdash; Meridian Life &amp; Annuity &mdash; configured for NSAI. Below: who Meridian is, what changes when NSAI runs underneath their capital management function, and the live engine itself.</p></div>
   </div>
 
+  <div class="carrier-content">
   <div class="carrier-sub-label">The carrier</div>
 
   <div class="carrier-card">
@@ -711,14 +951,14 @@
     </div>
   </div>
 
-  <div style="padding-bottom:64px"></div>
+  </div><!-- /carrier-content -->
 </div>
 
-<div class="demo-band" id="s06" style="scroll-margin-top:56px">
+<div class="demo-band" id="s06">
   <div class="demo-inner">
     <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">
       <div>
-        <div class="demo-eyebrow">05 / The demo</div>
+        <div class="demo-eyebrow">Live Engine</div>
         <div class="demo-title">NSAI Capital Management Engine</div>
       </div>
       <div style="font-family:var(--fm);font-size:11px;color:var(--d-dim);letter-spacing:.04em">Meridian Life &amp; Annuity &middot; All figures fictional &middot; Illustrative only</div>
@@ -769,7 +1009,7 @@
             <div class="card-headline">+$13.0M annual NII &middot; +$20M rate upside protected</div>
             <div class="card-sub">All five actions within board-approved authority &middot; execution 1&ndash;14 days</div>
             <div id="port-action-list"></div>
-            <div class="action-row" style="margin-top:14px">
+            <div class="action-row">
               <button class="btn-expand" id="port-exp-btn" onclick="toggleExpand('port-expand','port-exp-btn')">&#9662; See full rationale &amp; tradeoffs</button>
               <button class="btn-approve" id="btn-m02" onclick="approveModule('m02')">Approve all &rarr;</button>
             </div>
@@ -838,7 +1078,7 @@
         <div class="module-body">
           <div style="font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);margin-bottom:10px">Current opportunity pipeline &mdash; NSAI-flagged items</div>
           <div class="card pipeline-list" style="padding:0;margin-bottom:14px">
-            <div class="pipeline-item active"><span class="pipeline-type" style="color:var(--red)">FIA block</span><span class="pipeline-name">$2.8B FIA block &mdash; regional carrier strategic exit<span>Flagged via market intel + news coverage &middot; 14 days ago &middot; <strong style="color:var(--d-ink)">Active &mdash; analysis below &darr;</strong></span></span><span class="pipeline-status" style="color:var(--red)">ACTIVE</span></div>
+            <div class="pipeline-item active"><span class="pipeline-type" style="color:var(--accent-2)">FIA block</span><span class="pipeline-name">$2.8B FIA block &mdash; regional carrier strategic exit<span>Flagged via market intel + news coverage &middot; 14 days ago &middot; <strong style="color:var(--d-ink)">Active &mdash; analysis below &darr;</strong></span></span><span class="pipeline-status" style="color:var(--accent-2)">ACTIVE</span></div>
             <div class="pipeline-item"><span class="pipeline-type">PRT tender</span><span class="pipeline-name">$420M pension termination &mdash; Midwest manufacturer<span>Mortality data received &middot; Pricing in progress</span></span><span class="pipeline-status" style="color:var(--d-amb)">IN REVIEW</span></div>
             <div class="pipeline-item"><span class="pipeline-type">Block acq.</span><span class="pipeline-name">$1.1B ULSG runoff &mdash; mutual carrier conversion<span>Early screen only &middot; Flagged for monitoring</span></span><span class="pipeline-status" style="color:var(--d-dim)">WATCHING</span></div>
             <div class="pipeline-item"><span class="pipeline-type">Entity opt.</span><span class="pipeline-name">Cross-entity rebalance &mdash; Meridian Re Bermuda underutilized BSCR capacity<span>Continuous monitoring signal &middot; $180M deployment opportunity identified</span></span><span class="pipeline-status" style="color:var(--d-blu)">SIGNAL</span></div>
@@ -1006,8 +1246,10 @@
 
 
 <section class="section" id="s07">
-  <div class="section-marker">06 / What this looks like in practice</div>
-  <h2 class="section-heading">The results a representative<br/>carrier should expect.</h2>
+  <div class="sec-head">
+    <div class="sec-num">04 / Results</div>
+    <h2 class="sec-title">The results a representative carrier should expect.</h2>
+  </div>
   <div class="outcomes-grid">
     <div class="outcome-cell"><div class="outcome-label">Incremental annual NII</div><div class="outcome-num">$30&ndash;50M</div><div class="outcome-desc">Through faster reinvestment execution, spread dislocation capture, and portfolio rotation into higher-yielding sectors within existing guardrails.</div></div>
     <div class="outcome-cell"><div class="outcome-label">Capital released from legacy blocks</div><div class="outcome-num">$100&ndash;150M</div><div class="outcome-desc">Through accelerated reinsurance evaluation cycles, redeployed at hurdle rates into new business rather than sitting in low-efficiency in-force blocks.</div></div>
@@ -1016,23 +1258,16 @@
   </div>
   <div class="prose">
     <p>Governance is the reason the board approves this. Speed and dollar value are the reasons the CFO funds it. The two are not in tension &mdash; governance is what makes the speed safe, and what makes the decisions defensible when scrutinized by people who weren&rsquo;t in the room.</p>
-    <p>The carriers that capture the value described in Section 02 will be the ones with an integrated, auditable decision layer across their capital management function. The tools are already in place. The layer is what&rsquo;s missing.</p>
+    <p>The carriers that capture the value described above will be the ones with an integrated, auditable decision layer across their capital management function. The tools are already in place. The layer is what&rsquo;s missing.</p>
   </div>
 </section>
-
-<div class="cta-block">
-  <div class="cta-eyebrow">Next step</div>
-  <h2 class="cta-title">Request a session with<br/>our L&amp;A team.</h2>
-  <p class="cta-sub">We work directly with CFOs, CROs, and appointed actuaries at large U.S. carriers. Bring your current stack and your open questions.</p>
-  <button class="cta-btn" onclick="alert('Connect to your contact form.')">Request a session</button>
-</div>
 
 <div class="disclosure">
   <p>Meridian Life &amp; Annuity and Meridian Re Bermuda Ltd. are entirely fictional entities created for illustrative purposes only. All financial figures, projections, scenarios, constraint values, guardrail thresholds, and analytical outputs are hypothetical and do not represent the position, performance, or strategy of any real company. This page is a product demonstration only and does not constitute financial, actuarial, regulatory, or investment advice.</p>
 </div>
 
 <footer>
-  <div class="footer-brand"><span class="footer-dot"></span>NSAI for Insurance</div>
+  <div class="footer-brand"><span class="footer-dot"></span>NSAI for Insurance &mdash; L&amp;A Capital Management</div>
   <div class="footer-copy">&copy; 2026 NSAI for Insurance. All rights reserved.</div>
 </footer>
 <script>
@@ -1465,30 +1700,29 @@ renderPortfolio();
 renderReinDetail('b');
 renderAcqSensitivity();
 
-// ── ToC active tracking ──
+// ── ToC active tracking (IntersectionObserver) ──
 (function(){
-  const sections = [
-    {id:'s01',el:null},{id:'s02',el:null},{id:'s03',el:null},{id:'s05',el:null},{id:'s06',el:null}
-  ];
-  sections.forEach(s=>{ s.el = document.getElementById(s.id); });
-  const links = document.querySelectorAll('#main-nav a[data-section]');
+  const ids = ['s01','s02','s05','s07'];
+  const els = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const links = {};
+  document.querySelectorAll('#main-nav a[data-section]').forEach(a => {
+    links[a.dataset.section] = a;
+  });
   function setActive(id){
-    links.forEach(a=>{
-      a.classList.toggle('active', a.dataset.section===id);
-    });
+    Object.values(links).forEach(a => a.classList.remove('active'));
+    if(id && links[id]) links[id].classList.add('active');
   }
-  function onScroll(){
-    const scrollY = window.scrollY + 80;
-    let active = sections[0].id;
-    sections.forEach(s=>{
-      if(s.el && s.el.getBoundingClientRect().top + window.scrollY <= scrollY){
-        active = s.id;
-      }
-    });
-    setActive(active);
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+  const spy = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting);
+    if(visible.length){
+      visible.sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+      setActive(visible[0].target.id);
+    }
+  }, { rootMargin:'-28% 0px -62% 0px', threshold:[0,0.1,0.5,1] });
+  els.forEach(el => spy.observe(el));
+  window.addEventListener('scroll', () => {
+    if(window.scrollY < 200) setActive(null);
+  }, {passive:true});
 })();
 </script>
 </body>
