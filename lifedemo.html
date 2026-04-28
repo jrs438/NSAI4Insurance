@@ -94,16 +94,113 @@
     .demo-eyebrow{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--red);margin-bottom:10px}
     .demo-title{font-family:var(--fs);font-size:clamp(20px,2.5vw,28px);font-weight:600;color:var(--d-ink);line-height:1.25}
     .demo-sub{margin-top:8px;font-size:14px;color:var(--d-mid);font-weight:300;max-width:640px;margin-bottom:32px}
-    .carrier-card{border:1px solid var(--d-brd);background:rgba(255,255,255,.03);padding:24px 28px;margin-bottom:28px}
-    .carrier-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:20px;flex-wrap:wrap}
-    .carrier-name{font-family:var(--fs);font-size:20px;font-weight:600;color:var(--d-ink)}
-    .carrier-tag{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);margin-top:3px}
-    .carrier-meta{font-family:var(--fm);font-size:10px;color:var(--d-dim);text-align:right;line-height:1.8}
-    .carrier-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--d-brd);border:1px solid var(--d-brd)}
-    .cs{background:var(--d-sur);padding:10px 14px}
-    .cs-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--d-dim);margin-bottom:4px}
-    .cs-val{font-size:15px;font-weight:500;color:var(--d-ink);line-height:1.2}
-    .cs-sub{font-size:11px;color:var(--d-dim);margin-top:2px}
+    .carrier-card{max-width:820px;margin:0 auto;border:1px solid var(--rule);background:#fff;padding:28px 32px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    .carrier-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:22px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+    .carrier-name{font-family:var(--fs);font-size:24px;font-weight:600;color:#0a0a0a;letter-spacing:-.01em}
+    .carrier-est{font-family:var(--fm);font-size:11px;color:var(--ink-mid);margin-top:5px;letter-spacing:.02em}
+    .carrier-tag{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);margin-top:6px}
+    .carrier-meta{font-family:var(--fm);font-size:10px;color:var(--ink-light);text-align:right;line-height:1.8;flex-shrink:0}
+    .carrier-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+    .cs{background:#fff;padding:14px 16px}
+    .cs-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-light);margin-bottom:6px}
+    .cs-val{font-size:20px;font-weight:600;color:#0a0a0a;line-height:1.1;font-family:var(--fs);letter-spacing:-.01em}
+    .cs-sub{font-size:11px;color:var(--ink-mid);margin-top:5px;line-height:1.4}
+    /* sub-labels above carrier card and comparison */
+    .carrier-sub-label{max-width:820px;margin:48px auto 14px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--red);font-weight:500}
+    .carrier-sub-label:first-of-type{margin-top:0}
+    .carrier-narrative{max-width:820px;margin:24px auto 0;padding:0}
+    .carrier-narrative p{font-size:15px;line-height:1.7;color:var(--ink-mid);font-weight:300}
+    /* interactive comparison tiles */
+    .compare-hint{max-width:820px;margin:8px auto 16px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);text-align:center}
+    .compare-tiles{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+    .ctile{background:#fff;border:1px solid var(--rule);cursor:pointer;transition:border-color .2s,box-shadow .2s;overflow:hidden}
+    .ctile:hover{border-color:var(--ink-light);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .ctile.open{border-color:var(--red);box-shadow:0 2px 12px rgba(192,57,43,.08)}
+    .ctile-header{display:flex;align-items:center;justify-content:space-between;padding:16px 22px 12px;gap:16px}
+    .ctile-label{font-family:var(--fs);font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-.005em}
+    .ctile-expand{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:18px;color:var(--ink-light);background:var(--bg-s);border:1px solid var(--rule);transition:all .2s;flex-shrink:0;line-height:1;font-weight:300}
+    .ctile.open .ctile-expand{background:var(--red);color:#fff;border-color:var(--red);transform:rotate(45deg)}
+    .ctile-pair{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:0;padding:6px 22px 18px}
+    .ctile-before,.ctile-after{display:flex;flex-direction:column;gap:4px;padding:10px 16px}
+    .ctile-before{background:var(--bg-s);border:1px solid var(--rule);text-align:left}
+    .ctile-after{background:rgba(192,57,43,.05);border:1px solid rgba(192,57,43,.2);text-align:left}
+    .ctile.open .ctile-after{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35)}
+    .ctile-tag{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light)}
+    .ctile-after .ctile-tag{color:var(--red)}
+    .ctile-metric{font-family:var(--fs);font-size:18px;font-weight:600;color:var(--ink);line-height:1.15;letter-spacing:-.01em}
+    .ctile-arrow{font-family:var(--fm);font-size:18px;color:var(--ink-light);padding:0 18px;line-height:1;flex-shrink:0}
+    .ctile.open .ctile-arrow{color:var(--red)}
+    .ctile-detail{display:none;border-top:1px solid var(--rule);background:var(--bg-s);padding:0}
+    .ctile.open .ctile-detail{display:block}
+    .ctile-detail-row{display:grid;grid-template-columns:90px 1fr;gap:18px;padding:16px 22px;border-bottom:1px solid var(--rule);align-items:start}
+    .ctile-detail-row:last-child{border-bottom:none}
+    .ctile-detail-row:nth-child(2){background:rgba(192,57,43,.025)}
+    .ctile-detail-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:500;padding-top:2px}
+    .ctile-detail-label.before-l{color:var(--ink-light)}
+    .ctile-detail-label.after-l{color:var(--red)}
+    .ctile-detail-text{font-size:14px;line-height:1.65;color:var(--ink-mid);font-weight:300}
+    .ctile-detail-row:nth-child(2) .ctile-detail-text{color:var(--ink)}
+    /* Phase 2 — M02 status link strip */
+    .scenario-link-strip{display:flex;align-items:center;gap:12px;padding:9px 14px;margin-bottom:12px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);font-size:12px;flex-wrap:wrap}
+    .sls-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--d-dim)}
+    .sls-scenario{color:var(--d-ink);font-weight:500}
+    .sls-status{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-grn);background:rgba(34,197,94,.12);padding:2px 8px}
+    .sls-jump{margin-left:auto;background:none;border:1px solid var(--d-brd);color:var(--d-blu);font-family:var(--fm);font-size:10px;letter-spacing:.06em;padding:5px 10px;cursor:pointer;text-transform:uppercase}
+    .sls-jump:hover{border-color:var(--d-blu);color:var(--d-ink)}
+    /* Phase 2 — M02 rich action items */
+    .action-item-rich{display:block;padding:14px 0;border-bottom:1px solid var(--d-brd2)}
+    .action-item-rich:last-child{border-bottom:none}
+    .action-item-rich.aapr{background:rgba(34,197,94,.04)}
+    .action-row-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+    .aapr-check{color:var(--d-grn)!important}
+    .btn-approve-mini{background:var(--red);border:1px solid var(--red);color:#fff;font-family:var(--fm);font-size:10px;letter-spacing:.04em;padding:5px 11px;cursor:pointer;flex-shrink:0;margin-top:1px;text-transform:uppercase}
+    .btn-approve-mini:hover:not(.approved){background:var(--red-light)}
+    .btn-approve-mini.approved{background:rgba(34,197,94,.15);border-color:var(--d-grn);color:var(--d-grn);cursor:default}
+    .action-securities{display:flex;align-items:flex-start;gap:10px;padding:8px 12px 0 24px;font-size:11px;line-height:1.55}
+    .action-sec-label{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);flex-shrink:0;padding-top:2px;width:60px}
+    .action-sec-text{color:var(--d-mid);font-family:var(--fm);font-size:11px}
+    /* Phase 2 — M04 routing clickable */
+    .routing-section-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);margin-bottom:8px}
+    .routing-choice.clickable{display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:border-color .15s}
+    .routing-choice.clickable:hover{border-color:var(--d-mid)}
+    .routing-choice.clickable.selected{border-color:var(--red);background:rgba(192,57,43,.04)}
+    .routing-radio{width:14px;height:14px;border-radius:50%;border:2px solid var(--d-brd);margin-top:3px;flex-shrink:0;transition:all .15s}
+    .routing-choice.clickable.selected .routing-radio{border-color:var(--red);background:var(--red)}
+    .routing-content{flex:1}
+    /* Phase 2 — M04 resolution paths */
+    .resolution-paths{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+    .rp-card{padding:14px 16px;border:1px solid var(--d-brd);background:rgba(255,255,255,.02);cursor:pointer;transition:all .15s}
+    .rp-card:hover{border-color:var(--d-amb);background:rgba(245,158,11,.04)}
+    .rp-card.selected{border-color:var(--d-grn);background:rgba(34,197,94,.06)}
+    .rp-card.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+    .rp-tag{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-amb);margin-bottom:6px}
+    .rp-card.selected .rp-tag{color:var(--d-grn)}
+    .rp-title{font-size:14px;color:var(--d-ink);font-weight:500;margin-bottom:6px}
+    .rp-desc{font-size:12px;color:var(--d-mid);line-height:1.55;margin-bottom:8px;font-weight:300}
+    .rp-meta{font-family:var(--fm);font-size:10px;color:var(--d-dim);letter-spacing:.02em}
+    .escalation-status{font-family:var(--fm);font-size:11px;color:var(--d-mid);padding:8px 0 0 0;min-height:18px}
+    .esc-sent{color:var(--d-grn);font-weight:500}
+    /* Phase 2 — M04 term sheet locked button */
+    .btn-ts-locked{background:rgba(245,158,11,.1)!important;border-color:rgba(245,158,11,.3)!important;color:var(--d-amb)!important;cursor:not-allowed!important}
+    .btn-ts-locked:hover{border-color:rgba(245,158,11,.3)!important;color:var(--d-amb)!important}
+    /* Phase 2 — M04 diligence cleaner */
+    .diligence-section{margin-top:18px;padding-top:14px;border-top:1px solid var(--d-brd2)}
+    .diligence-header{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);margin-bottom:10px}
+    .diligence-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .diligence-section .dil-item{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--d-brd2);background:rgba(255,255,255,.02);color:var(--d-mid)}
+    .diligence-section .dil-item::before{display:none}
+    .dil-num{font-family:var(--fm);font-size:10px;color:var(--d-amb);font-weight:500;flex-shrink:0;padding-top:2px}
+    .dil-content{flex:1}
+    .dil-title{font-size:12px;color:var(--d-ink);font-weight:500;margin-bottom:2px}
+    .dil-sub{font-family:var(--fm);font-size:10px;color:var(--d-dim);letter-spacing:.02em}
+    /* responsive Phase 2 */
+    @media(max-width:768px){
+      .resolution-paths{grid-template-columns:1fr}
+      .action-row-top{flex-wrap:wrap}
+      .action-securities{padding-left:12px}
+      .scenario-link-strip{flex-wrap:wrap}
+      .sls-jump{margin-left:0}
+    }
     .demo-container{background:var(--d-sur);border:1px solid var(--d-brd);overflow:hidden}
     .demo-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--d-brd);gap:12px;flex-wrap:wrap}
     .demo-header-title{font-family:var(--fm);font-size:11px;letter-spacing:.08em;color:var(--d-mid);text-transform:uppercase}
@@ -223,40 +320,20 @@
     .term-key{color:var(--d-mid)}.term-val{font-family:var(--fm);font-size:12px;color:var(--d-ink)}.term-val.warn{color:var(--d-amb)}
     .modal-actions{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--d-brd);flex-wrap:wrap}
     .status-strip{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid var(--d-brd);background:rgba(0,0,0,.35);font-family:var(--fm);font-size:11px;color:var(--d-dim);flex-wrap:wrap;gap:6px}
-    /* reasoning diagram */
-    .reasoning-diagram{max-width:860px;margin:0 auto}
-    .rd-layer{border:1px solid var(--rule);background:var(--bg)}
-    .rd-layer-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-light);padding:10px 20px 8px;border-bottom:1px solid var(--rule);background:var(--bg-s)}
-    .rd-layer-content{padding:16px 20px}
-    .rd-ontology{border-color:#c8b8f0;background:#faf8ff}
-    .rd-ontology .rd-layer-label{background:#f3effc;color:#6b46c1;border-bottom-color:#c8b8f0}
-    .rd-rules{border-color:#a8c8f0;background:#f8fbff}
-    .rd-rules .rd-layer-label{background:#edf4fc;color:#1d4ed8;border-bottom-color:#a8c8f0}
-    .rd-output{border-color:#a8e0b8;background:#f8fff9}
-    .rd-output .rd-layer-label{background:#edfaf1;color:#166534;border-bottom-color:#a8e0b8}
-    .rd-input-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .rd-input-chip{background:var(--bg-s);border:1px solid var(--rule);padding:8px 12px;font-size:13px;color:var(--ink);font-weight:500;line-height:1.3}
-    .rd-input-chip span{display:block;font-family:var(--fm);font-size:10px;color:var(--ink-light);font-weight:400;margin-top:3px;letter-spacing:.02em}
-    .rd-arrow{display:flex;align-items:center;justify-content:center;padding:6px 20px;position:relative}
-    .rd-arrow-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);text-align:center;display:flex;align-items:center;gap:8px}
-    .rd-arrow-label::before,.rd-arrow-label::after{content:'';flex:1;height:1px;background:var(--rule);width:60px}
-    .rd-arrow-down{font-size:12px;color:var(--ink-light);text-align:center;display:block;line-height:1;margin:2px 0}
-    .rd-ont-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-    .rd-ont-row:last-child{margin-bottom:0}
-    .rd-ont-node{flex:1;background:rgba(107,70,193,.07);border:1px solid rgba(107,70,193,.2);padding:8px 12px;font-size:13px;font-weight:500;color:#4c1d95;line-height:1.3}
-    .rd-ont-node span.rd-ont-type{display:block;font-family:var(--fm);font-size:10px;color:#6b46c1;font-weight:400;margin-top:3px;letter-spacing:.02em}
-    .rd-ont-rel{font-family:var(--fm);font-size:11px;color:var(--ink-light);white-space:nowrap;flex-shrink:0}
-    .rd-rule-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-    .rd-rule-row:last-child{margin-bottom:0}
-    .rd-rule-tag{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;flex-shrink:0;background:rgba(29,78,216,.1);color:#1d4ed8;border-radius:2px}
-    .rd-rule-text{font-size:13px;color:var(--ink-mid)}
-    .rd-rule-text code{font-family:var(--fm);font-size:12px;color:#1d4ed8;background:rgba(29,78,216,.06);padding:2px 6px}
-    .rd-output-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .rd-out-rec{padding:14px 16px;background:rgba(22,101,52,.06);border:1px solid rgba(22,101,52,.2)}
-    .rd-out-audit{padding:14px 16px;background:rgba(22,101,52,.03);border:1px solid rgba(22,101,52,.15)}
-    .rd-out-tag{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#166534;margin-bottom:8px}
-    .rd-out-text{font-size:13px;color:var(--ink-mid);line-height:1.6;font-weight:300}
-    .section{scroll-margin-top:56px}
+    /* ontology figure (P&C-style) */
+    .ont-fig{margin:48px 0;border:1px solid var(--rule);background:#fff;padding:24px 24px 16px}
+    .ont-fig-label{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-light);text-align:center;margin-bottom:18px}
+    .ont-fig-svg{width:100%;max-width:860px;margin:0 auto}
+    .ont-fig-svg svg{width:100%;height:auto;display:block}
+    .ont-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:18px;padding-top:18px;border-top:1px solid var(--rule)}
+    .ont-legend-item{display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-mid)}
+    .ont-swatch{display:inline-block;width:14px;height:14px;border:1px solid var(--rule)}
+    .ont-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px}
+    .ont-pillar{padding:0}
+    .ont-pillar-num{font-family:var(--fs);font-size:24px;font-weight:600;color:var(--red);font-style:italic;margin-bottom:8px}
+    .ont-pillar-title{font-family:var(--fs);font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+    .ont-pillar-body{font-size:14px;color:var(--ink-mid);font-weight:300;line-height:1.65}
+        .section{scroll-margin-top:56px}
     @media(max-width:768px){
       nav{padding:0 20px}.nav-links{display:none}
       .page-header,.section{padding-left:20px;padding-right:20px}
@@ -265,9 +342,14 @@
       .pillar{border-right:none;border-bottom:1px solid var(--rule)}.pillar:last-child{border-bottom:none}
       .outcomes-grid{grid-template-columns:1fr}.stack-item{grid-template-columns:1fr;gap:4px}
       .carrier-stats{grid-template-columns:repeat(2,1fr)}.demo-inner{padding:0 16px}.demo-band{padding:48px 0}
-      .carrier-section{padding:0 20px}.compare-grid{grid-template-columns:1fr}
-      .rd-input-grid{grid-template-columns:repeat(2,1fr)}.rd-ont-row{flex-direction:column;align-items:stretch}.rd-ont-rel{text-align:center}
-      .rd-output-row{grid-template-columns:1fr}
+      .carrier-section{padding:0 20px}.carrier-card{padding:20px}.carrier-sub-label{padding:0 4px}.carrier-narrative{padding:0 4px}
+      .compare-tiles{padding:0 4px}
+      .ctile-pair{grid-template-columns:1fr;gap:8px;padding:6px 16px 16px}
+      .ctile-arrow{transform:rotate(90deg);padding:4px 0}
+      .ctile-detail-row{grid-template-columns:1fr;gap:6px;padding:14px 16px}
+      .ctile-header{padding:14px 16px 10px}
+      .ont-pillars{grid-template-columns:1fr;gap:24px}
+      .ont-fig{padding:14px 14px 12px}.ont-legend{gap:10px}
       .metric-row,.diligence-grid,.routing-grid{grid-template-columns:1fr}
       footer{padding:24px 20px;flex-direction:column;align-items:flex-start}
       .cta-block,.disclosure{padding-left:20px;padding-right:20px}.modal-overlay{padding:12px}
@@ -282,9 +364,9 @@
 <nav>
   <a href="/" class="nav-brand"><span class="nav-dot"></span>NSAI for Insurance</a>
   <ul class="nav-links" id="main-nav">
-    <li><a href="#s02" data-section="s02">01 / Value at stake</a></li>
-    <li><a href="#s03" data-section="s03">02 / Current stack</a></li>
-    <li><a href="#s05b" data-section="s05b">03 / How it reasons</a></li>
+    <li><a href="#s01" data-section="s01">01 / Ontology</a></li>
+    <li><a href="#s02" data-section="s02">02 / Value</a></li>
+    <li><a href="#s03" data-section="s03">03 / Stack</a></li>
     <li><a href="#s05" data-section="s05">04 / Meridian</a></li>
     <li><a href="#s06" data-section="s06">05 / Demo</a></li>
   </ul>
@@ -301,8 +383,152 @@
   <p class="page-lede">Large U.S. life and annuity carriers don&rsquo;t lack capital management sophistication. What they lack is a system that integrates the views, runs scenarios continuously, and produces the audit trail that makes every decision defensible. NSAI is that system.</p>
 </header>
 
+<section class="section" id="s01" style="scroll-margin-top:56px">
+  <div class="section-marker">01 / Ontology</div>
+  <h2 class="section-heading">An ontology is a <em>shared mental model</em> &mdash;<br/>for machines.</h2>
+  <div class="prose">
+    <p>Think of an ontology as the <em>vocabulary and grammar</em> of your business, written in a form a computer can reason over.</p>
+    <p>When an actuary says &ldquo;a 2014-vintage MYGA block in surrender period three with elevated lapse experience in the hot-money cohort, ceded 50% on a funds-withheld basis to a Bermuda affiliate,&rdquo; every term is loaded with meaning &mdash; and every term connects to other concepts. Vintage implies surrender schedule. Cohort implies behavior. Cession structure implies which RBC charges transfer and which stay. The actuary&rsquo;s brain holds this web of concepts.</p>
+    <p>An ontology makes that web explicit. It names the <em>classes</em> (Block, CreditingRateTier, RBCCharge, ReinsStructure), the <em>properties</em> (account value, duration, lapse curve, ceding commission), and the <em>relationships</em> (a Block <em>hasTier</em>, <em>generates</em> RBCCharges, <em>is reinsured under</em> a Treaty).</p>
+    <p>Without an ontology, an LLM knows the <em>words</em>. With an ontology, the system knows the <em>meaning</em> &mdash; and can reason over it deterministically.</p>
+    <p>Once the world is modeled this way, rules become composable and inheritable. A guardrail that applies to &ldquo;all long-duration spread products&rdquo; automatically applies to anything the ontology classifies as such &mdash; MYGA, FIA, ULSG. Write the rule once, against the concept. And ontologies compose across domains: the same Block concept anchors ALM, capital management, reinsurance evaluation, and acquisition analysis.</p>
+  </div>
+
+  <div class="ont-fig">
+    <div class="ont-fig-label">Fig. 01 &mdash; Minimal Life &amp; Annuity Capital Ontology</div>
+    <div class="ont-fig-svg">
+      <svg viewBox="0 0 860 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+          </marker>
+        </defs>
+
+        <!-- relationship lines (drawn first so boxes overlay them) -->
+        <!-- Policy → Block -->
+        <line x1="180" y1="60" x2="180" y2="120" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="190" y="92" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">covers</text>
+
+        <!-- Block → CreditingRateTier -->
+        <line x1="240" y1="160" x2="380" y2="160" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="270" y="152" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">hasTier</text>
+
+        <!-- CreditingRateTier → LapseCurve -->
+        <line x1="500" y1="190" x2="500" y2="250" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="510" y="222" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">drives</text>
+
+        <!-- Block → RBCCharge -->
+        <line x1="180" y1="200" x2="180" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="190" y="232" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">generates</text>
+
+        <!-- RBCCharge → CapitalPosition -->
+        <line x1="240" y1="300" x2="380" y2="300" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="265" y="292" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">loadsInto</text>
+
+        <!-- CapitalPosition → Entity -->
+        <line x1="500" y1="340" x2="500" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="510" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">heldBy</text>
+
+        <!-- Block → ReinsStructure -->
+        <line x1="120" y1="200" x2="120" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="20" y="232" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">reinsuredUnder</text>
+
+        <!-- ReinsStructure → EarningsBridge -->
+        <line x1="120" y1="340" x2="120" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="20" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">producesBridge</text>
+
+        <!-- POLICY (top) -->
+        <rect x="100" y="20" width="160" height="40" rx="2" fill="#fdf5f4" stroke="#c0392b" stroke-width="1.5"/>
+        <text x="180" y="45" text-anchor="middle" font-family="Lora, serif" font-size="14" font-weight="600" fill="#1a1a1a">Policy</text>
+
+        <!-- BLOCK (center-left, the hub) -->
+        <rect x="100" y="120" width="160" height="80" rx="2" fill="#fdf5f4" stroke="#c0392b" stroke-width="2"/>
+        <text x="180" y="150" text-anchor="middle" font-family="Lora, serif" font-size="14" font-weight="600" fill="#1a1a1a">Block</text>
+        <text x="180" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">MYGA &middot; FIA</text>
+        <text x="180" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">ULSG &middot; PRT</text>
+
+        <!-- CREDITING RATE TIER (right, top) -->
+        <rect x="380" y="120" width="240" height="70" rx="2" fill="#faf8ff" stroke="#6b46c1" stroke-width="1.5"/>
+        <text x="500" y="148" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">CreditingRateTier</text>
+        <text x="500" y="170" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">SurrenderPeriod &middot; Crediting%</text>
+
+        <!-- LAPSE CURVE (right, bottom of tier) -->
+        <rect x="380" y="250" width="240" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="500" y="278" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">LapseCurve &middot; PolicyholderBehavior</text>
+
+        <!-- RBC CHARGE (under block) -->
+        <rect x="100" y="260" width="160" height="80" rx="2" fill="#f8fbff" stroke="#1d4ed8" stroke-width="1.5"/>
+        <text x="180" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">RBCCharge</text>
+        <text x="180" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">C1 asset &middot; C2 mort.</text>
+        <text x="180" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">C3 int. &middot; C4 biz</text>
+
+        <!-- CAPITAL POSITION (right of RBC) -->
+        <rect x="380" y="260" width="240" height="80" rx="2" fill="#f8fbff" stroke="#1d4ed8" stroke-width="1.5"/>
+        <text x="500" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">CapitalPosition</text>
+        <text x="500" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">SAP RBC &middot; BSCR</text>
+        <text x="500" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">entity-level ratios</text>
+
+        <!-- ENTITY (under capital position) -->
+        <rect x="380" y="390" width="240" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="500" y="418" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">Entity &middot; US OpCo &middot; Bermuda Re</text>
+
+        <!-- REINS STRUCTURE (left of block, below) -->
+        <rect x="640" y="120" width="200" height="70" rx="2" fill="#f8fff9" stroke="#166534" stroke-width="1.5"/>
+        <text x="740" y="148" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">ReinsStructure</text>
+        <text x="740" y="170" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">FW &middot; Coins. &middot; ModCo</text>
+
+        <!-- ReinsStructure → Block link -->
+        <line x1="640" y1="155" x2="270" y2="160" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="380" y="148" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">cedes</text>
+
+        <!-- EARNINGS BRIDGE (under reins) -->
+        <rect x="640" y="260" width="200" height="80" rx="2" fill="#f8fff9" stroke="#166534" stroke-width="1.5"/>
+        <text x="740" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">EarningsBridge</text>
+        <text x="740" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">spread ceded &middot; commission</text>
+        <text x="740" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">capital released</text>
+
+        <!-- ReinsStructure → EarningsBridge -->
+        <line x1="740" y1="190" x2="740" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="750" y="227" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">resolvesTo</text>
+
+        <!-- TREATY POLICY (under earnings bridge) -->
+        <rect x="640" y="390" width="200" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="740" y="418" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">Treaty &middot; CommissionSchedule</text>
+        <line x1="740" y1="340" x2="740" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="750" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">governedBy</text>
+      </svg>
+    </div>
+
+    <div class="ont-legend">
+      <div class="ont-legend-item"><span class="ont-swatch" style="background:#fdf5f4;border-color:#c0392b"></span>Core class</div>
+      <div class="ont-legend-item"><span class="ont-swatch" style="background:#faf8ff;border-color:#6b46c1"></span>Behavioral class</div>
+      <div class="ont-legend-item"><span class="ont-swatch" style="background:#f8fbff;border-color:#1d4ed8"></span>Capital class</div>
+      <div class="ont-legend-item"><span class="ont-swatch" style="background:#f8fff9;border-color:#166534"></span>Reinsurance class</div>
+      <div class="ont-legend-item"><span class="ont-swatch" style="background:#fff;border-color:#aaa;border-style:dashed"></span>Linked entity</div>
+    </div>
+  </div>
+
+  <div class="ont-pillars">
+    <div class="ont-pillar">
+      <div class="ont-pillar-num">I.</div>
+      <div class="ont-pillar-title">Meaning, not matching</div>
+      <div class="ont-pillar-body">An LLM might see &ldquo;funds-withheld coinsurance&rdquo; and &ldquo;FW coins&rdquo; as similar strings. An ontology knows they are the same structure &mdash; and knows that structure leaves C1 asset risk with the cedant while transferring C2 and C3 to the reinsurer.</div>
+    </div>
+    <div class="ont-pillar">
+      <div class="ont-pillar-num">II.</div>
+      <div class="ont-pillar-title">Rules follow concepts</div>
+      <div class="ont-pillar-body">A guardrail attached to &ldquo;long-duration spread products&rdquo; automatically applies to MYGA, FIA, and ULSG without re-authoring. Your investment policy statement becomes a small, maintainable tree instead of a sprawling document.</div>
+    </div>
+    <div class="ont-pillar">
+      <div class="ont-pillar-num">III.</div>
+      <div class="ont-pillar-title">Cross-domain consistency</div>
+      <div class="ont-pillar-body">The same Block concept anchors ALM, capital management, reinsurance evaluation, and acquisition analysis. One in-force position resolves to one entity everywhere &mdash; the foundation of clean cross-entity capital optimization.</div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="s02">
-  <div class="section-marker">01 / Where the value sits in L&amp;A</div>
+  <div class="section-marker">02 / Where the value sits in L&amp;A</div>
   <h2 class="section-heading">What&rsquo;s at stake.<br/>Precisely.</h2>
   <div class="prose"><p>Before we talk about how NSAI helps, let&rsquo;s be specific about what&rsquo;s at stake. At a typical $15&ndash;20B life and annuity carrier, the following categories of value are recurring, quantifiable, and currently undercaptured.</p></div>
   <div style="margin-top:40px">
@@ -321,7 +547,7 @@
 </section>
 
 <section class="section" id="s03">
-  <div class="section-marker">02 / What carriers already have</div>
+  <div class="section-marker">03 / What carriers already have</div>
   <h2 class="section-heading">Sophisticated tools.<br/>Sophisticated teams.</h2>
   <div class="prose"><p>Most large life and annuity carriers do not lack capital management sophistication. This is not a market of unsophisticated actors waiting to be taught ALM.</p></div>
   <div class="stack-list">
@@ -340,138 +566,159 @@
 
 <div class="carrier-section" id="s05">
   <div class="carrier-section-inner">
-    <div class="section-marker">03 / Representative carrier</div>
-    <h2 class="section-heading">Meridian Life &amp; Annuity.<br/>A carrier NSAI knows cold.</h2>
-    <div class="prose" style="margin-bottom:32px"><p>Founded in Des Moines in 1961 as a mutual insurer, Meridian completed its demutualization in 1997 and has since built one of the Midwest&rsquo;s most recognized fixed annuity franchises. Its general account is managed against a conservative investment policy statement, with a long-standing preference for private credit and infrastructure debt over public IG peers. The Bermuda affiliate, Meridian Re Bermuda Ltd., was established in 2019 to support reinsurance capital optimization. The Monday morning view below is what the NSAI engine surfaces for Meridian at session open.</p></div>
+    <div class="section-marker">04 / The demo: how NSAI changes the approach</div>
+    <h2 class="section-heading">How NSAI changes<br/>the capital management approach.</h2>
+    <div class="prose" style="margin-bottom:36px"><p>The demo runs on a representative carrier &mdash; Meridian Life &amp; Annuity &mdash; configured for NSAI. Below: who Meridian is, what changes when NSAI runs underneath their capital management function, and the live engine itself.</p></div>
   </div>
+
+  <div class="carrier-sub-label">The carrier</div>
+
   <div class="carrier-card">
     <div class="carrier-head">
       <div>
-        <div class="carrier-name">Meridian Life &amp; Annuity <span style="font-family:var(--fm);font-size:11px;font-weight:400;color:var(--ink-light);margin-left:10px">est. 1961 &middot; Des Moines, IA</span></div>
-        <div class="carrier-tag">Fictional entity &mdash; illustrative purposes only &middot; Iowa domicile &middot; Bermuda affiliate: Meridian Re Bermuda Ltd.</div>
+        <div class="carrier-name">Meridian Life &amp; Annuity</div>
+        <div class="carrier-est">est. 1961 &middot; Des Moines, IA &middot; Iowa domicile &middot; Bermuda affiliate: Meridian Re Bermuda Ltd.</div>
+        <div class="carrier-tag">Fictional entity &mdash; illustrative purposes only</div>
       </div>
       <div class="carrier-meta">NSAI session: 2026-04-21 &middot; 07:14 CDT<br/>Ontology: L&amp;A v4.2 &middot; 47 active rules</div>
     </div>
-    <div class="carrier-stats" style="grid-template-columns:repeat(6,1fr)">
+    <div class="carrier-stats">
       <div class="cs"><div class="cs-label">General account AUM</div><div class="cs-val">$20.4B</div><div class="cs-sub">+4.2% YoY net flows</div></div>
       <div class="cs"><div class="cs-label">Annuity premium (2025)</div><div class="cs-val">$3.1B</div><div class="cs-sub">#14 U.S. by fixed annuity premium</div></div>
-      <div class="cs"><div class="cs-label">Avg. policy size</div><div class="cs-val">$187K</div><div class="cs-sub">Bank channel dominant (62% of new sales)</div></div>
-      <div class="cs"><div class="cs-label">In-force policies</div><div class="cs-val">141,000</div><div class="cs-sub">MYGA, FIA, ULSG, PRT</div></div>
+      <div class="cs"><div class="cs-label">Avg. policy size</div><div class="cs-val">$187K</div><div class="cs-sub">Bank channel: 62% of new sales</div></div>
+      <div class="cs"><div class="cs-label">In-force policies</div><div class="cs-val">141,000</div><div class="cs-sub">MYGA &middot; FIA &middot; ULSG &middot; PRT</div></div>
       <div class="cs"><div class="cs-label">RBC ratio</div><div class="cs-val">410%</div><div class="cs-sub">SAP &middot; Iowa DOI &middot; floor 375%</div></div>
       <div class="cs"><div class="cs-label">Net investment yield</div><div class="cs-val">5.18%</div><div class="cs-sub">GA portfolio &middot; Q1 2026</div></div>
     </div>
   </div>
-  <div style="max-width:var(--mw);padding:0;margin:0 auto">
-    <div class="section-marker" style="padding:40px 0 0 0">05b / What changes with NSAI</div>
-    <h2 class="section-heading" style="padding:12px 0 0 0">Before and after.<br/>The same carrier. Different decisions.</h2>
-    <div class="compare-grid">
-      <div class="compare-col">
-        <div class="compare-head before">Without NSAI &mdash; current process</div>
-        <div class="compare-row"><div class="compare-icon x">&#x2715;</div><div class="compare-text"><strong>Integration is human.</strong> ALM, asset management, and capital views exist in separate systems. The integrated view only exists during the quarterly committee meeting.</div></div>
-        <div class="compare-row"><div class="compare-icon x">&#x2715;</div><div class="compare-text"><strong>Cycle time is the calendar.</strong> Monthly ALM. Quarterly capital committee. Spread windows, reinsurance pricing, and acquisition opportunities move faster than the cycle.</div></div>
-        <div class="compare-row"><div class="compare-icon x">&#x2715;</div><div class="compare-text"><strong>Opportunity surface is whatever got modeled.</strong> Three to five scenarios per quarter. The other forty value-creation paths are invisible &mdash; not rejected, just never evaluated.</div></div>
-        <div class="compare-row"><div class="compare-icon x">&#x2715;</div><div class="compare-text"><strong>Audit trail is institutional memory.</strong> When the senior actuary leaves, the rationale leaves too. The replacement inherits a number and a spreadsheet.</div></div>
-      </div>
-      <div class="compare-col nsai">
-        <div class="compare-head after">With NSAI &mdash; governed engine</div>
-        <div class="compare-row"><div class="compare-icon ok">&#x2713;</div><div class="compare-text"><strong>Integration is continuous and automatic.</strong> Liability, asset, capital, and reinsurance views are unified in the ontology. The integrated view is always current, not just during the meeting.</div></div>
-        <div class="compare-row"><div class="compare-icon ok">&#x2713;</div><div class="compare-text"><strong>Decisions execute in days.</strong> NSAI surfaces the opportunity with the recommendation already pre-cleared against all guardrails. The committee reviews and decides &mdash; it doesn&rsquo;t assemble the analysis.</div></div>
-        <div class="compare-row"><div class="compare-icon ok">&#x2713;</div><div class="compare-text"><strong>Full opportunity surface evaluated continuously.</strong> Every scenario type runs on every market condition. Opportunities are surfaced when they become actionable &mdash; not when the team had time to model them.</div></div>
-        <div class="compare-row"><div class="compare-icon ok">&#x2713;</div><div class="compare-text"><strong>Audit trail is a byproduct of the engine.</strong> Every fact, every rule, every decision &mdash; timestamped and retained. Producible for board, rating agency, or regulator on demand. No additional compliance step.</div></div>
-      </div>
-    </div>
-  </div>
-  <div style="padding-bottom:48px"></div>
-</div>
 
-<section class="section" id="s05b" style="scroll-margin-top:56px">
-  <div class="section-marker">04 / How NSAI reasons</div>
-  <h2 class="section-heading">Not retrieval. Not generation.<br/>Derivation.</h2>
-  <div class="prose" style="margin-bottom:48px">
-    <p>Every NSAI recommendation traces to a specific fact and a specific rule. The engine doesn&rsquo;t summarize documents or generate plausible-sounding answers. It loads the carrier&rsquo;s world as a typed ontology &mdash; blocks, crediting rate tiers, RBC charge components, treaty structures &mdash; then evaluates that world against executable constraint rules. The same inputs always produce the same output, with a full proof trace as the byproduct.</p>
+  <div class="carrier-narrative">
+    <p>Founded in Des Moines in 1961 as a mutual insurer, Meridian completed its demutualization in 1997 and has since built one of the Midwest&rsquo;s most recognized fixed annuity franchises. The general account is managed against a conservative investment policy statement, with a long-standing preference for private credit and infrastructure debt over public IG peers. The Bermuda affiliate, Meridian Re Bermuda Ltd., was established in 2019 to support reinsurance capital optimization across the consolidated balance sheet.</p>
   </div>
-  <div class="reasoning-diagram">
-    <div class="rd-layer rd-inputs">
-      <div class="rd-layer-label">Inputs</div>
-      <div class="rd-layer-content">
-        <div class="rd-input-grid">
-          <div class="rd-input-chip">Market data <span>rates, spreads, vol</span></div>
-          <div class="rd-input-chip">Portfolio positions <span>cusips, durations, C1 classes</span></div>
-          <div class="rd-input-chip">Liability cashflows <span>lapse curves, surrender schedules</span></div>
-          <div class="rd-input-chip">Reinsurance terms <span>treaty parameters, cession rates</span></div>
-          <div class="rd-input-chip">Capital ratios <span>RBC, BSCR, entity thresholds</span></div>
-          <div class="rd-input-chip">Carrier constraints <span>board-approved guardrails</span></div>
+
+  <div class="carrier-sub-label">What changes with NSAI</div>
+
+  <div class="compare-hint">Click any dimension to see what changes</div>
+  <div class="compare-tiles" id="compare-tiles">
+    <div class="ctile" data-tile="t1" onclick="toggleTile('t1')">
+      <div class="ctile-header">
+        <div class="ctile-label">Integration of views</div>
+        <div class="ctile-expand">+</div>
+      </div>
+      <div class="ctile-pair">
+        <div class="ctile-before"><span class="ctile-tag">Today</span><span class="ctile-metric">3 systems</span></div>
+        <div class="ctile-arrow">&rarr;</div>
+        <div class="ctile-after"><span class="ctile-tag">With NSAI</span><span class="ctile-metric">1 ontology</span></div>
+      </div>
+      <div class="ctile-detail">
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label before-l">Today</div>
+          <div class="ctile-detail-text">ALM, asset management, and capital views live in separate systems. The integrated view exists only during the quarterly committee &mdash; in the discussion itself. When the meeting ends, the integration ends with it.</div>
+        </div>
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label after-l">With NSAI</div>
+          <div class="ctile-detail-text">Liability, asset, capital, and reinsurance views unified in a single ontology. The integrated view is always current, always queryable, and always auditable &mdash; not assembled at meeting time.</div>
         </div>
       </div>
     </div>
-    <div class="rd-arrow"><div class="rd-arrow-label">asserted as typed facts</div></div><div class="rd-arrow-down">▼</div>
-    <div class="rd-layer rd-ontology">
-      <div class="rd-layer-label">L&amp;A Ontology</div>
-      <div class="rd-layer-content">
-        <div class="rd-ont-row">
-          <div class="rd-ont-node">Block <span class="rd-ont-type">FixedAnnuity | ULSG | PRT | FIA</span></div>
-          <div class="rd-ont-rel">&rarr; has &rarr;</div>
-          <div class="rd-ont-node">CreditingRateTier <span class="rd-ont-type">SurrenderPeriod &middot; LapseCurve</span></div>
+
+    <div class="ctile" data-tile="t2" onclick="toggleTile('t2')">
+      <div class="ctile-header">
+        <div class="ctile-label">Cycle time</div>
+        <div class="ctile-expand">+</div>
+      </div>
+      <div class="ctile-pair">
+        <div class="ctile-before"><span class="ctile-tag">Today</span><span class="ctile-metric">Quarterly</span></div>
+        <div class="ctile-arrow">&rarr;</div>
+        <div class="ctile-after"><span class="ctile-tag">With NSAI</span><span class="ctile-metric">Days</span></div>
+      </div>
+      <div class="ctile-detail">
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label before-l">Today</div>
+          <div class="ctile-detail-text">Monthly ALM. Quarterly capital committee. Spread windows, reinsurance pricing, and acquisition opportunities move faster than the meeting cadence &mdash; many decisions are made on stale market conditions.</div>
         </div>
-        <div class="rd-ont-row">
-          <div class="rd-ont-node">RBCCharge <span class="rd-ont-type">C1 asset &middot; C2 mortality &middot; C3 interest &middot; C4 business</span></div>
-          <div class="rd-ont-rel">&rarr; loads into &rarr;</div>
-          <div class="rd-ont-node">CapitalPosition <span class="rd-ont-type">entity-level &middot; SAP | BSCR basis</span></div>
-        </div>
-        <div class="rd-ont-row">
-          <div class="rd-ont-node">ReinsStructure <span class="rd-ont-type">FundsWithheld | FullCoinsurance | ModCo</span></div>
-          <div class="rd-ont-rel">&rarr; maps to &rarr;</div>
-          <div class="rd-ont-node">EarningsBridge <span class="rd-ont-type">ceded economics &middot; commission &middot; RBC relief</span></div>
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label after-l">With NSAI</div>
+          <div class="ctile-detail-text">Opportunities surface in real time, pre-cleared against all guardrails. The committee reviews and decides in days &mdash; it does not assemble the analysis. Cycle time becomes a function of decision quality, not coordination overhead.</div>
         </div>
       </div>
     </div>
-    <div class="rd-arrow"><div class="rd-arrow-label">evaluated against</div></div><div class="rd-arrow-down">▼</div>
-    <div class="rd-layer rd-rules">
-      <div class="rd-layer-label">Constraint rules</div>
-      <div class="rd-layer-content">
-        <div class="rd-rule-row">
-          <div class="rd-rule-tag">GUARDRAIL</div>
-          <div class="rd-rule-text"><code>IF duration_gap &gt; board_limit THEN action_required</code></div>
+
+    <div class="ctile" data-tile="t3" onclick="toggleTile('t3')">
+      <div class="ctile-header">
+        <div class="ctile-label">Opportunity surface</div>
+        <div class="ctile-expand">+</div>
+      </div>
+      <div class="ctile-pair">
+        <div class="ctile-before"><span class="ctile-tag">Today</span><span class="ctile-metric">~5 / quarter</span></div>
+        <div class="ctile-arrow">&rarr;</div>
+        <div class="ctile-after"><span class="ctile-tag">With NSAI</span><span class="ctile-metric">Continuous</span></div>
+      </div>
+      <div class="ctile-detail">
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label before-l">Today</div>
+          <div class="ctile-detail-text">Three to five scenarios modeled per quarter, constrained by team bandwidth. The other forty value-creation paths are invisible &mdash; not rejected, just never evaluated. Opportunity cost is real but uncountable.</div>
         </div>
-        <div class="rd-rule-row">
-          <div class="rd-rule-tag">GUARDRAIL</div>
-          <div class="rd-rule-text"><code>IF rbc_ratio &lt; floor_375pct THEN escalate_immediately</code></div>
-        </div>
-        <div class="rd-rule-row">
-          <div class="rd-rule-tag">AUTHORITY</div>
-          <div class="rd-rule-text"><code>IF deployment &gt; $750M THEN committee_approval_required</code></div>
-        </div>
-        <div class="rd-rule-row">
-          <div class="rd-rule-tag">EFFICIENCY</div>
-          <div class="rd-rule-text"><code>IF spread_per_rbc &lt; 0.60× THEN flag_for_reinsurance_review</code></div>
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label after-l">With NSAI</div>
+          <div class="ctile-detail-text">Every scenario type evaluated continuously against current market conditions. Opportunities surface when they become actionable &mdash; not when there is analyst bandwidth to model them. The full surface is always under evaluation.</div>
         </div>
       </div>
     </div>
-    <div class="rd-arrow"><div class="rd-arrow-label">derives</div></div><div class="rd-arrow-down">▼</div>
-    <div class="rd-layer rd-output">
-      <div class="rd-layer-label">Output</div>
-      <div class="rd-layer-content">
-        <div class="rd-output-row">
-          <div class="rd-out-block rd-out-rec">
-            <div class="rd-out-tag">Recommendation</div>
-            <div class="rd-out-text">Add $400M 5yr receiver swap. Close duration gap +1.2yr &rarr; +0.7yr. Enables $600M infrastructure debt allocation. Net NII: +$10M.</div>
-          </div>
-          <div class="rd-out-block rd-out-audit">
-            <div class="rd-out-tag">Audit record</div>
-            <div class="rd-out-text">Facts: duration_gap=+1.2yr, board_limit=±1.5yr. Rule fired: GUARDRAIL-DUR-01. Constraint: within standing authority. Timestamp: 2026-04-21T07:14:33Z.</div>
-          </div>
+
+    <div class="ctile" data-tile="t4" onclick="toggleTile('t4')">
+      <div class="ctile-header">
+        <div class="ctile-label">Audit trail</div>
+        <div class="ctile-expand">+</div>
+      </div>
+      <div class="ctile-pair">
+        <div class="ctile-before"><span class="ctile-tag">Today</span><span class="ctile-metric">Institutional memory</span></div>
+        <div class="ctile-arrow">&rarr;</div>
+        <div class="ctile-after"><span class="ctile-tag">With NSAI</span><span class="ctile-metric">Proof tree</span></div>
+      </div>
+      <div class="ctile-detail">
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label before-l">Today</div>
+          <div class="ctile-detail-text">Institutional memory + email threads + meeting notes. When the senior actuary leaves, the rationale for why duration target was set where it was leaves too. The replacement inherits a number and a spreadsheet, not a reasoning chain.</div>
+        </div>
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label after-l">With NSAI</div>
+          <div class="ctile-detail-text">Every fact, every rule, every recommendation, every override &mdash; timestamped and retained as a proof tree. Producible for board, rating agency, or regulator on demand. Institutional memory becomes auditable system state.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ctile" data-tile="t5" onclick="toggleTile('t5')">
+      <div class="ctile-header">
+        <div class="ctile-label">When markets move</div>
+        <div class="ctile-expand">+</div>
+      </div>
+      <div class="ctile-pair">
+        <div class="ctile-before"><span class="ctile-tag">Today</span><span class="ctile-metric">Days to assemble</span></div>
+        <div class="ctile-arrow">&rarr;</div>
+        <div class="ctile-after"><span class="ctile-tag">With NSAI</span><span class="ctile-metric">Real-time response</span></div>
+      </div>
+      <div class="ctile-detail">
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label before-l">Today</div>
+          <div class="ctile-detail-text">Email threads. Ad-hoc analysis. The action plan exists by the next committee &mdash; if the relevant people are available and the dislocation is still live. Most market windows close before the response can be coordinated.</div>
+        </div>
+        <div class="ctile-detail-row">
+          <div class="ctile-detail-label after-l">With NSAI</div>
+          <div class="ctile-detail-text">Sequenced action plan generated automatically, with required escalations identified and committee memos pre-drafted. The committee reviews the plan and decides &mdash; it does not draft it. Response time matches market time.</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="prose" style="margin-top:40px"><p>The demo below shows this chain running live across four capital management domains for Meridian. Every recommendation in the demo is traceable to the layer above it.</p></div>
-</section>
+
+  <div style="padding-bottom:64px"></div>
+</div>
 
 <div class="demo-band" id="s06" style="scroll-margin-top:56px">
   <div class="demo-inner">
     <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">
       <div>
-        <div class="demo-eyebrow">06 / The demo</div>
+        <div class="demo-eyebrow">05 / The demo</div>
         <div class="demo-title">NSAI Capital Management Engine</div>
       </div>
       <div style="font-family:var(--fm);font-size:11px;color:var(--d-dim);letter-spacing:.04em">Meridian Life &amp; Annuity &middot; All figures fictional &middot; Illustrative only</div>
@@ -511,6 +758,12 @@
       <div class="module" id="m02">
         <div class="module-caption"><strong>Governed P&amp;L Optimization.</strong> NSAI identifies five portfolio actions adding $13.0M annual NII and protecting $20M of rate upside. Each action shows what Meridian currently holds, what is being proposed, and why &mdash; derived from the integrated liability, capital, and market view.</div>
         <div class="module-body">
+          <div class="scenario-link-strip" id="m02-scen-link">
+            <span class="sls-label">Actions generated from</span>
+            <span class="sls-scenario">Scenario 01 &mdash; Higher-Rate Reinvestment</span>
+            <span class="sls-status">active</span>
+            <button class="sls-jump" onclick="switchTab('m01')">View in M01 &rarr;</button>
+          </div>
           <div class="card">
             <div class="card-title">Governed P&amp;L Optimization &mdash; 5 actions identified<span class="badge bg-g">7/7 guardrails clear</span></div>
             <div class="card-headline">+$13.0M annual NII &middot; +$20M rate upside protected</div>
@@ -573,7 +826,7 @@
           <div>
             <div class="option-row" id="opt-a" onclick="selectReinOption('a')"><div class="option-radio"></div><div class="option-content"><div class="option-title">Option A &mdash; Retain &amp; hedge (receiver swap overlay)</div><div class="option-desc">No capital freed &middot; Full earnings retained &middot; Duration hedged via $1.2B 10yr receiver swaps &middot; Partial C3 relief &middot; ~$8M/yr hedge cost</div></div></div>
             <div class="option-row selected" id="opt-b" onclick="selectReinOption('b')"><div class="option-radio"></div><div class="option-content"><div class="option-title">Option B &mdash; 50% coinsurance / funds-withheld <span class="pref-tag">Preferred</span></div><div class="option-desc">$140M capital released &middot; 50% of earnings ceded &middot; Assets remain with Meridian (Meridian retains C1 asset risk) &middot; Ceding commission $28&ndash;42M &middot; RBC 410% &rarr; 427% &middot; 60&ndash;90 day execution</div></div></div>
-            <div class="option-row" id="opt-c" onclick="selectReinOption('c')"><div class="option-radio"></div><div class="option-content"><div class="option-title">Option C &mdash; Full modified coinsurance (ModCo)</div><div class="option-desc">$280M capital freed &middot; All economics ceded &middot; Assets transfer to reinsurer &middot; Eliminates C1, C2, C3 exposure &middot; 9&ndash;18 month execution</div></div></div>
+            <div class="option-row" id="opt-c" onclick="selectReinOption('c')"><div class="option-radio"></div><div class="option-content"><div class="option-title">Option C &mdash; Full coinsurance</div><div class="option-desc">$280M capital freed &middot; All economics ceded &middot; Assets transfer to reinsurer &middot; Eliminates C1, C2, C3 exposure on ceded block &middot; 9&ndash;18 month execution</div></div></div>
           </div>
           <div id="rein-detail-card" style="margin-top:14px"></div>
         </div>
@@ -601,26 +854,42 @@
                 Stress mult 2.2&times; <span style="color:var(--d-dim)">(seller: 1.8&times;)</span> &middot; Reinvest yield 5.20% <span style="color:var(--d-dim)">(seller: 5.55%)</span>
               </div>
             </div>
+            <div class="routing-section-label">Routing &mdash; click to evaluate</div>
             <div class="routing-grid">
-              <div class="routing-choice"><div class="routing-title">Meridian US &middot; RBC framework</div><div class="routing-val">341% RBC post-close</div><div class="routing-desc">NAIC SAP treatment &middot; Higher C3 charges on long-duration FIA reserves &middot; No new filing required</div></div>
-              <div class="routing-choice preferred"><div class="routing-title pref">Meridian Re Bermuda &middot; BSCR primary &larr; preferred</div><div class="routing-val">178% BSCR ratio</div><div class="routing-desc">BSCR economic-capital treatment releases ~$24M additional capital vs. US routing. Connects to cross-entity optimization signal in pipeline. Subject to BMA filing and rating-agency notice.</div></div>
+              <div class="routing-choice clickable" id="rt-us" onclick="selectRouting('us')"><div class="routing-radio"></div><div class="routing-content"><div class="routing-title">Meridian US &middot; RBC framework</div><div class="routing-val">341% RBC post-close</div><div class="routing-desc">NAIC SAP treatment &middot; Higher C3 charges on long-duration FIA reserves &middot; No new filing required</div></div></div>
+              <div class="routing-choice clickable preferred selected" id="rt-bermuda" onclick="selectRouting('bermuda')"><div class="routing-radio"></div><div class="routing-content"><div class="routing-title pref">Meridian Re Bermuda &middot; BSCR primary <span style="color:var(--d-grn);font-size:9px;border:1px solid rgba(34,197,94,.3);padding:1px 6px;margin-left:6px">PREFERRED</span></div><div class="routing-val">178% BSCR ratio</div><div class="routing-desc">BSCR economic-capital treatment releases ~$24M additional capital vs. US routing. Connects to cross-entity optimization signal in pipeline. Subject to BMA filing and rating-agency notice.</div></div></div>
             </div>
             <div class="escalation-notice">
               <div class="escalation-title">&#9888; Guardrail breach &mdash; committee escalation required before binding</div>
-              <div class="escalation-body">FIA concentration: current 38% of GA &rarr; 41% post-close. Board-approved limit: 40%. <strong>NSAI cannot approve this transaction at standard authority.</strong> Two resolution paths prepared: (1) concurrent FIA run-off (~$300M over 18mo), or (2) board approval for temporary 42% limit with reversion plan. NSAI has pre-drafted both memos.</div>
+              <div class="escalation-body">FIA concentration: current 38% of GA &rarr; 41% post-close. Board-approved limit: 40%. <strong>NSAI cannot approve this transaction at standard authority.</strong> Select a resolution path below to review NSAI&rsquo;s pre-drafted committee memo.</div>
             </div>
-            <div>
-              <div style="font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);margin-bottom:8px">Diligence required before binding offer</div>
+            <div class="resolution-paths" id="resolution-paths">
+              <div class="rp-card" id="rp-runoff" onclick="openResolutionMemo('runoff')">
+                <div class="rp-tag">Resolution path 1</div>
+                <div class="rp-title">Concurrent FIA run-off</div>
+                <div class="rp-desc">~$300M of existing FIA book runs off over 18 months, bringing concentration back inside the 40% limit before close. No board action required.</div>
+                <div class="rp-meta">Timeline: 18mo &middot; Approval: capital committee &middot; Memo: pre-drafted</div>
+              </div>
+              <div class="rp-card" id="rp-limit" onclick="openResolutionMemo('limit')">
+                <div class="rp-tag">Resolution path 2</div>
+                <div class="rp-title">Temporary board limit increase</div>
+                <div class="rp-desc">Board approves a temporary 42% FIA concentration limit with a reversion plan over 24 months. Faster execution path; requires board memo and rating agency notification.</div>
+                <div class="rp-meta">Timeline: 4&ndash;6 weeks &middot; Approval: board &middot; Memo: pre-drafted</div>
+              </div>
+            </div>
+            <div class="escalation-status" id="escalation-status"></div>
+            <div class="diligence-section">
+              <div class="diligence-header">Diligence required before binding offer</div>
               <div class="diligence-grid">
-                <div class="dil-item">Lapse cohort data by surrender period</div>
-                <div class="dil-item">Seller dynamic-lapse model assumptions</div>
-                <div class="dil-item">Capital plan &mdash; US vs. Bermuda routing confirmed</div>
-                <div class="dil-item">FIA concentration resolution path approved</div>
+                <div class="dil-item"><span class="dil-num">01</span><div class="dil-content"><div class="dil-title">Lapse cohort data</div><div class="dil-sub">By surrender period &middot; from seller</div></div></div>
+                <div class="dil-item"><span class="dil-num">02</span><div class="dil-content"><div class="dil-title">Dynamic-lapse model</div><div class="dil-sub">Seller assumptions &amp; back-testing</div></div></div>
+                <div class="dil-item"><span class="dil-num">03</span><div class="dil-content"><div class="dil-title">Capital plan</div><div class="dil-sub">US vs. Bermuda routing confirmed</div></div></div>
+                <div class="dil-item"><span class="dil-num">04</span><div class="dil-content"><div class="dil-title">Concentration resolution</div><div class="dil-sub">FIA path approved by committee</div></div></div>
               </div>
             </div>
             <div class="action-row" style="margin-top:14px">
               <button class="btn-expand" id="acq-exp-btn" onclick="toggleExpand('acq-expand','acq-exp-btn')">&#9662; Run pricing sensitivity</button>
-              <button class="btn-ghost" onclick="openTermSheet()">Open recommended term sheet &rarr;</button>
+              <button class="btn-ghost btn-ts-locked" id="btn-open-ts" onclick="openTermSheet()" disabled>&#128274; Term sheet locked &mdash; resolve escalation first</button>
             </div>
             <div class="expand-detail" id="acq-expand">
               <br/>
@@ -636,10 +905,12 @@
                   <tr><td>5-yr IRR</td><td>17.8%</td><td class="em">14.6%</td><td>10.2%</td></tr>
                 </tbody>
               </table>
-              <div class="grd-row"><div class="grd-info"><span class="grd-name">RBC post-close &ge; 300% (Meridian US)</span><div class="grd-detail">341% post-close &middot; 38pts above floor</div></div><span class="grd-pass">PASS</span></div>
+              <div id="acq-grd-rows">
+              <div class="grd-row"><div class="grd-info"><span class="grd-name">RBC post-close &ge; 300% (Meridian US)</span><div class="grd-detail">Not applicable &mdash; Bermuda routing</div></div><span class="grd-pass">PASS</span></div>
               <div class="grd-row"><div class="grd-info"><span class="grd-name">BSCR post-close &ge; 150% (Bermuda entity)</span><div class="grd-detail">178% &middot; $24M capital efficiency advantage vs. US routing</div></div><span class="grd-pass">PASS</span></div>
               <div class="grd-row"><div class="grd-info"><span class="grd-name">FIA concentration &le; 40% of GA</span><div class="grd-detail">Current 38% &rarr; 41% post-close &middot; Board limit 40% &middot; Resolution required</div></div><span class="grd-esc">ESCALATE</span></div>
               <div class="grd-row"><div class="grd-info"><span class="grd-name">5-yr IRR &ge; 12% hurdle (Meridian assumptions)</span><div class="grd-detail">14.6% at base &middot; 10.2% at stress</div></div><span class="grd-pass">PASS</span></div>
+              </div>
               <div class="audit-footer">Model: NSAI-ACQ-1.9 &middot; Seller: [Regional carrier, NDA active] &middot; Concentration breach &mdash; escalation required before binding &middot; Run: 2026-04-21T07:14:33Z</div>
             </div>
           </div>
@@ -703,9 +974,39 @@
     </div>
   </div>
 </div>
+<!-- M03 REINSURANCE TERM SHEET MODAL -->
+<div class="modal-overlay" id="rein-ts-modal" onclick="closeReinTSBg(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="rein-ts-title">NSAI &mdash; Recommended Term Sheet &middot; MYGA Block Reinsurance</span>
+      <button class="modal-close" onclick="closeReinTermSheet()">&times; Close</button>
+    </div>
+    <div class="modal-body" id="rein-ts-body"></div>
+    <div class="modal-actions">
+      <button class="btn-approve" id="btn-rein-approve" onclick="approveModule('m03'); closeReinTermSheet();">Approve cession &amp; initiate execution &rarr;</button>
+      <button class="btn-expand" onclick="closeReinTermSheet()">Return to analysis</button>
+    </div>
+  </div>
+</div>
+<!-- M04 RESOLUTION MEMO MODAL -->
+<div class="modal-overlay" id="resolution-modal" onclick="closeResolutionBg(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="resolution-title">Pre-drafted Committee Memo</span>
+      <button class="modal-close" onclick="closeResolutionMemo()">&times; Close</button>
+    </div>
+    <div class="modal-body" id="resolution-body"></div>
+    <div class="modal-actions">
+      <button class="btn-approve" id="btn-send-escalation" onclick="sendEscalation()">Send to committee &rarr;</button>
+      <button class="btn-expand" onclick="closeResolutionMemo()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
 
 <section class="section" id="s07">
-  <div class="section-marker">07 / What this looks like in practice</div>
+  <div class="section-marker">06 / What this looks like in practice</div>
   <h2 class="section-heading">The results a representative<br/>carrier should expect.</h2>
   <div class="outcomes-grid">
     <div class="outcome-cell"><div class="outcome-label">Incremental annual NII</div><div class="outcome-num">$30&ndash;50M</div><div class="outcome-desc">Through faster reinvestment execution, spread dislocation capture, and portfolio rotation into higher-yielding sectors within existing guardrails.</div></div>
@@ -735,7 +1036,7 @@
   <div class="footer-copy">&copy; 2026 NSAI for Insurance. All rights reserved.</div>
 </footer>
 <script>
-const STATE={approvals:{m01:false,m02:false,m03:false,m04:false},scenario:'s1',reinOption:'b'};
+const STATE={approvals:{m01:false,m02:false,m03:false,m04:false},actionApprovals:{a1:false,a2:false,a3:false,a4:false,a5:false},scenario:'s1',reinOption:'b',routing:'bermuda',escalationPath:null,escalationSent:false};
 
 const SCENARIOS={
   s1:{badge:'bg-g',badgeText:'7/7 guardrails clear',title:'Higher-Rate Reinvestment Opportunity (+100bps)',headline:'+$10M annual NII captured',sub:'After receiver-swap overlay &middot; all guardrails clear &middot; decision window: 3&ndash;5 days',caption:'<strong>ALM Opportunity Dashboard.</strong> A +100bps rate move over the past quarter creates an $11M gross NII opportunity on new money. NSAI sizes the receiver-swap overlay needed to keep duration inside Meridian&rsquo;s &plusmn;1.5-year board-approved guardrail (currently at +1.2yr &mdash; approaching the ceiling). Net captured after hedge cost: $10M annually.',
@@ -776,26 +1077,31 @@ const SCENARIOS={
 };
 
 const PORT_ACTIONS=[
-  {name:'Add long-duration IG infrastructure debt',sub:'Addresses duration gap &middot; illiquidity premium 55&ndash;70bps vs. comparable IG &middot; enables Module 01 reinvestment opportunity',nii:'+$8.6M'},
-  {name:'Rotate seasoned CMBS into private credit',sub:'CMBS spreads near 5yr tight &middot; private credit +45bps spread premium, C1-neutral, duration neutral',nii:'+$1.1M'},
-  {name:'Receiver-swap overlay (5yr, $400M notional)',sub:'Required to close duration gap &middot; protects $20M of rate upside &middot; cost ~$1M/yr',nii:'+$20M protected'},
-  {name:'Build T-bill liquidity sleeve (+$200M)',sub:'Restores liquidity guardrail margin &middot; preserves spread dislocation optionality',nii:'+$2.4M'},
-  {name:'Trim single-name; redeploy diversified IG',sub:'3 positions near 2% single-issuer limit &middot; proactive trim avoids forced sale on downgrade',nii:'+$0.9M'}
+  {id:'a1',name:'Add long-duration IG infrastructure debt',sub:'Addresses duration gap &middot; illiquidity premium 55&ndash;70bps vs. comparable IG &middot; enables Module 01 reinvestment opportunity',nii:'+$8.6M',
+   securities:'Brookfield Infrastructure Sr. Notes 4.85% 2039 ($150M) &middot; AEP Texas Central 5.10% 2041 ($200M) &middot; Duke Energy Florida 4.95% 2038 ($150M) &middot; Vistra Op Co 4.75% 2040 ($100M)'},
+  {id:'a2',name:'Rotate seasoned CMBS into private credit',sub:'CMBS spreads near 5yr tight &middot; private credit +45bps spread premium, C1-neutral, duration neutral',nii:'+$1.1M',
+   securities:'Sell: 2018 vintage CMBS conduit AAA tranches ($1.1B notional) &middot; Buy: Apollo Strategic Credit Fund II commitment ($600M) &middot; Blackstone Private Credit Fund ($500M)'},
+  {id:'a3',name:'Receiver-swap overlay (5yr, $400M notional)',sub:'Required to close duration gap &middot; protects $20M of rate upside &middot; cost ~$1M/yr',nii:'+$20M protected',
+   securities:'5yr USD interest rate swap, receive fixed 4.42% / pay SOFR &middot; $400M notional &middot; counterparty: JPM (existing ISDA) &middot; CSA mark-to-market daily'},
+  {id:'a4',name:'Build T-bill liquidity sleeve (+$200M)',sub:'Restores liquidity guardrail margin &middot; preserves spread dislocation optionality',nii:'+$2.4M',
+   securities:'3-month T-bill ladder &middot; $200M notional &middot; weekly auction participation &middot; rolling maturity profile'},
+  {id:'a5',name:'Trim single-name; redeploy diversified IG',sub:'3 positions near 2% single-issuer limit &middot; proactive trim avoids forced sale on downgrade',nii:'+$0.9M',
+   securities:'Sell: AT&amp;T Inc. 4.30% 2042 ($45M, trim to 1.5%) &middot; Verizon 4.50% 2039 ($38M trim) &middot; Comcast 4.60% 2045 ($32M trim) &middot; Buy: Bloomberg US Aggregate Corp Index ETF wrapper ($115M)'}
 ];
 
 const REIN_DATA={
-  a:{badge:'bg-a',badgeText:'$0 capital freed',headline:'$0 capital released &middot; full earnings retained',sub:'Receiver swap reduces duration and C3 exposure &middot; hedge cost ~$8M/yr &middot; no RBC improvement',bridgeTitle:'MYGA Block &middot; Option A &mdash; Earnings bridge, Year 1',
-  bridge:[{l:'Current block earnings (net spread &times; AV)',v:'$78M',c:''},{l:'Less: receiver swap hedge cost (10yr, $1.2B notional)',v:'&minus;$8M',c:'neg'},{l:'Plus: partial C3 risk reduction benefit',v:'+$2M',c:'pos'},{l:'Capital redeployed (none freed)',v:'&mdash;',c:''}],
-  total:{l:'Year 1 post-hedge earnings',v:'$72M'},totalNote:'vs $78M current &middot; net $6M cost to hedge &middot; duration &minus;0.4yr &middot; no capital freed &middot; no RBC improvement',
-  strat:'Option A provides real benefits &mdash; the swap overlay reduces duration exposure ~0.4yr and provides partial C3 risk relief. But it does not release capital, does not improve RBC, and the $8M/yr hedge cost is a permanent earnings drag. The argument against Option A is not that it has no value &mdash; it is that Option B delivers more at a similar Year 1 cost, while also freeing $140M of capital and improving RBC by 17pts.'},
+  a:{badge:'bg-a',badgeText:'$22M capital relief &middot; +3pts RBC',headline:'$22M capital relief &middot; RBC 410% &rarr; 413%',sub:'Receiver swap reduces duration and partial C3 risk &middot; hedge cost $8M/yr &middot; modest capital benefit but cost-inefficient vs. Option B',bridgeTitle:'MYGA Block &middot; Option A &mdash; Earnings bridge, Year 1',
+  bridge:[{l:'Current block earnings (net spread &times; AV)',v:'$78M',c:''},{l:'Less: receiver swap hedge cost (10yr, $1.2B notional)',v:'&minus;$8M',c:'neg'},{l:'Plus: partial C3 risk reduction benefit',v:'+$2M',c:'pos'},{l:'Plus: $22M capital redeployed at 6% hurdle',v:'+$1.3M',c:'pos'}],
+  total:{l:'Year 1 post-hedge earnings',v:'$73M'},totalNote:'vs $78M current &middot; net $5M cost to hedge &middot; duration &minus;0.4yr &middot; $22M capital freed via partial C3 relief &middot; RBC +3pts',
+  strat:'Option A does deliver capital benefit &mdash; the receiver swap overlay reduces C3 (interest rate) charges on the block, releasing roughly $22M of capital and improving RBC by ~3pts. The strategic question is cost-efficiency: at $8M/yr in hedge premium for $22M of capital relief, the implied cost of capital is unattractive relative to Option B, which frees 6&times; more capital at near-flat Year 1 earnings. Option A is appropriate only if reinsurance market pricing deteriorates beyond the modeled range, eliminating Option B as a clean alternative.'},
   b:{badge:'bg-g',badgeText:'$140M capital released &middot; RBC +17pts',headline:'$140M capital released &middot; RBC 410% &rarr; 427%',sub:'50% of block earnings ceded &middot; assets stay with Meridian (Meridian retains C1 asset risk) &middot; 60&ndash;90 day execution',bridgeTitle:'MYGA Block &middot; Option B &mdash; Earnings bridge, Year 1 (50% coinsurance, funds-withheld)',
   bridge:[{l:'Current block earnings (net spread &times; AV)',v:'$78M',c:''},{l:'Less: 50% of block earnings ceded to reinsurer',v:'&minus;$39M',c:'neg'},{l:'Plus: ceding commission received (upfront, Year 1 only)',v:'+$35M',c:'pos'},{l:'Less: annual administration / treaty fee',v:'&minus;$6M',c:'neg'},{l:'Plus: $140M capital redeployed at 6% hurdle rate',v:'+$8M',c:'pos'}],
   total:{l:'Year 1 post-cession earnings',v:'$76M'},totalNote:'Near-flat vs. $78M current &mdash; with $140M capital freed and RBC +17pts. Note: ceding commission is a one-time upfront payment (not recurring). In Year 2+, steady-state earnings are ~$41M from retained 50%, less $6M admin fee, plus hurdle income on redeployed capital.',
   strat:'Under 50% coinsurance on a funds-withheld basis, Meridian cedes 50% of block earnings but retains the assets &mdash; Meridian continues to manage the portfolio and retains C1 (asset credit) risk. The reinsurer takes C2 and C3 risk on the ceded 50%, driving the RBC improvement. The ceding commission ($35M modeled) is paid upfront at close &mdash; it is the present value of the ceded economics net of the reinsurer\'s return requirement, not a recurring fee.'},
-  c:{badge:'bg-b',badgeText:'$280M capital freed &middot; 9&ndash;18mo execution',headline:'$280M capital released &middot; all economics ceded',sub:'Assets transfer to reinsurer &middot; maximum capital relief &middot; Year 1 earnings drag &middot; high execution risk',bridgeTitle:'MYGA Block &middot; Option C &mdash; Earnings bridge, Year 1 (Full ModCo)',
-  bridge:[{l:'Current block earnings (net spread &times; AV)',v:'$78M',c:''},{l:'Less: all earnings ceded (ModCo basis)',v:'&minus;$78M',c:'neg'},{l:'Plus: ceding commission (negotiated, upfront)',v:'+$50M',c:'pos'},{l:'Less: residual administration obligations',v:'&minus;$4M',c:'neg'},{l:'Plus: $280M capital redeployed at 6% hurdle',v:'+$17M',c:'pos'}],
-  total:{l:'Year 1 post-ModCo earnings',v:'&minus;$15M net'},totalNote:'Year 1 earnings drag from commission vs. ceded spread timing. Breakeven ~Year 2&ndash;3 depending on redeployment yield. Maximum capital relief &mdash; but maximum execution risk at current reinsurer capacity.',
-  strat:'Full ModCo provides maximum capital relief and completely removes C1, C2, and C3 exposure. But it cedes all economics and creates a Year 1 drag. Current reinsurer capacity constraints make 9&ndash;18 month execution realistic &mdash; meaning capital is not available when the spread dislocation window is open. Option B is preferred: nearly equivalent Year 1 earnings, $140M freed now vs. $280M in 12&ndash;18 months, and Meridian retains the asset management relationship.'}
+  c:{badge:'bg-b',badgeText:'$280M capital freed &middot; 9&ndash;18mo execution',headline:'$280M capital released &middot; all economics ceded',sub:'Assets transfer to reinsurer &middot; maximum capital relief &middot; Year 1 earnings drag &middot; high execution risk',bridgeTitle:'MYGA Block &middot; Option C &mdash; Earnings bridge, Year 1 (Full Coinsurance)',
+  bridge:[{l:'Current block earnings (net spread &times; AV)',v:'$78M',c:''},{l:'Less: all earnings ceded (full coinsurance basis)',v:'&minus;$78M',c:'neg'},{l:'Plus: ceding commission (negotiated, upfront)',v:'+$50M',c:'pos'},{l:'Less: residual administration obligations',v:'&minus;$4M',c:'neg'},{l:'Plus: $280M capital redeployed at 6% hurdle',v:'+$17M',c:'pos'}],
+  total:{l:'Year 1 post-cession earnings',v:'&minus;$15M net'},totalNote:'Year 1 earnings drag from commission vs. ceded spread timing. Breakeven ~Year 2&ndash;3 depending on redeployment yield. Maximum capital relief &mdash; but maximum execution risk at current reinsurer capacity.',
+  strat:'Full coinsurance provides maximum capital relief and completely removes C1, C2, and C3 exposure on the ceded block. But it cedes all economics and creates a Year 1 drag. Current reinsurer capacity constraints make 9&ndash;18 month execution realistic &mdash; meaning capital is not available when the spread dislocation window is open. Option B is preferred: nearly equivalent Year 1 earnings, $140M freed now vs. $280M in 12&ndash;18 months, and Meridian retains the asset management relationship.'}
 };
 
 function renderALM(sid){
@@ -826,8 +1132,25 @@ function renderALM(sid){
 }
 
 function renderPortfolio(){
-  document.getElementById('port-action-list').innerHTML=PORT_ACTIONS.map(a=>`
-    <div class="action-item"><span class="action-check">&#10003;</span><div class="action-name"><div class="action-name-main">${a.name}</div><div class="action-name-sub">${a.sub}</div></div><span class="action-nii">${a.nii}</span></div>`).join('');
+  document.getElementById('port-action-list').innerHTML=PORT_ACTIONS.map(a=>{
+    const isApproved = STATE.actionApprovals[a.id];
+    return `
+    <div class="action-item action-item-rich ${isApproved?'aapr':''}" data-action="${a.id}">
+      <div class="action-row-top">
+        <span class="action-check ${isApproved?'aapr-check':''}">&#10003;</span>
+        <div class="action-name">
+          <div class="action-name-main">${a.name}</div>
+          <div class="action-name-sub">${a.sub}</div>
+        </div>
+        <span class="action-nii">${a.nii}</span>
+        <button class="btn-approve-mini ${isApproved?'approved':''}" onclick="approveAction('${a.id}')">${isApproved?'&#10003; Approved':'Approve'}</button>
+      </div>
+      <div class="action-securities">
+        <span class="action-sec-label">Securities</span>
+        <span class="action-sec-text">${a.securities}</span>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function renderReinDetail(opt){
@@ -842,10 +1165,10 @@ function renderReinDetail(opt){
       <div class="rec-block"><div class="rec-label">Strategic argument</div><div class="rec-text">${d.strat}</div></div>
       <div class="action-row">
         <button class="btn-expand" id="rein-exp-btn" onclick="toggleExpand('rein-expand','rein-exp-btn')">&#9662; Compare all three structures</button>
-        <button class="btn-approve ${approved?'approved':''}" id="btn-m03" onclick="approveModule('m03')">${approved?'&#10003; Approved':'Proceed to term sheet &rarr;'}</button>
+        <button class="btn-approve ${approved?'approved':''}" id="btn-m03" onclick="openReinTermSheet('${opt}')">${approved?'&#10003; Approved':'Proceed to term sheet &rarr;'}</button>
       </div>
       <div class="expand-detail" id="rein-expand"><br/>
-        <table class="data-table"><thead><tr><th>Metric</th><th>Option A (Retain)</th><th>Option B (50% Coins.)</th><th>Option C (Full ModCo)</th></tr></thead>
+        <table class="data-table"><thead><tr><th>Metric</th><th>Option A (Retain)</th><th>Option B (50% Coins.)</th><th>Option C (Full Coins.)</th></tr></thead>
         <tbody>
           <tr><td>Capital freed</td><td>$0</td><td class="em">$140M</td><td>$280M</td></tr>
           <tr><td>RBC post-transaction</td><td>410%</td><td class="em">427%</td><td>441%</td></tr>
@@ -883,7 +1206,30 @@ function approveModule(mod){
   const btn=document.getElementById('btn-'+mod);
   if(btn){btn.classList.add('approved');btn.innerHTML='&#10003; Approved';}
   if(mod==='m02'){
+    // mark all individual actions approved as well
+    Object.keys(STATE.actionApprovals).forEach(id=>{STATE.actionApprovals[id]=true;});
+    renderPortfolio();
     document.querySelectorAll('#port-status-rows td.pend').forEach(td=>{td.classList.remove('pend');td.classList.add('apvd');td.textContent='APPROVED';});
+  }
+  updateStatus();
+}
+
+function approveAction(id){
+  STATE.actionApprovals[id]=true;
+  renderPortfolio();
+  // update detail-table status row if present
+  const idx={a1:0,a2:1,a3:2,a4:3,a5:4}[id];
+  const rows=document.querySelectorAll('#port-status-rows tr');
+  if(rows[idx]){
+    const td=rows[idx].querySelector('td.pend');
+    if(td){td.classList.remove('pend');td.classList.add('apvd');td.textContent='APPROVED';}
+  }
+  // if all 5 approved, mark module approved
+  const allApproved = Object.values(STATE.actionApprovals).every(Boolean);
+  if(allApproved && !STATE.approvals.m02){
+    STATE.approvals.m02=true;
+    const btn=document.getElementById('btn-m02');
+    if(btn){btn.classList.add('approved');btn.innerHTML='&#10003; All approved';}
   }
   updateStatus();
 }
@@ -902,18 +1248,227 @@ function updateStatus(){
   document.getElementById('s-nii').textContent=nii;
   document.getElementById('s-cap').textContent=cap;
 }
-function openTermSheet(){document.getElementById('ts-modal').classList.add('open');}
+function openTermSheet(){
+  // Block opening the M04 term sheet if escalation not sent
+  if(!STATE.escalationSent){
+    alert('Escalation must be sent to committee before the term sheet can be opened. Select a resolution path below.');
+    return;
+  }
+  document.getElementById('ts-modal').classList.add('open');
+}
 function closeTermSheet(){document.getElementById('ts-modal').classList.remove('open');}
 function closeTSBg(e){if(e.target===document.getElementById('ts-modal'))closeTermSheet();}
+
+// M04 routing data — toggling updates sensitivity table
+const ROUTING_DATA={
+  us:{
+    label:'Meridian US',
+    capital:'341% RBC post-close',
+    yr1Roe:'12.1%',
+    iyr5:'13.2%',
+    walk:'$28M',
+    capitalEff:'baseline',
+    sensRows:[
+      ['Lapse rate','7.5%','9.8%','12.5%'],
+      ['Reinvest yield','5.55%','5.20%','4.80%'],
+      ['Discount rate','4.75%','5.10%','5.40%'],
+      ['Stress multiplier','1.8&times;','2.2&times;','2.8&times;'],
+      ['Max ceding commission','$45M (ask)','$28M (walk)','$18M'],
+      ['Year-1 ROE','14.8%','12.1%','7.9%'],
+      ['5-yr IRR','16.1%','13.2%','9.0%']
+    ],
+    grdRows:[
+      ['RBC post-close &ge; 300% (Meridian US)','341% post-close &middot; 38pts above floor','pass'],
+      ['BSCR (n/a — US routing)','Not applicable','pass'],
+      ['FIA concentration &le; 40% of GA','Current 38% &rarr; 41% post-close &middot; Resolution required','escalate'],
+      ['5-yr IRR &ge; 12% hurdle','13.2% at base &middot; 9.0% at stress &middot; tighter margin vs. Bermuda','pass']
+    ]
+  },
+  bermuda:{
+    label:'Meridian Re Bermuda',
+    capital:'178% BSCR ratio',
+    yr1Roe:'13.4%',
+    iyr5:'14.6%',
+    walk:'$32M',
+    capitalEff:'+$24M vs. US',
+    sensRows:[
+      ['Lapse rate','7.5%','9.8%','12.5%'],
+      ['Reinvest yield','5.55%','5.20%','4.80%'],
+      ['Discount rate','4.75%','5.10%','5.40%'],
+      ['Stress multiplier','1.8&times;','2.2&times;','2.8&times;'],
+      ['Max ceding commission','$45M (ask)','$32M (walk)','$22M'],
+      ['Year-1 ROE','16.2%','13.4%','9.1%'],
+      ['5-yr IRR','17.8%','14.6%','10.2%']
+    ],
+    grdRows:[
+      ['RBC post-close &ge; 300% (Meridian US)','Not applicable &mdash; Bermuda routing','pass'],
+      ['BSCR post-close &ge; 150% (Bermuda entity)','178% &middot; $24M capital efficiency advantage vs. US routing','pass'],
+      ['FIA concentration &le; 40% of GA','Current 38% &rarr; 41% post-close &middot; Resolution required','escalate'],
+      ['5-yr IRR &ge; 12% hurdle (Meridian assumptions)','14.6% at base &middot; 10.2% at stress','pass']
+    ]
+  }
+};
+
+function selectRouting(rt){
+  STATE.routing=rt;
+  document.getElementById('rt-us').classList.toggle('selected',rt==='us');
+  document.getElementById('rt-bermuda').classList.toggle('selected',rt==='bermuda');
+  // re-render sensitivity table inside acq-expand
+  renderAcqSensitivity();
+  // also update the headline numbers on the acq card
+  const d=ROUTING_DATA[rt];
+  const headline=document.querySelector('#m04 .card-headline');
+  if(headline) headline.innerHTML='Proceed at &le;'+d.walk+' ceding commission';
+  const sub=document.querySelector('#m04 .card-sub');
+  if(sub) sub.innerHTML=d.yr1Roe+' Year-1 ROE &middot; '+d.iyr5+' 5-yr IRR &middot; above 12% hurdle &mdash; subject to concentration resolution';
+}
+
+function renderAcqSensitivity(){
+  const d=ROUTING_DATA[STATE.routing];
+  const tbody=document.querySelector('#acq-expand table tbody');
+  if(tbody){
+    tbody.innerHTML=d.sensRows.map(r=>{
+      const stressClass=parseFloat(r[3])<12?' style="color:var(--d-amb)"':'';
+      return `<tr><td>${r[0]}</td><td>${r[1]}</td><td class="em">${r[2]}</td><td${stressClass}>${r[3]}</td></tr>`;
+    }).join('');
+  }
+  // update guardrail rows
+  const grdContainer=document.getElementById('acq-grd-rows');
+  if(grdContainer){
+    grdContainer.innerHTML=d.grdRows.map(([n,detail,status])=>{
+      const cls=status==='pass'?'grd-pass':status==='action'?'grd-act':'grd-esc';
+      const lbl=status==='pass'?'PASS':status==='action'?'ACTION':'ESCALATE';
+      return `<div class="grd-row"><div class="grd-info"><span class="grd-name">${n}</span><div class="grd-detail">${detail}</div></div><span class="${cls}">${lbl}</span></div>`;
+    }).join('');
+  }
+}
+
+// M04 resolution memos
+const RESOLUTION_MEMOS={
+  runoff:{
+    title:'Committee Memo &middot; FIA Concentration Resolution via Run-off',
+    sections:[
+      {label:'Resolution path summary',rows:[['Path','Concurrent FIA run-off (~$300M over 18 months)'],['Approval required','Capital committee'],['Board action','Not required'],['Timeline','18-month run-off completes before close']]},
+      {label:'Mechanics',rows:[['Existing book',' $7.7B FIA in-force (current)'],['Run-off target','~$300M of low-credit-rate vintages'],['Acquisition adds','$2.8B FIA block'],['Net FIA position post-runoff','$10.2B'],['Concentration','39.7% of GA &middot; back inside 40% limit']]},
+      {label:'Earnings impact',rows:[['Run-off NII forgone','~$5M/yr (at maturity)'],['Acquisition NII added','+$28M Year 1'],['Net incremental','+$23M Year 1, +$28M steady-state']]},
+      {label:'Risk considerations',rows:[['Lapse risk','Lapses on run-off block already elevated &mdash; low marginal risk'],['Distribution disruption','None &mdash; bank channel can substitute new product'],['Regulatory','Iowa DOI notice required, no filing']]}
+    ]
+  },
+  limit:{
+    title:'Board Memo &middot; Temporary FIA Concentration Limit Increase',
+    sections:[
+      {label:'Resolution path summary',rows:[['Path','Temporary FIA concentration limit increase to 42%'],['Approval required','Board of Directors'],['Reversion plan','Back to 40% over 24 months'],['Timeline','4&ndash;6 weeks for board cycle']]},
+      {label:'Concentration trajectory',rows:[['Current','38%'],['Post-close','41% (with $2.8B add)'],['Month 12','40.5% (organic run-off + new sales mix)'],['Month 24','39.8% (back inside limit)']]},
+      {label:'Risk mitigants',rows:[['Quarterly board review','Concentration tracked in quarterly capital report'],['Hard re-test','Annual stress test with 100bps rate move'],['Distribution mix','New sales targeted toward MYGA + PRT to dilute FIA share']]},
+      {label:'Rating agency notification',rows:[['S&P','Required &middot; pre-close briefing'],['AM Best','Required &middot; explanatory memo'],['Expected impact','Neutral &middot; consistent with current capital management posture']]}
+    ]
+  }
+};
+
+function openResolutionMemo(path){
+  const m=RESOLUTION_MEMOS[path];
+  if(!m)return;
+  STATE.escalationPath=path;
+  document.getElementById('resolution-title').textContent=m.title;
+  const bodyHtml=m.sections.map(s=>{
+    const rowsHtml=s.rows.map(([k,v])=>`<div class="term-row"><span class="term-key">${k}</span><span class="term-val">${v}</span></div>`).join('');
+    return `<div class="modal-section"><div class="modal-section-title">${s.label}</div>${rowsHtml}</div>`;
+  }).join('');
+  document.getElementById('resolution-body').innerHTML=bodyHtml;
+  document.getElementById('resolution-modal').classList.add('open');
+}
+function closeResolutionMemo(){document.getElementById('resolution-modal').classList.remove('open');}
+function closeResolutionBg(e){if(e.target===document.getElementById('resolution-modal'))closeResolutionMemo();}
+
+function sendEscalation(){
+  STATE.escalationSent=true;
+  closeResolutionMemo();
+  // mark the chosen resolution path card as selected
+  const path=STATE.escalationPath;
+  if(path==='runoff'){
+    document.getElementById('rp-runoff').classList.add('selected');
+    document.getElementById('rp-limit').classList.add('disabled');
+  } else if(path==='limit'){
+    document.getElementById('rp-limit').classList.add('selected');
+    document.getElementById('rp-runoff').classList.add('disabled');
+  }
+  // unlock the term sheet button
+  const tsBtn=document.getElementById('btn-open-ts');
+  if(tsBtn){
+    tsBtn.disabled=false;
+    tsBtn.classList.remove('btn-ts-locked');
+    tsBtn.classList.remove('btn-ghost');
+    tsBtn.classList.add('btn-approve');
+    tsBtn.innerHTML='Open recommended term sheet &rarr;';
+  }
+  // update status note
+  const status=document.getElementById('escalation-status');
+  if(status){
+    const pathLabel = path==='runoff'?'Concurrent FIA run-off':'Temporary board limit increase';
+    status.innerHTML='<span class="esc-sent">&#10003; Escalation sent to committee</span> &middot; Path: <strong>'+pathLabel+'</strong> &middot; Term sheet now available.';
+  }
+}
+
+// M03 reinsurance term sheets
+const REIN_TERM_SHEETS={
+  a:{
+    title:'NSAI — Recommended Term Sheet · Receiver Swap Overlay',
+    sections:[
+      {label:'Structure',rows:[['Type','Receiver swap overlay (no cession)'],['Block','$4.2B MYGA 2014–2018 vintage'],['Hedge size','$1.2B notional · 10yr tenor'],['Counterparty','JPM (existing ISDA)'],['Pricing','Receive fixed 4.42% / pay SOFR']]},
+      {label:'Capital effect',rows:[['Capital released','$22M (partial C3 relief)'],['RBC ratio','410% → 413% (+3pts)'],['Duration impact','−0.4yr on block']]},
+      {label:'Year 1 economics',rows:[['Block earnings','$78M'],['Hedge cost','−$8M'],['C3 relief benefit','+$2M'],['Capital redeployed @ 6%','+$1.3M'],['Year 1 net','$73M']]},
+      {label:'Execution',rows:[['Timeline','2–4 weeks'],['Approvals','Within standing ALM authority'],['Risk','Low — overlay reversible']]}
+    ]
+  },
+  b:{
+    title:'NSAI — Recommended Term Sheet · 50% Coinsurance (Funds-Withheld)',
+    sections:[
+      {label:'Structure',rows:[['Type','50% quota share coinsurance — funds-withheld basis'],['Block','$4.2B MYGA 2014–2018 vintage'],['Cession %','50% of block'],['Asset custody','Retained by Meridian (FW basis)'],['Risk transfer','C2 mortality + C3 interest rate to reinsurer; C1 retained']]},
+      {label:'Capital effect',rows:[['Capital released','$140M'],['RBC ratio','410% → 427% (+17pts)'],['NAIC SAP treatment','Approved structure, no filing']]},
+      {label:'Year 1 economics',rows:[['Block earnings','$78M'],['50% earnings ceded','−$39M'],['Ceding commission (upfront)','+$35M'],['Annual treaty fee','−$6M'],['Capital redeployed @ 6%','+$8M'],['Year 1 net','$76M (near-flat)']]},
+      {label:'Steady-state (Year 2+)',rows:[['Retained earnings','~$41M/yr'],['Treaty fee','−$6M/yr'],['Capital redeployment income','~$8M/yr'],['Net','~$43M/yr (vs. $78M pre-cession)']]},
+      {label:'Counterparty & execution',rows:[['Reinsurer (preferred)','Hannover Re (NAIC-authorized)'],['Backup','Munich American · SCOR Global Life'],['Execution timeline','60–90 days'],['Approvals','Capital committee + appointed actuary sign-off']]}
+    ]
+  },
+  c:{
+    title:'NSAI — Recommended Term Sheet · Full Coinsurance',
+    sections:[
+      {label:'Structure',rows:[['Type','100% coinsurance with asset transfer'],['Block','$4.2B MYGA 2014–2018 vintage'],['Cession %','100%'],['Asset custody','Transferred to reinsurer'],['Risk transfer','Full C1 + C2 + C3 transfer to reinsurer']]},
+      {label:'Capital effect',rows:[['Capital released','$280M'],['RBC ratio','410% → 441% (+31pts)'],['Asset management','No longer Meridian responsibility']]},
+      {label:'Year 1 economics',rows:[['Block earnings','$78M'],['All earnings ceded','−$78M'],['Ceding commission (upfront)','+$50M'],['Residual admin','−$4M'],['Capital redeployed @ 6%','+$17M'],['Year 1 net','−$15M (drag from timing)']]},
+      {label:'Execution risk',rows:[['Timeline','9–18 months (capacity-constrained market)'],['Counterparty risk','Concentrated exposure to single reinsurer'],['Recommended only if','Option B unavailable or Meridian exits asset management']]}
+    ]
+  }
+};
+
+function openReinTermSheet(opt){
+  const ts=REIN_TERM_SHEETS[opt];
+  if(!ts)return;
+  document.getElementById('rein-ts-title').textContent=ts.title;
+  const bodyHtml=ts.sections.map(s=>{
+    const rowsHtml=s.rows.map(([k,v])=>`<div class="term-row"><span class="term-key">${k}</span><span class="term-val">${v}</span></div>`).join('');
+    return `<div class="modal-section"><div class="modal-section-title">${s.label}</div>${rowsHtml}</div>`;
+  }).join('');
+  document.getElementById('rein-ts-body').innerHTML=bodyHtml;
+  document.getElementById('rein-ts-modal').classList.add('open');
+}
+function closeReinTermSheet(){document.getElementById('rein-ts-modal').classList.remove('open');}
+function closeReinTSBg(e){if(e.target===document.getElementById('rein-ts-modal'))closeReinTermSheet();}
+function toggleTile(id){
+  const tile=document.querySelector(`[data-tile="${id}"]`);
+  if(!tile)return;
+  tile.classList.toggle('open');
+}
 
 renderALM('s1');
 renderPortfolio();
 renderReinDetail('b');
+renderAcqSensitivity();
 
 // ── ToC active tracking ──
 (function(){
   const sections = [
-    {id:'s02',el:null},{id:'s03',el:null},{id:'s05b',el:null},{id:'s05',el:null},{id:'s06',el:null}
+    {id:'s01',el:null},{id:'s02',el:null},{id:'s03',el:null},{id:'s05',el:null},{id:'s06',el:null}
   ];
   sections.forEach(s=>{ s.el = document.getElementById(s.id); });
   const links = document.querySelectorAll('#main-nav a[data-section]');
