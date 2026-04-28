@@ -38,7 +38,7 @@
       --mw:1100px;--cw:680px;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;scroll-padding-top:68px}
+    html{scroll-behavior:smooth;scroll-padding-top:68px;scroll-snap-type:y proximity}
     body{font-family:var(--fn);font-size:16px;line-height:1.55;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
   /* Paper grain */
   body::before {
@@ -71,19 +71,20 @@
     .page-title{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(36px,4.5vw,58px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink);max-width:780px;margin-bottom:24px}
     .page-title em{color:var(--accent-2)}
     .page-lede{font-size:18px;line-height:1.7;color:var(--ink-mid);max-width:var(--cw);font-weight:300}
-    .section{max-width:var(--mw);margin:0 auto;padding:72px 40px;border-bottom:1px solid rgba(28,37,48,0.15);position:relative;z-index:2}
+    .section{max-width:var(--mw);margin:0 auto;padding:72px 40px;border-bottom:1px solid rgba(28,37,48,0.15);position:relative;z-index:2;scroll-snap-align:start;scroll-snap-stop:normal}
     .section-marker{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);margin-bottom:20px}
     .section-heading{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(26px,3.5vw,42px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink);max-width:680px;margin-bottom:36px}
     .prose{max-width:var(--cw)}.prose p{margin-bottom:20px;font-weight:300;color:var(--ink-mid)}
     .prose p:last-child{margin-bottom:0}.prose strong{color:var(--ink);font-weight:500}
     .thesis{margin:44px 0;padding:28px 32px;border-left:3px solid var(--accent-2);background:rgba(63,94,74,0.05)}
     .thesis p{font-family:var(--fs);font-size:19px;line-height:1.6;color:var(--ink);font-style:italic;margin:0}
-    .value-item{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--rule);max-width:var(--cw)}
-    .value-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-    .value-head{display:flex;align-items:baseline;gap:16px;margin-bottom:12px}
-    .value-num{font-family:var(--fm);font-size:11px;font-weight:500;color:var(--accent-2);letter-spacing:.08em;flex-shrink:0}
-    .value-title{font-size:15px;font-weight:500;color:var(--ink)}
-    .value-body{padding-left:36px;font-size:16px;line-height:1.7;color:var(--ink-mid);font-weight:300}
+    .value-list{max-width:var(--cw);border-top:1px solid var(--rule)}
+    .value-item{padding:22px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:36px 1fr;gap:0 20px}
+    .value-num{font-family:var(--fm);font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.1em;padding-top:3px}
+    .value-content{}
+    .value-title{font-size:14px;font-weight:600;color:var(--ink);letter-spacing:-.01em;margin-bottom:5px}
+    .value-body{font-size:14.5px;line-height:1.65;color:var(--ink-mid);font-weight:300}
+    .value-body p{margin:0}
     .stack-list{max-width:var(--cw);margin:32px 0}
     .stack-item{display:grid;grid-template-columns:140px 1fr;gap:0 24px;padding:14px 0;border-top:1px solid var(--rule)}
     .stack-item:last-child{border-bottom:1px solid var(--rule)}
@@ -123,13 +124,17 @@
     .footer-brand{font-family:var(--fm);font-size:12px;color:var(--ink-light);display:flex;align-items:center;gap:8px}
     .footer-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
     .footer-copy{font-size:12px;color:var(--ink-light)}
+    /* carrier section — same geometry as .section */
+    .carrier-section{border-bottom:1px solid rgba(28,37,48,0.15);position:relative;z-index:2;scroll-snap-align:start;scroll-snap-stop:normal}
+    .carrier-section-inner{max-width:var(--mw);margin:0 auto;padding:72px 40px 36px}
+    .carrier-content{max-width:var(--mw);margin:0 auto;padding:0 40px 64px}
     /* DEMO */
-    .demo-band{background:var(--d-bg);padding:72px 0}
+    .demo-band{background:var(--d-bg);padding:72px 0;scroll-snap-align:start;scroll-snap-stop:normal}
     .demo-inner{max-width:var(--mw);margin:0 auto;padding:0 40px}
     .demo-eyebrow{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-2);margin-bottom:10px}
     .demo-title{font-family:var(--fs);font-size:clamp(20px,2.5vw,28px);font-weight:600;color:var(--d-ink);line-height:1.25}
     .demo-sub{margin-top:8px;font-size:14px;color:var(--d-mid);font-weight:300;max-width:640px;margin-bottom:32px}
-    .carrier-card{max-width:820px;margin:0 auto;border:1px solid var(--rule);background:#fff;padding:28px 32px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    .carrier-card{border:1px solid var(--rule);background:#fff;padding:28px 32px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
     .carrier-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:22px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--rule)}
     .carrier-name{font-family:var(--fs);font-size:24px;font-weight:600;color:#0a0a0a;letter-spacing:-.01em}
     .carrier-est{font-family:var(--fm);font-size:11px;color:var(--ink-mid);margin-top:5px;letter-spacing:.02em}
@@ -141,13 +146,13 @@
     .cs-val{font-size:20px;font-weight:600;color:#0a0a0a;line-height:1.1;font-family:var(--fs);letter-spacing:-.01em}
     .cs-sub{font-size:11px;color:var(--ink-mid);margin-top:5px;line-height:1.4}
     /* sub-labels above carrier card and comparison */
-    .carrier-sub-label{max-width:820px;margin:48px auto 14px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-2);font-weight:500}
+    .carrier-sub-label{margin:48px 0 14px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-2);font-weight:500}
     .carrier-sub-label:first-of-type{margin-top:0}
-    .carrier-narrative{max-width:820px;margin:24px auto 0;padding:0}
+    .carrier-narrative{margin:24px 0 0;padding:0}
     .carrier-narrative p{font-size:15px;line-height:1.7;color:var(--ink-mid);font-weight:300}
     /* interactive comparison tiles */
-    .compare-hint{max-width:820px;margin:8px auto 16px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);text-align:center}
-    .compare-tiles{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+    .compare-hint{margin:8px 0 16px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);text-align:center}
+    .compare-tiles{display:flex;flex-direction:column;gap:10px}
     .ctile{background:#fff;border:1px solid var(--rule);cursor:pointer;transition:border-color .2s,box-shadow .2s;overflow:hidden}
     .ctile:hover{border-color:var(--ink-light);box-shadow:0 2px 8px rgba(0,0,0,.04)}
     .ctile.open{border-color:var(--accent-2);box-shadow:0 2px 12px rgba(63,94,74,.12)}
@@ -186,7 +191,7 @@
     .action-item-rich{display:block;padding:14px 0;border-bottom:1px solid var(--d-brd2)}
     .action-item-rich:last-child{border-bottom:none}
     .action-item-rich.aapr{background:rgba(34,197,94,.04)}
-    .action-row-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+    .action-row-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
     .aapr-check{color:var(--d-grn)!important}
     .btn-approve-mini{background:var(--accent-2);border:1px solid var(--accent-2);color:#fff;font-family:var(--fm);font-size:10px;letter-spacing:.04em;padding:5px 11px;cursor:pointer;flex-shrink:0;margin-top:1px;text-transform:uppercase}
     .btn-approve-mini:hover:not(.approved){background:var(--la-green-light)}
@@ -271,7 +276,7 @@
     .rec-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-2);margin-bottom:6px}
     .rec-text{font-size:13px;color:var(--d-ink);line-height:1.6}
     .cross-note{font-family:var(--fm);font-size:10px;color:var(--d-blu);letter-spacing:.04em;cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;text-decoration:underline;text-underline-offset:2px}
-    .action-row{display:flex;gap:10px;flex-wrap:wrap}
+    .action-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
     .btn-expand{background:none;border:1px solid var(--d-brd);color:var(--d-mid);font-family:var(--fm);font-size:11px;letter-spacing:.06em;padding:9px 16px;cursor:pointer;transition:border-color .15s,color .15s}
     .btn-expand:hover{border-color:var(--d-mid);color:var(--d-ink)}
     .btn-approve{background:var(--accent-2);border:1px solid var(--accent-2);color:#fff;font-family:var(--fm);font-size:11px;letter-spacing:.06em;padding:9px 20px;cursor:pointer;transition:background .15s}
@@ -355,14 +360,19 @@
     .term-key{color:var(--d-mid)}.term-val{font-family:var(--fm);font-size:12px;color:var(--d-ink)}.term-val.warn{color:var(--d-amb)}
     .modal-actions{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--d-brd);flex-wrap:wrap}
     .status-strip{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-top:1px solid var(--d-brd);background:rgba(0,0,0,.35);font-family:var(--fm);font-size:11px;color:var(--d-dim);flex-wrap:wrap;gap:6px}
-    /* ontology figure (P&C-style) */
-    .ont-fig{margin:48px 0;border:1px solid var(--rule);background:#fff;padding:24px 24px 16px}
-    .ont-fig-label{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-light);text-align:center;margin-bottom:18px}
-    .ont-fig-svg{width:100%;max-width:860px;margin:0 auto}
-    .ont-fig-svg svg{width:100%;height:auto;display:block}
-    .ont-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:18px;padding-top:18px;border-top:1px solid var(--rule)}
-    .ont-legend-item{display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-mid)}
-    .ont-swatch{display:inline-block;width:14px;height:14px;border:1px solid var(--rule)}
+    /* ontology figure — matches pc-deepdive style */
+    .ont-viz{background:var(--paper-2);border:1px solid var(--rule);padding:24px;margin:48px 0;position:relative}
+    .ont-viz-label{font-family:var(--fm);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+    .ont-svg{width:100%;height:auto;display:block}
+    .ont-node{cursor:pointer;transition:filter .2s}
+    .ont-node:hover{filter:brightness(1.1)}
+    .ont-node rect,.ont-node ellipse{fill:var(--paper-2);stroke:var(--ink-2);stroke-width:1.5}
+    .ont-node.core rect{fill:var(--accent-2);stroke:var(--accent-2)}
+    .ont-node.core text{fill:var(--paper);font-weight:600}
+    .ont-node.attr rect{fill:#fff}
+    .ont-node text{font-family:'Inter Tight',sans-serif;font-size:12px;text-anchor:middle;fill:var(--ink);dominant-baseline:middle;font-weight:500;pointer-events:none}
+    .ont-edge{stroke:var(--ink-2);stroke-width:1;fill:none}
+    .ont-edge-label{font-family:var(--fm);font-size:9px;fill:var(--muted);text-anchor:middle}
     .ont-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px}
     .ont-pillar{padding:0}
     .ont-pillar-num{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--accent-2);font-style:italic;margin-bottom:8px}
@@ -370,6 +380,7 @@
     .ont-pillar-body{font-size:14px;color:var(--ink-mid);font-weight:300;line-height:1.65}
         .section{scroll-margin-top:68px}
     @media(max-width:768px){
+      html{scroll-snap-type:none}
       nav{padding:0 20px}.nav-links{display:none}
       .page-header,.section{padding-left:20px;padding-right:20px}
       .page-header{padding-top:48px;padding-bottom:40px}.section{padding-top:48px;padding-bottom:48px}
@@ -377,14 +388,15 @@
       .pillar{border-right:none;border-bottom:1px solid var(--rule)}.pillar:last-child{border-bottom:none}
       .outcomes-grid{grid-template-columns:1fr}.stack-item{grid-template-columns:1fr;gap:4px}
       .carrier-stats{grid-template-columns:repeat(2,1fr)}.demo-inner{padding:0 16px}.demo-band{padding:48px 0}
-      .carrier-section{padding:0 20px}.carrier-card{padding:20px}.carrier-sub-label{padding:0 4px}.carrier-narrative{padding:0 4px}
-      .compare-tiles{padding:0 4px}
+      .carrier-section-inner{padding:48px 20px 24px}.carrier-content{padding:0 20px 48px}
+      .carrier-card{padding:20px}.carrier-sub-label{padding:0}.carrier-narrative{padding:0}
+      .compare-tiles{padding:0}
       .ctile-pair{grid-template-columns:1fr;gap:8px;padding:6px 16px 16px}
       .ctile-arrow{transform:rotate(90deg);padding:4px 0}
       .ctile-detail-row{grid-template-columns:1fr;gap:6px;padding:14px 16px}
       .ctile-header{padding:14px 16px 10px}
       .ont-pillars{grid-template-columns:1fr;gap:24px}
-      .ont-fig{padding:14px 14px 12px}.ont-legend{gap:10px}
+      .ont-viz{padding:14px}
       .metric-row,.diligence-grid,.routing-grid{grid-template-columns:1fr}
       footer{padding:24px 20px;flex-direction:column;align-items:flex-start}
       .cta-block,.disclosure{padding-left:20px;padding-right:20px}.modal-overlay{padding:12px}
@@ -451,10 +463,9 @@
   <div class="nav-links" id="main-nav">
     <a href="index.html" class="back-link">&larr; Overview</a>
     <a href="#s01" data-section="s01">01 / Ontology</a>
-    <a href="#s02" data-section="s02">02 / Value</a>
-    <a href="#s03" data-section="s03">03 / Stack</a>
-    <a href="#s05" data-section="s05">04 / Meridian</a>
-    <a href="#s06" data-section="s06">05 / Demo</a>
+    <a href="#s02" data-section="s02">02 / Current State</a>
+    <a href="#s05" data-section="s05">03 / Demo</a>
+    <a href="#s07" data-section="s07">04 / Results</a>
     <a href="pc-deepdive.html" class="fwd-link">P&amp;C &rarr;</a>
   </div>
 </nav>
@@ -481,118 +492,134 @@
     <p>Once the world is modeled this way, rules become composable and inheritable. A guardrail that applies to &ldquo;all long-duration spread products&rdquo; automatically applies to anything the ontology classifies as such &mdash; MYGA, FIA, ULSG. Write the rule once, against the concept. And ontologies compose across domains: the same Block concept anchors ALM, capital management, reinsurance evaluation, and acquisition analysis.</p>
   </div>
 
-  <div class="ont-fig">
-    <div class="ont-fig-label">Fig. 01 &mdash; Minimal Life &amp; Annuity Capital Ontology</div>
-    <div class="ont-fig-svg">
-      <svg viewBox="0 0 860 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
-          </marker>
-        </defs>
+  <div class="ont-viz">
+    <div class="ont-viz-label">Fig. 01 &mdash; Minimal Life &amp; Annuity Capital Ontology</div>
+    <svg class="ont-svg" viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6" fill="none" stroke="#2A3340" stroke-width="1"/>
+        </marker>
+      </defs>
 
-        <!-- relationship lines (drawn first so boxes overlay them) -->
+      <!-- Edges -->
+      <g>
         <!-- Policy → Block -->
-        <line x1="180" y1="60" x2="180" y2="120" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="190" y="92" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">covers</text>
+        <path class="ont-edge" d="M 190 65 L 190 115" marker-end="url(#arr)"/>
+        <text class="ont-edge-label" x="215" y="94">covers</text>
 
         <!-- Block → CreditingRateTier -->
-        <line x1="240" y1="160" x2="380" y2="160" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="270" y="152" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">hasTier</text>
+        <path class="ont-edge" d="M 260 155 L 370 155" marker-end="url(#arr)"/>
+        <text class="ont-edge-label" x="312" y="147">hasTier</text>
 
         <!-- CreditingRateTier → LapseCurve -->
-        <line x1="500" y1="190" x2="500" y2="250" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="510" y="222" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">drives</text>
+        <path class="ont-edge" d="M 490 195 L 490 245" marker-end="url(#arr)"/>
+        <text class="ont-edge-label" x="515" y="224">drives</text>
 
         <!-- Block → RBCCharge -->
-        <line x1="180" y1="200" x2="180" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="190" y="232" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">generates</text>
+        <path class="ont-edge" d="M 190 195 L 190 255" marker-end="url(#arr)"/>
+        <text class="ont-edge-label" x="216" y="228">generates</text>
 
         <!-- RBCCharge → CapitalPosition -->
-        <line x1="240" y1="300" x2="380" y2="300" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="265" y="292" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">loadsInto</text>
+        <path class="ont-edge" d="M 260 295 L 370 295" marker-end="url(#arr)"/>
+        <text class="ont-edge-label" x="312" y="287">loadsInto</text>
 
         <!-- CapitalPosition → Entity -->
-        <line x1="500" y1="340" x2="500" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="510" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">heldBy</text>
+        <path class="ont-edge" d="M 490 335 L 490 385" marker-end="url(#arr)"/>
+        <text class="ont-edge-label" x="516" y="364">heldBy</text>
 
-        <!-- Block → ReinsStructure -->
-        <line x1="120" y1="200" x2="120" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="20" y="232" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">reinsuredUnder</text>
-
-        <!-- ReinsStructure → EarningsBridge -->
-        <line x1="120" y1="340" x2="120" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="20" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">producesBridge</text>
-
-        <!-- POLICY (top) -->
-        <rect x="100" y="20" width="160" height="40" rx="2" fill="#f0f5f0" stroke="#3F5E4A" stroke-width="1.5"/>
-        <text x="180" y="45" text-anchor="middle" font-family="Lora, serif" font-size="14" font-weight="600" fill="#1a1a1a">Policy</text>
-
-        <!-- BLOCK (center-left, the hub) -->
-        <rect x="100" y="120" width="160" height="80" rx="2" fill="#f0f5f0" stroke="#3F5E4A" stroke-width="2"/>
-        <text x="180" y="150" text-anchor="middle" font-family="Lora, serif" font-size="14" font-weight="600" fill="#1a1a1a">Block</text>
-        <text x="180" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">MYGA &middot; FIA</text>
-        <text x="180" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">ULSG &middot; PRT</text>
-
-        <!-- CREDITING RATE TIER (right, top) -->
-        <rect x="380" y="120" width="240" height="70" rx="2" fill="#faf8ff" stroke="#6b46c1" stroke-width="1.5"/>
-        <text x="500" y="148" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">CreditingRateTier</text>
-        <text x="500" y="170" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">SurrenderPeriod &middot; Crediting%</text>
-
-        <!-- LAPSE CURVE (right, bottom of tier) -->
-        <rect x="380" y="250" width="240" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
-        <text x="500" y="278" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">LapseCurve &middot; PolicyholderBehavior</text>
-
-        <!-- RBC CHARGE (under block) -->
-        <rect x="100" y="260" width="160" height="80" rx="2" fill="#f8fbff" stroke="#1d4ed8" stroke-width="1.5"/>
-        <text x="180" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">RBCCharge</text>
-        <text x="180" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">C1 asset &middot; C2 mort.</text>
-        <text x="180" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">C3 int. &middot; C4 biz</text>
-
-        <!-- CAPITAL POSITION (right of RBC) -->
-        <rect x="380" y="260" width="240" height="80" rx="2" fill="#f8fbff" stroke="#1d4ed8" stroke-width="1.5"/>
-        <text x="500" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">CapitalPosition</text>
-        <text x="500" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">SAP RBC &middot; BSCR</text>
-        <text x="500" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">entity-level ratios</text>
-
-        <!-- ENTITY (under capital position) -->
-        <rect x="380" y="390" width="240" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
-        <text x="500" y="418" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">Entity &middot; US OpCo &middot; Bermuda Re</text>
-
-        <!-- REINS STRUCTURE (left of block, below) -->
-        <rect x="640" y="120" width="200" height="70" rx="2" fill="#f8fff9" stroke="#166534" stroke-width="1.5"/>
-        <text x="740" y="148" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">ReinsStructure</text>
-        <text x="740" y="170" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">FW &middot; Coins. &middot; ModCo</text>
-
-        <!-- ReinsStructure → Block link -->
-        <line x1="640" y1="155" x2="270" y2="160" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="380" y="148" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">cedes</text>
-
-        <!-- EARNINGS BRIDGE (under reins) -->
-        <rect x="640" y="260" width="200" height="80" rx="2" fill="#f8fff9" stroke="#166534" stroke-width="1.5"/>
-        <text x="740" y="288" text-anchor="middle" font-family="Lora, serif" font-size="13" font-weight="600" fill="#1a1a1a">EarningsBridge</text>
-        <text x="740" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">spread ceded &middot; commission</text>
-        <text x="740" y="324" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">capital released</text>
+        <!-- Block → ReinsStructure (curve right) -->
+        <path class="ont-edge" d="M 260 165 Q 650 140 660 165" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+        <text class="ont-edge-label" x="460" y="140">reinsuredUnder</text>
 
         <!-- ReinsStructure → EarningsBridge -->
-        <line x1="740" y1="190" x2="740" y2="260" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="750" y="227" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">resolvesTo</text>
+        <path class="ont-edge" d="M 700 205 L 700 255" marker-end="url(#arr)"/>
+        <text class="ont-edge-label" x="728" y="234">resolvesTo</text>
 
-        <!-- TREATY POLICY (under earnings bridge) -->
-        <rect x="640" y="390" width="200" height="50" rx="2" fill="#fff" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
-        <text x="740" y="418" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#666">Treaty &middot; CommissionSchedule</text>
-        <line x1="740" y1="340" x2="740" y2="390" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>
-        <text x="750" y="372" font-family="JetBrains Mono, monospace" font-size="10" fill="#666">governedBy</text>
-      </svg>
-    </div>
+        <!-- EarningsBridge → Treaty -->
+        <path class="ont-edge" d="M 700 335 L 700 385" marker-end="url(#arr)"/>
+        <text class="ont-edge-label" x="728" y="364">governedBy</text>
+      </g>
 
-    <div class="ont-legend">
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#f0f5f0;border-color:#3F5E4A"></span>Core class</div>
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#faf8ff;border-color:#6b46c1"></span>Behavioral class</div>
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#f8fbff;border-color:#1d4ed8"></span>Capital class</div>
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#f8fff9;border-color:#166534"></span>Reinsurance class</div>
-      <div class="ont-legend-item"><span class="ont-swatch" style="background:#fff;border-color:#aaa;border-style:dashed"></span>Linked entity</div>
-    </div>
+      <!-- Nodes -->
+      <!-- Policy — core -->
+      <g class="ont-node core">
+        <rect x="130" y="30" width="120" height="40" rx="2"/>
+        <text x="190" y="50">Policy</text>
+      </g>
+
+      <!-- Block — core hub -->
+      <g class="ont-node core">
+        <rect x="120" y="115" width="140" height="80" rx="2"/>
+        <text x="190" y="148">Block</text>
+        <text x="190" y="168" style="font-size:9px;fill:#ECE5D6;font-weight:400">MYGA &middot; FIA &middot; ULSG &middot; PRT</text>
+      </g>
+
+      <!-- CreditingRateTier -->
+      <g class="ont-node">
+        <rect x="370" y="120" width="240" height="70" rx="2"/>
+        <text x="490" y="148">CreditingRateTier</text>
+        <text x="490" y="168" style="font-size:9px;fill:#6B6458">SurrenderPeriod &middot; Crediting%</text>
+      </g>
+
+      <!-- LapseCurve — attr -->
+      <g class="ont-node attr">
+        <rect x="370" y="245" width="240" height="40" rx="2"/>
+        <text x="490" y="265">LapseCurve &middot; PolicyholderBehavior</text>
+      </g>
+
+      <!-- RBCCharge -->
+      <g class="ont-node">
+        <rect x="120" y="255" width="140" height="80" rx="2"/>
+        <text x="190" y="283">RBCCharge</text>
+        <text x="190" y="301" style="font-size:9px;fill:#6B6458">C1 asset &middot; C2 mort.</text>
+        <text x="190" y="317" style="font-size:9px;fill:#6B6458">C3 int. &middot; C4 biz</text>
+      </g>
+
+      <!-- CapitalPosition -->
+      <g class="ont-node">
+        <rect x="370" y="255" width="240" height="80" rx="2"/>
+        <text x="490" y="283">CapitalPosition</text>
+        <text x="490" y="301" style="font-size:9px;fill:#6B6458">SAP RBC &middot; BSCR</text>
+        <text x="490" y="317" style="font-size:9px;fill:#6B6458">entity-level ratios</text>
+      </g>
+
+      <!-- Entity — attr -->
+      <g class="ont-node attr">
+        <rect x="370" y="385" width="240" height="40" rx="2"/>
+        <text x="490" y="405">Entity &middot; US OpCo &middot; Bermuda Re</text>
+      </g>
+
+      <!-- ReinsStructure — core -->
+      <g class="ont-node core">
+        <rect x="640" y="120" width="110" height="80" rx="2"/>
+        <text x="695" y="148">ReinsStructure</text>
+        <text x="695" y="166" style="font-size:9px;fill:#ECE5D6;font-weight:400">FW &middot; Coins. &middot; ModCo</text>
+      </g>
+
+      <!-- EarningsBridge -->
+      <g class="ont-node">
+        <rect x="640" y="255" width="110" height="80" rx="2"/>
+        <text x="695" y="280">EarningsBridge</text>
+        <text x="695" y="298" style="font-size:9px;fill:#6B6458">spread ceded</text>
+        <text x="695" y="314" style="font-size:9px;fill:#6B6458">capital released</text>
+      </g>
+
+      <!-- Treaty — attr -->
+      <g class="ont-node attr">
+        <rect x="640" y="385" width="110" height="40" rx="2"/>
+        <text x="695" y="405">Treaty</text>
+      </g>
+
+      <!-- Legend -->
+      <g>
+        <rect x="20" y="465" width="14" height="14" fill="#3F5E4A"/>
+        <text x="42" y="476" style="font-size:10px;fill:#2A3340;text-anchor:start">Core class</text>
+        <rect x="130" y="465" width="14" height="14" fill="#ECE5D6" stroke="#2A3340"/>
+        <text x="152" y="476" style="font-size:10px;fill:#2A3340;text-anchor:start">Characteristic</text>
+        <rect x="280" y="465" width="14" height="14" fill="#FFFFFF" stroke="#2A3340"/>
+        <text x="302" y="476" style="font-size:10px;fill:#2A3340;text-anchor:start">Attribute / linked entity</text>
+      </g>
+    </svg>
   </div>
 
   <div class="ont-pillars">
@@ -615,49 +642,50 @@
 </section>
 
 <section class="section" id="s02">
-  <div class="section-marker">02 / Where the value sits in L&amp;A</div>
+  <div class="section-marker">02 / L&amp;A: Current State</div>
   <h2 class="section-heading">What&rsquo;s at stake.<br/>Precisely.</h2>
-  <div class="prose"><p>Before we talk about how NSAI helps, let&rsquo;s be specific about what&rsquo;s at stake. At a typical $15&ndash;20B life and annuity carrier, the following categories of value are recurring, quantifiable, and currently undercaptured.</p></div>
-  <div style="margin-top:40px">
-    <div class="value-item"><div class="value-head"><span class="value-num">01</span><span class="value-title">Reinvestment timing</span></div><div class="value-body"><p>Maturities roll into a market that has moved. New money goes to work weeks later than it could, and on a $20B general account, even 30bps of reinvestment lag costs roughly $6M annually per percent of book turning over. At normal turnover rates of 8&ndash;12% per year, the recurring annual cost sits in the $10&ndash;20M range.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">02</span><span class="value-title">Spread dislocation capture</span></div><div class="value-body"><p>When spreads widen, carriers with sufficient liquidity and authorization buy. Carriers running quarterly approval cycles miss the window. The differential is <em>permanent</em> NII for the next decade on every dollar deployed. A two-week cycle delay during a 50bps dislocation event costs roughly $5&ndash;10M of locked-in annual spread on a $300M deployment sleeve, compounding forward for the life of the position.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">03</span><span class="value-title">Liability repricing signals</span></div><div class="value-body"><p>Lapse signals are pricing signals. Elevated surrenders in a fixed annuity book are not just a liquidity event &mdash; they are a segmentation signal. Hot-money policyholders behave differently from relationship policyholders; treating them identically costs margin. A carrier that reprices crediting-rate tiers in response to lapse cohort data captures $5&ndash;8M annually on a typical fixed annuity book relative to one running a uniform repricing calendar.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">04</span><span class="value-title">Capital velocity</span></div><div class="value-body"><p>Reinsurance evaluations that take six months miss favorable pricing windows. Capital trapped in legacy in-force blocks for an extra two quarters is capital not redeploying at hurdle rates. On a $4B legacy block, two quarters of delay on a 50% cession represents approximately $35M of foregone redeployment income &mdash; capital present, but idle, while the market moves.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">05</span><span class="value-title">PRT capital efficiency</span></div><div class="value-body"><p>Pension risk transfer is structurally attractive &mdash; long-duration assets that fit GA portfolios, limited competition at the top, and mortality improvement that accrues to the carrier. PRT does consume capital: C2 mortality charges and C3 interest rate charges both apply. But PRT generates among the highest NII per dollar of RBC deployed in the product mix. The opportunity is not to avoid capital consumption &mdash; it is to win more tenders at better prices within existing capital appetite. A 10-percentage-point improvement in win rate is worth $8&ndash;15M annually for an active writer, fully utilizing existing capital rather than requiring incremental allocation.</p></div></div>
-    <div class="value-item"><div class="value-head"><span class="value-num">06</span><span class="value-title">Continuous cross-entity portfolio optimization</span></div><div class="value-body"><p>Multi-entity carriers &mdash; a U.S. operating company alongside a Bermuda affiliate or captive &mdash; have processes for entity routing, but those processes were built for a quarterly cadence and a static capital snapshot. The value is not in making a routing decision once at transaction time. It is in continuously monitoring capital efficiency across entities as positions evolve, spreads shift, and regulatory capital requirements update &mdash; and surfacing rebalancing moves as a live feed of optimization signals. Most carriers have a quarterly process for this. NSAI runs it continuously, across all live positions simultaneously. At a multi-entity $20B carrier, static quarterly routing creates $5&ndash;15M of annual ROE drag. That analysis is now always running.</p></div></div>
+  <div class="prose"><p>At a typical $15&ndash;20B life and annuity carrier, the following categories of value are recurring, quantifiable, and currently undercaptured.</p></div>
+  <div class="value-list" style="margin-top:32px">
+    <div class="value-item"><span class="value-num">01</span><div class="value-content"><div class="value-title">Reinvestment timing</div><div class="value-body">Maturities roll into a market that has moved. New money goes to work weeks later than it could, and on a $20B general account, even 30bps of reinvestment lag costs roughly $6M annually per percent of book turning over. At normal turnover rates of 8&ndash;12% per year, the recurring annual cost sits in the $10&ndash;20M range.</div></div></div>
+    <div class="value-item"><span class="value-num">02</span><div class="value-content"><div class="value-title">Spread dislocation capture</div><div class="value-body">When spreads widen, carriers with sufficient liquidity and authorization buy. Carriers running quarterly approval cycles miss the window. The differential is <em>permanent</em> NII for the next decade on every dollar deployed. A two-week cycle delay during a 50bps dislocation event costs roughly $5&ndash;10M of locked-in annual spread on a $300M deployment sleeve, compounding forward for the life of the position.</div></div></div>
+    <div class="value-item"><span class="value-num">03</span><div class="value-content"><div class="value-title">Liability repricing signals</div><div class="value-body">Lapse signals are pricing signals. Elevated surrenders in a fixed annuity book are not just a liquidity event &mdash; they are a segmentation signal. A carrier that reprices crediting-rate tiers in response to lapse cohort data captures $5&ndash;8M annually on a typical fixed annuity book relative to one running a uniform repricing calendar.</div></div></div>
+    <div class="value-item"><span class="value-num">04</span><div class="value-content"><div class="value-title">Capital velocity</div><div class="value-body">Reinsurance evaluations that take six months miss favorable pricing windows. Capital trapped in legacy in-force blocks for an extra two quarters is capital not redeploying at hurdle rates. On a $4B legacy block, two quarters of delay on a 50% cession represents approximately $35M of foregone redeployment income &mdash; capital present, but idle, while the market moves.</div></div></div>
+    <div class="value-item"><span class="value-num">05</span><div class="value-content"><div class="value-title">PRT capital efficiency</div><div class="value-body">Pension risk transfer is structurally attractive &mdash; long-duration assets that fit GA portfolios, limited competition at the top, and mortality improvement that accrues to the carrier. PRT generates among the highest NII per dollar of RBC deployed in the product mix. A 10-percentage-point improvement in win rate is worth $8&ndash;15M annually for an active writer, fully utilizing existing capital.</div></div></div>
+    <div class="value-item"><span class="value-num">06</span><div class="value-content"><div class="value-title">Continuous cross-entity optimization</div><div class="value-body">Multi-entity carriers have processes for entity routing, but those processes were built for a quarterly cadence and a static capital snapshot. NSAI runs this continuously, across all live positions simultaneously. At a multi-entity $20B carrier, static quarterly routing creates $5&ndash;15M of annual ROE drag.</div></div></div>
   </div>
-  <div class="summary-bar">
+  <div class="summary-bar" style="margin-top:32px">
     <div class="sum-item"><span class="sum-label">Aggregate annual value at stake</span><span class="sum-val">$40&ndash;80M</span></div>
     <div class="sum-item"><span class="sum-label">Carrier profile</span><span class="sum-val">$15&ndash;20B GA</span></div>
     <div class="sum-item"><span class="sum-label">Nature</span><span style="font-size:14px;font-family:var(--fn);font-weight:300;color:var(--ink-mid);padding-top:4px">Recurring. Quantifiable. Currently undercaptured.</span></div>
   </div>
-</section>
 
-<section class="section" id="s03">
-  <div class="section-marker">03 / What carriers already have</div>
-  <h2 class="section-heading">Sophisticated tools.<br/>Sophisticated teams.</h2>
-  <div class="prose"><p>Most large life and annuity carriers do not lack capital management sophistication. This is not a market of unsophisticated actors waiting to be taught ALM.</p></div>
-  <div class="stack-list">
-    <div class="stack-item"><span class="stack-label">Actuarial</span><span class="stack-value">Prophet, AXIS, MG-ALFA, Polysystems, RAFM, GGY-AXIS &mdash; often multiple in parallel, heavily customized over decades to match the specific liability structure of the company.</span></div>
-    <div class="stack-item"><span class="stack-label">Asset management</span><span class="stack-value">Aladdin, BlackRock Solutions, or proprietary systems managing duration targets, sector allocation, and daily liquidity across a general account spanning dozens of asset classes.</span></div>
-    <div class="stack-item"><span class="stack-label">Capital modeling</span><span class="stack-value">Custom internal RBC and economic capital tools, sometimes built over fifteen years by teams that know the book better than any vendor does.</span></div>
-    <div class="stack-item"><span class="stack-label">ALM function</span><span class="stack-value">Dedicated, often led by senior actuaries with 20+ years of experience and deep familiarity with the specific liability profile of the company.</span></div>
-    <div class="stack-item"><span class="stack-label">Governance</span><span class="stack-value">Board-level capital management committees with independent actuarial review, rating agency relationships, and regulatory reporting infrastructure already in place.</span></div>
-  </div>
-  <div class="prose" style="margin-top:20px">
-    <p>These are not gaps. Anyone arguing that large L&amp;A carriers need to be taught capital management is not a credible counterparty &mdash; and will be recognized as such immediately.</p>
-    <p>But the question is not whether carriers have capability. The question is whether that capability is <em>integrated, fast, and auditable enough to capture the value identified in Section 02.</em></p>
+  <div style="margin-top:56px;padding-top:40px;border-top:1px solid var(--rule)">
+    <div class="section-marker" style="margin-bottom:20px">What carriers already have</div>
+    <h3 style="font-family:'Fraunces',serif;font-weight:400;font-size:clamp(22px,3vw,34px);line-height:1.1;letter-spacing:-0.02em;color:var(--ink);max-width:600px;margin-bottom:24px">Sophisticated tools.<br/>Sophisticated teams.</h3>
+    <div class="prose"><p>Most large life and annuity carriers do not lack capital management sophistication. This is not a market of unsophisticated actors waiting to be taught ALM.</p></div>
+    <div class="stack-list">
+      <div class="stack-item"><span class="stack-label">Actuarial</span><span class="stack-value">Prophet, AXIS, MG-ALFA, Polysystems, RAFM, GGY-AXIS &mdash; often multiple in parallel, heavily customized over decades to match the specific liability structure of the company.</span></div>
+      <div class="stack-item"><span class="stack-label">Asset management</span><span class="stack-value">Aladdin, BlackRock Solutions, or proprietary systems managing duration targets, sector allocation, and daily liquidity across a general account spanning dozens of asset classes.</span></div>
+      <div class="stack-item"><span class="stack-label">Capital modeling</span><span class="stack-value">Custom internal RBC and economic capital tools, sometimes built over fifteen years by teams that know the book better than any vendor does.</span></div>
+      <div class="stack-item"><span class="stack-label">ALM function</span><span class="stack-value">Dedicated, often led by senior actuaries with 20+ years of experience and deep familiarity with the specific liability profile of the company.</span></div>
+      <div class="stack-item"><span class="stack-label">Governance</span><span class="stack-value">Board-level capital management committees with independent actuarial review, rating agency relationships, and regulatory reporting infrastructure already in place.</span></div>
+    </div>
+    <div class="prose" style="margin-top:20px">
+      <p>These are not gaps. Anyone arguing that large L&amp;A carriers need to be taught capital management is not a credible counterparty &mdash; and will be recognized as such immediately.</p>
+      <p>But the question is not whether carriers have capability. The question is whether that capability is <em>integrated, fast, and auditable enough to capture the value identified above.</em></p>
+    </div>
   </div>
 </section>
 
 
 <div class="carrier-section" id="s05">
   <div class="carrier-section-inner">
-    <div class="section-marker">04 / The demo: how NSAI changes the approach</div>
+    <div class="section-marker">03 / Demo</div>
     <h2 class="section-heading">How NSAI changes<br/>the capital management approach.</h2>
     <div class="prose" style="margin-bottom:36px"><p>The demo runs on a representative carrier &mdash; Meridian Life &amp; Annuity &mdash; configured for NSAI. Below: who Meridian is, what changes when NSAI runs underneath their capital management function, and the live engine itself.</p></div>
   </div>
 
+  <div class="carrier-content">
   <div class="carrier-sub-label">The carrier</div>
 
   <div class="carrier-card">
@@ -798,14 +826,14 @@
     </div>
   </div>
 
-  <div style="padding-bottom:64px"></div>
+  </div><!-- /carrier-content -->
 </div>
 
-<div class="demo-band" id="s06" style="scroll-margin-top:56px">
+<div class="demo-band" id="s06">
   <div class="demo-inner">
     <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">
       <div>
-        <div class="demo-eyebrow">05 / The demo</div>
+        <div class="demo-eyebrow">Live Engine</div>
         <div class="demo-title">NSAI Capital Management Engine</div>
       </div>
       <div style="font-family:var(--fm);font-size:11px;color:var(--d-dim);letter-spacing:.04em">Meridian Life &amp; Annuity &middot; All figures fictional &middot; Illustrative only</div>
@@ -856,7 +884,7 @@
             <div class="card-headline">+$13.0M annual NII &middot; +$20M rate upside protected</div>
             <div class="card-sub">All five actions within board-approved authority &middot; execution 1&ndash;14 days</div>
             <div id="port-action-list"></div>
-            <div class="action-row" style="margin-top:14px">
+            <div class="action-row">
               <button class="btn-expand" id="port-exp-btn" onclick="toggleExpand('port-expand','port-exp-btn')">&#9662; See full rationale &amp; tradeoffs</button>
               <button class="btn-approve" id="btn-m02" onclick="approveModule('m02')">Approve all &rarr;</button>
             </div>
@@ -1093,7 +1121,7 @@
 
 
 <section class="section" id="s07">
-  <div class="section-marker">06 / What this looks like in practice</div>
+  <div class="section-marker">04 / Results</div>
   <h2 class="section-heading">The results a representative<br/>carrier should expect.</h2>
   <div class="outcomes-grid">
     <div class="outcome-cell"><div class="outcome-label">Incremental annual NII</div><div class="outcome-num">$30&ndash;50M</div><div class="outcome-desc">Through faster reinvestment execution, spread dislocation capture, and portfolio rotation into higher-yielding sectors within existing guardrails.</div></div>
@@ -1103,7 +1131,7 @@
   </div>
   <div class="prose">
     <p>Governance is the reason the board approves this. Speed and dollar value are the reasons the CFO funds it. The two are not in tension &mdash; governance is what makes the speed safe, and what makes the decisions defensible when scrutinized by people who weren&rsquo;t in the room.</p>
-    <p>The carriers that capture the value described in Section 02 will be the ones with an integrated, auditable decision layer across their capital management function. The tools are already in place. The layer is what&rsquo;s missing.</p>
+    <p>The carriers that capture the value described above will be the ones with an integrated, auditable decision layer across their capital management function. The tools are already in place. The layer is what&rsquo;s missing.</p>
   </div>
 </section>
 
@@ -1548,7 +1576,7 @@ renderAcqSensitivity();
 // ── ToC active tracking ──
 (function(){
   const sections = [
-    {id:'s01',el:null},{id:'s02',el:null},{id:'s03',el:null},{id:'s05',el:null},{id:'s06',el:null}
+    {id:'s01',el:null},{id:'s02',el:null},{id:'s05',el:null},{id:'s07',el:null}
   ];
   sections.forEach(s=>{ s.el = document.getElementById(s.id); });
   const links = document.querySelectorAll('#main-nav a[data-section]');
