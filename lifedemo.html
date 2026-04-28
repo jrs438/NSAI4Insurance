@@ -187,18 +187,21 @@
     .sls-status{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-grn);background:rgba(34,197,94,.12);padding:2px 8px}
     .sls-jump{margin-left:auto;background:none;border:1px solid var(--d-brd);color:var(--d-blu);font-family:var(--fm);font-size:10px;letter-spacing:.06em;padding:5px 10px;cursor:pointer;text-transform:uppercase}
     .sls-jump:hover{border-color:var(--d-blu);color:var(--d-ink)}
-    /* Phase 2 — M02 rich action items */
-    .action-item-rich{display:block;padding:14px 0;border-bottom:1px solid var(--d-brd2)}
+    /* M02 rich action items */
+    .action-item-rich{display:flex!important;flex-direction:column!important;padding:14px 0;border-bottom:1px solid var(--d-brd2)}
     .action-item-rich:last-child{border-bottom:none}
-    .action-item-rich.aapr{background:rgba(34,197,94,.04)}
-    .action-row-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-    .aapr-check{color:var(--d-grn)!important}
-    .btn-approve-mini{background:var(--accent-2);border:1px solid var(--accent-2);color:#fff;font-family:var(--fm);font-size:10px;letter-spacing:.04em;padding:5px 11px;cursor:pointer;flex-shrink:0;margin-top:1px;text-transform:uppercase}
+    .action-item-rich.aapr{background:rgba(34,197,94,.03)}
+    .action-row-top{display:flex;align-items:center;gap:10px}
+    .action-check{opacity:.18;transition:opacity .2s}
+    .action-item-rich.aapr .action-check{opacity:1}
+    .btn-approve-mini{background:var(--accent-2);border:1px solid var(--accent-2);color:#fff;font-family:var(--fm);font-size:10px;letter-spacing:.04em;padding:5px 11px;cursor:pointer;flex-shrink:0;text-transform:uppercase;margin-left:auto}
     .btn-approve-mini:hover:not(.approved){background:var(--la-green-light)}
     .btn-approve-mini.approved{background:rgba(34,197,94,.15);border-color:var(--d-grn);color:var(--d-grn);cursor:default}
-    .action-securities{display:flex;align-items:flex-start;gap:10px;padding:8px 12px 0 24px;font-size:11px;line-height:1.55}
-    .action-sec-label{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);flex-shrink:0;padding-top:2px;width:60px}
+    .action-securities{display:flex;align-items:flex-start;gap:10px;padding:5px 0 0 22px;font-size:11px;line-height:1.55}
+    .action-sec-label{font-family:var(--fm);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);flex-shrink:0;padding-top:2px;width:56px}
     .action-sec-text{color:var(--d-mid);font-family:var(--fm);font-size:11px}
+    /* separator above Approve all row */
+    #port-action-list + .action-row{margin-top:14px;padding-top:12px;border-top:1px solid var(--d-brd2)}
     /* Phase 2 — M04 routing clickable */
     .routing-section-label{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--d-dim);margin-bottom:8px}
     .routing-choice.clickable{display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:border-color .15s}
@@ -315,12 +318,12 @@
     .bridge-row{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;color:var(--d-mid)}
     .bridge-row.total{border-top:1px solid var(--d-brd);margin-top:6px;padding-top:8px;color:var(--d-ink);font-weight:500}
     .bridge-val{font-family:var(--fm);font-size:12px}.bridge-val.pos{color:var(--d-grn)}.bridge-val.neg{color:var(--d-red)}
-    .action-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--d-brd2)}
+    .action-item{display:flex;flex-direction:column;padding:10px 0;border-bottom:1px solid var(--d-brd2)}
     .action-item:last-child{border-bottom:none}
-    .action-check{color:var(--d-grn);font-size:12px;flex-shrink:0;margin-top:2px}
+    .action-check{color:var(--d-grn);font-size:12px;flex-shrink:0}
     .action-name{flex:1}.action-name-main{color:var(--d-ink);font-size:13px;line-height:1.4}
     .action-name-sub{font-size:11px;color:var(--d-mid);margin-top:2px}
-    .action-nii{font-family:var(--fm);font-size:11px;color:var(--d-grn);flex-shrink:0;margin-top:2px}
+    .action-nii{font-family:var(--fm);font-size:11px;color:var(--d-grn);flex-shrink:0;white-space:nowrap}
     .slider-display{display:flex;align-items:center;gap:12px;margin-bottom:16px}
     .slider-end{font-family:var(--fm);font-size:10px;color:var(--d-dim);letter-spacing:.04em;flex-shrink:0}
     .slider-track{flex:1;height:2px;background:var(--d-brd);border-radius:2px;position:relative}
@@ -494,130 +497,118 @@
 
   <div class="ont-viz">
     <div class="ont-viz-label">Fig. 01 &mdash; Minimal Life &amp; Annuity Capital Ontology</div>
-    <svg class="ont-svg" viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg">
+    <svg class="ont-svg" viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <marker id="la-arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
           <path d="M0,0 L7,3 L0,6" fill="none" stroke="#2A3340" stroke-width="1"/>
         </marker>
       </defs>
 
-      <!-- Edges -->
+      <!-- Edges (drawn first so nodes render on top) -->
       <g>
-        <!-- Policy → Block -->
-        <path class="ont-edge" d="M 190 65 L 190 115" marker-end="url(#arr)"/>
-        <text class="ont-edge-label" x="215" y="94">covers</text>
+        <!-- Policy → Block (vertical) -->
+        <path class="ont-edge" d="M 115 50 L 115 68" marker-end="url(#la-arr)"/>
+        <text class="ont-edge-label" x="130" y="61">covers</text>
 
-        <!-- Block → CreditingRateTier -->
-        <path class="ont-edge" d="M 260 155 L 370 155" marker-end="url(#arr)"/>
-        <text class="ont-edge-label" x="312" y="147">hasTier</text>
+        <!-- Block → CreditingRateTier (row 1, horizontal) -->
+        <path class="ont-edge" d="M 205 98 L 230 98" marker-end="url(#la-arr)"/>
+        <text class="ont-edge-label" x="216" y="90">hasTier</text>
 
         <!-- CreditingRateTier → LapseCurve -->
-        <path class="ont-edge" d="M 490 195 L 490 245" marker-end="url(#arr)"/>
-        <text class="ont-edge-label" x="515" y="224">drives</text>
+        <path class="ont-edge" d="M 445 98 L 465 95" marker-end="url(#la-arr)"/>
+        <text class="ont-edge-label" x="454" y="88">drives</text>
 
-        <!-- Block → RBCCharge -->
-        <path class="ont-edge" d="M 190 195 L 190 255" marker-end="url(#arr)"/>
-        <text class="ont-edge-label" x="216" y="228">generates</text>
+        <!-- Block → RBCCharge (row 2, L-shape) -->
+        <path class="ont-edge" d="M 205 128 L 218 128 L 218 183 L 230 183" marker-end="url(#la-arr)"/>
+        <text class="ont-edge-label" x="220" y="155">generates</text>
 
         <!-- RBCCharge → CapitalPosition -->
-        <path class="ont-edge" d="M 260 295 L 370 295" marker-end="url(#arr)"/>
-        <text class="ont-edge-label" x="312" y="287">loadsInto</text>
+        <path class="ont-edge" d="M 390 183 L 415 180" marker-end="url(#la-arr)"/>
+        <text class="ont-edge-label" x="401" y="172">loadsInto</text>
 
         <!-- CapitalPosition → Entity -->
-        <path class="ont-edge" d="M 490 335 L 490 385" marker-end="url(#arr)"/>
-        <text class="ont-edge-label" x="516" y="364">heldBy</text>
+        <path class="ont-edge" d="M 625 178 L 648 173" marker-end="url(#la-arr)"/>
+        <text class="ont-edge-label" x="635" y="166">heldBy</text>
 
-        <!-- Block → ReinsStructure (curve right) -->
-        <path class="ont-edge" d="M 260 165 Q 650 140 660 165" marker-end="url(#arr)" stroke-dasharray="4,3"/>
-        <text class="ont-edge-label" x="460" y="140">reinsuredUnder</text>
+        <!-- Block → ReinsStructure (row 3, L-shape dashed) -->
+        <path class="ont-edge" d="M 205 155 L 218 155 L 218 263 L 230 263" marker-end="url(#la-arr)" stroke-dasharray="4,3"/>
+        <text class="ont-edge-label" x="220" y="220">reinsuredUnder</text>
 
         <!-- ReinsStructure → EarningsBridge -->
-        <path class="ont-edge" d="M 700 205 L 700 255" marker-end="url(#arr)"/>
-        <text class="ont-edge-label" x="728" y="234">resolvesTo</text>
+        <path class="ont-edge" d="M 390 263 L 415 261" marker-end="url(#la-arr)"/>
+        <text class="ont-edge-label" x="400" y="253">resolvesTo</text>
 
         <!-- EarningsBridge → Treaty -->
-        <path class="ont-edge" d="M 700 335 L 700 385" marker-end="url(#arr)"/>
-        <text class="ont-edge-label" x="728" y="364">governedBy</text>
+        <path class="ont-edge" d="M 605 260 L 628 258" marker-end="url(#la-arr)"/>
+        <text class="ont-edge-label" x="615" y="251">governedBy</text>
       </g>
 
-      <!-- Nodes -->
-      <!-- Policy — core -->
+      <!-- NODES -->
+
+      <!-- Policy (top, above Block) -->
       <g class="ont-node core">
-        <rect x="130" y="30" width="120" height="40" rx="2"/>
-        <text x="190" y="50">Policy</text>
+        <rect x="60" y="12" width="110" height="38" rx="2"/>
+        <text x="115" y="31">Policy</text>
       </g>
 
-      <!-- Block — core hub -->
+      <!-- Block — hub, left column, tall -->
       <g class="ont-node core">
-        <rect x="120" y="115" width="140" height="80" rx="2"/>
-        <text x="190" y="148">Block</text>
-        <text x="190" y="168" style="font-size:9px;fill:#ECE5D6;font-weight:400">MYGA &middot; FIA &middot; ULSG &middot; PRT</text>
+        <rect x="15" y="68" width="190" height="105" rx="2"/>
+        <text x="110" y="108">Block</text>
+        <text x="110" y="128" style="font-size:9px;fill:#ECE5D6;font-weight:400">MYGA &middot; FIA &middot; ULSG &middot; PRT</text>
       </g>
 
-      <!-- CreditingRateTier -->
+      <!-- Row 1: CreditingRateTier → LapseCurve -->
       <g class="ont-node">
-        <rect x="370" y="120" width="240" height="70" rx="2"/>
-        <text x="490" y="148">CreditingRateTier</text>
-        <text x="490" y="168" style="font-size:9px;fill:#6B6458">SurrenderPeriod &middot; Crediting%</text>
+        <rect x="230" y="68" width="215" height="60" rx="2"/>
+        <text x="337" y="95">CreditingRateTier</text>
+        <text x="337" y="113" style="font-size:9px;fill:#6B6458">SurrenderPeriod &middot; Crediting%</text>
       </g>
-
-      <!-- LapseCurve — attr -->
       <g class="ont-node attr">
-        <rect x="370" y="245" width="240" height="40" rx="2"/>
-        <text x="490" y="265">LapseCurve &middot; PolicyholderBehavior</text>
+        <rect x="465" y="71" width="200" height="38" rx="2"/>
+        <text x="565" y="90">LapseCurve / Behavior</text>
       </g>
 
-      <!-- RBCCharge -->
+      <!-- Row 2: RBCCharge → CapitalPosition → Entity -->
       <g class="ont-node">
-        <rect x="120" y="255" width="140" height="80" rx="2"/>
-        <text x="190" y="283">RBCCharge</text>
-        <text x="190" y="301" style="font-size:9px;fill:#6B6458">C1 asset &middot; C2 mort.</text>
-        <text x="190" y="317" style="font-size:9px;fill:#6B6458">C3 int. &middot; C4 biz</text>
+        <rect x="230" y="155" width="160" height="65" rx="2"/>
+        <text x="310" y="181">RBCCharge</text>
+        <text x="310" y="199" style="font-size:9px;fill:#6B6458">C1 &middot; C2 &middot; C3 &middot; C4</text>
       </g>
-
-      <!-- CapitalPosition -->
       <g class="ont-node">
-        <rect x="370" y="255" width="240" height="80" rx="2"/>
-        <text x="490" y="283">CapitalPosition</text>
-        <text x="490" y="301" style="font-size:9px;fill:#6B6458">SAP RBC &middot; BSCR</text>
-        <text x="490" y="317" style="font-size:9px;fill:#6B6458">entity-level ratios</text>
+        <rect x="415" y="150" width="210" height="65" rx="2"/>
+        <text x="520" y="176">CapitalPosition</text>
+        <text x="520" y="194" style="font-size:9px;fill:#6B6458">SAP RBC &middot; BSCR &middot; ratios</text>
       </g>
-
-      <!-- Entity — attr -->
       <g class="ont-node attr">
-        <rect x="370" y="385" width="240" height="40" rx="2"/>
-        <text x="490" y="405">Entity &middot; US OpCo &middot; Bermuda Re</text>
+        <rect x="648" y="155" width="192" height="38" rx="2"/>
+        <text x="744" y="174">Entity &middot; OpCo &middot; Bermuda Re</text>
       </g>
 
-      <!-- ReinsStructure — core -->
+      <!-- Row 3: ReinsStructure → EarningsBridge → Treaty -->
       <g class="ont-node core">
-        <rect x="640" y="120" width="110" height="80" rx="2"/>
-        <text x="695" y="148">ReinsStructure</text>
-        <text x="695" y="166" style="font-size:9px;fill:#ECE5D6;font-weight:400">FW &middot; Coins. &middot; ModCo</text>
+        <rect x="230" y="238" width="160" height="55" rx="2"/>
+        <text x="310" y="261">ReinsStructure</text>
+        <text x="310" y="280" style="font-size:9px;fill:#ECE5D6;font-weight:400">FW &middot; Coins. &middot; ModCo</text>
       </g>
-
-      <!-- EarningsBridge -->
       <g class="ont-node">
-        <rect x="640" y="255" width="110" height="80" rx="2"/>
-        <text x="695" y="280">EarningsBridge</text>
-        <text x="695" y="298" style="font-size:9px;fill:#6B6458">spread ceded</text>
-        <text x="695" y="314" style="font-size:9px;fill:#6B6458">capital released</text>
+        <rect x="415" y="235" width="190" height="55" rx="2"/>
+        <text x="510" y="258">EarningsBridge</text>
+        <text x="510" y="276" style="font-size:9px;fill:#6B6458">spread ceded &middot; capital released</text>
       </g>
-
-      <!-- Treaty — attr -->
       <g class="ont-node attr">
-        <rect x="640" y="385" width="110" height="40" rx="2"/>
-        <text x="695" y="405">Treaty</text>
+        <rect x="628" y="239" width="192" height="38" rx="2"/>
+        <text x="724" y="258">Treaty &middot; CommissionSchedule</text>
       </g>
 
       <!-- Legend -->
       <g>
-        <rect x="20" y="465" width="14" height="14" fill="#3F5E4A"/>
-        <text x="42" y="476" style="font-size:10px;fill:#2A3340;text-anchor:start">Core class</text>
-        <rect x="130" y="465" width="14" height="14" fill="#ECE5D6" stroke="#2A3340"/>
-        <text x="152" y="476" style="font-size:10px;fill:#2A3340;text-anchor:start">Characteristic</text>
-        <rect x="280" y="465" width="14" height="14" fill="#FFFFFF" stroke="#2A3340"/>
-        <text x="302" y="476" style="font-size:10px;fill:#2A3340;text-anchor:start">Attribute / linked entity</text>
+        <rect x="20" y="282" width="12" height="12" fill="#3F5E4A"/>
+        <text x="40" y="292" style="font-size:10px;fill:#2A3340;text-anchor:start">Core class</text>
+        <rect x="130" y="282" width="12" height="12" fill="#ECE5D6" stroke="#2A3340"/>
+        <text x="150" y="292" style="font-size:10px;fill:#2A3340;text-anchor:start">Characteristic</text>
+        <rect x="280" y="282" width="12" height="12" fill="#FFFFFF" stroke="#2A3340"/>
+        <text x="300" y="292" style="font-size:10px;fill:#2A3340;text-anchor:start">Attribute / linked entity</text>
       </g>
     </svg>
   </div>
