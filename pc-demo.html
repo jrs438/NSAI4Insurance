@@ -2572,39 +2572,6 @@
   </div>
 </nav>
 
-<section id="going-deeper">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-num">02 / DEEPER</div>
-      <h2 class="sec-title">What&rsquo;s happening <em>inside</em> each system.</h2>
-    </div>
-    <div class="deep-dive open" style="margin-top: 0;">
-      <div class="deep-dive-body">
-        <div class="deep-dive-body-inner">
-          <div>
-            <h5>Inside an LLM</h5>
-            <p>A submission comes in as text. The model tokenizes it and passes the tokens through dozens of transformer layers, each applying attention across the sequence. At each position, the model produces a probability distribution over its vocabulary and samples the next token.</p>
-            <p>There is no separate &ldquo;reasoning step.&rdquo; What looks like reasoning &mdash; chain-of-thought, for example &mdash; is the model generating text that resembles reasoning it has seen in training data. It often gets the answer right because that pattern is well-represented in the corpus. It sometimes gets it confidently wrong for the same reason.</p>
-            <p>The model has no persistent representation of your underwriting manual. Even if you paste the manual into context, the model&rsquo;s attention to it is probabilistic; there is no guarantee rule <code>CP-ACC-02</code> will be applied when it should be.</p>
-          </div>
-          <div>
-            <h5>Inside RAG + LLM</h5>
-            <p>The submission triggers a retrieval step first. The system embeds the query, searches a vector index over your documents, and pulls back the top-k most relevant passages. This is deterministic &mdash; the same query returns the same passages.</p>
-            <p>Those passages are injected into the prompt. Now the LLM generates with your actual guidelines visible in its context window. Citations in the output refer to retrieved passages, which is a real improvement: hallucinated facts are much rarer, and the model&rsquo;s answers are grounded in your content.</p>
-            <p>But the generation step is <em>still</em> an LLM. It can misread a retrieved clause, paraphrase it incorrectly, or let its training-data priors override what the passage actually says. And retrieval only works on documents &mdash; not on live portfolio data, APIs, or structured operational systems.</p>
-          </div>
-          <div>
-            <h5>Inside a Neurosymbolic System</h5>
-            <p>The same submission arrives as text. A neural extractor (often an LLM itself, constrained) parses it into structured facts: <code>Location(id=L1, address=&quot;Galveston, TX&quot;, construction=JoistedMasonry, occupancy=MetalFabrication, tiv=USD 38M)</code>.</p>
-            <p>These facts are asserted into a knowledge graph built on an ontology. A reasoner &mdash; a rules engine or a description-logic inference engine &mdash; then evaluates every applicable rule. Rule <code>CP-ACC-02</code> is represented as executable logic: <code>IF post_bind_accum &gt; 0.80 &times; cap THEN breach</code>.</p>
-            <p>The conclusion isn&rsquo;t generated &mdash; it&rsquo;s <em>derived</em>. Every derivation produces a proof: the fact, the rule, and the binding. That proof is what makes the output auditable, consistent, and defensible.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="demo">
   <div class="wrap">
     <div class="sec-head">
