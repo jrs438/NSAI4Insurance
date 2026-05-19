@@ -3693,7 +3693,7 @@
             <h5>Inside an LLM</h5>
             <p>A submission comes in as text. The model tokenizes it and passes the tokens through dozens of transformer layers, each applying attention across the sequence. At each position, the model produces a probability distribution over its vocabulary and samples the next token.</p>
             <p>There is no separate &ldquo;reasoning step.&rdquo; What looks like reasoning &mdash; chain-of-thought, for example &mdash; is the model generating text that resembles reasoning it has seen in training data. It often gets the answer right because that pattern is well-represented in the corpus. It sometimes gets it confidently wrong for the same reason.</p>
-            <p>The model has no persistent representation of your underwriting manual. Even if you paste the manual into context, the model&rsquo;s attention to it is probabilistic; there is no guarantee rule <code>CP-ACC-02</code> will be applied when it should be.</p>
+            <p>The model has no persistent representation of your underwriting manual or your expiring policy&rsquo;s subjectivities. Even if you paste them into context, the model&rsquo;s attention to them is probabilistic; there is no guarantee subjectivity <code>CP-OPS-04</code> will be matched against the COPE and MSDS evidence when it should be.</p>
           </div>
           <div>
             <h5>Inside RAG + LLM</h5>
@@ -3703,8 +3703,8 @@
           </div>
           <div>
             <h5>Inside a Neurosymbolic System</h5>
-            <p>The same submission arrives as text. A neural extractor (often an LLM itself, constrained) parses it into structured facts: <code>Location(id=L1, address=&quot;Galveston, TX&quot;, construction=JoistedMasonry, occupancy=MetalFabrication, tiv=USD 38M)</code>.</p>
-            <p>These facts are asserted into a knowledge graph built on an ontology. A reasoner &mdash; a rules engine or a description-logic inference engine &mdash; then evaluates every applicable rule. Rule <code>CP-ACC-02</code> is represented as executable logic: <code>IF post_bind_accum &gt; 0.80 &times; cap THEN breach</code>.</p>
+            <p>The same six documents arrive as text. A neural extractor (often an LLM itself, constrained) parses them into structured facts keyed by document and field: <code>COPE.Building_3.partition = new_coating_cell</code>, <code>MSDS.Location_B3.flash_point = {18, 21, 24, 27&deg;C}</code>, <code>Application.operations_change = "none"</code>.</p>
+            <p>These facts are asserted into a knowledge graph built on an ontology &mdash; one that knows <code>SOV.Building_3</code>, <code>COPE.Building_3</code>, <code>MSDS.Location_B3</code>, and <code>SprinklerCert.Building_3</code> are the same physical entity. A reasoner then evaluates every applicable rule. Subjectivity <code>CP-OPS-04</code> is represented as executable logic: <code>IF observed_operation &isin; {coating, dipping, ignitable_liquid} AND prior_notice = false THEN subjectivity_unmet</code>.</p>
             <p>The conclusion isn&rsquo;t generated &mdash; it&rsquo;s <em>derived</em>. Every derivation produces a proof: the fact, the rule, and the binding. That proof is what makes the output auditable, consistent, and defensible.</p>
           </div>
         </div>
