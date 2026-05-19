@@ -2562,8 +2562,9 @@
 
   /* ===================================================================
      HERO REBUILD — May 2026
-     Renewal-scenario submission package, LLM panel, NSAI pipeline,
-     remediation accordion, simplified compare widget, Act 2 panel.
+     Submission package · LLM/RAG panel · live side-by-side demo (the
+     wow) · NSAI pipeline (the explanation, gated by pipeline-bridge) ·
+     additional-NSAI-reasoning follow-on questions.
      =================================================================== */
 
   /* === SUBMISSION PACKAGE — six documents === */
@@ -3338,67 +3339,6 @@
     font-weight: 500;
     margin-top: 6px;
   }
-  .act2-chart-wrap {
-    margin: 40px 0 0;
-    max-width: 880px;
-  }
-  .act2-chart-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 12px;
-    font-weight: 600;
-  }
-  .act2-bar {
-    height: 56px;
-    background: var(--paper-2);
-    border: 1px solid rgba(28,37,48,0.2);
-    display: flex;
-    overflow: hidden;
-    position: relative;
-  }
-  .act2-bar .bar-rest {
-    flex: 0 0 83%;
-    background: rgba(63,94,74,0.16);
-    display: flex;
-    align-items: center;
-    padding: 0 18px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--nsai);
-    letter-spacing: 0.12em;
-    font-weight: 700;
-  }
-  .act2-bar .bar-flag {
-    flex: 0 0 17%;
-    background: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--paper);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-  }
-  .act2-bar-caption {
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--ink-2);
-    margin-top: 14px;
-    max-width: 68ch;
-  }
-  .act2-bar-caption em { font-style: italic; color: var(--accent); font-weight: 500; }
-  .act2-bar-disclaimer {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    margin-top: 10px;
-    font-style: italic;
-  }
   .act2-cta {
     margin-top: 36px;
     padding-top: 28px;
@@ -3436,6 +3376,92 @@
   }
   .act2-cta-btn:hover::after { transform: translateX(3px); }
 
+  /* === BRIDGE: live demo -> pipeline (the "here's how it worked" framing) === */
+  .pipeline-bridge {
+    margin-top: 56px;
+    margin-bottom: 28px;
+    padding: 26px 30px;
+    border-left: 3px solid var(--accent);
+    background: rgba(63,94,74,0.04);
+  }
+  .pipeline-bridge-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .pipeline-bridge p {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    max-width: 64ch;
+  }
+  .pipeline-bridge p em { font-style: italic; color: var(--accent); }
+
+  /* === ADDITIONAL NSAI REASONING — four follow-on questions === */
+  .add-reason-intro {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-top: 22px;
+    max-width: 68ch;
+  }
+  .add-reason-intro em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .add-reason-grid {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .add-reason-card {
+    background: var(--paper);
+    border: 1px solid rgba(28,37,48,0.18);
+    padding: 26px 28px 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .add-reason-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+  .add-reason-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .add-reason-q {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.3;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .add-reason-q em { font-style: italic; color: var(--accent); }
+  .add-reason-a {
+    font-size: 14px;
+    line-height: 1.62;
+    color: var(--ink-2);
+  }
+  .add-reason-a strong { color: var(--ink); font-weight: 600; }
+
   @media (max-width: 900px) {
     .extract-grid { grid-template-columns: 1fr 1fr; }
     .entity-res-diagram { grid-template-columns: 1fr; gap: 14px; }
@@ -3449,7 +3475,9 @@
       border-top: 1px solid rgba(244,239,230,0.1);
     }
     .act2 { padding: 36px 24px 40px; }
-    .act2-bar .bar-rest { font-size: 10px; padding: 0 10px; }
+    .add-reason-grid { grid-template-columns: 1fr; }
+    .pipeline-bridge { padding: 20px 22px; margin-top: 44px; }
+    .pipeline-bridge p { font-size: 17px; }
     .nsai-stage-body { padding: 18px 20px 20px; }
     .nsai-stage-head { padding: 14px 20px; }
     .remed-head { padding: 14px 16px; grid-template-columns: 28px 1fr 28px; }
@@ -3457,7 +3485,6 @@
   }
   @media (max-width: 600px) {
     .extract-grid { grid-template-columns: 1fr; }
-    .act2-bar { height: 44px; }
     .llm-output { padding: 22px 22px 24px; }
     .llm-rec { font-size: 20px; }
   }
@@ -3866,6 +3893,71 @@
       </div>
     </div>
 
+    <!-- LIVE DEMO — moved before the pipeline so the audience sees the side-by-side outcome first, then we unpack how the reasoner got there -->
+    <div class="live-demo" id="liveDemo">
+      <div class="live-demo-head">
+        <div>
+          <div class="live-demo-eyebrow">LIVE &middot; WATCH BOTH MODELS RUN</div>
+          <h3>See it for <em>yourself</em>.</h3>
+          <p>Press <strong>Run</strong>. Both systems receive the same six documents at the same moment. Watch RAG read each one and produce a confident, well-cited renewal recommendation &mdash; while the neurosymbolic reasoner extracts, resolves entities, surfaces the contradiction, and lands on the decision the documents support together.</p>
+        </div>
+        <button class="run-btn" id="runBtn" onclick="runDemo()">RUN BOTH MODELS</button>
+      </div>
+
+      <div class="stage">
+        <div class="lane llm" id="laneLLM">
+          <div class="lane-head">
+            <div>
+              <div class="lane-tag">RAG + LLM &middot; RETRIEVAL-AUGMENTED</div>
+              <div class="lane-title">Generative AI with Retrieval</div>
+            </div>
+            <div class="lane-clock"><span class="status"></span><span id="clockLLM">0.0s</span></div>
+          </div>
+          <div class="lane-body" id="bodyLLM"></div>
+        </div>
+
+        <div class="lane nsai" id="laneNSAI">
+          <div class="lane-head">
+            <div>
+              <div class="lane-tag">NEUROSYMBOLIC &middot; ONTOLOGY + RULES</div>
+              <div class="lane-title">Hybrid Reasoner</div>
+            </div>
+            <div class="lane-clock"><span class="status"></span><span id="clockNSAI">0.0s</span></div>
+          </div>
+          <div class="lane-body" id="bodyNSAI"></div>
+        </div>
+      </div>
+
+      <div class="compare-3" id="compare3" style="opacity:0; transition: opacity 0.6s ease;">
+        <div class="compare-3-header">
+          <div></div>
+          <div class="c3h-llm">LLM + RAG</div>
+          <div class="c3h-nsai">NSAI</div>
+        </div>
+        <div class="compare-3-row">
+          <div class="c3-metric">Documents reconciled</div>
+          <div class="c3-llm">Read independently</div>
+          <div class="c3-nsai">Cross-referenced</div>
+        </div>
+        <div class="compare-3-row">
+          <div class="c3-metric">Contradictions detected</div>
+          <div class="c3-llm">0</div>
+          <div class="c3-nsai">2</div>
+        </div>
+        <div class="compare-3-row">
+          <div class="c3-metric">Decision basis</div>
+          <div class="c3-llm">Citations</div>
+          <div class="c3-nsai">Proof tree</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRIDGE: pivot from the wow into the explanation -->
+    <div class="pipeline-bridge">
+      <div class="pipeline-bridge-eyebrow">Here's how the reasoner got there</div>
+      <p>The neurosymbolic side reached <em>refer / hold</em> in seconds. The five stages below are exactly what ran underneath that single decision &mdash; neural extraction, entity resolution, the ontology hop, the contradiction and rule-precedence checks, the proof tree, and the structured remediation path returned to the broker.</p>
+    </div>
+
     <!-- NSAI PIPELINE -->
     <div class="nsai-pipeline">
       <div class="nsai-pipeline-head">
@@ -4071,87 +4163,45 @@
       </div>
     </div>
 
-    <!-- RUN BOTH MODELS — press-play widget -->
-    <div class="live-demo" id="liveDemo">
-      <div class="live-demo-head">
-        <div>
-          <div class="live-demo-eyebrow">LIVE &middot; WATCH BOTH MODELS RUN</div>
-          <h3>See it for <em>yourself</em>.</h3>
-          <p>Press <strong>Run</strong>. Both systems receive the same six documents at the same moment. Watch RAG read each one and produce a confident, well-cited renewal recommendation &mdash; while the neurosymbolic reasoner extracts, resolves entities, surfaces the contradiction, and lands on the decision the documents support together.</p>
-        </div>
-        <button class="run-btn" id="runBtn" onclick="runDemo()">RUN BOTH MODELS</button>
-      </div>
-
-      <div class="stage">
-        <div class="lane llm" id="laneLLM">
-          <div class="lane-head">
-            <div>
-              <div class="lane-tag">RAG + LLM &middot; RETRIEVAL-AUGMENTED</div>
-              <div class="lane-title">Generative AI with Retrieval</div>
-            </div>
-            <div class="lane-clock"><span class="status"></span><span id="clockLLM">0.0s</span></div>
-          </div>
-          <div class="lane-body" id="bodyLLM"></div>
-        </div>
-
-        <div class="lane nsai" id="laneNSAI">
-          <div class="lane-head">
-            <div>
-              <div class="lane-tag">NEUROSYMBOLIC &middot; ONTOLOGY + RULES</div>
-              <div class="lane-title">Hybrid Reasoner</div>
-            </div>
-            <div class="lane-clock"><span class="status"></span><span id="clockNSAI">0.0s</span></div>
-          </div>
-          <div class="lane-body" id="bodyNSAI"></div>
-        </div>
-      </div>
-
-      <div class="compare-3" id="compare3" style="opacity:0; transition: opacity 0.6s ease;">
-        <div class="compare-3-header">
-          <div></div>
-          <div class="c3h-llm">LLM + RAG</div>
-          <div class="c3h-nsai">NSAI</div>
-        </div>
-        <div class="compare-3-row">
-          <div class="c3-metric">Documents reconciled</div>
-          <div class="c3-llm">Read independently</div>
-          <div class="c3-nsai">Cross-referenced</div>
-        </div>
-        <div class="compare-3-row">
-          <div class="c3-metric">Contradictions detected</div>
-          <div class="c3-llm">0</div>
-          <div class="c3-nsai">2</div>
-        </div>
-        <div class="compare-3-row">
-          <div class="c3-metric">Decision basis</div>
-          <div class="c3-llm">Citations</div>
-          <div class="c3-nsai">Proof tree</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ACT 2 — PORTFOLIO HINT -->
+    <!-- ADDITIONAL NSAI REASONING — four follow-on questions the ontology unlocks -->
     <div class="act2">
-      <div class="act2-eyebrow">Act 2 &middot; The book question</div>
+      <div class="act2-eyebrow">Additional NSAI reasoning &middot; The same ontology, asked at a different scope</div>
       <h3>
-        The breach in this submission was hidden between documents.
-        <strong>How many other warehouse renewals in your book have the same hidden drift?</strong>
+        Once a reconciled decision lands, the ontology lets you keep pulling the thread.
+        <strong>Four follow-on questions an underwriter rarely has time to chase &mdash; that NSAI surfaces by default.</strong>
       </h3>
+      <p class="add-reason-intro">
+        Each of these is the <em>same query as the Meridian decision</em> &mdash; neural extraction, entity resolution, ontology traversal, rule check &mdash; re-aimed at a different slice of the book. NSAI raises the question, scopes the answer, and shows its work.
+      </p>
 
-      <div class="act2-chart-wrap">
-        <div class="act2-chart-label">Warehouse renewals processed in the last 12 months</div>
-        <div class="act2-bar" role="img" aria-label="Illustrative bar: 17 percent of warehouse renewals had post-engineering-review COPE or MSDS evidence that was not reconciled before bind.">
-          <div class="bar-rest">100% TOTAL</div>
-          <div class="bar-flag">17%</div>
+      <div class="add-reason-grid">
+        <div class="add-reason-card">
+          <span class="add-reason-num">Question 01 &middot; The in-force book</span>
+          <div class="add-reason-q">Have any <em>other renewals</em> been bound in the last twelve months without this same reconciliation?</div>
+          <div class="add-reason-a">NSAI re-runs the Meridian pass across every account renewed in the last 12 months, looking for the same shape of breach: a post-engineering-review COPE note, an MSDS hazard upgrade, or a prior-renewal subjectivity that was never tied back to the application before bind. Each hit comes back with the offending document pair, the unsatisfied rule, and the <strong>account ranked by TIV exposure</strong>.</div>
         </div>
-        <p class="act2-bar-caption">
-          <em>~17% of warehouse renewals</em> had post-engineering-review COPE or MSDS evidence that was not reconciled before bind.
-        </p>
-        <div class="act2-bar-disclaimer">Illustrative only. Actual figures depend on book composition and current renewal workflow.</div>
+
+        <div class="add-reason-card">
+          <span class="add-reason-num">Question 02 &middot; The claims book</span>
+          <div class="add-reason-q">Have we had any <em>claims in the last twelve months</em> where this same kind of miss happened at renewal?</div>
+          <div class="add-reason-a">For each open or recently closed claim, NSAI walks the ontology from the loss-cause description in the FNOL back to the underwriting facts on file at the time of bind. Claims whose loss cause &mdash; flash fire, solvent ignition, special-hazard collapse, undeclared operations &mdash; doesn't reconcile with the rated occupancy or sprinkler design basis are flagged for re-examination, with the <strong>specific document-level conflict pinned to each file</strong>.</div>
+        </div>
+
+        <div class="add-reason-card">
+          <span class="add-reason-num">Question 03 &middot; Adjacent accounts</span>
+          <div class="add-reason-q">Are there <em>other accounts</em> with renewal or underwriting issues I should weigh alongside Meridian &mdash; not in isolation?</div>
+          <div class="add-reason-a">The ontology already encodes the edges: broker &rarr; submissions, inspector &rarr; reports, NAICS &rarr; occupancy class, subjectivity template &rarr; accounts. NSAI traverses those edges and surfaces accounts that share Meridian's broker (Hanley &amp; Co.), its inspector, its occupancy code, or its <strong>CP-OPS-04 subjectivity</strong> &mdash; so a single failed reconciliation here can be read as a pattern, not a one-off.</div>
+        </div>
+
+        <div class="add-reason-card">
+          <span class="add-reason-num">Question 04 &middot; Reinsurance exposure</span>
+          <div class="add-reason-q">How does this change my <em>reinsurance exposure</em> &mdash; and do I need to notify treaty partners?</div>
+          <div class="add-reason-a">NSAI traces the account through the treaty ontology &mdash; account &rarr; cession &rarr; treaty &rarr; reporting clause &mdash; recomputes the post-reclassification accumulation against treaty limits, and tests whether the occupancy change crosses any <strong>material-change or disclosure threshold</strong> in the treaty wording. Where reporting is triggered, it drafts the notification with the specific clause cited and the underlying proof tree attached.</div>
+        </div>
       </div>
 
       <div class="act2-cta">
-        <p>NSAI runs the same reconciliation across your in-force book &mdash; not as a one-time audit, but as a continuous check on every renewal.</p>
+        <p>Each of these used to need a separate workflow, a separate team, and a separate dataset. With a shared ontology, they are the same query asked at a different scope &mdash; and NSAI runs them continuously, not as a one-time audit.</p>
         <a href="index.html" class="act2-cta-btn">Talk to us about a portfolio-scale pilot</a>
       </div>
     </div>
