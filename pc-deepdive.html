@@ -2559,6 +2559,908 @@
   @media (max-width: 768px) {
     .float-nav { display: none; }
   }
+
+  /* ===================================================================
+     HERO REBUILD — May 2026
+     Renewal-scenario submission package, LLM panel, NSAI pipeline,
+     remediation accordion, simplified compare widget, Act 2 panel.
+     =================================================================== */
+
+  /* === SUBMISSION PACKAGE — six documents === */
+  .sub-package { margin: 0 0 56px; }
+  .sub-package-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .sub-package-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .sub-package-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .doc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .doc {
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.18);
+    padding: 18px 20px 20px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    min-height: 270px;
+    position: relative;
+  }
+  .doc-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .doc-title {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+  .doc-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+  .doc.acord { border-left: 3px solid var(--accent-2); }
+  .doc.sov   { border-left: 3px solid var(--accent-3); background: #FBF8F1; }
+  .doc.cope  { border-left: 3px solid var(--accent); }
+  .doc.msds  { border-left: 3px solid var(--accent); }
+  .doc.cert  { border-left: 3px solid var(--accent-2); }
+  .doc.subj  { border-left: 3px solid var(--ink); background: var(--paper-2); }
+
+  .acord-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(28,37,48,0.18);
+    font-size: 12px;
+  }
+  .acord-row:last-child { border-bottom: none; }
+  .acord-row .a-q { color: var(--ink-2); }
+  .acord-row .a-a {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .sov-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+  }
+  .sov-table th, .sov-table td {
+    text-align: left;
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(28,37,48,0.1);
+  }
+  .sov-table th {
+    background: rgba(0,0,0,0.04);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .sov-table td.tiv { text-align: right; color: var(--ink); font-weight: 600; }
+
+  .cope-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+    padding-left: 14px;
+    border-left: 2px solid var(--accent);
+    margin-top: 4px;
+  }
+  .cope-quote::before { content: '\201C'; font-size: 24px; color: var(--accent); line-height: 0; margin-right: 2px; vertical-align: -6px; }
+  .cope-quote::after  { content: '\201D'; font-size: 24px; color: var(--accent); line-height: 0; margin-left: 2px;  vertical-align: -6px; }
+
+  .msds-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+  }
+  .msds-table th, .msds-table td {
+    text-align: left;
+    padding: 5px 6px;
+    border-bottom: 1px solid rgba(28,37,48,0.1);
+  }
+  .msds-table th {
+    font-size: 8.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    background: rgba(184,68,46,0.05);
+  }
+  .msds-table td.fp,
+  .msds-table td.qty { color: var(--accent); font-weight: 600; text-align: right; }
+
+  .cert-stamp {
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--accent-2);
+    border: 1px solid var(--accent-2);
+    padding: 3px 8px;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    align-self: flex-start;
+  }
+  .cert-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .cert-quote::before { content: '\201C'; }
+  .cert-quote::after  { content: '\201D'; }
+
+  .subj-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .subj-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  @media (max-width: 900px) {
+    .doc-grid { grid-template-columns: 1fr 1fr; }
+    .doc { min-height: 0; }
+  }
+  @media (max-width: 600px) {
+    .doc-grid { grid-template-columns: 1fr; }
+  }
+
+  /* === LLM OUTPUT PANEL + MISSED CALLOUT === */
+  .llm-block { margin: 0 0 56px; }
+  .llm-block-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+    gap: 16px;
+  }
+  .llm-block-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--llm);
+    font-weight: 700;
+  }
+  .llm-block-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .llm-output {
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.2);
+    border-left: 4px solid var(--llm);
+    padding: 30px 34px 32px;
+  }
+  .llm-rec-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .llm-rec {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
+    line-height: 1.2;
+  }
+  .llm-rec em { color: var(--llm); font-style: italic; font-weight: 500; }
+  .llm-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .llm-list { list-style: none; margin-bottom: 16px; }
+  .llm-list li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .llm-list li::before {
+    content: '•';
+    position: absolute;
+    left: 4px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  .llm-conditions {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: var(--paper-2);
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--ink-2);
+    font-family: 'Fraunces', serif;
+    line-height: 1.5;
+  }
+  .llm-conditions strong { font-style: normal; font-weight: 600; color: var(--ink); }
+
+  .llm-missed {
+    margin-top: 20px;
+    background: linear-gradient(135deg, rgba(184,68,46,0.07), rgba(184,68,46,0.02));
+    border: 1px solid rgba(184,68,46,0.3);
+    border-left: 4px solid var(--llm);
+    padding: 24px 28px 26px;
+  }
+  .llm-missed .missed-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--llm);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .llm-missed h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .llm-missed ul { list-style: none; }
+  .llm-missed li {
+    padding: 6px 0 6px 26px;
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .llm-missed li::before {
+    content: '\22A5';
+    position: absolute;
+    left: 0;
+    color: var(--llm);
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    top: 7px;
+  }
+  .llm-missed li strong { color: var(--ink); font-weight: 600; }
+
+  /* === NSAI PIPELINE === */
+  .nsai-pipeline { margin: 0 0 56px; }
+  .nsai-pipeline-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+    gap: 16px;
+  }
+  .nsai-pipeline-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--nsai);
+    font-weight: 700;
+  }
+  .nsai-pipeline-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .nsai-stage {
+    background: #FAF7F0;
+    border: 1px solid rgba(28,37,48,0.15);
+    margin-bottom: 14px;
+  }
+  .nsai-stage-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 16px 28px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .nsai-stage-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    color: var(--accent-3);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .nsai-stage-name {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .nsai-stage-body { padding: 22px 28px 24px; }
+
+  /* Stage 1: extraction */
+  .extract-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .extract-card {
+    background: #fff;
+    border-top: 2px solid var(--accent-2);
+    padding: 12px 14px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .extract-card .ek {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 700;
+    display: block;
+  }
+  .extract-card .ev { color: var(--ink); }
+  .extract-card .ev strong { color: var(--accent); font-weight: 600; }
+
+  /* Stage 2: entity resolution + ontology hop */
+  .entity-res-label,
+  .ontology-hop .oh-label,
+  .contradiction-card .cc-label,
+  .precedence-card .pc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: block;
+    font-weight: 700;
+  }
+  .entity-res {
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.15);
+    padding: 22px 24px;
+    margin-bottom: 14px;
+  }
+  .entity-res-diagram {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 28px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .entity-refs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .entity-refs.left { align-items: flex-end; }
+  .entity-refs.right { align-items: flex-start; }
+  .entity-ref {
+    background: var(--paper-2);
+    border: 1px solid rgba(28,37,48,0.18);
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    position: relative;
+  }
+  .entity-refs.left .entity-ref::after,
+  .entity-refs.right .entity-ref::before {
+    content: '\2192';
+    color: var(--accent-2);
+    font-weight: 700;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .entity-refs.left .entity-ref::after { right: -16px; }
+  .entity-refs.right .entity-ref::before { left: -16px; content: '\2190'; }
+  .entity-center {
+    background: var(--accent-2);
+    color: var(--paper);
+    padding: 16px 22px;
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 2px;
+    min-width: 160px;
+  }
+  .entity-center .ec-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: rgba(244,239,230,0.65);
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .entity-center .ec-sub {
+    display: block;
+    font-style: italic;
+    font-size: 12px;
+    margin-top: 6px;
+    color: rgba(244,239,230,0.85);
+  }
+
+  .ontology-hop {
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.15);
+    border-left: 3px solid var(--accent-2);
+    padding: 18px 22px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: var(--ink-2);
+  }
+  .ontology-hop .oh-line { padding: 2px 0; }
+  .ontology-hop .oh-line.indent { padding-left: 28px; }
+  .ontology-hop .arrow { color: var(--accent); padding: 0 6px; font-weight: 700; }
+  .ontology-hop .term  { color: var(--ink); font-weight: 600; }
+
+  /* Stage 3: contradiction + rule precedence */
+  .contradiction-card,
+  .precedence-card {
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.15);
+    padding: 18px 22px 20px;
+    margin-bottom: 12px;
+  }
+  .contradiction-card { border-left: 3px solid var(--llm); }
+  .precedence-card    { border-left: 3px solid var(--ink); }
+  .cc-body {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: var(--ink-2);
+  }
+  .cc-body .row { padding: 2px 0; }
+  .cc-body .row.indent { padding-left: 28px; }
+  .cc-body .perp {
+    color: var(--llm);
+    font-weight: 700;
+    padding: 0 6px;
+    font-size: 14px;
+  }
+  .cc-body .implies { color: var(--accent); padding: 0 6px; font-weight: 700; }
+  .cc-body .term { color: var(--ink); font-weight: 600; }
+  .cc-body .lit { color: var(--accent); font-style: italic; }
+  .pc-body {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .pc-body code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--paper-2);
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 12.5px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .pc-body .verdict {
+    display: block;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(28,37,48,0.2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--llm);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* Stage 4: proof tree */
+  .proof-tree {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 24px 28px 26px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+  }
+  .proof-line {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 10px;
+    padding: 4px 0;
+  }
+  .proof-line .pn  { color: var(--accent-3); font-weight: 600; }
+  .proof-line .pc  { color: rgba(244,239,230,0.88); }
+  .proof-line .pc .v { color: var(--paper); font-weight: 600; }
+  .proof-line .pc .k { color: var(--accent-3); }
+  .proof-line.therefore .pc { color: var(--accent-3); font-weight: 600; }
+  .proof-line.decision {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(244,239,230,0.22);
+  }
+  .proof-line.decision .pc { color: #E57760; font-weight: 700; letter-spacing: 0.04em; }
+
+  /* Stage 5: remediation accordion */
+  .remed-intro {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin-bottom: 16px;
+    max-width: 72ch;
+  }
+  .remed-intro em { font-style: italic; color: var(--ink); }
+  .remed-list { list-style: none; }
+  .remed-item {
+    border: 1px solid rgba(28,37,48,0.15);
+    background: #fff;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  .remed-head {
+    display: grid;
+    grid-template-columns: 38px 1fr 36px;
+    gap: 14px;
+    padding: 16px 22px;
+    cursor: pointer;
+    align-items: center;
+    user-select: none;
+    background: #fff;
+    transition: background 0.2s;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+  }
+  .remed-head:hover { background: var(--paper-2); }
+  .remed-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .remed-title {
+    font-family: 'Fraunces', serif;
+    font-size: 15.5px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .remed-chev {
+    width: 26px;
+    height: 26px;
+    border: 1px solid rgba(28,37,48,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    transition: transform 0.25s ease, background 0.2s, color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+    justify-self: end;
+  }
+  .remed-item.open .remed-chev {
+    transform: rotate(45deg);
+    background: var(--accent);
+    color: var(--paper);
+    border-color: var(--accent);
+  }
+  .remed-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .remed-item.open .remed-body { max-height: 600px; }
+  .remed-body-inner {
+    padding: 14px 24px 22px 74px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    border-top: 1px dashed rgba(28,37,48,0.15);
+  }
+  .remed-body-inner .ev-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  /* === SIMPLIFIED 3-ROW COMPARE (replaces race-summary) === */
+  .compare-3 {
+    margin-top: 28px;
+    background: rgba(244,239,230,0.04);
+    border: 1px solid rgba(244,239,230,0.12);
+    overflow: hidden;
+  }
+  .compare-3-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(244,239,230,0.12);
+  }
+  .compare-3-header > div {
+    padding: 12px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,0.6);
+    font-weight: 700;
+  }
+  .compare-3-header .c3h-llm  { color: #E57760; border-left: 1px solid rgba(244,239,230,0.1); }
+  .compare-3-header .c3h-nsai { color: #7CB091; border-left: 1px solid rgba(244,239,230,0.1); }
+  .compare-3-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid rgba(244,239,230,0.08);
+  }
+  .compare-3-row:last-child { border-bottom: none; }
+  .compare-3-row > div { padding: 18px 20px; }
+  .compare-3 .c3-metric {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,0.6);
+    align-self: center;
+    font-weight: 600;
+  }
+  .compare-3 .c3-llm {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: #E57760;
+    font-style: italic;
+    border-left: 1px solid rgba(244,239,230,0.08);
+    align-self: center;
+  }
+  .compare-3 .c3-nsai {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: #7CB091;
+    font-weight: 500;
+    border-left: 1px solid rgba(244,239,230,0.08);
+    align-self: center;
+  }
+
+  /* === ACT 2 PORTFOLIO HINT === */
+  .act2 {
+    margin-top: 72px;
+    padding: 56px 48px 60px;
+    background: linear-gradient(135deg, rgba(63,94,74,0.07), rgba(63,94,74,0.01));
+    border: 1px solid rgba(63,94,74,0.22);
+    position: relative;
+  }
+  .act2-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .act2-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .act2 h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(26px, 3.6vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0;
+    max-width: 30ch;
+  }
+  .act2 h3 em { font-style: italic; color: var(--accent); }
+  .act2 h3 strong {
+    display: block;
+    font-weight: 500;
+    margin-top: 6px;
+  }
+  .act2-chart-wrap {
+    margin: 40px 0 0;
+    max-width: 880px;
+  }
+  .act2-chart-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .act2-bar {
+    height: 56px;
+    background: var(--paper-2);
+    border: 1px solid rgba(28,37,48,0.2);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+  .act2-bar .bar-rest {
+    flex: 0 0 83%;
+    background: rgba(63,94,74,0.16);
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--nsai);
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .act2-bar .bar-flag {
+    flex: 0 0 17%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--paper);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+  .act2-bar-caption {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin-top: 14px;
+    max-width: 68ch;
+  }
+  .act2-bar-caption em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .act2-bar-disclaimer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 10px;
+    font-style: italic;
+  }
+  .act2-cta {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px dashed rgba(28,37,48,0.25);
+  }
+  .act2-cta p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: 22px;
+    max-width: 66ch;
+  }
+  .act2-cta-btn {
+    display: inline-block;
+    background: var(--accent-2);
+    color: var(--paper);
+    padding: 18px 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .act2-cta-btn:hover {
+    background: var(--ink);
+    transform: translateY(-1px);
+  }
+  .act2-cta-btn::after {
+    content: ' \2192';
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform 0.2s;
+  }
+  .act2-cta-btn:hover::after { transform: translateX(3px); }
+
+  @media (max-width: 900px) {
+    .extract-grid { grid-template-columns: 1fr 1fr; }
+    .entity-res-diagram { grid-template-columns: 1fr; gap: 14px; }
+    .entity-refs.left, .entity-refs.right { align-items: stretch; }
+    .entity-refs.left .entity-ref::after,
+    .entity-refs.right .entity-ref::before { display: none; }
+    .compare-3-header, .compare-3-row { grid-template-columns: 1fr; }
+    .compare-3 .c3-llm, .compare-3 .c3-nsai,
+    .compare-3-header .c3h-llm, .compare-3-header .c3h-nsai {
+      border-left: none;
+      border-top: 1px solid rgba(244,239,230,0.1);
+    }
+    .act2 { padding: 36px 24px 40px; }
+    .act2-bar .bar-rest { font-size: 10px; padding: 0 10px; }
+    .nsai-stage-body { padding: 18px 20px 20px; }
+    .nsai-stage-head { padding: 14px 20px; }
+    .remed-head { padding: 14px 16px; grid-template-columns: 28px 1fr 28px; }
+    .remed-body-inner { padding: 14px 20px 22px 20px; }
+  }
+  @media (max-width: 600px) {
+    .extract-grid { grid-template-columns: 1fr; }
+    .act2-bar { height: 44px; }
+    .llm-output { padding: 22px 22px 24px; }
+    .llm-rec { font-size: 20px; }
+  }
 </style>
 </head>
 <body>
@@ -2588,27 +3490,27 @@
 <!-- HERO -->
 <header class="hero" style="padding: 64px 0 80px;">
   <div class="wrap">
-    <div class="hero-eyebrow">Property &amp; Casualty / Commercial Lines</div>
-    <h1>Commercial property, <em>fully reasoned</em>.</h1>
+    <div class="hero-eyebrow">Property &amp; Casualty / Commercial Lines &middot; Renewal</div>
+    <h1>The breach was not in the submission. It was <em>between the documents.</em></h1>
     <p class="hero-lede">
-      A step-by-step walkthrough &mdash; ontology-driven fact extraction, rule evaluation, accumulation breach diagnosis, and constraint-satisfaction pricing, applied to a mid-market commercial property submission. Every rule fires explicitly. Every number traces to a named source.
+      <em>Same package. Same retrievable manual.</em> The LLM summarized every document accurately and recommended renewal. NSAI reconciled them and held the risk.
     </p>
     <div class="hero-meta">
       <div>
-        <div class="label">Line</div>
-        <div class="val">Commercial Property</div>
-      </div>
-      <div>
-        <div class="label">Submission</div>
+        <div class="label">Risk</div>
         <div class="val">Meridian Fabrication</div>
       </div>
       <div>
-        <div class="label">TIV</div>
-        <div class="val">$ 84.5M</div>
+        <div class="label">Type</div>
+        <div class="val">Renewal &middot; Campus Property</div>
       </div>
       <div>
-        <div class="label">Result</div>
-        <div class="val">Priced &amp; Placed</div>
+        <div class="label">Effective</div>
+        <div class="val">06 / 01 / 2026</div>
+      </div>
+      <div>
+        <div class="label">Outcome</div>
+        <div class="val">Refer / Hold</div>
       </div>
     </div>
   </div>
@@ -2811,344 +3713,380 @@
   </div>
 </section>
 
-<!-- SECTION 3: DEMO -->
+<!-- SECTION 3: DEMO — renewal-scenario hero rebuild -->
 <section id="demo">
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-num">03 / DEMO</div>
-      <h2 class="sec-title">A live commercial property <em>underwriting decision</em>.</h2>
+      <h2 class="sec-title">A renewal that <em>summarized clean</em> &mdash; and didn't reconcile.</h2>
     </div>
 
     <p class="demo-intro">
-      A broker submits a mid-market commercial property risk. Below is the actual submission. Then: how the process <em>traditionally</em> runs, how a <em>RAG-augmented LLM</em> would handle it (with the underwriting manual indexed for retrieval), and how a <em>neurosymbolic system</em> handles it — not just gating the referral but <em>reasoning across the enterprise ontology</em> to derive a priced, structured quote. The NSAI pipeline runs in five stages: extract facts from the submission, enrich with ontology-driven joins, evaluate underwriting rules, compose an explanation, and finally <em>reason across pricing, reinsurance, portfolio, claims, and regulatory ontologies</em> to produce the actual terms and premium. Every number traceable to its source.
+      Meridian Fabrication has been a renewal account for three years. The broker submits the same six documents the carrier always sees: application, statement of values, COPE inspection, MSDS list, sprinkler certificate, and the expiring policy's subjectivities. A RAG-augmented LLM reads each document, cites each one, and lands on a confident <em>renew with moderate rate increase</em>. The neurosymbolic system reads the same six documents &mdash; and reaches a different decision, because the breach is not <em>in</em> any document. It is <em>between</em> them.
     </p>
 
-    <!-- SUBMISSION CARD -->
-    <div class="submission">
-      <div class="sub-head">
-        <h3>Submission · Meridian Fabrication, Inc.</h3>
-        <div class="sub-id">SUB-2026-047193 · Broker: Hanley &amp; Co.</div>
+    <!-- SUBMISSION PACKAGE — six documents -->
+    <div class="sub-package">
+      <div class="sub-package-head">
+        <div class="sub-package-label">Submission package &middot; Meridian Fabrication renewal</div>
+        <div class="sub-package-meta">SUB-2026-091108 &middot; Broker: Hanley &amp; Co. &middot; 6 documents</div>
       </div>
-      <div class="sub-body">
-        <div class="sub-field">
-          <div class="label">Named Insured</div>
-          <div class="val">Meridian Fabrication, Inc.</div>
+
+      <div class="doc-grid">
+        <!-- Doc 1: ACORD application -->
+        <div class="doc acord">
+          <div class="doc-tag">DOC 01 &middot; ACORD-style application</div>
+          <div class="doc-title">Renewal application</div>
+          <div class="doc-meta">Form ACORD 140 &middot; signed 04/22/2026</div>
+          <div class="acord-row">
+            <span class="a-q">Material operations change in past 12 months</span>
+            <span class="a-a">No</span>
+          </div>
+          <div class="acord-row">
+            <span class="a-q">Spray-painting, coating, or dipping operations at any location</span>
+            <span class="a-a">No</span>
+          </div>
+          <div class="acord-row">
+            <span class="a-q">Flammable liquids stored above threshold</span>
+            <span class="a-a">No</span>
+          </div>
+          <div class="acord-row">
+            <span class="a-q">Requested effective date</span>
+            <span class="a-a">06/01/2026</span>
+          </div>
         </div>
-        <div class="sub-field">
-          <div class="label">Coverage</div>
-          <div class="val">Building + BPP + BI</div>
+
+        <!-- Doc 2: SOV -->
+        <div class="doc sov">
+          <div class="doc-tag">DOC 02 &middot; Statement of values</div>
+          <div class="doc-title">Statement of values (SOV)</div>
+          <div class="doc-meta">3 buildings &middot; campus property</div>
+          <table class="sov-table">
+            <thead>
+              <tr>
+                <th>Bldg</th>
+                <th>Occupancy</th>
+                <th style="text-align:right;">TIV</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Metal fabrication</td><td class="tiv">$42M</td></tr>
+              <tr><td>2</td><td>Metal fab / shipping</td><td class="tiv">$28M</td></tr>
+              <tr><td>3</td><td>Finished-goods warehouse</td><td class="tiv">$31M</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="sub-field">
-          <div class="label">Effective Date</div>
-          <div class="val">06 / 01 / 2026</div>
+
+        <!-- Doc 3: COPE inspection -->
+        <div class="doc cope">
+          <div class="doc-tag">DOC 03 &middot; COPE inspection</div>
+          <div class="doc-title">COPE inspection report</div>
+          <div class="doc-meta">Inspector: Carrier Risk Engineering &middot; 03/15/2026</div>
+          <div class="cope-quote">Building 3 &mdash; northwest quadrant has been partitioned with metal-stud fire-rated assembly to segregate a new coating / finishing cell. Cell contains spray booth, drying racks, and small-quantity solvent storage.</div>
         </div>
-        <div class="sub-field">
-          <div class="label">Locations</div>
-          <div class="val">3 (TX, OK, LA)</div>
+
+        <!-- Doc 4: MSDS / SDS -->
+        <div class="doc msds">
+          <div class="doc-tag">DOC 04 &middot; MSDS / SDS list</div>
+          <div class="doc-title">Materials on premises (one-page summary)</div>
+          <div class="doc-meta">As of 03/01/2026 &middot; provided by insured</div>
+          <table class="msds-table">
+            <thead>
+              <tr>
+                <th>Material</th>
+                <th>Use</th>
+                <th style="text-align:right;">FP</th>
+                <th style="text-align:right;">Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Solvent topcoat A</td><td>Coating</td><td class="fp">24&deg;C</td><td class="qty">~80 gal</td></tr>
+              <tr><td>Acrylic enamel B</td><td>Coating</td><td class="fp">27&deg;C</td><td class="qty">~55 gal</td></tr>
+              <tr><td>Reducer / thinner C</td><td>Thinning</td><td class="fp">21&deg;C</td><td class="qty">~30 gal</td></tr>
+              <tr><td>Lacquer cleaner D</td><td>Equipment</td><td class="fp">18&deg;C</td><td class="qty">~15 gal</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="sub-field">
-          <div class="label">Primary Location</div>
-          <div class="val">Galveston, TX 77551</div>
+
+        <!-- Doc 5: Sprinkler certificate -->
+        <div class="doc cert">
+          <div class="doc-tag">DOC 05 &middot; Sprinkler certificate</div>
+          <div class="doc-title">Annual inspection certificate</div>
+          <div class="doc-meta">FireGuard Inc. &middot; 02/04/2026</div>
+          <div class="cert-stamp">Operational &middot; No deficiencies</div>
+          <div class="cert-quote">Annual inspection complete. ESFR system in Building 3 tested and operational. Design basis on file: Class III commodity storage, palletized, max 20&nbsp;ft pile height. No deficiencies noted in system operability.</div>
         </div>
-        <div class="sub-field">
-          <div class="label">Construction</div>
-          <div class="val">Joisted Masonry (1987)</div>
-        </div>
-        <div class="sub-field">
-          <div class="label">Occupancy</div>
-          <div class="val">Metal Fabrication (NAICS 332710)</div>
-        </div>
-        <div class="sub-field">
-          <div class="label">Protection</div>
-          <div class="val">Sprinklered · PC 4 · Central Station</div>
-        </div>
-        <div class="sub-field">
-          <div class="label">Total TIV</div>
-          <div class="val warn">$ 84,500,000</div>
-        </div>
-        <div class="sub-field">
-          <div class="label">5-Yr Loss History</div>
-          <div class="val warn">2 losses · $ 412k incurred</div>
-        </div>
-        <div class="sub-field">
-          <div class="label">Prior Carrier</div>
-          <div class="val">Non-renewed (capacity)</div>
-        </div>
-        <div class="sub-field">
-          <div class="label">Broker Note</div>
-          <div class="val good">Quick turn requested — bind 05/25</div>
+
+        <!-- Doc 6: Expiring policy subjectivity -->
+        <div class="doc subj">
+          <div class="doc-tag">DOC 06 &middot; Expiring policy subjectivity</div>
+          <div class="doc-title">Subjectivity attached at last renewal</div>
+          <div class="subj-id">CP-OPS-04</div>
+          <div class="subj-quote">&ldquo;Coverage at Building 3 is conditioned on continued use as ordinary storage warehouse. No spray-painting, coating, dipping, or other ignitable-liquid operations are permitted at any insured location without prior written notice to and approval by underwriter. Failure to notify constitutes a material change in occupancy and may suspend coverage at the affected location.&rdquo;</div>
         </div>
       </div>
     </div>
 
-    <!-- PROCESS TABS -->
-    <div class="process-tabs">
-      <button class="process-tab active" data-tab="baseline" onclick="switchTab('baseline')">
-        <span class="tab-num">A / BASELINE</span>
-        <span class="tab-title">Traditional Underwriting Workflow</span>
-        <span class="tab-sub">How the process runs today</span>
-      </button>
-      <button class="process-tab" data-tab="llm" onclick="switchTab('llm')">
-        <span class="tab-num">B / RAG + LLM</span>
-        <span class="tab-title">Retrieval-Augmented Generation</span>
-        <span class="tab-sub">Retrieve → inject → generate</span>
-      </button>
-      <button class="process-tab" data-tab="nsai" onclick="switchTab('nsai')">
-        <span class="tab-num">C / NEUROSYMBOLIC</span>
-        <span class="tab-title">Ontology + Rule Engine</span>
-        <span class="tab-sub">Extract → enrich → infer → explain → reason</span>
-      </button>
-    </div>
+    <!-- LLM + RAG OUTPUT -->
+    <div class="llm-block">
+      <div class="llm-block-head">
+        <div class="llm-block-label">RAG + LLM &middot; Output trace</div>
+        <div class="llm-block-meta">6 documents indexed &middot; cited rationale &middot; 8.4s</div>
+      </div>
 
-    <!-- PANEL A: BASELINE -->
-    <div class="process-panel active" id="panel-baseline">
-      <p class="panel-intro">
-        Before introducing any AI, here's the traditional workflow a commercial property underwriter runs on a submission of this size. The process is sound — but it's slow, uneven across underwriters, and heavily dependent on manual interpretation.
-      </p>
+      <div class="llm-output">
+        <div class="llm-rec-label">Recommendation</div>
+        <div class="llm-rec">RENEW <em>with moderate rate increase</em></div>
 
-      <div class="flow">
-        <div class="flow-step">
-          <div class="step-n">STEP 01</div>
-          <strong>Intake &amp; Clearance</strong>
-          <p>Check for conflicts, prior submissions, sanctioned entities. Verify appetite fit.</p>
-        </div>
-        <div class="flow-step">
-          <div class="step-n">STEP 02</div>
-          <strong>COPE Assessment</strong>
-          <p>Review Construction, Occupancy, Protection, Exposure for each location.</p>
-        </div>
-        <div class="flow-step">
-          <div class="step-n">STEP 03</div>
-          <strong>Loss &amp; Exposure Analysis</strong>
-          <p>Evaluate loss runs, CAT exposure, accumulation vs portfolio limits.</p>
-        </div>
-        <div class="flow-step">
-          <div class="step-n">STEP 04</div>
-          <strong>Pricing &amp; Authority</strong>
-          <p>Run rating model, compare to authority grid, determine referral need.</p>
-        </div>
-        <div class="flow-step">
-          <div class="step-n">STEP 05</div>
-          <strong>Decision &amp; Terms</strong>
-          <p>Accept, decline, or quote with subjectivities. Issue terms to broker.</p>
+        <div class="llm-section-label">Rationale</div>
+        <ul class="llm-list">
+          <li>Loss history remains favorable (no reported losses past 5 years)</li>
+          <li>Sprinkler certificate confirms ESFR system operational; annual inspection current (02/04/2026)</li>
+          <li>COPE inspection notes a partitioned area in Building 3 described as a coating / finishing cell; recommend post-bind risk-engineering review to assess</li>
+          <li>MSDS list reflects standard maintenance and operational chemicals consistent with metal fabrication</li>
+          <li>Application confirms no material operations change</li>
+          <li>Building 3 remains classified as warehouse occupancy under SOV</li>
+        </ul>
+
+        <div class="llm-conditions">
+          <strong>Conditions:</strong> Standard renewal terms with 6% rate increase; risk-engineering inspection within 90 days post-bind.
         </div>
       </div>
 
-      <div class="decision">
-        <div class="decision-label">Observed Pain Points</div>
-        <h4>Slow, inconsistent, and hard to defend</h4>
-        <p>A submission this size typically takes 5–8 business days across multiple handoffs. Two underwriters looking at the same risk routinely produce different terms. When a decision is challenged — by a broker, a regulator, or internal audit — the rationale often lives in one underwriter's email thread or handwritten notes. Accumulation exposure is checked manually against stale portfolio extracts.</p>
-        <ul class="issue-list">
-          <li>Inconsistent application of guidelines across the desk</li>
-          <li>Manual portfolio checks miss aggregation risk in real time</li>
-          <li>Decisions are defensible only where documentation is strong — and documentation is uneven</li>
+      <div class="llm-missed">
+        <div class="missed-tag">What the LLM did not reconcile</div>
+        <h4>Every document read accurately. Nothing read <em>against</em> anything else.</h4>
+        <ul>
+          <li>Building 3 in the SOV, COPE inspection, sprinkler cert, and MSDS list are the <strong>same location</strong></li>
+          <li>The application's &ldquo;no operations change&rdquo; answer <strong>conflicts</strong> with the COPE finding of a new coating cell</li>
+          <li>The MSDS list of low-flash-point solvent coatings indicates <strong>ignitable-liquid operations</strong></li>
+          <li>The sprinkler certificate confirms <strong>operational status</strong>, not <strong>design adequacy</strong> for the changed hazard</li>
+          <li>The expiring-policy subjectivity <strong>CP-OPS-04</strong> is no longer satisfied</li>
         </ul>
       </div>
     </div>
 
-    <!-- PANEL B: RAG + LLM -->
-    <div class="process-panel" id="panel-llm">
-      <p class="panel-intro">
-        The realistic deployment today: a RAG-augmented LLM with the underwriting manual, appetite guide, and CAT classifications indexed for retrieval. The model sees the submission, <em>searches your actual documents</em>, and generates a cited recommendation. This is materially better than a bare LLM — but still fundamentally different from a reasoner.
-      </p>
+    <!-- NSAI PIPELINE -->
+    <div class="nsai-pipeline">
+      <div class="nsai-pipeline-head">
+        <div class="nsai-pipeline-label">NSAI &middot; Reconciliation pipeline</div>
+        <div class="nsai-pipeline-meta">5 stages &middot; proof-tree output &middot; deterministic</div>
+      </div>
 
-      <div class="trace">
-        <div class="trace-head">
-          <span>RAG + LLM · RETRIEVAL-AUGMENTED</span>
-          <span>3 retrievals &middot; 14 passages &middot; 9.8k ctx &middot; 8.2s</span>
+      <!-- Stage 1 -->
+      <div class="nsai-stage">
+        <div class="nsai-stage-head">
+          <div class="nsai-stage-num">STAGE 01</div>
+          <div class="nsai-stage-name">Neural extraction</div>
         </div>
-        <div class="trace-body">
-          <div class="trace-line comment"><span class="num">01</span><span class="code"># Pipeline: query \u2192 vector search across docs \u2192 inject top-k \u2192 generate</span></div>
-          <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-key">Analysis (grounded):</span> <span class="trace-val">Risk fits standard Tier 1 metal fabrication profile.</span></span></div>
-          <div class="trace-line"><span class="num">03</span><span class="code">Per <span class="trace-key">[UW-Manual-\u00a73.2]</span>, joisted masonry + PC4 + sprinklered is acceptable construction.</span></div>
-          <div class="trace-line"><span class="num">04</span><span class="code">Per <span class="trace-key">[Appetite-2026-Q2]</span>, NAICS 332710 (metal fabrication) is in appetite with hot-work warranty.</span></div>
-          <div class="trace-line"><span class="num">05</span><span class="code">Per <span class="trace-key">[CAT-Zones-TX]</span>, Galveston is Tier 1; standard 5% NWS deductible applies.</span></div>
-          <div class="trace-line"><span class="num">06</span><span class="code"><span class="trace-key">Recommendation:</span> <span class="trace-pass">QUOTE</span> with referral for TIV; 5% NWS ded; hot-work warranty; flood sublimit $5M.</span></div>
-          <div class="trace-line"><span class="num">07</span><span class="code"><span class="trace-key">Suggested Deductible:</span> $25,000 AOP.</span></div>
-          <div class="trace-line comment"><span class="num">08</span><span class="code"># Narrative cites retrieved passages throughout</span></div>
+        <div class="nsai-stage-body">
+          <div class="extract-grid">
+            <div class="extract-card">
+              <span class="ek">Application</span>
+              <span class="ev">operations_change = <strong>"none"</strong><br>spray_coating = "no"<br>flam_liq = "no"<br>effective = 2026-06-01</span>
+            </div>
+            <div class="extract-card">
+              <span class="ek">SOV</span>
+              <span class="ev">Building_1 &middot; metal fab &middot; $42M<br>Building_2 &middot; metal fab / ship &middot; $28M<br>Building_3 &middot; <strong>warehouse</strong> &middot; $31M</span>
+            </div>
+            <div class="extract-card">
+              <span class="ek">COPE</span>
+              <span class="ev">Building_3.partition = new<br>Building_3.cell = <strong>coating</strong><br>Building_3.contains = {spray_booth, drying_racks, solvents}</span>
+            </div>
+            <div class="extract-card">
+              <span class="ek">MSDS</span>
+              <span class="ev">Location_B3 &middot; 4 materials<br>flash_points = <strong>{18, 21, 24, 27&deg;C}</strong><br>use = coating, thinning, cleaning</span>
+            </div>
+            <div class="extract-card">
+              <span class="ek">Sprinkler cert</span>
+              <span class="ev">Building_3.ESFR = operational<br>design_basis = <strong>Class III @ 20ft</strong><br>deficiencies = none</span>
+            </div>
+            <div class="extract-card">
+              <span class="ek">Expiring policy</span>
+              <span class="ev">subj.id = <strong>CP-OPS-04</strong><br>scope = Building_3<br>conditions = no_coating, no_dipping, no_ignitable_liq</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="decision llm">
-        <div class="decision-label">What RAG improved &mdash; and what it still can't do</div>
-        <h4>Better grounded. Still not reasoning.</h4>
-        <p>RAG is a real improvement over a bare LLM. With the manual retrievable, the model correctly identifies metal fabrication as a hot-work hazard, knows Galveston is Tier 1, and suggests a 5% NWS deductible. These are the <em>in-document</em> facts RAG excels at. But RAG is still an LLM at the core &mdash; and LLMs cannot execute multi-step reasoning across systems, query live data, or derive a proof. Here is what retrieval can't fix:</p>
-        <ul class="issue-list">
-          <li><strong>No portfolio awareness:</strong> The underwriting manual is in the retrieval corpus. Your <em>live portfolio accumulation</em> is not. RAG doesn't know Gulf Tier 1 retained accumulation is at 79.0% of the 80% cap &mdash; and has no way to check.</li>
-          <li><strong>No accumulation math:</strong> Even if the retrieval surfaced the CP-ACC-02 rule text, RAG cannot do the multi-step calculation to determine that binding at default cession pushes accumulation to 80.4%. LLMs are unreliable on chained arithmetic.</li>
-          <li><strong>No constraint-satisfaction:</strong> Finding the cession structure that clears every rule simultaneously is not something RAG can solve. It can describe the tradeoffs &mdash; it cannot optimize across them.</li>
-          <li><strong>Treaty-structure blind:</strong> The reinsurance treaty ontology (default 50% cession, 25&ndash;75% variable band, commission schedule) is operational data in another system. RAG retrieves from documents, not from APIs.</li>
-          <li><strong>Probabilistic, not deterministic:</strong> Same submission tomorrow, same retrieved passages &mdash; the generated narrative will be subtly different each time. Retrieval is deterministic; generation is not.</li>
-          <li><strong>Citations, not proofs:</strong> A citation says "I consulted this passage." A proof says "here is the logical chain from facts to conclusion." Regulators increasingly want the latter.</li>
-        </ul>
+      <!-- Stage 2 -->
+      <div class="nsai-stage">
+        <div class="nsai-stage-head">
+          <div class="nsai-stage-num">STAGE 02</div>
+          <div class="nsai-stage-name">Entity resolution &amp; ontology</div>
+        </div>
+        <div class="nsai-stage-body">
+          <div class="entity-res">
+            <span class="entity-res-label">Entity resolution &middot; four documents resolve to one building</span>
+            <div class="entity-res-diagram">
+              <div class="entity-refs left">
+                <div class="entity-ref">SOV.Building_3</div>
+                <div class="entity-ref">COPE.Building_3</div>
+              </div>
+              <div class="entity-center">
+                <span class="ec-label">Resolved entity</span>
+                Building 3
+                <span class="ec-sub">same physical location</span>
+              </div>
+              <div class="entity-refs right">
+                <div class="entity-ref">MSDS.Location_B3</div>
+                <div class="entity-ref">SprinklerCert.Building_3</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ontology-hop">
+            <span class="oh-label">Ontology hop &middot; classify the materials</span>
+            <div class="oh-line"><span class="term">solvent-based coating (flash point &lt; 38&deg;C)</span></div>
+            <div class="oh-line indent"><span class="arrow">&rarr;</span><span class="term">ignitable-liquid operation</span></div>
+            <div class="oh-line indent"><span class="arrow">&rarr;</span><span class="term">special-hazard occupancy</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="nsai-stage">
+        <div class="nsai-stage-head">
+          <div class="nsai-stage-num">STAGE 03</div>
+          <div class="nsai-stage-name">Contradiction &amp; rule engine</div>
+        </div>
+        <div class="nsai-stage-body">
+          <div class="contradiction-card">
+            <span class="cc-label">Contradiction detected</span>
+            <div class="cc-body">
+              <div class="row"><span class="term">Application.operations_change</span> = <span class="lit">"none"</span></div>
+              <div class="row indent"><span class="perp">&perp;</span>(conflicts with)</div>
+              <div class="row"><span class="term">COPE.Building_3</span> contains <span class="lit">coating_cell</span></div>
+              <div class="row"><span class="term">COPE.Building_3</span> + <span class="term">MSDS</span> evidence <span class="implies">&rArr;</span> <span class="lit">ignitable-liquid operation</span></div>
+            </div>
+          </div>
+
+          <div class="precedence-card">
+            <span class="pc-label">Rule precedence</span>
+            <div class="pc-body">
+              Expiring subjectivity <code>CP-OPS-04</code> requires prior written notice of any coating, dipping, or ignitable-liquid operation. The reconciled facts trigger that subjectivity. No notice was filed.
+              <span class="verdict">Subjectivity not satisfied &middot; overrides standard renewal appetite</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="nsai-stage">
+        <div class="nsai-stage-head">
+          <div class="nsai-stage-num">STAGE 04</div>
+          <div class="nsai-stage-name">Proof tree</div>
+        </div>
+        <div class="nsai-stage-body">
+          <div class="proof-tree">
+            <div class="proof-line"><span class="pn">01</span><span class="pc"><span class="k">Building_3</span> [SOV] = <span class="k">Building_3</span> [COPE] = <span class="k">Building_3</span> [MSDS] = <span class="k">Building_3</span> [SprinklerCert]</span></div>
+            <div class="proof-line"><span class="pn">02</span><span class="pc"><span class="k">COPE.Building_3</span> contains <span class="v">coating_cell</span></span></div>
+            <div class="proof-line"><span class="pn">03</span><span class="pc"><span class="k">MSDS.list</span> contains <span class="v">solvent_based_coatings</span> (flash point &lt; 38&deg;C)</span></div>
+            <div class="proof-line therefore"><span class="pn">&there4;</span><span class="pc"><span class="k">Building_3</span> hosts <span class="v">ignitable_liquid_operation</span></span></div>
+            <div class="proof-line"><span class="pn">04</span><span class="pc"><span class="k">Application.operations_change</span> = "none" &perp; <span class="v">observed_operation</span></span></div>
+            <div class="proof-line"><span class="pn">05</span><span class="pc"><span class="k">Subjectivity CP-OPS-04</span> requires prior notice &rarr; not satisfied</span></div>
+            <div class="proof-line decision"><span class="pn">&there4;</span><span class="pc">Decision: REFER / HOLD &mdash; do not renew as quoted</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 5 -->
+      <div class="nsai-stage">
+        <div class="nsai-stage-head">
+          <div class="nsai-stage-num">STAGE 05</div>
+          <div class="nsai-stage-name">Remediation path</div>
+        </div>
+        <div class="nsai-stage-body">
+          <p class="remed-intro">
+            The decision is <em>refer / hold</em>, not decline. NSAI returns the broker a structured remediation path. Click any step to see what satisfactory evidence looks like.
+          </p>
+          <ul class="remed-list" id="remedList">
+            <li class="remed-item">
+              <button type="button" class="remed-head" data-remed-toggle aria-expanded="false">
+                <span class="remed-num">01</span>
+                <span class="remed-title">Obtain written clarification of Building 3 operations and ignitable-liquid quantities</span>
+                <span class="remed-chev" aria-hidden="true">+</span>
+              </button>
+              <div class="remed-body">
+                <div class="remed-body-inner">
+                  <span class="ev-label">Satisfactory evidence</span>
+                  Broker letter on letterhead specifying coating types, daily and maximum-on-premises quantities of each ignitable liquid, storage configuration (cabinets, control area, segregated room), dispensing method, and operational hours.
+                </div>
+              </div>
+            </li>
+            <li class="remed-item">
+              <button type="button" class="remed-head" data-remed-toggle aria-expanded="false">
+                <span class="remed-num">02</span>
+                <span class="remed-title">Reconcile application &ldquo;no operations change&rdquo; against COPE and MSDS evidence</span>
+                <span class="remed-chev" aria-hidden="true">+</span>
+              </button>
+              <div class="remed-body">
+                <div class="remed-body-inner">
+                  <span class="ev-label">Satisfactory evidence</span>
+                  Amended application or signed acknowledgement of operations change effective date, with corrected answers to operations-change, coating-operation, and flammable-liquid questions.
+                </div>
+              </div>
+            </li>
+            <li class="remed-item">
+              <button type="button" class="remed-head" data-remed-toggle aria-expanded="false">
+                <span class="remed-num">03</span>
+                <span class="remed-title">Risk engineering review of coating cell against current sprinkler design</span>
+                <span class="remed-chev" aria-hidden="true">+</span>
+              </button>
+              <div class="remed-body">
+                <div class="remed-body-inner">
+                  <span class="ev-label">Satisfactory evidence</span>
+                  Engineering report addressing whether existing ESFR design remains adequate given the changed hazard. Report should specifically address commodity classification, special-hazard suppression needs, and any required design modifications.
+                </div>
+              </div>
+            </li>
+            <li class="remed-item">
+              <button type="button" class="remed-head" data-remed-toggle aria-expanded="false">
+                <span class="remed-num">04</span>
+                <span class="remed-title">Confirm protective-safeguards adequacy or specify required upgrades</span>
+                <span class="remed-chev" aria-hidden="true">+</span>
+              </button>
+              <div class="remed-body">
+                <div class="remed-body-inner">
+                  <span class="ev-label">Satisfactory evidence</span>
+                  Documented confirmation of one of: (a) adequate existing suppression for the changed hazard, (b) required upgrades with installation schedule and contractor commitment, or (c) operational controls sufficient to compensate (e.g., reduced quantities, segregation, ventilation, approved electrical).
+                </div>
+              </div>
+            </li>
+            <li class="remed-item">
+              <button type="button" class="remed-head" data-remed-toggle aria-expanded="false">
+                <span class="remed-num">05</span>
+                <span class="remed-title">Update classification, conditions, and rating; bind subject to satisfied items</span>
+                <span class="remed-chev" aria-hidden="true">+</span>
+              </button>
+              <div class="remed-body">
+                <div class="remed-body-inner">
+                  <span class="ev-label">Satisfactory evidence</span>
+                  Revised quote with updated Building 3 classification, applicable warranties and exclusions, rating reflective of actual hazard, and explicit subjectivities for any items not cured at bind. All prior subjectivities (CP-OPS-04 and successors) reissued.
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- PANEL C: NSAI -->
-    <div class="process-panel" id="panel-nsai">
-      <p class="panel-intro">
-        The neurosymbolic system runs the submission through four stages: <em>neural extraction</em> into the ontology, <em>symbolic enrichment</em> from external sources, <em>rule-engine evaluation</em> of underwriting guidelines, and <em>neural explanation</em> of the derived decision. Every step is inspectable.
-      </p>
-
-      <div class="mini-ont">
-        <div class="mini-ont-label">Stage 01 / Neural extraction — submission text parsed into ontology instances</div>
-        <div class="trace" style="margin-top:0; border:none; background:transparent;">
-          <div class="trace-body" style="padding: 8px 0;">
-            <div class="trace-line"><span class="num">01</span><span class="code"><span class="trace-key">Policy</span>(id=P1, insured=<span class="trace-val">"Meridian Fabrication"</span>, effective=2026-06-01)</span></div>
-            <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-key">Location</span>(id=L1, address=<span class="trace-val">"Galveston, TX 77551"</span>, primary=true)</span></div>
-            <div class="trace-line"><span class="num">03</span><span class="code"><span class="trace-key">Building</span>(id=B1, locatedAt=L1, yearBuilt=1987, tiv=<span class="trace-val">USD 38.2M</span>)</span></div>
-            <div class="trace-line"><span class="num">04</span><span class="code"><span class="trace-key">Construction</span>(B1, <span class="trace-val">JoistedMasonry</span>) ⊑ ISO_CC_3</span></div>
-            <div class="trace-line"><span class="num">05</span><span class="code"><span class="trace-key">Occupancy</span>(B1, NAICS=<span class="trace-val">332710</span>) → resolves to <span class="trace-val">MetalFabrication</span></span></div>
-            <div class="trace-line"><span class="num">06</span><span class="code"><span class="trace-key">Protection</span>(B1, sprinklered=true, PC=<span class="trace-val">4</span>, alarmType=CentralStation)</span></div>
-            <div class="trace-line"><span class="num">07</span><span class="code"><span class="trace-key">Loss</span>(P1, count=2, incurred=USD 412k, period=5y)</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mini-ont">
-        <div class="mini-ont-label">Stage 02 / Symbolic enrichment — ontology auto-derives and joins to external knowledge</div>
-        <div class="trace" style="margin-top:0; border:none; background:transparent;">
-          <div class="trace-body" style="padding: 8px 0;">
-            <div class="trace-line"><span class="num">01</span><span class="code"><span class="trace-key">Location</span>(L1).<span class="trace-key">catZone</span> ← lookup(FIPS=48167) → <span class="trace-val">Tier1_NamedWindstorm · FEMA_AE_Flood</span></span></div>
-            <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-key">MetalFabrication</span> ⊑ <span class="trace-val">HighHazard_Welding</span> ⊑ <span class="trace-val">FireHazardClass_4</span></span></div>
-            <div class="trace-line"><span class="num">03</span><span class="code"><span class="trace-key">JoistedMasonry</span> ⊑ <span class="trace-val">NonCombustibleExterior · CombustibleInterior</span></span></div>
-            <div class="trace-line"><span class="num">04</span><span class="code"><span class="trace-key">Portfolio</span>(Gulf_T1_retained) = USD 568.8M / 720M cap → <span class="trace-val">79.0%</span></span></div>
-            <div class="trace-line"><span class="num">05</span><span class="code"><span class="trace-key">PriorCarrier</span>.nonRenewalReason=<span class="trace-val">"capacity"</span> → <span class="trace-warn">flag for disclosure review</span></span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mini-ont">
-        <div class="mini-ont-label">Stage 03 / Rule engine evaluation — every applicable guideline fires deterministically</div>
-        <table class="rules">
-          <thead>
-            <tr>
-              <th style="width:14%;">Rule</th>
-              <th>Condition</th>
-              <th style="width:22%;">Inputs</th>
-              <th style="width:14%; text-align:right;">Outcome</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="rule-id">CP-APT-01</td>
-              <td>Named insured must pass clearance &amp; appetite screen</td>
-              <td>Metal Fab · NAICS 332710</td>
-              <td class="rule-out"><span class="pill pass">In Appetite</span></td>
-            </tr>
-            <tr>
-              <td class="rule-id">CP-TIV-03</td>
-              <td>If TIV &gt; USD 50M, route to senior authority</td>
-              <td>TIV = USD 84.5M</td>
-              <td class="rule-out"><span class="pill warn">Refer</span></td>
-            </tr>
-            <tr>
-              <td class="rule-id">CP-CAT-12</td>
-              <td>If location in Tier 1 named-wind zone, require 5% NWS deductible</td>
-              <td>L1 ∈ Tier1_NamedWindstorm</td>
-              <td class="rule-out"><span class="pill warn">Subject To</span></td>
-            </tr>
-            <tr>
-              <td class="rule-id">CP-CAT-18</td>
-              <td>If FEMA flood zone ∈ {A*, V*}, require flood sublimit or exclusion</td>
-              <td>L1 ∈ FEMA_AE</td>
-              <td class="rule-out"><span class="pill warn">Subject To</span></td>
-            </tr>
-            <tr>
-              <td class="rule-id">CP-HAZ-07</td>
-              <td>HighHazard_Welding occupancies require hot-work permit warranty</td>
-              <td>B1 ⊑ HighHazard_Welding</td>
-              <td class="rule-out"><span class="pill warn">Warranty</span></td>
-            </tr>
-            <tr>
-              <td class="rule-id">CP-ACC-02</td>
-              <td>Gulf Tier 1 accumulation must remain &lt; 80% of treaty capacity</td>
-              <td>Post-bind: 79.0% → 80.4%</td>
-              <td class="rule-out"><span class="pill fail">Breach</span></td>
-            </tr>
-            <tr>
-              <td class="rule-id">CP-LOSS-04</td>
-              <td>Loss ratio &lt; 40% over 5 yr — no load required</td>
-              <td>LR ≈ 11% (est.)</td>
-              <td class="rule-out"><span class="pill pass">Pass</span></td>
-            </tr>
-            <tr>
-              <td class="rule-id">CP-DISC-09</td>
-              <td>Prior non-renewal requires written disclosure from broker</td>
-              <td>Non-renewal flagged</td>
-              <td class="rule-out"><span class="pill warn">Subject To</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="mini-ont">
-        <div class="mini-ont-label">Stage 04 / Neural explanation — initial decision narrative grounded in the proof tree</div>
-        <div class="trace" style="margin-top:0; border:none; background:transparent;">
-          <div class="trace-body" style="padding: 8px 0;">
-            <div class="trace-line comment"><span class="num">01</span><span class="code"># Narrative generated from rule firings — every claim cites a rule ID</span></div>
-            <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-val">Initial screen:</span> <span class="trace-warn">REFER · 6 SUBJECTIVITIES · 1 BREACH</span></span></div>
-            <div class="trace-line"><span class="num">03</span><span class="code">Risk is in appetite [<span class="trace-key">CP-APT-01</span>] with acceptable loss history [<span class="trace-key">CP-LOSS-04</span>].</span></div>
-            <div class="trace-line"><span class="num">04</span><span class="code">Binding at default 50% cession pushes Gulf T1 accumulation to 80.4%, breaching</span></div>
-            <div class="trace-line"><span class="num">05</span><span class="code">the 80% treaty cap [<span class="trace-key">CP-ACC-02</span>] — cession structure must be re-reasoned.</span></div>
-            <div class="trace-line"><span class="num">06</span><span class="code">Quote to include: 5% NWS deductible [<span class="trace-key">CP-CAT-12</span>], flood</span></div>
-            <div class="trace-line"><span class="num">07</span><span class="code">sublimit USD 5M [<span class="trace-key">CP-CAT-18</span>], hot-work warranty [<span class="trace-key">CP-HAZ-07</span>],</span></div>
-            <div class="trace-line"><span class="num">08</span><span class="code">prior non-renewal disclosure [<span class="trace-key">CP-DISC-09</span>], senior UW authority [<span class="trace-key">CP-TIV-03</span>].</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mini-ont">
-        <div class="mini-ont-label">Stage 05 / Cross-domain reasoning — compose a priced, placed quote</div>
-        <div class="trace" style="margin-top:0; border:none; background:transparent;">
-          <div class="trace-body" style="padding: 8px 0;">
-            <div class="trace-line comment"><span class="num">01</span><span class="code"># Query enterprise ontology for resolution levers &amp; pricing inputs</span></div>
-            <div class="trace-line"><span class="num">02</span><span class="code"><span class="trace-key">ReinsuranceTreaty</span>(ABC-Gulf-2026).variableBand = [<span class="trace-val">25%, 75%</span>] retention</span></div>
-            <div class="trace-line"><span class="num">03</span><span class="code"><span class="trace-key">PricingOntology</span>.bookRate(MetalFab · PC4 · Tier1) = <span class="trace-val">$0.248 / $100 TIV</span></span></div>
-            <div class="trace-line"><span class="num">04</span><span class="code"><span class="trace-key">ClaimsOntology</span>.severityCurve(welding, 5y) → blended expected loss</span></div>
-            <div class="trace-line"><span class="num">05</span><span class="code"><span class="trace-key">RegFilingsOntology</span>.texas = NWS ded minimum OK · filing approved</span></div>
-            <div class="trace-line comment"><span class="num">06</span><span class="code"># Constraint-satisfaction · find retention that clears CP-ACC-02</span></div>
-            <div class="trace-line"><span class="num">07</span><span class="code">solve(retention ∈ [0.25, 0.75] | accumulation_post_bind ≤ 0.80 × cap)</span></div>
-            <div class="trace-line"><span class="num">08</span><span class="code">→ retention = <span class="trace-val">0.25</span> (75% ceded) · post-bind = <span class="trace-pass">79.7% ✓</span></span></div>
-            <div class="trace-line comment"><span class="num">09</span><span class="code"># Causal pricing derivation · base × loads × credits</span></div>
-            <div class="trace-line"><span class="num">10</span><span class="code">premium = base × (1 + welding + NWS + credit) × retained + commission</span></div>
-            <div class="trace-line"><span class="num">11</span><span class="code"><span class="trace-val">Final recommendation:</span> <span class="trace-pass">BIND · 25% RETENTION · NET PREMIUM $104,109</span></span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="decision nsai">
-        <div class="decision-label">What the neurosymbolic system produced</div>
-        <h4>A decision, a proof, a structure, and a price.</h4>
-        <p>Unlike the LLM, the NSAI system didn't stop at a fluent answer. It caught every compliance flag, diagnosed the accumulation breach with real math, then <em>reasoned across six enterprise ontologies</em> — treaty, portfolio, pricing, claims, regulatory filings, and commission — to find a cession structure that resolves the breach and arrive at a defensible net premium. Every value here has a named source.</p>
-        <ul class="issue-list">
-          <li><strong>Caught the CAT exposure</strong> through ontology-driven enrichment — not left to the model's attention.</li>
-          <li><strong>Caught the occupancy hazard</strong> via NAICS-to-hazard-class inheritance in the ontology.</li>
-          <li><strong>Diagnosed the accumulation breach</strong> at default cession with explicit portfolio math — 79.0% + gross add at 50% retention → 80.4%.</li>
-          <li><strong>Resolved it by constraint-satisfaction</strong> — flexed retention to 25% within the treaty band, lands at 79.7%, clears the 80% cap.</li>
-          <li><strong>Priced the risk causally</strong> — base rate loaded for welding and NWS, credited for protection, netted for cession.</li>
-          <li><strong>Every number traces to a source</strong> — the proof tree is the compliance record.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- LIVE DEMO — click to watch both models run -->
+    <!-- RUN BOTH MODELS — press-play widget -->
     <div class="live-demo" id="liveDemo">
       <div class="live-demo-head">
         <div>
-          <div class="live-demo-eyebrow">LIVE · WATCH BOTH MODELS RUN</div>
+          <div class="live-demo-eyebrow">LIVE &middot; WATCH BOTH MODELS RUN</div>
           <h3>See it for <em>yourself</em>.</h3>
-          <p>Press <strong>Run</strong>. Both systems receive the Meridian Fabrication submission at the same moment. Watch RAG retrieve, cite, and produce a grounded-sounding recommendation — while the neurosymbolic reasoner extracts, enriches, evaluates rules, composes an explanation, and then <em>reasons across the enterprise ontology</em> — deductively, causally, and by constraint-satisfaction — to structure and price the actual quote. Every number traced to a source.</p>
+          <p>Press <strong>Run</strong>. Both systems receive the same six documents at the same moment. Watch RAG read each one and produce a confident, well-cited renewal recommendation &mdash; while the neurosymbolic reasoner extracts, resolves entities, surfaces the contradiction, and lands on the decision the documents support together.</p>
         </div>
         <button class="run-btn" id="runBtn" onclick="runDemo()">RUN BOTH MODELS</button>
       </div>
 
       <div class="stage">
-        <!-- LLM LANE -->
         <div class="lane llm" id="laneLLM">
           <div class="lane-head">
             <div>
-              <div class="lane-tag">RAG + LLM · RETRIEVAL-AUGMENTED</div>
+              <div class="lane-tag">RAG + LLM &middot; RETRIEVAL-AUGMENTED</div>
               <div class="lane-title">Generative AI with Retrieval</div>
             </div>
             <div class="lane-clock"><span class="status"></span><span id="clockLLM">0.0s</span></div>
@@ -3156,11 +4094,10 @@
           <div class="lane-body" id="bodyLLM"></div>
         </div>
 
-        <!-- NSAI LANE -->
         <div class="lane nsai" id="laneNSAI">
           <div class="lane-head">
             <div>
-              <div class="lane-tag">NEUROSYMBOLIC · ONTOLOGY + RULES</div>
+              <div class="lane-tag">NEUROSYMBOLIC &middot; ONTOLOGY + RULES</div>
               <div class="lane-title">Hybrid Reasoner</div>
             </div>
             <div class="lane-clock"><span class="status"></span><span id="clockNSAI">0.0s</span></div>
@@ -3169,65 +4106,53 @@
         </div>
       </div>
 
-      <div class="race-summary" id="raceSummary">
-        <h4>Same submission. <em>Very different thinking.</em></h4>
-        <div class="sub">Side-by-side: what each system produced on this run.</div>
-        <div class="race-stats">
-          <div class="race-stat">
-            <div class="rs-label">Decision</div>
-            <div class="rs-pair">
-              <div class="rs-llm">Quote · binds a breach</div>
-              <div class="rs-divider">vs</div>
-              <div class="rs-nsai">Priced &amp; placed</div>
-            </div>
-          </div>
-          <div class="race-stat">
-            <div class="rs-label">Critical factors caught</div>
-            <div class="rs-pair">
-              <div class="rs-llm">5 of 8</div>
-              <div class="rs-divider">vs</div>
-              <div class="rs-nsai">8 of 8</div>
-            </div>
-          </div>
-          <div class="race-stat">
-            <div class="rs-label">Reasoning across domains</div>
-            <div class="rs-pair">
-              <div class="rs-llm">Documents only</div>
-              <div class="rs-divider">vs</div>
-              <div class="rs-nsai">6 ontologies</div>
-            </div>
-          </div>
-          <div class="race-stat">
-            <div class="rs-label">Audit trail</div>
-            <div class="rs-pair">
-              <div class="rs-llm">Citations</div>
-              <div class="rs-divider">vs</div>
-              <div class="rs-nsai">Proof tree</div>
-            </div>
-          </div>
+      <div class="compare-3" id="compare3" style="opacity:0; transition: opacity 0.6s ease;">
+        <div class="compare-3-header">
+          <div></div>
+          <div class="c3h-llm">LLM + RAG</div>
+          <div class="c3h-nsai">NSAI</div>
+        </div>
+        <div class="compare-3-row">
+          <div class="c3-metric">Documents reconciled</div>
+          <div class="c3-llm">Read independently</div>
+          <div class="c3-nsai">Cross-referenced</div>
+        </div>
+        <div class="compare-3-row">
+          <div class="c3-metric">Contradictions detected</div>
+          <div class="c3-llm">0</div>
+          <div class="c3-nsai">2</div>
+        </div>
+        <div class="compare-3-row">
+          <div class="c3-metric">Decision basis</div>
+          <div class="c3-llm">Citations</div>
+          <div class="c3-nsai">Proof tree</div>
         </div>
       </div>
     </div>
 
-    <!-- SCORECARD -->
-    <div class="scorecard">
-      <div class="score-col llm">
-        <h4>RAG + LLM Approach</h4>
-        <div class="score-metric"><span class="m-label">Decision accuracy on this risk</span><span class="m-val">Partial</span></div>
-        <div class="score-metric"><span class="m-label">Reproducibility across runs</span><span class="m-val">Probabilistic</span></div>
-        <div class="score-metric"><span class="m-label">Auditable rationale</span><span class="m-val">Citations</span></div>
-        <div class="score-metric"><span class="m-label">Guideline update cost</span><span class="m-val">Re-index docs</span></div>
-        <div class="score-metric"><span class="m-label">Portfolio awareness</span><span class="m-val">None</span></div>
-        <div class="score-metric"><span class="m-label">Regulatory defensibility</span><span class="m-val">Moderate</span></div>
+    <!-- ACT 2 — PORTFOLIO HINT -->
+    <div class="act2">
+      <div class="act2-eyebrow">Act 2 &middot; The book question</div>
+      <h3>
+        The breach in this submission was hidden between documents.
+        <strong>How many other warehouse renewals in your book have the same hidden drift?</strong>
+      </h3>
+
+      <div class="act2-chart-wrap">
+        <div class="act2-chart-label">Warehouse renewals processed in the last 12 months</div>
+        <div class="act2-bar" role="img" aria-label="Illustrative bar: 17 percent of warehouse renewals had post-engineering-review COPE or MSDS evidence that was not reconciled before bind.">
+          <div class="bar-rest">100% TOTAL</div>
+          <div class="bar-flag">17%</div>
+        </div>
+        <p class="act2-bar-caption">
+          <em>~17% of warehouse renewals</em> had post-engineering-review COPE or MSDS evidence that was not reconciled before bind.
+        </p>
+        <div class="act2-bar-disclaimer">Illustrative only. Actual figures depend on book composition and current renewal workflow.</div>
       </div>
-      <div class="score-col nsai">
-        <h4>Neurosymbolic Approach</h4>
-        <div class="score-metric"><span class="m-label">Decision accuracy on this risk</span><span class="m-val">Correct</span></div>
-        <div class="score-metric"><span class="m-label">Reproducibility across runs</span><span class="m-val">Deterministic</span></div>
-        <div class="score-metric"><span class="m-label">Auditable rationale</span><span class="m-val">Proof tree</span></div>
-        <div class="score-metric"><span class="m-label">Guideline update cost</span><span class="m-val">Edit rule</span></div>
-        <div class="score-metric"><span class="m-label">Portfolio awareness</span><span class="m-val">Real-time</span></div>
-        <div class="score-metric"><span class="m-label">Regulatory defensibility</span><span class="m-val">Strong</span></div>
+
+      <div class="act2-cta">
+        <p>NSAI runs the same reconciliation across your in-force book &mdash; not as a one-time audit, but as a continuous check on every renewal.</p>
+        <a href="index.html" class="act2-cta-btn">Talk to us about a portfolio-scale pilot</a>
       </div>
     </div>
   </div>
@@ -3244,120 +4169,60 @@
 </footer>
 
 <script>
-  function switchTab(name) {
-    document.querySelectorAll('.process-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.process-panel').forEach(p => p.classList.remove('active'));
-    document.querySelector('.process-tab[data-tab="' + name + '"]').classList.add('active');
-    document.getElementById('panel-' + name).classList.add('active');
-  }
-
-  function toggleDeepDive() {
-    // Going Deeper is always expanded on this page
-  }
+  // ============ REMEDIATION ACCORDION (Stage 5) ============
+  (function initRemediation() {
+    const list = document.getElementById('remedList');
+    if (!list) return;
+    list.querySelectorAll('[data-remed-toggle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.remed-item');
+        const wasOpen = item.classList.contains('open');
+        list.querySelectorAll('.remed-item').forEach(i => {
+          i.classList.remove('open');
+          const b = i.querySelector('[data-remed-toggle]');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
 
   // ============ LIVE DEMO RUNNER ============
-  // RAG + LLM pipeline: query → retrieve → inject → generate.
-  // RAG is noticeably smarter than a bare LLM — it can cite the underwriting
-  // manual and avoid the NAICS mis-classification — but it still can't do
-  // multi-step portfolio reasoning or constraint-satisfaction.
+  // Same six documents into both systems. LLM reads each accurately and
+  // recommends renew. NSAI reconciles across documents and refers / holds.
   const LLM_SCRIPT = [
-    { label: "Query formulation",   text: 'Parsing submission \u2192 building retrieval query...',                                     wait: 400 },
-    { label: "Retrieve · Pass 1",   text: 'Vector search (underwriting manual) \u2192 <span class="ok">7 passages</span>',               wait: 500 },
-    { label: "Retrieve · Pass 2",   text: 'Vector search (appetite guide) \u2192 <span class="ok">4 passages</span>',                     wait: 500 },
-    { label: "Retrieve · Pass 3",   text: 'Vector search (CAT classifications) \u2192 <span class="ok">3 passages</span>',                wait: 500 },
-    { label: "Context injection",   text: 'Top 14 passages injected into prompt (9.8k tokens)...',                                       wait: 500 },
-    { label: "Grounded generation", text: 'Cites [UW-Manual-§3.2] \u2192 joisted masonry acceptable, PC4 with sprinklers standard',      wait: 550 },
-    { label: "Grounded generation", text: 'Cites [Appetite-2026-Q2] \u2192 metal fabrication in appetite with hot-work warranty',       wait: 550 },
-    { label: "Grounded generation", text: 'Cites [CAT-Zones-TX] \u2192 Galveston Tier 1 \u2192 standard 5% NWS deductible',               wait: 550 },
-    { label: "Forming recommendation", text: 'Drafting narrative response from retrieved context...',                                   wait: 650 },
+    { label: "Doc 01 · Application",     text: 'Reading ACORD renewal application <span class="ok">&#10003;</span> &middot; <span class="v">no operations change</span>',           wait: 520 },
+    { label: "Doc 02 · SOV",             text: 'Reading statement of values <span class="ok">&#10003;</span> &middot; Building 3 = <span class="v">warehouse</span>',                wait: 520 },
+    { label: "Doc 03 · COPE",            text: 'Reading COPE inspection <span class="ok">&#10003;</span> &middot; notes <span class="v">partitioned coating cell</span> in Bldg 3',  wait: 560 },
+    { label: "Doc 04 · MSDS",            text: 'Reading MSDS list <span class="ok">&#10003;</span> &middot; <span class="v">solvent coatings, thinners, cleaner</span>',             wait: 520 },
+    { label: "Doc 05 · Sprinkler cert",  text: 'Reading inspection certificate <span class="ok">&#10003;</span> &middot; <span class="v">ESFR operational, no deficiencies</span>',  wait: 520 },
+    { label: "Doc 06 · Expiring policy", text: 'Reading subjectivity <span class="v">CP-OPS-04</span> <span class="ok">&#10003;</span> &middot; warehouse-occupancy condition',       wait: 520 },
+    { label: "Compose rationale",        text: 'Citing each document &middot; recommending post-bind risk-engineering review of new cell',                                           wait: 700 },
   ];
-
   const LLM_VERDICT = {
-    headline: 'Recommendation: <em>QUOTE with referral</em> &middot; 5% NWS ded &middot; hot-work warranty &middot; standard terms.',
-    body: 'Well-cited, well-structured, and grounded in the actual manual. But no portfolio context, no accumulation math, no treaty awareness &mdash; all the retrieved passages are about <em>this</em> risk in isolation. The carrier binds this, then discovers post-bind that CP-ACC-02 has breached.',
+    headline: 'Recommendation: <em>RENEW with moderate rate increase</em> &middot; 6% &middot; post-bind RE review.',
+    body: 'Every document was read accurately and cited. None of them, read alone, contradicts the renewal. The breach lives in what the documents say about each other &mdash; which the LLM did not check.',
   };
 
-  // NSAI runs four stages, with stage 3 being a rule-by-rule evaluation
-  const NSAI_STAGE_1 = [
-    { label: "Stage 01 · Extract",  text: '<span class="k">Policy</span>(id=P1, insured=<span class="v">"Meridian Fabrication"</span>)',  wait: 450 },
-    { label: "Stage 01 · Extract",  text: '<span class="k">Location</span>(id=L1, address=<span class="v">"Galveston, TX 77551"</span>)', wait: 450 },
-    { label: "Stage 01 · Extract",  text: '<span class="k">Building</span>(B1, tiv=<span class="v">USD 38.2M</span>, year=1987)',          wait: 450 },
-    { label: "Stage 01 · Extract",  text: '<span class="k">Occupancy</span>(B1, NAICS=<span class="v">332710</span>)',                    wait: 450 },
+  const NSAI_SCRIPT = [
+    { label: "Stage 01 · Neural extraction",      text: 'Parsing 6 documents into structured facts &middot; <span class="v">42 fields, 4 building references</span>',                                            wait: 600 },
+    { label: "Stage 02 · Entity resolution",      text: '<span class="k">SOV.Building_3</span> = <span class="k">COPE.Building_3</span> = <span class="k">MSDS.Loc_B3</span> = <span class="k">Cert.Building_3</span>', wait: 700 },
+    { label: "Stage 02 · Ontology hop",           text: 'solvent coating (flash &lt; 38&deg;C) <span class="flag">&rarr;</span> <span class="v">ignitable-liquid operation</span> <span class="flag">&rarr;</span> special-hazard occupancy', wait: 700 },
+    { label: "Stage 03 · Contradiction detected", text: '<span class="bad">&perp;</span> Application.operations_change = "none" conflicts with COPE + MSDS evidence',                                              wait: 720, cls: "fail" },
+    { label: "Stage 03 · Rule precedence",        text: 'Subjectivity <span class="k">CP-OPS-04</span> requires prior notice &middot; <span class="bad">not satisfied</span>',                                       wait: 700, cls: "fail" },
+    { label: "Stage 04 · Proof tree",             text: 'Building 3 hosts ignitable-liquid operation &middot; subjectivity unmet &middot; <span class="bad">decision: refer / hold</span>',                          wait: 700, cls: "fail" },
+    { label: "Stage 05 · Remediation path",       text: 'Composing 5-step remediation path to cure the contradiction and reissue subjectivity',                                                                      wait: 600, cls: "pass" },
   ];
-  const NSAI_STAGE_2 = [
-    { label: "Stage 02 · Enrich", text: '<span class="k">Location</span>.catZone \u2190 lookup(FIPS=48167) = <span class="flag">Tier1_NamedWindstorm</span>', wait: 500 },
-    { label: "Stage 02 · Enrich", text: '<span class="k">MetalFab</span> \u2291 <span class="flag">HighHazard_Welding</span> \u2291 FireHazardClass_4',        wait: 500 },
-    { label: "Stage 02 · Enrich", text: '<span class="k">Portfolio</span>(Gulf_T1) = <span class="flag">71% of treaty</span>',                                wait: 500 },
-    { label: "Stage 02 · Enrich", text: '<span class="k">PriorCarrier</span>.nonRenewal = <span class="flag">flag for disclosure review</span>',              wait: 500 },
-  ];
-  // Stage 3 — rule engine firings (animated specially)
-  const NSAI_RULES = [
-    { id: "CP-APT-01",  desc: "Clearance & appetite screen",                       result: "pass", out: "IN APPETITE" },
-    { id: "CP-TIV-03",  desc: "TIV > $50M routes to senior authority",             result: "warn", out: "REFER" },
-    { id: "CP-CAT-12",  desc: "Tier 1 named-wind requires 5% NWS deductible",      result: "warn", out: "SUBJECT TO" },
-    { id: "CP-CAT-18",  desc: "FEMA flood zone requires sublimit or exclusion",    result: "warn", out: "SUBJECT TO" },
-    { id: "CP-HAZ-07",  desc: "Welding requires hot-work permit warranty",         result: "warn", out: "WARRANTY" },
-    { id: "CP-ACC-02",  desc: "Gulf T1 accumulation must stay < 80% of treaty",    result: "fail", out: "BREACH" },
-    { id: "CP-LOSS-04", desc: "Loss ratio < 40% over 5y — no load required",       result: "pass", out: "PASS" },
-    { id: "CP-DISC-09", desc: "Prior non-renewal requires broker disclosure",      result: "warn", out: "SUBJECT TO" },
-  ];
-
   const NSAI_VERDICT = {
-    headline: '<em>6 subjectivities flagged. 1 breach (CP-ACC-02).</em> Proceeding to reason across the organization...',
-    body: 'Rule engine complete. Every flag traces to a named guideline. The breach is solvable — cession structure is the lever. Moving to Stage 5.',
-  };
-
-  // ===== Stage 5: Reason across the ontology to a priced quote =====
-  // Knowledge sources pulled from other parts of the enterprise ontology
-  const NSAI_SOURCES = [
-    { domain: 'Reinsurance treaty ontology', detail: 'Treaty ABC-Gulf-2026 · default cession 50% · variable band 25–75%',    value: 'BAND AVAILABLE' },
-    { domain: 'Portfolio ontology',          detail: 'Gulf Tier 1 — retained accumulation 71.0% of 80% cap · PML @ 250yr',     value: 'HEADROOM 9.0%' },
-    { domain: 'Pricing ontology',            detail: 'Book rate for MetalFab · PC4 · Tier1_NWS · 2-loss 5y frequency',          value: 'BASE $0.248' },
-    { domain: 'Claims ontology',             detail: 'Severity curve for welding occupancies · 5y rolling mean & tail',         value: 'SEV BLENDED' },
-    { domain: 'Pricing ontology · loads',    detail: 'Hazard, CAT, protection, and sprinkler credit rate factors',              value: 'LOADS RESOLVED' },
-    { domain: 'Reg filings ontology',        detail: 'Texas admitted filings — rate floor, NWS ded minimums, form approvals',  value: 'FILING OK' },
-  ];
-
-  // Options deliberated — the reasoner considers cession structures under CP-ACC-02
-  const NSAI_DELIBERATION = {
-    label: 'Constraint-satisfaction — find cession structure that clears CP-ACC-02 and maximizes net margin',
-    options: [
-      { text: 'Decline the risk — avoid the accumulation issue entirely',                                score: 'EV  −$47k', status: 'rejected', reason: 'forgoes a profitable account' },
-      { text: 'Bind at default 50% cession · retain 50% · standard terms',                                score: 'EV +$84k',  status: 'rejected', reason: 'still breaches CP-ACC-02 (accum 80.4%)' },
-      { text: 'Retain 25% (cede 75%) on this risk · 5% NWS ded · $5M flood sublimit · hot-work warranty', score: 'EV +$60k',  status: 'chosen',   reason: 'clears accum (79.7%), all filings & rules satisfied' },
-      { text: 'Bind at 75% retention · negotiate fac reinsurance for NWS layer above $10M',               score: 'EV +$108k', status: 'rejected', reason: 'fac market soft this quarter · timing risk for 06/01' },
-    ],
-  };
-
-  // The derived quote — every value has a reasoning trace
-  const NSAI_QUOTE = {
-    title: 'Derived quote — <em>priced, structured, and fully traced</em>',
-    terms: [
-      { k: 'Coverage',                     v: 'Building + BPP + BI · 3 locations' },
-      { k: 'Policy form',                  v: 'Special, replacement cost' },
-      { k: 'All-other-perils deductible',  v: '$25,000' },
-      { k: 'Named-windstorm deductible',   v: '<em>5% of TIV per location</em>' },
-      { k: 'Flood sublimit',               v: '$5,000,000 · Tier 1 location only' },
-      { k: 'Hot-work warranty',            v: 'Required · 48-hr fire watch' },
-      { k: 'Reinsurance structure',        v: '<em>75% ceded</em> · 25% retained · Treaty ABC-Gulf-2026' },
-      { k: 'Authority',                    v: 'Senior UW referral (TIV > $50M)' },
-    ],
-    premium: {
-      value: '$ 104,109',
-      reason: 'Base rate $0.248/$100 TIV · +18% welding hazard · +12% Tier 1 NWS load · −22% PC/sprinkler credit · net of 75% QS cession + 28% ceding commission',
-    },
-    trace: [
-      'Base rate → <span class="cite">Pricing ontology / MetalFab · PC4 · Tier1</span>',
-      'NWS deductible → <span class="cite">CP-CAT-12</span> · Flood sublimit → <span class="cite">CP-CAT-18</span>',
-      'Hot-work warranty → <span class="cite">CP-HAZ-07</span> · Cession 75% → <span class="cite">Treaty ABC-Gulf-2026 variable band</span>',
-      'Accumulation resolution → <span class="cite">CP-ACC-02 solved · retained 79.7% post-bind</span>',
-      'Expected loss → <span class="cite">Claims ontology / severity curve · 5y</span>',
-    ],
+    headline: 'Decision: <em>REFER / HOLD &mdash; do not renew as quoted</em>.',
+    body: 'Two contradictions, one unmet subjectivity, one resolved entity that ties four documents together. The reasoner returned a structured remediation path so the broker can cure the hold.',
   };
 
   // State
   let running = false;
-  let clockLLM = 0, clockNSAI = 0;
   let tickLLM = null, tickNSAI = null;
 
   function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -3366,44 +4231,13 @@
   function addStep(laneId, step, extraClass = "") {
     const body = $(laneId);
     const el = document.createElement("div");
-    el.className = "step " + extraClass;
+    el.className = "step " + (extraClass || step.cls || "");
     el.innerHTML = '<span class="s-label">' + step.label + '</span>' + step.text;
     body.appendChild(el);
-    // Let layout settle then animate in
     requestAnimationFrame(() => {
       requestAnimationFrame(() => el.classList.add("visible"));
     });
-    // Only keep NSAI lane in view (LLM is shorter and finishes fast)
-    if (laneId === "bodyNSAI") keepInView(el);
     return el;
-  }
-
-  function addRuleRow(laneId, rule) {
-    const body = $(laneId);
-    const wrapper = body.querySelector(".rule-ticker") || (() => {
-      const div = document.createElement("div");
-      div.className = "rule-ticker";
-      const head = document.createElement("div");
-      head.className = "step";
-      head.innerHTML = '<span class="s-label">Stage 03 · Rule engine</span>Evaluating underwriting guidelines...';
-      body.appendChild(head);
-      requestAnimationFrame(() => head.classList.add("visible"));
-      body.appendChild(div);
-      if (laneId === "bodyNSAI") keepInView(head);
-      return div;
-    })();
-    const row = document.createElement("div");
-    row.className = "rule-row evaluating";
-    row.innerHTML =
-      '<div class="r-id">' + rule.id + '</div>' +
-      '<div class="r-desc">' + rule.desc + '</div>' +
-      '<div class="r-out">' + rule.out + '</div>';
-    wrapper.appendChild(row);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => row.classList.add("visible"));
-    });
-    if (laneId === "bodyNSAI") keepInView(row);
-    return row;
   }
 
   function setVerdict(laneId, kind, v) {
@@ -3418,157 +4252,6 @@
     requestAnimationFrame(() => {
       requestAnimationFrame(() => el.classList.add("visible"));
     });
-    keepInView(el);
-  }
-
-  // Scroll helper — ensures the most recent element stays visible as NSAI grows
-  function keepInView(el) {
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    // If the element is below the 75% line of the viewport, scroll it up
-    const triggerLine = vh * 0.75;
-    if (rect.bottom > triggerLine) {
-      const targetOffset = rect.bottom - triggerLine + 60; // gentle lead
-      window.scrollBy({ top: targetOffset, behavior: 'smooth' });
-    }
-  }
-
-  function addReasonHeader(laneId, label, text) {
-    const body = $(laneId);
-    const el = document.createElement("div");
-    el.className = "reason-header";
-    el.innerHTML = '<span class="rh-label">' + label + '</span>' + text;
-    body.appendChild(el);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => el.classList.add("visible"));
-    });
-    keepInView(el);
-    return el;
-  }
-
-  function addSourcePull(laneId, source, letter) {
-    const body = $(laneId);
-    const el = document.createElement("div");
-    el.className = "source-pull loading";
-    el.innerHTML =
-      '<div class="sp-icon">' + letter + '</div>' +
-      '<div class="sp-domain"><strong>' + source.domain + '</strong> — ' + source.detail + '</div>' +
-      '<div class="sp-val">QUERYING...</div>';
-    body.appendChild(el);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => el.classList.add("visible"));
-    });
-    keepInView(el);
-    return el;
-  }
-
-  function addDeliberation(laneId, delib) {
-    const body = $(laneId);
-    const el = document.createElement("div");
-    el.className = "deliberation";
-    let html = '<span class="d-label">' + delib.label + '</span>';
-    delib.options.forEach((opt, i) => {
-      html += '<div class="d-option" data-idx="' + i + '">' +
-              '<div class="d-text">' + opt.text + '</div>' +
-              '<div class="d-score">' + opt.score + '</div>' +
-              '</div>';
-    });
-    el.innerHTML = html;
-    body.appendChild(el);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => el.classList.add("visible"));
-    });
-    keepInView(el);
-    return el;
-  }
-
-  function addQuoteCard(laneId, quote) {
-    const body = $(laneId);
-    const el = document.createElement("div");
-    el.className = "quote-card";
-    let terms = '';
-    quote.terms.forEach(t => {
-      terms += '<div class="qc-row"><div class="qc-k">' + t.k + '</div><div class="qc-v">' + t.v + '</div></div>';
-    });
-    let trace = '';
-    quote.trace.forEach(line => { trace += '<div>' + line + '</div>'; });
-    el.innerHTML =
-      '<div class="qc-head">' +
-        '<div class="qc-label">DERIVED DECISION · STAGE 05 OUTPUT</div>' +
-        '<div class="qc-title">' + quote.title + '</div>' +
-      '</div>' +
-      '<div class="qc-body">' +
-        terms +
-        '<div class="qc-premium">' +
-          '<div>' +
-            '<div class="qc-premium-label">ANNUAL PREMIUM (NET)</div>' +
-            '<div class="qc-premium-reason">' + quote.premium.reason + '</div>' +
-          '</div>' +
-          '<div class="qc-premium-val">' + quote.premium.value + '</div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="qc-trace">' +
-        '<div class="qc-trace-label">Reasoning trace — every value derived from a named source</div>' +
-        trace +
-      '</div>';
-    body.appendChild(el);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => el.classList.add("visible"));
-    });
-    keepInView(el);
-    return el;
-  }
-
-  // Solve block — shows a multi-line math resolution (e.g., CP-ACC-02 breach being resolved)
-  function addSolveBlock(laneId, cfg) {
-    const body = $(laneId);
-    const el = document.createElement("div");
-    el.className = "solve-block";
-    let rowsHtml = '';
-    cfg.rows.forEach(r => {
-      rowsHtml += '<div class="sb-row">' +
-                    '<div class="sb-k">' + r.k + '</div>' +
-                    '<div class="sb-calc">' + r.calc + '</div>' +
-                    '<div class="sb-val">' + r.val + '</div>' +
-                  '</div>';
-    });
-    el.innerHTML =
-      '<span class="sb-label">' + cfg.label + '</span>' +
-      (cfg.headline ? '<div class="sb-headline">' + cfg.headline + '</div>' : '') +
-      rowsHtml +
-      (cfg.result ? '<div class="sb-divider"></div>' +
-        '<div class="sb-result">' +
-          '<div class="sb-k">' + cfg.result.k + '</div>' +
-          '<div class="sb-calc">' + cfg.result.calc + '</div>' +
-          '<div class="sb-val">' + cfg.result.val + '</div>' +
-        '</div>' : '');
-    body.appendChild(el);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => el.classList.add("visible"));
-    });
-    keepInView(el);
-    return el;
-  }
-
-  // Update an existing rule row's status — used when the reasoner resolves a breach
-  function updateRuleStatus(ruleId, newStatus, newLabel) {
-    const rows = document.querySelectorAll("#bodyNSAI .rule-row");
-    for (const row of rows) {
-      const idEl = row.querySelector(".r-id");
-      if (idEl && idEl.textContent.trim() === ruleId) {
-        row.classList.remove("pass", "warn", "fail");
-        row.classList.add(newStatus);
-        row.querySelector(".r-out").textContent = newLabel;
-        row.style.transition = "all 0.5s ease";
-        // Brief highlight
-        const origBg = row.style.background;
-        row.style.background = "rgba(124,176,145,0.2)";
-        setTimeout(() => { row.style.background = origBg; }, 900);
-        return row;
-      }
-    }
-    return null;
   }
 
   function startClock(which) {
@@ -3579,8 +4262,6 @@
     const ticker = setInterval(() => {
       const elapsed = (performance.now() - start) / 1000;
       clockEl.textContent = elapsed.toFixed(1) + "s";
-      if (which === "llm") clockLLM = elapsed;
-      else clockNSAI = elapsed;
     }, 50);
     if (which === "llm") tickLLM = ticker;
     else tickNSAI = ticker;
@@ -3597,7 +4278,6 @@
   async function runLLM() {
     $("laneLLM").classList.remove("done");
     startClock("llm");
-    // First step immediately
     for (const step of LLM_SCRIPT) {
       addStep("bodyLLM", step);
       await wait(step.wait);
@@ -3610,129 +4290,12 @@
   async function runNSAI() {
     $("laneNSAI").classList.remove("done");
     startClock("nsai");
-    // Stage 1
-    for (const step of NSAI_STAGE_1) {
+    for (const step of NSAI_SCRIPT) {
       addStep("bodyNSAI", step);
       await wait(step.wait);
     }
-    // Stage 2
-    for (const step of NSAI_STAGE_2) {
-      addStep("bodyNSAI", step, "warn");
-      await wait(step.wait);
-    }
-    // Stage 3 — rules
-    for (const rule of NSAI_RULES) {
-      const row = addRuleRow("bodyNSAI", rule);
-      await wait(520);
-      row.classList.remove("evaluating");
-      row.classList.add(rule.result);
-      row.classList.add("done");
-      await wait(180);
-    }
-    // Stage 4 — narrative
-    addStep("bodyNSAI", {
-      label: "Stage 04 · Explain",
-      text: 'Decision narrative generated from proof tree; every claim cites a rule ID.',
-    }, "pass");
-    await wait(500);
     setVerdict("bodyNSAI", "nsai", NSAI_VERDICT);
-    await wait(900);
-
-    // ===== STAGE 5 — REASON TO A PRICED QUOTE =====
-    addReasonHeader("bodyNSAI",
-      'Stage 05 · Reason across the organization <span class="mode-pill">CONSTRAINT-SATISFACTION</span>',
-      "One blocking breach remains: CP-ACC-02. Before pricing anything, the reasoner diagnoses the breach by the numbers, then searches for a cession structure that clears it while satisfying every other constraint."
-    );
-    await wait(700);
-
-    // ---- Breach diagnosis: show the math at default cession ----
-    addSolveBlock("bodyNSAI", {
-      label: "Diagnose · CP-ACC-02 at default treaty terms",
-      headline: 'Treaty ABC-Gulf-2026 default cession is <em>50%</em>. The question: does binding at 50% retention fit under the 80% accumulation cap?',
-      rows: [
-        { k: "gross accum add",    calc: "Tier 1 exposed TIV × CAT factor  =  $67.1M × 0.30",                val: "$ 20.13M" },
-        { k: "retained add",       calc: "gross × (1 − cession)    =  $20.13M × 0.50",                       val: "$ 10.07M" },
-        { k: "treaty cap",         calc: "80% of $900M gross treaty limit",                                 val: "$ 720M" },
-        { k: "retained pre-bind",  calc: "portfolio accumulation (from Stage 02)",                          val: "$ 568.8M (79.0%)" },
-      ],
-      result: {
-        k: "POST-BIND",
-        calc: "($ 568.8M + $ 10.07M) / $ 720M cap  →  breach of 0.4%",
-        val: "80.4%  ✗",
-      },
-    });
-    await wait(1400);
-
-    // ---- Source pulls: query the broader ontology ----
-    addReasonHeader("bodyNSAI",
-      'Query enterprise ontology for resolution levers <span class="mode-pill">CAUSAL + DEDUCTIVE</span>',
-      "The reasoner pulls from every ontology that could produce a solution — cession structure, pricing, claims severity, and regulatory filings."
-    );
-    await wait(500);
-
-    const letters = ['R', 'P', '$', 'C', 'L', 'F'];
-    for (let i = 0; i < NSAI_SOURCES.length; i++) {
-      const src = NSAI_SOURCES[i];
-      const el = addSourcePull("bodyNSAI", src, letters[i]);
-      await wait(420);
-      el.classList.remove("loading");
-      el.classList.add("loaded");
-      el.querySelector(".sp-val").textContent = src.value;
-      await wait(180);
-    }
     await wait(400);
-
-    // ---- Deliberation: weigh alternatives ----
-    addReasonHeader("bodyNSAI",
-      'Weigh placement options <span class="mode-pill">COUNTERFACTUAL</span>',
-      "Four structures simulated. Each option priced for expected value and tested against every rule — appetite, accumulation, filings, treaty terms, and operational feasibility."
-    );
-    await wait(500);
-
-    const delibEl = addDeliberation("bodyNSAI", NSAI_DELIBERATION);
-    await wait(1100);
-    const optionEls = delibEl.querySelectorAll(".d-option");
-    const order = [0, 1, 3, 2]; // reject in order, chosen (idx 2) last
-    for (let k = 0; k < order.length; k++) {
-      const idx = order[k];
-      const opt = NSAI_DELIBERATION.options[idx];
-      optionEls[idx].classList.add(opt.status);
-      await wait(520);
-    }
-    await wait(700);
-
-    // ---- Resolution math: prove the chosen option clears CP-ACC-02 ----
-    addSolveBlock("bodyNSAI", {
-      label: "Resolve · CP-ACC-02 at chosen cession structure",
-      headline: 'Flex retention on this risk from the default 50% down to <em>25%</em> (treaty variable band: 25–75%). Recompute the accumulation.',
-      rows: [
-        { k: "retention",         calc: "flexed from default 50% → chosen 25%",                               val: "25%" },
-        { k: "retained add",      calc: "$ 20.13M × 0.25",                                                    val: "$ 5.03M" },
-        { k: "retained post-bind", calc: "$ 568.8M + $ 5.03M  =  $ 573.83M",                                   val: "$ 573.8M" },
-        { k: "as % of cap",       calc: "$ 573.8M / $ 720M",                                                  val: "79.7%" },
-      ],
-      result: {
-        k: "POST-BIND",
-        calc: "79.7% vs 80% cap  →  0.30% headroom · CP-ACC-02 cleared",
-        val: "79.7%  ✓",
-      },
-    });
-    await wait(700);
-
-    // Flip CP-ACC-02 in the rule ticker from BREACH → RESOLVED
-    updateRuleStatus("CP-ACC-02", "pass", "RESOLVED");
-    await wait(900);
-
-    addReasonHeader("bodyNSAI",
-      'Compose priced quote <span class="mode-pill">DEDUCTIVE</span>',
-      "All constraints satisfied. Every rule passes or is addressed by a subjectivity. Pricing is derived from the book rate, loaded for causally-linked hazards, credited for protection, and netted for the chosen cession."
-    );
-    await wait(500);
-
-    // ---- Final quote card: the payoff ----
-    addQuoteCard("bodyNSAI", NSAI_QUOTE);
-    await wait(500);
-
     stopClock("nsai");
   }
 
@@ -3740,23 +4303,20 @@
     if (running) return;
     running = true;
     const btn = $("runBtn");
-    // Reset if re-running
     $("bodyLLM").innerHTML = "";
     $("bodyNSAI").innerHTML = "";
     $("laneLLM").classList.remove("done");
     $("laneNSAI").classList.remove("done");
-    $("raceSummary").classList.remove("visible");
+    const compare = $("compare3");
+    if (compare) compare.style.opacity = "0";
     btn.classList.remove("finished");
     btn.classList.add("running");
     btn.textContent = "RUNNING BOTH MODELS...";
-    btn.querySelector && (btn.textContent = "RUNNING BOTH MODELS...");
 
-    // Run both concurrently
     await Promise.all([runLLM(), runNSAI()]);
 
-    // Reveal the summary
-    await wait(400);
-    $("raceSummary").classList.add("visible");
+    await wait(300);
+    if (compare) compare.style.opacity = "1";
 
     btn.classList.remove("running");
     btn.classList.add("finished");
@@ -3823,6 +4383,30 @@
   })();
 
 </script>
+
+<!-- ARCHIVED 2026-05: prior hero treatment, may be repurposed as portfolio / reinsurance demo on a separate page. Do not render.
+
+  Prior hero scenario summary:
+    - Carrier: Meridian Fabrication (Galveston, TX 77551), commercial property
+    - Submission framed as new business: TIV $84.5M across TX/OK/LA, joisted masonry,
+      metal fabrication (NAICS 332710), PC 4, sprinklered, 2 losses / $412k 5yr,
+      prior carrier non-renewed (capacity).
+    - Reasoning lever: reinsurance treaty ABC-Gulf-2026 (default 50% cession,
+      variable band 25-75%); Gulf Tier 1 retained accumulation at 79.0% of $720M cap.
+    - Rule CP-ACC-02: Gulf Tier 1 accumulation must stay < 80% of treaty.
+      Binding at default 50% retention pushed post-bind accumulation to 80.4% (breach).
+    - Resolution: flex retention to 25% (cede 75%) within treaty variable band,
+      lands post-bind at 79.7% (cleared, 0.30% headroom). Net premium $104,109,
+      derived from book rate $0.248/$100 TIV with welding +18%, Tier 1 NWS +12%,
+      PC/sprinkler credit -22%, net of 75% QS cession at 28% ceding commission.
+    - Decision: BIND with 5% NWS deductible, $5M flood sublimit, hot-work warranty,
+      prior non-renewal disclosure, senior UW referral. Reasoned across six ontologies:
+      treaty, portfolio, pricing, claims, reg filings, commission.
+    - Full HTML markup, NSAI 5-stage trace (extract / enrich / rule engine /
+      explanation / cross-domain reason), constraint-satisfaction deliberation,
+      and derived-quote card lived in this section. Replaced May 2026 with
+      contradiction-between-documents hero (Building 3 coating cell / CP-OPS-04).
+-->
 
 </body>
 </html>
