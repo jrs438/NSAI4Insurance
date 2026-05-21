@@ -2890,7 +2890,7 @@
           <div class="pillar">
             <div class="pillar-num">03 — SYMBOLIC</div>
             <h3>Reason</h3>
-            <p>Apply underwriting guidelines, capacity limits, regulatory constraints, and reinsurance treaty rules as executable logic — with every inference traceable to a rule and a fact.</p>
+            <p>Apply underwriting guidelines, appetite gates, regulatory constraints, and capacity rules as executable logic — with every inference traceable to a rule and a fact.</p>
           </div>
           <div class="pillar">
             <div class="pillar-num">04 — NEURAL (again)</div>
@@ -3079,35 +3079,35 @@
         <div class="m-tag">MODE 01</div>
         <h4>Deductive</h4>
         <div class="m-desc">Given facts and rules, derive what must be true. Certainty, not probability. This is what rule engines and description logics do — and what regulators and auditors expect.</div>
-        <div class="m-example"><strong>In Underwriting</strong>If TIV &gt; $50M and underwriter authority is $50M, <em>referral is required</em>. No judgment call — a logical consequence.</div>
+        <div class="m-example"><strong>In Underwriting</strong>If a described activity is classified as height-work and the channel is DTC small-commercial, <em>the appetite gate excludes it</em>. No judgment call — a logical consequence.</div>
       </div>
       <div class="mode-cell">
         <div class="m-glyph">?</div>
         <div class="m-tag">MODE 02</div>
         <h4>Abductive</h4>
-        <div class="m-desc">Given observations, infer the best explanation. Used to classify — map a NAICS code or an address to the right concept in the ontology, resolve which peril regime applies.</div>
-        <div class="m-example"><strong>In Underwriting</strong>NAICS 332710 + welding equipment observed → <em>best classification is HighHazard_Welding</em>, not generic light manufacturing.</div>
+        <div class="m-desc">Given observations, infer the best explanation. Used to classify — map a customer description or business code to the right concept in the ontology, resolve which exposure class applies.</div>
+        <div class="m-example"><strong>In Underwriting</strong>Customer self-describes as &ldquo;handyman&rdquo; but mentions roof leak patching → <em>best decomposition includes ROOF_SURFACE_WORK</em>, not bundled handyman.</div>
       </div>
       <div class="mode-cell">
         <div class="m-glyph">→</div>
         <div class="m-tag">MODE 03</div>
         <h4>Causal</h4>
         <div class="m-desc">Reason about cause and effect, not just correlation. Knowing what drives what lets the system trace pricing loads to their origin — and predict how a change propagates.</div>
-        <div class="m-example"><strong>In Underwriting</strong>Tier 1 location → elevated wind exposure → NWS deductible needed → <em>premium rate load of +12%</em>. Each link traceable.</div>
+        <div class="m-example"><strong>In Underwriting</strong>Roof-surface activity → height_work_exposure → standard GL limit inadequate → <em>require $2M endorsement</em>. Each link traceable.</div>
       </div>
       <div class="mode-cell">
         <div class="m-glyph">∩</div>
         <div class="m-tag">MODE 04</div>
         <h4>Constraint-satisfaction</h4>
-        <div class="m-desc">Find a solution that satisfies many constraints simultaneously. Price, capacity, regulatory filings, appetite, treaty terms — all must hold. Solvers find the option that clears every test.</div>
-        <div class="m-example"><strong>In Underwriting</strong>What deductible + sublimit + cession structure <em>keeps retained accumulation &lt; 80%</em> while maximizing margin?</div>
+        <div class="m-desc">Find a solution that satisfies many constraints simultaneously. Price, capacity, regulatory filings, appetite, coverage adequacy — all must hold. Solvers find the option that clears every test.</div>
+        <div class="m-example"><strong>In Underwriting</strong>Which deductible + sublimit + exclusion structure <em>keeps the risk inside DTC appetite</em> while preserving customer choice?</div>
       </div>
       <div class="mode-cell">
         <div class="m-glyph">~</div>
         <div class="m-tag">MODE 05</div>
         <h4>Counterfactual</h4>
-        <div class="m-desc">Ask what-if. With a structured world model the system can simulate changes — what happens to the portfolio if this bind goes through, if the treaty renews at different terms, if the book shifts.</div>
-        <div class="m-example"><strong>In Underwriting</strong>If we cede 40% via quota-share instead of 25%, <em>retained PML drops by $3.8M</em> — reshaping the bind decision.</div>
+        <div class="m-desc">Ask what-if. With a structured world model the system can simulate changes — what happens to the priced quote if a different activity mix is bound, if the customer accepts a roof-surface exclusion, if the limits change.</div>
+        <div class="m-example"><strong>In Underwriting</strong>If the customer accepts a roof-surface exclusion, <em>premium drops from $4,100 to $1,950</em> and the bind moves from specialty referral to same-session DTC.</div>
       </div>
     </div>
   </div>
@@ -3139,7 +3139,7 @@
           Once the world is modeled this way, rules become composable and inheritable. A rule that applies to "all combustible-construction buildings" automatically applies to anything the ontology classifies as combustible — frame, heavy timber, ordinary. You don't write the rule four times. You write it once, against the concept.
         </p>
         <p>
-          Most importantly, ontologies compose across domains. A location ontology plugs into a peril ontology plugs into a reinsurance ontology. The same structure that supports underwriting supports claims, portfolio management, and regulatory reporting.
+          Most importantly, ontologies compose across domains. An activity ontology plugs into an exposure ontology plugs into a rating ontology. The same structure that supports underwriting supports claims, portfolio management, and regulatory reporting.
         </p>
       </div>
 
@@ -3265,7 +3265,7 @@
       <div class="why-cell">
         <div class="why-num">III.</div>
         <h4>Cross-domain consistency</h4>
-        <p>The same <em>Location</em> concept anchors underwriting, claims, portfolio, and reinsurance. One broker address resolves to one entity everywhere — the foundation of clean accumulation and PML analysis.</p>
+        <p>The same <em>Activity</em> decomposition anchors underwriting, claims, portfolio, and rating. One described job resolves to the same activity classes everywhere &mdash; the foundation of consistent pricing and meaningful claim-pattern comparison.</p>
       </div>
     </div>
   </div>
@@ -3376,13 +3376,13 @@
 
       <div class="dive-card pc">
         <div class="dive-card-tag">Property &amp; Casualty</div>
-        <h3 class="dive-card-title">Commercial Property <em>Underwriting</em></h3>
-        <p class="dive-card-desc">A mid-market commercial property submission &mdash; from ontology-driven fact extraction through accumulation breach diagnosis and constraint-satisfaction pricing. Every rule fires explicitly. Every number traces to a source.</p>
+        <h3 class="dive-card-title">Small Commercial <em>Direct</em></h3>
+        <p class="dive-card-desc">A small business owner describes their work in plain English. The LLM classifies. NSAI decomposes the activities, finds the hidden exposures, prices accurately &mdash; and produces the customer message that explains why.</p>
         <ul class="dive-features">
-          <li>Commercial property ontology (COPE)</li>
-          <li>Eight-rule guideline evaluation</li>
+          <li>Activity decomposition ontology</li>
+          <li>Eight-rule appetite evaluation</li>
           <li>Live side-by-side demo: RAG vs NSAI</li>
-          <li>Constraint-satisfaction pricing</li>
+          <li>Customer-facing explanation</li>
           <li>Full proof tree</li>
         </ul>
         <a href="pc-deepdive.html" class="dive-cta">Explore P&amp;C Deep Dive &rarr;</a>
