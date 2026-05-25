@@ -1,0 +1,3240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Small commercial, fully reasoned &mdash; Neurosymbolic AI for Insurance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0F1419;
+    --ink-2: #2A3340;
+    --paper: #F4EFE6;
+    --paper-2: #ECE5D6;
+    --rule: #1C2530;
+    --accent: #B8442E;        /* terracotta */
+    --accent-2: #3F5E4A;      /* deep moss */
+    --accent-3: #C8A951;      /* muted brass */
+    --llm: #B8442E;
+    --nsai: #3F5E4A;
+    --muted: #6B6458;
+    --soft: #D9D1BF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 68px; /* account for sticky nav */
+  }
+  .hero, section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter Tight', -apple-system, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  /* Paper grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(0,0,0,0.015) 1px, transparent 1px),
+      radial-gradient(circle at 80% 70%, rgba(0,0,0,0.015) 1px, transparent 1px);
+    background-size: 3px 3px, 4px 4px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: sticky;
+    top: 0;
+    background: rgba(244,239,230,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(28,37,48,0.15);
+    z-index: 100;
+    padding: 18px 0;
+  }
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+  .nav-brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+  .nav-brand .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    transform: translateY(-2px);
+  }
+  .nav-sub { font-weight: 400; font-size: 14px; letter-spacing: 0; color: var(--muted); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a {
+    color: var(--ink-2);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--accent); font-weight: 600; }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.25s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active::after { width: 100%; height: 2px; }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 80px 0 100px;
+    position: relative;
+    border-bottom: 1px solid rgba(28,37,48,0.15);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+    gap: 56px;
+    align-items: start;
+    margin-bottom: 40px;
+  }
+  .hero-text { min-width: 0; }
+  .hero-visual {
+    position: relative;
+    animation: hero-fade 1.2s ease 0.2s both;
+  }
+  .hero-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 20px 40px rgba(184,68,46,0.08));
+  }
+  @keyframes hero-fade {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 32px;
+    max-width: 14ch;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .hero-lede {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 58ch;
+    margin-bottom: 48px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid rgba(28,37,48,0.15);
+  }
+  .hero-meta div {
+    font-size: 13px;
+  }
+  .hero-meta .label {
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+  .hero-meta .val {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 17px;
+  }
+
+  /* Corner stamp */
+  .stamp {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    width: 180px;
+    height: 180px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.3;
+    padding: 20px;
+    transform: rotate(-8deg);
+    opacity: 0.9;
+  }
+  @media (max-width: 900px) {
+    .stamp { display: none; }
+  }
+
+  /* ============ SECTION ============ */
+  section {
+    padding: 96px 0;
+    border-bottom: 1px solid rgba(28,37,48,0.15);
+  }
+  .sec-head {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 40px;
+    margin-bottom: 56px;
+    align-items: start;
+  }
+  .sec-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    padding-top: 18px;
+    border-top: 2px solid var(--accent);
+  }
+  .sec-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.5vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    max-width: 22ch;
+  }
+  .sec-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .sec-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* ============ SECTION 1: DEFINITION ============ */
+  .def-grid {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 40px;
+  }
+  .def-lede {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    line-height: 1.4;
+    font-weight: 400;
+    max-width: 38ch;
+    margin-bottom: 48px;
+    color: var(--ink);
+  }
+  .def-lede em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .def-body {
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 62ch;
+    color: var(--ink-2);
+    margin-bottom: 48px;
+  }
+  .def-body p + p { margin-top: 18px; }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(28,37,48,0.15);
+    border: 1px solid rgba(28,37,48,0.15);
+  }
+  .pillar {
+    background: var(--paper);
+    padding: 36px 32px;
+  }
+  .pillar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+  .pillar h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .pillar p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  /* ============ SECTION 2: LLM vs NSAI REASONING ============ */
+  .reason-intro {
+    grid-column: 2;
+    max-width: 62ch;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 48px;
+  }
+
+  .reason-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+  .reason-col {
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.2);
+    padding: 40px 36px;
+    position: relative;
+  }
+  .reason-col.llm { border-left: 4px solid var(--llm); }
+  .reason-col.nsai { border-left: 4px solid var(--nsai); }
+  .reason-col-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .reason-col.llm .reason-col-tag { color: var(--llm); }
+  .reason-col.nsai .reason-col-tag { color: var(--nsai); }
+  .reason-col h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: -0.015em;
+    margin-bottom: 20px;
+  }
+  .reason-col .tagline {
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    color: var(--muted);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(28,37,48,0.2);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .reason-col ul {
+    list-style: none;
+  }
+  .reason-col li {
+    padding: 14px 0;
+    border-bottom: 1px dotted rgba(28,37,48,0.15);
+    font-size: 15px;
+    line-height: 1.55;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+  }
+  .reason-col li:last-child { border-bottom: none; }
+  .reason-col li strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    padding-top: 2px;
+  }
+
+  /* ===== RAG explainer block ===== */
+  .rag-block {
+    margin-top: 24px;
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.2);
+    border-left: 4px solid var(--accent-3);
+    padding: 40px 44px 44px;
+    position: relative;
+  }
+  .rag-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8A7220;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .rag-block h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    max-width: 28ch;
+  }
+  .rag-block h3 em { font-style: italic; color: #8A7220; }
+  .rag-intro {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 70ch;
+    margin-bottom: 32px;
+  }
+
+  /* Side-by-side flow diagrams for LLM/RAG/NSAI */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .flow-card {
+    padding: 22px 22px 24px;
+    background: var(--paper-2);
+    border-top: 3px solid;
+    position: relative;
+  }
+  .flow-card.llm { border-top-color: var(--llm); }
+  .flow-card.rag { border-top-color: var(--accent-3); }
+  .flow-card.nsai { border-top-color: var(--nsai); }
+  .flow-card .fc-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .flow-card.llm .fc-tag { color: var(--llm); }
+  .flow-card.rag .fc-tag { color: #8A7220; }
+  .flow-card.nsai .fc-tag { color: var(--nsai); }
+  .flow-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .flow-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+  }
+  .flow-steps li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    padding: 5px 0 5px 20px;
+    position: relative;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .flow-steps li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .flow-output {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding-top: 14px;
+    border-top: 1px dashed rgba(28,37,48,0.2);
+  }
+  .flow-output strong {
+    font-style: normal;
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  /* Myth vs Reality block */
+  .myth-reality {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(28,37,48,0.15);
+    border: 1px solid rgba(28,37,48,0.15);
+  }
+  .myth-cell {
+    padding: 22px 24px;
+  }
+  .myth-cell.myth {
+    background: rgba(184,68,46,0.04);
+  }
+  .myth-cell.reality {
+    background: rgba(63,94,74,0.05);
+  }
+  .myth-cell .mc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .myth-cell.myth .mc-label { color: var(--llm); }
+  .myth-cell.reality .mc-label { color: var(--nsai); }
+  .myth-cell p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .myth-cell p + p { margin-top: 10px; }
+  .myth-cell strong { color: var(--ink); }
+
+  /* Deep dive accordion */
+  .deep-dive {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px;
+    margin-top: 24px;
+  }
+  .deep-dive-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .deep-dive-head h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: -0.015em;
+  }
+  .deep-dive-head h4 em { font-style: italic; color: var(--accent-3); }
+  .toggle {
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(244,239,230,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    transition: transform 0.3s ease, background 0.2s;
+  }
+  .deep-dive.open .toggle {
+    transform: rotate(45deg);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .deep-dive-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .deep-dive.open .deep-dive-body {
+    max-height: 2500px;
+  }
+  .deep-dive-body-inner {
+    padding-top: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 36px;
+  }
+  .deep-dive-body h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-3);
+    margin-bottom: 16px;
+  }
+  .deep-dive-body p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(244,239,230,0.85);
+    margin-bottom: 12px;
+  }
+  .deep-dive-body code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(255,255,255,0.08);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: var(--accent-3);
+  }
+
+  /* ===== Thinking Fast / Slow framing + reasoning modes ===== */
+  .think-frame {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(28,37,48,0.2);
+    border: 1px solid rgba(28,37,48,0.2);
+  }
+  .think-col {
+    background: var(--paper);
+    padding: 36px 32px;
+  }
+  .think-col.system1 {
+    background: linear-gradient(135deg, rgba(184,68,46,0.05) 0%, rgba(184,68,46,0.01) 100%);
+  }
+  .think-col.system2 {
+    background: linear-gradient(135deg, rgba(63,94,74,0.06) 0%, rgba(63,94,74,0.02) 100%);
+  }
+  .think-glyph {
+    width: 160px;
+    height: auto;
+    display: block;
+    margin-bottom: 18px;
+    opacity: 0.9;
+  }
+  .think-col .think-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .think-col.system1 .think-tag { color: var(--llm); }
+  .think-col.system2 .think-tag { color: var(--nsai); }
+  .think-col h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .think-col h3 em { font-style: italic; color: var(--ink-2); }
+  .think-col .think-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: 14px;
+  }
+  .think-col .think-map {
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.4);
+    border-left: 2px solid;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+  }
+  .think-col.system1 .think-map { border-left-color: var(--llm); }
+  .think-col.system2 .think-map { border-left-color: var(--nsai); }
+
+  /* Reasoning modes grid */
+  .modes-head {
+    margin-top: 48px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .modes-head .modes-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-top: 6px;
+  }
+  .modes-head h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    max-width: 24ch;
+    color: var(--ink);
+  }
+  .modes-head h3 em { font-style: italic; color: var(--accent); }
+  .modes-head p {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin-top: 10px;
+    max-width: 58ch;
+  }
+  .modes-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: rgba(28,37,48,0.15);
+    border: 1px solid rgba(28,37,48,0.15);
+  }
+  .mode-cell {
+    background: var(--paper);
+    padding: 24px 22px 26px;
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+  }
+  .mode-cell .m-glyph {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--accent-2);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .mode-cell .m-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .mode-cell h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .mode-cell .m-desc {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin-bottom: 14px;
+    flex: 1;
+  }
+  .mode-cell .m-example {
+    padding-top: 12px;
+    border-top: 1px dotted rgba(28,37,48,0.25);
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .mode-cell .m-example strong {
+    color: var(--accent-2);
+    font-style: normal;
+    font-weight: 600;
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 900px) {
+    .think-frame { grid-template-columns: 1fr; }
+    .modes-head { grid-template-columns: 1fr; gap: 12px; }
+    .modes-grid { grid-template-columns: 1fr 1fr; }
+    .mode-cell { min-height: auto; }
+  }
+
+  /* ============ SECTION 3: ONTOLOGY ============ */
+  .ont-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .ont-text .def-lede {
+    font-size: 24px;
+    max-width: 30ch;
+  }
+  .ont-text p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 16px;
+  }
+  .ont-text .callout {
+    background: var(--paper-2);
+    border-left: 3px solid var(--accent-2);
+    padding: 20px 24px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 24px 0;
+  }
+
+  /* Ontology visualization */
+  .ont-viz {
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.2);
+    padding: 24px;
+    position: relative;
+  }
+  .ont-viz-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .ont-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .ont-node {
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+  .ont-node:hover { filter: brightness(1.1); }
+  .ont-node rect, .ont-node ellipse {
+    fill: var(--paper-2);
+    stroke: var(--ink-2);
+    stroke-width: 1.5;
+  }
+  .ont-node.core rect { fill: var(--accent-2); stroke: var(--accent-2); }
+  .ont-node.core text { fill: var(--paper); font-weight: 600; }
+  .ont-node.attr rect { fill: #fff; }
+  .ont-node text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px;
+    text-anchor: middle;
+    fill: var(--ink);
+    dominant-baseline: middle;
+    font-weight: 500;
+    pointer-events: none;
+  }
+  .ont-edge {
+    stroke: var(--ink-2);
+    stroke-width: 1;
+    fill: none;
+  }
+  .ont-edge-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    fill: var(--muted);
+    text-anchor: middle;
+  }
+
+  /* Bottom comparison (why ontology helps) */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(28,37,48,0.15);
+    border: 1px solid rgba(28,37,48,0.15);
+    margin-top: 48px;
+  }
+  .why-cell {
+    background: var(--paper);
+    padding: 32px 28px;
+  }
+  .why-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 40px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .why-cell h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .why-cell p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  /* ============ SECTION 4: DEMO ============ */
+  .demo-intro {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin-bottom: 40px;
+  }
+
+  /* Submission card */
+  .submission {
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.2);
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .sub-head {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 24px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .sub-head h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  .sub-head .sub-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--accent-3);
+  }
+  .sub-body {
+    padding: 32px 36px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px 36px;
+  }
+  .sub-field {
+    font-size: 14px;
+  }
+  .sub-field .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .sub-field .val {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .sub-field .val.warn { color: var(--accent); }
+  .sub-field .val.good { color: var(--nsai); }
+
+  /* Process selector */
+  .process-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(28,37,48,0.2);
+    margin-bottom: 0;
+  }
+  .process-tab {
+    flex: 1;
+    padding: 24px 20px;
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(28,37,48,0.2);
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Inter Tight', sans-serif;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .process-tab:last-child { border-right: none; }
+  .process-tab:hover { background: rgba(255,255,255,0.4); }
+  .process-tab.active { background: #fff; }
+  .process-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+  .process-tab[data-tab="baseline"].active::after { background: var(--ink); }
+  .process-tab[data-tab="llm"].active::after { background: var(--llm); }
+  .process-tab[data-tab="nsai"].active::after { background: var(--nsai); }
+  .process-tab .tab-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .process-tab .tab-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .process-tab .tab-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .process-panel {
+    display: none;
+    background: #fff;
+    border: 1px solid rgba(28,37,48,0.2);
+    border-top: none;
+    padding: 44px 40px 48px;
+  }
+  .process-panel.active { display: block; }
+
+  .panel-intro {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 36px;
+    max-width: 72ch;
+  }
+  .panel-intro em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Baseline workflow steps */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .flow-step {
+    background: var(--paper-2);
+    padding: 20px 16px;
+    border-top: 2px solid var(--ink-2);
+    position: relative;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .flow-step .step-n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .flow-step strong {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 15px;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .flow-step p {
+    color: var(--ink-2);
+    font-size: 12.5px;
+  }
+  @media (max-width: 900px) {
+    .flow { grid-template-columns: 1fr; }
+  }
+
+  /* Reasoning trace styling */
+  .trace {
+    background: #FAF7F0;
+    border: 1px solid rgba(28,37,48,0.15);
+    padding: 0;
+    margin-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    overflow: hidden;
+  }
+  .trace-head {
+    background: rgba(28,37,48,0.05);
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(28,37,48,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .trace-body {
+    padding: 20px 24px;
+    line-height: 1.75;
+  }
+  .trace-line {
+    padding: 6px 0;
+    color: var(--ink-2);
+    display: flex;
+    gap: 14px;
+  }
+  .trace-line .num {
+    color: var(--muted);
+    user-select: none;
+    flex-shrink: 0;
+    width: 30px;
+  }
+  .trace-line .code { flex: 1; }
+  .trace-line.comment { color: var(--muted); }
+  .trace-line.comment .code { font-style: italic; }
+  .trace-key { color: var(--accent-2); }
+  .trace-val { color: var(--ink); font-weight: 500; }
+  .trace-pass { color: var(--nsai); }
+  .trace-fail { color: var(--llm); }
+  .trace-warn { color: #A87C1E; }
+
+  /* Decision card */
+  .decision {
+    margin-top: 28px;
+    padding: 28px 32px;
+    border-left: 4px solid var(--ink);
+    background: var(--paper-2);
+  }
+  .decision.llm { border-color: var(--llm); }
+  .decision.nsai { border-color: var(--nsai); }
+  .decision-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .decision h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .decision p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .decision .issue-list {
+    margin-top: 14px;
+    list-style: none;
+  }
+  .decision .issue-list li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .decision .issue-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .decision.nsai .issue-list li::before { color: var(--nsai); }
+
+  /* NSAI ontology mini-diagram */
+  .mini-ont {
+    background: #FAF7F0;
+    border: 1px solid rgba(28,37,48,0.15);
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .mini-ont-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  /* Rules table */
+  .rules {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 20px;
+    background: #fff;
+  }
+  .rules thead {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .rules th {
+    text-align: left;
+    padding: 12px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .rules td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(28,37,48,0.1);
+    vertical-align: top;
+  }
+  .rules td.rule-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--accent);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .rules td.rule-out { text-align: right; }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .pill.pass { background: rgba(63,94,74,0.12); color: var(--nsai); }
+  .pill.fail { background: rgba(184,68,46,0.12); color: var(--llm); }
+  .pill.warn { background: rgba(200,169,81,0.18); color: #8A7220; }
+
+  /* Scorecard comparison */
+  .scorecard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 56px;
+    border: 1px solid rgba(28,37,48,0.2);
+  }
+  .score-col {
+    padding: 32px 36px;
+    background: #fff;
+  }
+  .score-col.llm {
+    background: linear-gradient(135deg, rgba(184,68,46,0.04) 0%, rgba(184,68,46,0.01) 100%);
+    border-right: 1px solid rgba(28,37,48,0.2);
+  }
+  .score-col.nsai {
+    background: linear-gradient(135deg, rgba(63,94,74,0.05) 0%, rgba(63,94,74,0.01) 100%);
+  }
+  .score-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .score-col.llm h4 { color: var(--llm); }
+  .score-col.nsai h4 { color: var(--nsai); }
+  .score-metric {
+    padding: 14px 0;
+    border-bottom: 1px dotted rgba(28,37,48,0.15);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .score-metric:last-child { border-bottom: none; }
+  .score-metric .m-label {
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .score-metric .m-val {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ============ LIVE DEMO — RUN ========= */
+  .live-demo {
+    margin-top: 56px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 40px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Subtle grid pattern */
+  .live-demo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .live-demo-head {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+    margin-bottom: 44px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(244,239,230,0.12);
+  }
+  .live-demo-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent-3);
+    margin-bottom: 14px;
+  }
+  .live-demo-head h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    max-width: 22ch;
+  }
+  .live-demo-head h3 em {
+    font-style: italic;
+    color: var(--accent-3);
+  }
+  .live-demo-head p {
+    font-size: 14px;
+    color: rgba(244,239,230,0.7);
+    margin-top: 10px;
+    max-width: 60ch;
+    line-height: 1.55;
+  }
+
+  /* Run button */
+  .run-btn {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--accent-3);
+    color: var(--ink);
+    border: none;
+    padding: 20px 36px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    transition: transform 0.15s ease, background 0.2s;
+    box-shadow: 0 0 0 0 rgba(200,169,81,0.5);
+  }
+  .run-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(200,169,81,0.3);
+  }
+  .run-btn:active { transform: translateY(0); }
+  .run-btn.running {
+    background: rgba(244,239,230,0.1);
+    color: var(--accent-3);
+    cursor: wait;
+  }
+  .run-btn.finished {
+    background: transparent;
+    color: rgba(244,239,230,0.4);
+    border: 1px solid rgba(244,239,230,0.2);
+  }
+  .run-btn::before {
+    content: '▶';
+    margin-right: 10px;
+    display: inline-block;
+  }
+  .run-btn.running::before {
+    content: '●';
+    animation: pulse-dot 1s infinite;
+  }
+  .run-btn.finished::before {
+    content: '↻';
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* Split stage */
+  .stage {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .lane {
+    background: rgba(244,239,230,0.03);
+    border: 1px solid rgba(244,239,230,0.12);
+    padding: 28px 28px 32px;
+    position: relative;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+  }
+  .lane.llm { border-top: 3px solid var(--llm); }
+  .lane.nsai { border-top: 3px solid var(--nsai); }
+  .lane-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(244,239,230,0.15);
+    margin-bottom: 22px;
+  }
+  .lane-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+  }
+  .lane.llm .lane-tag { color: var(--llm); }
+  .lane.nsai .lane-tag { color: var(--nsai); }
+  .lane-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    margin-top: 4px;
+    color: var(--paper);
+  }
+  .lane-clock {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(244,239,230,0.5);
+    letter-spacing: 0.08em;
+  }
+  .lane-clock .status {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(244,239,230,0.3);
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .lane.running .lane-clock .status {
+    background: var(--accent-3);
+    animation: pulse-dot 0.8s infinite;
+  }
+  .lane.done .lane-clock .status {
+    background: var(--nsai);
+    animation: none;
+  }
+  .lane.llm.done .lane-clock .status {
+    background: var(--llm);
+  }
+
+  .lane-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Step line items */
+  .step {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: rgba(244,239,230,0.82);
+    padding: 10px 14px;
+    border-left: 2px solid rgba(244,239,230,0.08);
+    background: rgba(0,0,0,0.15);
+    word-break: break-word;
+  }
+  .step.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .step .s-label {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,0.4);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .step.pass { border-left-color: var(--nsai); }
+  .step.fail { border-left-color: var(--llm); }
+  .step.warn { border-left-color: var(--accent-3); }
+  .step .k { color: var(--accent-3); }
+  .step .v { color: var(--paper); font-weight: 500; }
+  .step .ok { color: #7CB091; font-weight: 600; }
+  .step .bad { color: #E57760; font-weight: 600; }
+  .step .flag { color: var(--accent-3); font-weight: 600; }
+
+  /* Rule ticker — specific NSAI animation */
+  .rule-ticker {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rule-row {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.2);
+    border-left: 2px solid rgba(244,239,230,0.1);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.4s ease, transform 0.4s ease, border-left-color 0.3s ease, background 0.3s ease;
+  }
+  .rule-row.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .rule-row.evaluating {
+    border-left-color: var(--accent-3);
+    background: rgba(200,169,81,0.08);
+  }
+  .rule-row.pass { border-left-color: var(--nsai); }
+  .rule-row.warn { border-left-color: var(--accent-3); background: rgba(200,169,81,0.08); }
+  .rule-row.fail { border-left-color: var(--llm); background: rgba(184,68,46,0.1); }
+  .rule-row .r-id {
+    color: var(--accent-3);
+    font-weight: 600;
+    font-size: 10.5px;
+  }
+  .rule-row .r-desc {
+    color: rgba(244,239,230,0.82);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px;
+  }
+  .rule-row .r-out {
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .rule-row.done .r-out { opacity: 1; }
+  .rule-row.pass .r-out { background: rgba(124,176,145,0.15); color: #7CB091; }
+  .rule-row.warn .r-out { background: rgba(200,169,81,0.2); color: var(--accent-3); }
+  .rule-row.fail .r-out { background: rgba(229,119,96,0.15); color: #E57760; }
+  .rule-row.evaluating::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid var(--accent-3);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Verdict banner at end of each lane */
+  .verdict {
+    margin-top: 20px;
+    padding: 20px 22px;
+    border: 1px solid;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .verdict.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .verdict.llm {
+    background: rgba(184,68,46,0.1);
+    border-color: var(--llm);
+  }
+  .verdict.nsai {
+    background: rgba(63,94,74,0.12);
+    border-color: var(--nsai);
+  }
+  .verdict .v-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .verdict.llm .v-label { color: #E57760; }
+  .verdict.nsai .v-label { color: #7CB091; }
+  .verdict .v-headline {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--paper);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .verdict.llm .v-headline em { color: #E57760; font-style: italic; }
+  .verdict.nsai .v-headline em { color: #7CB091; font-style: italic; }
+  .verdict .v-body {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(244,239,230,0.75);
+  }
+
+  /* ===== Stage 5 — Reasoning & Pricing ===== */
+  .reason-header {
+    margin-top: 8px;
+    padding: 14px 16px;
+    background: rgba(200,169,81,0.08);
+    border-left: 2px solid var(--accent-3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: rgba(244,239,230,0.9);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .reason-header.visible { opacity: 1; transform: translateY(0); }
+  .reason-header .rh-label {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: var(--accent-3);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  /* Knowledge source pulls — shows ontology domains being queried */
+  .source-pull {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.2);
+    border-left: 2px solid rgba(244,239,230,0.1);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.4s ease, transform 0.4s ease, border-left-color 0.3s ease;
+  }
+  .source-pull.visible { opacity: 1; transform: translateX(0); }
+  .source-pull.loaded { border-left-color: #7CB091; }
+  .source-pull .sp-icon {
+    width: 22px; height: 22px;
+    border-radius: 3px;
+    background: rgba(200,169,81,0.15);
+    color: var(--accent-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .source-pull .sp-domain {
+    color: rgba(244,239,230,0.85);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12.5px;
+  }
+  .source-pull .sp-domain strong { color: var(--paper); font-weight: 600; }
+  .source-pull .sp-val {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(244,239,230,0.4);
+    font-weight: 600;
+  }
+  .source-pull.loaded .sp-val { color: #7CB091; }
+  .source-pull.loading::after {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--accent-3);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  /* Deliberation — multi-option weighing */
+  .deliberation {
+    margin-top: 2px;
+    padding: 12px 14px;
+    background: rgba(0,0,0,0.25);
+    border-left: 2px solid rgba(244,239,230,0.1);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .deliberation.visible { opacity: 1; transform: translateY(0); }
+  .deliberation .d-label {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: rgba(244,239,230,0.5);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .deliberation .d-option {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    padding: 6px 8px;
+    border-left: 2px solid rgba(244,239,230,0.08);
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
+  }
+  .deliberation .d-option .d-text {
+    color: rgba(244,239,230,0.7);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .deliberation .d-option .d-score {
+    color: rgba(244,239,230,0.4);
+    font-size: 10px;
+    white-space: nowrap;
+    align-self: center;
+  }
+  .deliberation .d-option.rejected {
+    border-left-color: rgba(229,119,96,0.4);
+    opacity: 0.45;
+    text-decoration: line-through;
+    text-decoration-color: rgba(229,119,96,0.4);
+  }
+  .deliberation .d-option.chosen {
+    border-left-color: #7CB091;
+    background: rgba(124,176,145,0.08);
+  }
+  .deliberation .d-option.chosen .d-text {
+    color: var(--paper);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .deliberation .d-option.chosen .d-score {
+    color: #7CB091;
+    font-weight: 600;
+  }
+
+  /* Final quote card — the payoff */
+  .quote-card {
+    margin-top: 20px;
+    border: 1px solid rgba(124,176,145,0.4);
+    background:
+      linear-gradient(135deg, rgba(63,94,74,0.15) 0%, rgba(63,94,74,0.04) 100%);
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .quote-card.visible { opacity: 1; transform: translateY(0); }
+  .quote-card .qc-head {
+    padding: 18px 22px 14px;
+    border-bottom: 1px dashed rgba(244,239,230,0.18);
+  }
+  .quote-card .qc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: #7CB091;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .quote-card .qc-title {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--paper);
+    line-height: 1.2;
+  }
+  .quote-card .qc-title em { color: #7CB091; font-style: italic; }
+  .quote-card .qc-body {
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 28px;
+  }
+  .quote-card .qc-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .quote-card .qc-row .qc-k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.13em;
+    color: rgba(244,239,230,0.45);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .quote-card .qc-row .qc-v {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--paper);
+    line-height: 1.25;
+  }
+  .quote-card .qc-row .qc-v em { color: var(--accent-3); font-style: italic; }
+  .quote-card .qc-premium {
+    grid-column: 1 / -1;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(244,239,230,0.18);
+    margin-top: 4px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 12px;
+  }
+  .quote-card .qc-premium .qc-premium-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(244,239,230,0.5);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .quote-card .qc-premium .qc-premium-reason {
+    font-size: 12.5px;
+    color: rgba(244,239,230,0.7);
+    line-height: 1.45;
+    font-family: 'Inter Tight', sans-serif;
+    max-width: 36ch;
+  }
+  .quote-card .qc-premium .qc-premium-val {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    line-height: 1;
+    color: #7CB091;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+  .quote-card .qc-trace {
+    padding: 12px 22px 16px;
+    background: rgba(0,0,0,0.2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: rgba(244,239,230,0.55);
+    line-height: 1.5;
+    border-top: 1px solid rgba(244,239,230,0.08);
+  }
+  .quote-card .qc-trace .qc-trace-label {
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: rgba(244,239,230,0.4);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .quote-card .qc-trace .cite {
+    color: var(--accent-3);
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .quote-card .qc-body { grid-template-columns: 1fr; gap: 14px; }
+    .quote-card .qc-premium { grid-template-columns: 1fr; }
+    .quote-card .qc-premium .qc-premium-val { font-size: 28px; }
+  }
+
+  /* Solve block — shows how the accumulation breach is resolved with math */
+  .solve-block {
+    padding: 16px 18px;
+    background: rgba(0,0,0,0.3);
+    border-left: 2px solid var(--accent-3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    line-height: 1.5;
+  }
+  .solve-block.visible { opacity: 1; transform: translateY(0); }
+  .solve-block .sb-label {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: var(--accent-3);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .solve-block .sb-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    padding: 4px 0;
+    color: rgba(244,239,230,0.7);
+  }
+  .solve-block .sb-row .sb-k {
+    color: rgba(244,239,230,0.45);
+    font-size: 10.5px;
+  }
+  .solve-block .sb-row .sb-calc {
+    color: rgba(244,239,230,0.8);
+    font-size: 11px;
+  }
+  .solve-block .sb-row .sb-val {
+    color: var(--paper);
+    font-weight: 600;
+    font-size: 11.5px;
+  }
+  .solve-block .sb-divider {
+    margin: 10px 0 8px;
+    border-top: 1px dashed rgba(244,239,230,0.2);
+  }
+  .solve-block .sb-result {
+    padding-top: 6px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .solve-block .sb-result .sb-k { color: #7CB091; font-weight: 600; font-size: 10.5px; letter-spacing: 0.08em; }
+  .solve-block .sb-result .sb-calc { color: rgba(244,239,230,0.85); font-size: 11.5px; }
+  .solve-block .sb-result .sb-val { color: #7CB091; font-weight: 700; font-size: 13.5px; font-family: 'Fraunces', serif; }
+  .solve-block .sb-headline {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12.5px;
+    color: rgba(244,239,230,0.85);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .solve-block .sb-headline em {
+    font-style: italic;
+    color: var(--accent-3);
+  }
+
+  /* Mode tag pill — appears on reason-headers to label which mode is active */
+  .mode-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(200,169,81,0.18);
+    border: 1px solid rgba(200,169,81,0.4);
+    color: var(--accent-3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  /* Typing cursor */
+  .cursor-blink::after {
+    content: '▊';
+    color: var(--accent-3);
+    animation: cursor 0.7s infinite;
+    margin-left: 2px;
+    font-weight: 400;
+  }
+  @keyframes cursor {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  /* Diff/callout markers — highlights LLM's oversights retroactively after both finish */
+  .miss-marker {
+    position: absolute;
+    right: -8px;
+    top: 8px;
+    background: var(--llm);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 2px 6px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .miss-marker.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Reveal-missed summary — appears after race finishes */
+  .race-summary {
+    position: relative;
+    z-index: 2;
+    margin-top: 36px;
+    padding: 28px 32px;
+    background: rgba(244,239,230,0.04);
+    border: 1px solid rgba(244,239,230,0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .race-summary.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .race-summary h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--paper);
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .race-summary h4 em {
+    color: var(--accent-3);
+    font-style: italic;
+  }
+  .race-summary .sub {
+    font-size: 13px;
+    color: rgba(244,239,230,0.6);
+    margin-bottom: 24px;
+  }
+  .race-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .race-stat {
+    border-left: 2px solid rgba(244,239,230,0.12);
+    padding: 6px 0 6px 16px;
+  }
+  .race-stat .rs-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: rgba(244,239,230,0.5);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .race-stat .rs-pair {
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+  }
+  .race-stat .rs-llm, .race-stat .rs-nsai {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.2;
+  }
+  .race-stat .rs-llm { color: #E57760; }
+  .race-stat .rs-nsai { color: #7CB091; }
+  .race-stat .rs-divider {
+    color: rgba(244,239,230,0.3);
+  }
+
+  @media (max-width: 900px) {
+    .live-demo { padding: 36px 24px; }
+    .live-demo-head { grid-template-columns: 1fr; align-items: start; }
+    .stage { grid-template-columns: 1fr; gap: 20px; }
+    .lane { min-height: auto; }
+    .race-stats { grid-template-columns: 1fr 1fr; gap: 18px; }
+  }
+
+  /* ===== SECTION 05: REGULATOR VIEW ===== */
+  .reg-frame {
+    margin-top: 8px;
+  }
+  .reg-lede {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.4;
+    max-width: 40ch;
+    margin-bottom: 40px;
+    color: var(--ink);
+    grid-column: 2;
+  }
+  .reg-lede em { font-style: italic; color: var(--accent); }
+
+  /* Three pillars of regulator comfort */
+  .reg-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(28,37,48,0.15);
+    border: 1px solid rgba(28,37,48,0.15);
+    margin-bottom: 56px;
+  }
+  .reg-pillar {
+    background: var(--paper);
+    padding: 32px 28px 36px;
+    position: relative;
+  }
+  .reg-pillar-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 40px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .reg-pillar h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .reg-pillar p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: 14px;
+  }
+  .reg-pillar .reg-frameworks {
+    padding-top: 14px;
+    border-top: 1px dotted rgba(28,37,48,0.25);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .reg-pillar .reg-frameworks strong {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Regulator-view quote band */
+  .reg-quote {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 56px;
+    position: relative;
+    margin-bottom: 48px;
+  }
+  .reg-quote-mark {
+    position: absolute;
+    top: 12px;
+    left: 36px;
+    font-family: 'Fraunces', serif;
+    font-size: 96px;
+    line-height: 1;
+    color: var(--accent-3);
+    opacity: 0.4;
+  }
+  .reg-quote blockquote {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.45;
+    font-weight: 400;
+    color: var(--paper);
+    margin: 0 0 18px;
+    padding-left: 40px;
+    max-width: 60ch;
+  }
+  .reg-quote blockquote em { color: var(--accent-3); font-style: italic; }
+  .reg-quote cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(244,239,230,0.55);
+    font-style: normal;
+    text-transform: uppercase;
+    padding-left: 40px;
+  }
+
+  /* Bias comparison */
+  .bias-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(28,37,48,0.15);
+    border: 1px solid rgba(28,37,48,0.15);
+  }
+  .bias-cell {
+    background: var(--paper);
+    padding: 28px 28px 32px;
+  }
+  .bias-cell.llm {
+    background: linear-gradient(135deg, rgba(184,68,46,0.04) 0%, rgba(184,68,46,0.01) 100%);
+  }
+  .bias-cell.nsai {
+    background: linear-gradient(135deg, rgba(63,94,74,0.05) 0%, rgba(63,94,74,0.01) 100%);
+  }
+  .bias-cell .bc-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .bias-cell.llm .bc-tag { color: var(--llm); }
+  .bias-cell.nsai .bc-tag { color: var(--nsai); }
+  .bias-cell h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .bias-cell p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: 12px;
+  }
+  .bias-cell ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .bias-cell li {
+    font-size: 13.5px;
+    line-height: 1.5;
+    padding: 6px 0 6px 22px;
+    position: relative;
+    color: var(--ink-2);
+  }
+  .bias-cell li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+  .bias-cell.llm li::before { color: var(--llm); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 64px 0;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .foot-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-size: 13px;
+  }
+  .foot-inner .brand {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .foot-inner .meta {
+    color: rgba(244,239,230,0.6);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .wrap { padding: 0 24px; }
+    .sec-head { grid-template-columns: 1fr; gap: 12px; }
+    .def-grid { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: 1fr; }
+    .reason-compare { grid-template-columns: 1fr; }
+    .deep-dive-body-inner { grid-template-columns: 1fr; gap: 24px; }
+    .ont-layout { grid-template-columns: 1fr; gap: 32px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .sub-body { grid-template-columns: repeat(2, 1fr); }
+    .process-tabs { flex-direction: column; }
+    .process-tab { border-right: none; border-bottom: 1px solid rgba(28,37,48,0.2); }
+    .scorecard { grid-template-columns: 1fr; }
+    .score-col.llm { border-right: none; border-bottom: 1px solid rgba(28,37,48,0.2); }
+    .nav-links { gap: 16px; font-size: 11px; }
+    .hero { padding: 56px 0 72px; }
+    section { padding: 64px 0; }
+
+    /* ===== Mobile polish pass ===== */
+
+    /* Disable section snap on mobile — feels bad with iOS momentum scroll */
+    html { scroll-snap-type: none; }
+
+    /* Hero — collapse the meta grid, breathing room */
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .hero-visual { display: none; }
+    .hero-meta {
+      gap: 20px 32px;
+      padding-top: 24px;
+    }
+    .hero-meta > div { min-width: 130px; }
+
+    /* Nav — keep brand and links on one line but tighten */
+    .nav { padding: 14px 0; }
+    .nav-brand { font-size: 14px; }
+    .nav-links { gap: 14px; }
+
+    /* Live demo — the two lanes stack; make header feel natural */
+    .live-demo { padding: 32px 20px 40px; }
+    .live-demo-head {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 20px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+    }
+    .live-demo-head h3 { font-size: 26px; }
+    .run-btn {
+      padding: 16px 22px;
+      font-size: 12px;
+      width: 100%;
+    }
+    .stage { grid-template-columns: 1fr; gap: 18px; }
+    .lane { padding: 20px 18px 24px; min-height: auto; }
+    .lane-title { font-size: 17px; }
+    .lane-clock { font-size: 10px; }
+
+    /* Step lines: slightly smaller mono text, tighter padding */
+    .step { font-size: 11.5px; padding: 9px 12px; }
+
+    /* Rule rows: drop to 2 columns (id + desc) with outcome pill on its own line */
+    .rule-row {
+      grid-template-columns: auto 1fr;
+      gap: 10px 14px;
+      padding: 8px 10px;
+    }
+    .rule-row .r-out {
+      grid-column: 1 / -1;
+      justify-self: end;
+      margin-top: 2px;
+    }
+
+    /* Solve blocks — let rows stack if needed */
+    .solve-block { padding: 14px 14px; font-size: 11px; }
+    .solve-block .sb-row,
+    .solve-block .sb-result {
+      grid-template-columns: 1fr auto;
+      gap: 6px 10px;
+    }
+    .solve-block .sb-row .sb-calc,
+    .solve-block .sb-result .sb-calc {
+      grid-column: 1 / -1;
+      font-size: 10.5px;
+      color: rgba(244,239,230,0.55);
+      padding-left: 0;
+    }
+
+    /* Source-pull rows: tighter */
+    .source-pull {
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      padding: 9px 12px;
+    }
+    .source-pull .sp-val {
+      grid-column: 1 / -1;
+      justify-self: end;
+      font-size: 9.5px;
+    }
+
+    /* Deliberation — same tightening */
+    .deliberation { padding: 12px 12px; }
+    .deliberation .d-option {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .deliberation .d-option .d-score {
+      justify-self: start;
+      padding-top: 2px;
+    }
+
+    /* Quote card */
+    .quote-card .qc-head { padding: 16px 18px 12px; }
+    .quote-card .qc-body {
+      grid-template-columns: 1fr;
+      gap: 12px 16px;
+      padding: 16px 18px;
+    }
+    .quote-card .qc-premium {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .quote-card .qc-premium .qc-premium-val { font-size: 28px; }
+    .quote-card .qc-trace { padding: 10px 18px 14px; font-size: 9.5px; }
+
+    /* Race summary — stacked stats */
+    .race-stats { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .race-summary { padding: 22px 22px; margin-top: 28px; }
+
+    /* Reason header pills — let mode pill wrap */
+    .reason-header { padding: 12px 14px; font-size: 11px; }
+    .mode-pill { display: inline-block; margin-top: 6px; margin-left: 0; }
+
+    /* Tables on mobile — let them scroll horizontally rather than squish */
+    .rules {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+    .rules th, .rules td { padding: 10px 12px; }
+    .rules td.rule-out { white-space: nowrap; }
+
+    /* Modes grid — 2 columns on tablet-ish, 1 on phone */
+    .modes-grid { grid-template-columns: 1fr 1fr; }
+    .mode-cell { min-height: auto; padding: 22px 18px; }
+
+    /* Think-frame: stack */
+    .think-frame { grid-template-columns: 1fr; }
+
+    /* Ontology diagram: shrink */
+    .ont-svg { max-height: 460px; }
+
+    /* RAG block: flow cards stack */
+    .rag-block { padding: 28px 24px 32px; }
+    .rag-block h3 { font-size: 24px; }
+    .flow-grid { grid-template-columns: 1fr; gap: 16px; }
+    .flow-card { padding: 20px 20px 22px; }
+    .myth-reality { grid-template-columns: 1fr; }
+
+    /* Regulator section */
+    .reg-lede { font-size: 22px; grid-column: 1; }
+    .reg-pillars { grid-template-columns: 1fr; }
+    .reg-quote { padding: 36px 32px; }
+    .reg-quote-mark { font-size: 72px; left: 18px; top: 4px; }
+    .reg-quote blockquote { font-size: 18px; padding-left: 28px; }
+    .reg-quote cite { padding-left: 28px; }
+    .bias-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+
+    /* Shrink decorative glyphs on tight screens */
+    .think-glyph { width: 120px; margin-bottom: 12px; }
+
+    /* Hero tighter */
+    .hero { padding: 44px 0 60px; }
+    .hero h1 { font-size: 44px; }
+    .hero-lede { font-size: 16px; margin-bottom: 32px; }
+    .hero-meta {
+      grid-template-columns: 1fr 1fr;
+      display: grid;
+      gap: 16px 24px;
+    }
+    .hero-meta > div { min-width: 0; }
+    .hero-meta .val { font-size: 15px; }
+
+    /* Nav: allow wrap so brand and links don't collide */
+    .nav-inner { flex-wrap: wrap; gap: 10px 16px; }
+    .nav-links { gap: 12px; font-size: 10.5px; }
+
+    /* Section headings */
+    section { padding: 52px 0; }
+    .sec-title { font-size: 28px; }
+    .def-lede { font-size: 20px; }
+
+    /* Submission card: 1 column on small phones */
+    .sub-body { grid-template-columns: 1fr; gap: 16px; padding: 22px 24px; }
+    .sub-head { padding: 18px 24px; }
+    .sub-head h3 { font-size: 18px; }
+
+    /* Modes grid: single column */
+    .modes-grid { grid-template-columns: 1fr; }
+
+    /* Live demo */
+    .live-demo-head h3 { font-size: 22px; }
+    .lane { padding: 18px 16px 22px; }
+
+    /* Process tabs titles */
+    .process-tab .tab-title { font-size: 15px; }
+    .process-tab .tab-sub { font-size: 11px; }
+
+    /* Race summary: single column on small phones */
+    .race-stats { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  /* ===== Deep Dive page — back/forward nav links ===== */
+  .nav-links .back-link,
+  .nav-links .fwd-link {
+    opacity: 0.65;
+    font-size: 12px;
+  }
+  .nav-links .back-link:hover,
+  .nav-links .fwd-link:hover {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  /* ===== Floating navigation buttons ===== */
+  .float-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .float-nav-left { left: 16px; }
+  .float-nav-right { right: 16px; }
+  .float-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(63, 94, 74, 0.88);
+    color: #F4EFE6;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    backdrop-filter: blur(6px);
+    opacity: 0.82;
+  }
+  .float-btn:hover {
+    background: rgba(63, 94, 74, 1);
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    .float-nav { display: none; }
+  }
+</style>
+</head>
+<body style="background: var(--paper);">
+<div class="wrap" style="padding-top: 32px; padding-bottom: 32px;">
+  <div style="margin-bottom: 20px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">NSAI for Insurance &middot; Small Commercial Direct</div>
+    <div style="font-family: 'Fraunces', serif; font-size: 26px; color: var(--ink); margin-top: 6px;">Same submission. Two ways of reading it.</div>
+  </div>
+<!-- LIVE DEMO -->
+    <div class="live-demo" id="liveDemo">
+      <div class="live-demo-head">
+        <div>
+          <div class="live-demo-eyebrow">LIVE &middot; WATCH BOTH MODELS RUN</div>
+          <h3>See it for <em>yourself</em>.</h3>
+          <p>Press <strong>Run</strong>. Both systems receive Marcos&rsquo;s message at the same moment. Watch RAG retrieve, cite, and produce a fluent quote &mdash; while the neurosymbolic reasoner extracts, decomposes the described activities, evaluates rules, compares to similar claim patterns, and composes a priced quote with a customer-facing explanation. Every conclusion traced to a rule, fact, or pattern.</p>
+        </div>
+        <button class="run-btn" id="runBtn" onclick="runDemo()">RUN BOTH MODELS</button>
+      </div>
+
+      <div class="stage">
+        <!-- LLM LANE -->
+        <div class="lane llm" id="laneLLM">
+          <div class="lane-head">
+            <div>
+              <div class="lane-tag">RAG + LLM &middot; RETRIEVAL-AUGMENTED</div>
+              <div class="lane-title">Generative AI with Retrieval</div>
+            </div>
+            <div class="lane-clock"><span class="status"></span><span id="clockLLM">0.0s</span></div>
+          </div>
+          <div class="lane-body" id="bodyLLM"></div>
+        </div>
+
+        <!-- NSAI LANE -->
+        <div class="lane nsai" id="laneNSAI">
+          <div class="lane-head">
+            <div>
+              <div class="lane-tag">NEUROSYMBOLIC &middot; ONTOLOGY + RULES</div>
+              <div class="lane-title">Hybrid Reasoner</div>
+            </div>
+            <div class="lane-clock"><span class="status"></span><span id="clockNSAI">0.0s</span></div>
+          </div>
+          <div class="lane-body" id="bodyNSAI"></div>
+        </div>
+      </div>
+
+      <div class="race-summary" id="raceSummary">
+        <h4>Same submission. <em>Very different reading.</em></h4>
+        <div class="sub">Side-by-side: what each system produced on this run.</div>
+        <div class="race-stats">
+          <div class="race-stat">
+            <div class="rs-label">Business activities recognized</div>
+            <div class="rs-pair">
+              <div class="rs-llm">1 bundled label: handyman</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">3 activity classes</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Exposure-class accuracy</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Self-classified</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">Decomposed &amp; rule-bound</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Claims-history comparison</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Generic class-level</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">Similar activity-mix pattern</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Customer message</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Price-only</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">Price with rationale</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<script>
+  function switchTab(name) {
+    document.querySelectorAll('.process-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.process-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector('.process-tab[data-tab="' + name + '"]').classList.add('active');
+    document.getElementById('panel-' + name).classList.add('active');
+  }
+
+  function toggleDeepDive() {
+    // Going Deeper is always expanded on this page
+  }
+
+  // ============ LIVE DEMO RUNNER ============
+  // RAG + LLM pipeline: customer message -> vector search over appetite + rating docs -> inject -> generate.
+  // The LLM is competent and conversion-optimized. The failure is structural: retrieval doesn't enforce
+  // activity-level decomposition or rule binding.
+  const LLM_SCRIPT = [
+    { label: "Query formulation",   text: 'Parsing customer message → building retrieval query...',                                              wait: 350 },
+    { label: "Retrieve · Pass 1",   text: 'Vector search (appetite guide) → <span class="ok">5 passages</span>',                                  wait: 450 },
+    { label: "Retrieve · Pass 2",   text: 'Vector search (rate manual + coverage defaults) → <span class="ok">3 passages</span>',                wait: 450 },
+    { label: "Context injection",   text: 'Top 8 passages injected into prompt (4.2k tokens)...',                                                wait: 450 },
+    { label: "Grounded generation", text: 'Cites [Appetite-Guide-2026-Q2] → handyman services is in BrightSure DTC appetite',              wait: 500 },
+    { label: "Grounded generation", text: 'Cites [Rate-Manual-AZ-2026] → small handyman under $250K revenue → streamlined BOP',         wait: 500 },
+    { label: "Grounded generation", text: 'Cites [Coverage-Defaults-DTC] → standard $1M/$2M GL + $10K tools coverage appropriate',          wait: 500 },
+    { label: "Forming recommendation", text: 'Drafting customer-facing quote from retrieved context...',                                          wait: 600 },
+  ];
+
+  const LLM_VERDICT = {
+    headline: 'Recommendation: <em>QUOTE handyman BOP</em> &middot; $1,840/yr &middot; $1M/$2M GL &middot; $10K tools &middot; auto bind eligible.',
+    body: 'Well-cited, fluent, conversion-optimized. But the customer described roof-surface work and water-heater plumbing that the retrieved &ldquo;handyman&rdquo; class does not contemplate. RAG took the self-classification at face value. The premium is competitive because it is pricing the wrong risk profile &mdash; gaps surface at claim time.',
+  };
+
+  // NSAI runs five stages, with stage 3 being a rule-by-rule evaluation
+  const NSAI_STAGE_1 = [
+    { label: "Stage 01 · Extract",  text: '<span class="k">CustomerMessage</span>(id=M1, channel=<span class="v">"DTC_web"</span>)',                                          wait: 400 },
+    { label: "Stage 01 · Extract",  text: '<span class="k">Business</span>(id=B1, name=<span class="v">"Delgado Home Services"</span>, years=6, revenue=<span class="v">USD 180K</span>)', wait: 400 },
+    { label: "Stage 01 · Extract",  text: '<span class="k">Owner</span>(id=O1, name=<span class="v">"Marcos Delgado"</span>, loc=<span class="v">"Phoenix, AZ"</span>)',           wait: 400 },
+    { label: "Stage 01 · Extract",  text: '<span class="k">Activities_extracted</span> = [bathroom_repair, kitchen_repair, drywall_patch, water_heater_replace, roof_leak_patch_shingle]', wait: 450 },
+    { label: "Stage 01 · Extract",  text: '<span class="k">AdjacentCoveragePrompt</span>: 1 helper → <span class="flag">workers comp eligibility check (platform layer)</span>', wait: 400 },
+  ];
+  const NSAI_STAGE_2 = [
+    { label: "Stage 02 · Decompose", text: 'bathroom / kitchen / drywall ⊑ <span class="flag">CarrierActivityClass.HANDYMAN_LIGHT_INTERIOR</span>',  wait: 450 },
+    { label: "Stage 02 · Decompose", text: 'water heater ⊑ <span class="flag">CarrierActivityClass.PLUMBING_WATER_HEATER</span> → water-damage terms required', wait: 450 },
+    { label: "Stage 02 · Decompose", text: 'leak patch / shingles ⊑ <span class="flag">CarrierActivityClass.ROOF_SURFACE_WORK</span> → height_work_exposure', wait: 450 },
+    { label: "Stage 02 · Decompose", text: 'ROOF_SURFACE_WORK → <span class="flag">OUTSIDE standard DTC handyman appetite</span>',                  wait: 450 },
+  ];
+  // Stage 3 - rule engine firings (the eight rules from the spec)
+  const NSAI_RULES = [
+    { id: "SC-APT-01",  desc: "Customer / business existence verification",                            result: "pass", out: "IN APPETITE" },
+    { id: "SC-CLS-04",  desc: "Self-classification matches described activities",                      result: "fail", out: "MISMATCH" },
+    { id: "SC-HAZ-12",  desc: "Roof-surface / height work excludes standard DTC handyman flow",        result: "fail", out: "BREACH" },
+    { id: "SC-COV-08",  desc: "Water-related plumbing requires water-damage terms / sublimit",         result: "warn", out: "SUBJECT TO" },
+    { id: "SC-EXP-15",  desc: "Annual revenue reconciles against described scope",                     result: "pass", out: "PASS" },
+    { id: "SC-LOSS-02", desc: "Prior-loss evidence reviewed (no claims disclosed or found)",           result: "pass", out: "PASS" },
+    { id: "SC-LIM-06",  desc: "Limits adequate for highest-hazard activity",                           result: "warn", out: "SUBJECT TO" },
+    { id: "SC-COMM-09", desc: "Customer message explains price variance from initial expectation",     result: "warn", out: "TRIGGERED" },
+  ];
+
+  const NSAI_VERDICT = {
+    headline: '<em>1 mismatch, 1 appetite breach, 2 subjectivities, 1 customer-message trigger.</em> Proceeding to cross-domain reasoning...',
+    body: 'Rule engine complete. Self-classification mismatch (SC-CLS-04) and roof-surface appetite breach (SC-HAZ-12) cannot be silently bound. Moving to Stage 5 to price the components, compare to similar claim patterns, and compose a two-option customer message.',
+  };
+
+  // ===== Stage 5: Reason across pricing, claims-similarity, and customer-communication ontologies =====
+  // Sources pulled from the shared ontology
+  const NSAI_SOURCES = [
+    { domain: 'Rating ontology · light interior', detail: 'AZ, rev share 65% of $180K → base premium for HANDYMAN_LIGHT_INTERIOR',     value: 'BASE $1,050' },
+    { domain: 'Rating ontology · plumbing',       detail: 'AZ, rev share 20% of $180K → base premium for PLUMBING_WATER_HEATER',        value: 'BASE $720' },
+    { domain: 'Rating ontology · roof-surface',   detail: 'AZ, rev share 15% of $180K → base premium for ROOF_SURFACE_WORK',             value: 'BASE $1,890' },
+    { domain: 'Coverage ontology',                     detail: 'Water-damage terms + height-exposure $2M GL endorsements priced separately',    value: 'ENDS $440' },
+    { domain: 'Claims-similarity layer',               detail: 'Carrier prior claims indexed under same activity ontology (illustrative)',      value: 'PATTERN MATCH' },
+    { domain: 'Customer-communication ontology',       detail: 'Two-option template with scope clarification and adjacent WC prompt',           value: 'MESSAGE READY' },
+  ];
+
+  // Options weighed - the reasoner constructs two legitimate paths for the customer
+  const NSAI_DELIBERATION = {
+    label: 'Construct two paths the customer can choose between - both legitimate, both priced',
+    options: [
+      { text: 'Bind today as full DTC handyman quote (LLM path) - takes the self-classification at face value', score: 'EV unsafe',  status: 'rejected', reason: 'misclassifies roof-surface work, leaves coverage gaps at claim time' },
+      { text: 'Decline outright because of the roof-surface breach',                                              score: 'EV −$2.1k', status: 'rejected', reason: 'forgoes a customer who has legitimate interior + plumbing exposures' },
+      { text: 'Option A · Refer roof-surface to specialty UW for full-scope quote (~5 day cycle)',          score: '$4,100/yr',  status: 'chosen',   reason: 'covers everything Marcos described, subject to specialty UW review' },
+      { text: 'Option B · DTC bind handyman + water-heater with roof-surface explicitly excluded',         score: '$1,950/yr',  status: 'chosen',   reason: 'bindable today; customer keeps roof work knowingly excluded' },
+    ],
+  };
+
+  // Final output - this is the customer-facing message, not a one-line premium
+  const NSAI_QUOTE = {
+    title: 'Two priced options &middot; <em>customer-facing message with rationale</em>',
+    terms: [
+      { k: 'Coverage scope',          v: 'General Liability + Tools &amp; Equipment' },
+      { k: 'Truck / auto coverage',   v: '<em>Not included</em> in this quote path' },
+      { k: 'Workers’ compensation', v: 'Not included &middot; separate eligibility prompt (1 helper)' },
+      { k: 'Activity decomposition',  v: 'HANDYMAN_LIGHT_INTERIOR (65%) &middot; PLUMBING_WATER_HEATER (20%) &middot; ROOF_SURFACE_WORK (15%)' },
+      { k: 'Revenue split',           v: 'Estimated for quote &middot; confirmed before bind via one follow-up question' },
+      { k: 'Option A',                v: '<em>Full-scope quote</em> &middot; ~5-day specialty UW cycle' },
+      { k: 'Option B',                v: '<em>DTC bind today</em> &middot; roof-surface excluded' },
+    ],
+    premium: {
+      value: '$1,950 &nbsp;/&nbsp; $4,100',
+      reason: 'Option B (DTC bind, roof excluded) $1,950/yr &middot; Option A (full-scope w/ roof-surface specialty UW) ~$4,100/yr &middot; both derived from per-activity base rates, water-damage endorsement, and height-exposure GL endorsement; final terms confirmed at bind.',
+    },
+    trace: [
+      'Light interior base rate → <span class="cite">Rating ontology &middot; HANDYMAN_LIGHT_INTERIOR &middot; AZ</span>',
+      'Plumbing base + water-damage terms → <span class="cite">SC-COV-08 &middot; Coverage ontology</span>',
+      'Roof-surface price &amp; appetite path → <span class="cite">SC-HAZ-12 &middot; AppetiteOntology.roof_surface_options</span>',
+      'Limits adequacy for height exposure → <span class="cite">SC-LIM-06</span>',
+      'Two-option customer message → <span class="cite">SC-COMM-09 &middot; CustomerCommunicationOntology</span>',
+      'WC adjacent prompt → <span class="cite">platform layer (not the rule engine)</span>',
+    ],
+  };
+
+  // State
+  let running = false;
+  let clockLLM = 0, clockNSAI = 0;
+  let tickLLM = null, tickNSAI = null;
+
+  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+  function $(id) { return document.getElementById(id); }
+
+  function addStep(laneId, step, extraClass = "") {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "step " + extraClass;
+    el.innerHTML = '<span class="s-label">' + step.label + '</span>' + step.text;
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    if (laneId === "bodyNSAI") keepInView(el);
+    return el;
+  }
+
+  function addRuleRow(laneId, rule) {
+    const body = $(laneId);
+    const wrapper = body.querySelector(".rule-ticker") || (() => {
+      const div = document.createElement("div");
+      div.className = "rule-ticker";
+      const head = document.createElement("div");
+      head.className = "step";
+      head.innerHTML = '<span class="s-label">Stage 03 · Rule engine</span>Evaluating appetite, coverage, and customer-message rules...';
+      body.appendChild(head);
+      requestAnimationFrame(() => head.classList.add("visible"));
+      body.appendChild(div);
+      if (laneId === "bodyNSAI") keepInView(head);
+      return div;
+    })();
+    const row = document.createElement("div");
+    row.className = "rule-row evaluating";
+    row.innerHTML =
+      '<div class="r-id">' + rule.id + '</div>' +
+      '<div class="r-desc">' + rule.desc + '</div>' +
+      '<div class="r-out">' + rule.out + '</div>';
+    wrapper.appendChild(row);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => row.classList.add("visible"));
+    });
+    if (laneId === "bodyNSAI") keepInView(row);
+    return row;
+  }
+
+  function setVerdict(laneId, kind, v) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "verdict " + kind;
+    el.innerHTML =
+      '<div class="v-label">FINAL OUTPUT</div>' +
+      '<div class="v-headline">' + v.headline + '</div>' +
+      '<div class="v-body">' + v.body + '</div>';
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+  }
+
+  function keepInView(el) {
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const triggerLine = vh * 0.75;
+    if (rect.bottom > triggerLine) {
+      const targetOffset = rect.bottom - triggerLine + 60;
+      window.scrollBy({ top: targetOffset, behavior: 'smooth' });
+    }
+  }
+
+  function addReasonHeader(laneId, label, text) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "reason-header";
+    el.innerHTML = '<span class="rh-label">' + label + '</span>' + text;
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  function addSourcePull(laneId, source, letter) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "source-pull loading";
+    el.innerHTML =
+      '<div class="sp-icon">' + letter + '</div>' +
+      '<div class="sp-domain"><strong>' + source.domain + '</strong> — ' + source.detail + '</div>' +
+      '<div class="sp-val">QUERYING...</div>';
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  function addDeliberation(laneId, delib) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "deliberation";
+    let html = '<span class="d-label">' + delib.label + '</span>';
+    delib.options.forEach((opt, i) => {
+      html += '<div class="d-option" data-idx="' + i + '">' +
+              '<div class="d-text">' + opt.text + '</div>' +
+              '<div class="d-score">' + opt.score + '</div>' +
+              '</div>';
+    });
+    el.innerHTML = html;
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  function addQuoteCard(laneId, quote) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "quote-card";
+    let terms = '';
+    quote.terms.forEach(t => {
+      terms += '<div class="qc-row"><div class="qc-k">' + t.k + '</div><div class="qc-v">' + t.v + '</div></div>';
+    });
+    let trace = '';
+    quote.trace.forEach(line => { trace += '<div>' + line + '</div>'; });
+    el.innerHTML =
+      '<div class="qc-head">' +
+        '<div class="qc-label">DERIVED DECISION · STAGE 05 OUTPUT</div>' +
+        '<div class="qc-title">' + quote.title + '</div>' +
+      '</div>' +
+      '<div class="qc-body">' +
+        terms +
+        '<div class="qc-premium">' +
+          '<div>' +
+            '<div class="qc-premium-label">ANNUAL PREMIUM · OPTION B / OPTION A</div>' +
+            '<div class="qc-premium-reason">' + quote.premium.reason + '</div>' +
+          '</div>' +
+          '<div class="qc-premium-val">' + quote.premium.value + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="qc-trace">' +
+        '<div class="qc-trace-label">Reasoning trace — every value derived from a named source</div>' +
+        trace +
+      '</div>';
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  function addSolveBlock(laneId, cfg) {
+    const body = $(laneId);
+    const el = document.createElement("div");
+    el.className = "solve-block";
+    let rowsHtml = '';
+    cfg.rows.forEach(r => {
+      rowsHtml += '<div class="sb-row">' +
+                    '<div class="sb-k">' + r.k + '</div>' +
+                    '<div class="sb-calc">' + r.calc + '</div>' +
+                    '<div class="sb-val">' + r.val + '</div>' +
+                  '</div>';
+    });
+    el.innerHTML =
+      '<span class="sb-label">' + cfg.label + '</span>' +
+      (cfg.headline ? '<div class="sb-headline">' + cfg.headline + '</div>' : '') +
+      rowsHtml +
+      (cfg.result ? '<div class="sb-divider"></div>' +
+        '<div class="sb-result">' +
+          '<div class="sb-k">' + cfg.result.k + '</div>' +
+          '<div class="sb-calc">' + cfg.result.calc + '</div>' +
+          '<div class="sb-val">' + cfg.result.val + '</div>' +
+        '</div>' : '');
+    body.appendChild(el);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => el.classList.add("visible"));
+    });
+    keepInView(el);
+    return el;
+  }
+
+  function updateRuleStatus(ruleId, newStatus, newLabel) {
+    const rows = document.querySelectorAll("#bodyNSAI .rule-row");
+    for (const row of rows) {
+      const idEl = row.querySelector(".r-id");
+      if (idEl && idEl.textContent.trim() === ruleId) {
+        row.classList.remove("pass", "warn", "fail");
+        row.classList.add(newStatus);
+        row.querySelector(".r-out").textContent = newLabel;
+        row.style.transition = "all 0.5s ease";
+        const origBg = row.style.background;
+        row.style.background = "rgba(124,176,145,0.2)";
+        setTimeout(() => { row.style.background = origBg; }, 900);
+        return row;
+      }
+    }
+    return null;
+  }
+
+  function startClock(which) {
+    const laneEl = which === "llm" ? $("laneLLM") : $("laneNSAI");
+    const clockEl = which === "llm" ? $("clockLLM") : $("clockNSAI");
+    laneEl.classList.add("running");
+    const start = performance.now();
+    const ticker = setInterval(() => {
+      const elapsed = (performance.now() - start) / 1000;
+      clockEl.textContent = elapsed.toFixed(1) + "s";
+      if (which === "llm") clockLLM = elapsed;
+      else clockNSAI = elapsed;
+    }, 50);
+    if (which === "llm") tickLLM = ticker;
+    else tickNSAI = ticker;
+  }
+
+  function stopClock(which) {
+    const laneEl = which === "llm" ? $("laneLLM") : $("laneNSAI");
+    if (which === "llm") { clearInterval(tickLLM); tickLLM = null; }
+    else { clearInterval(tickNSAI); tickNSAI = null; }
+    laneEl.classList.remove("running");
+    laneEl.classList.add("done");
+  }
+
+  async function runLLM() {
+    $("laneLLM").classList.remove("done");
+    startClock("llm");
+    for (const step of LLM_SCRIPT) {
+      addStep("bodyLLM", step);
+      await wait(step.wait);
+    }
+    setVerdict("bodyLLM", "llm", LLM_VERDICT);
+    await wait(400);
+    stopClock("llm");
+  }
+
+  async function runNSAI() {
+    $("laneNSAI").classList.remove("done");
+    startClock("nsai");
+    // Stage 1 - extract
+    for (const step of NSAI_STAGE_1) {
+      addStep("bodyNSAI", step);
+      await wait(step.wait);
+    }
+    // Stage 2 - decompose
+    for (const step of NSAI_STAGE_2) {
+      addStep("bodyNSAI", step, "warn");
+      await wait(step.wait);
+    }
+    // Stage 3 - rules
+    for (const rule of NSAI_RULES) {
+      const row = addRuleRow("bodyNSAI", rule);
+      await wait(480);
+      row.classList.remove("evaluating");
+      row.classList.add(rule.result);
+      row.classList.add("done");
+      await wait(160);
+    }
+    // Stage 4 - narrative
+    addStep("bodyNSAI", {
+      label: "Stage 04 · Explain",
+      text: 'Proof tree narrative generated; every claim cites a rule ID.',
+    }, "pass");
+    await wait(500);
+    setVerdict("bodyNSAI", "nsai", NSAI_VERDICT);
+    await wait(900);
+
+    // ===== STAGE 5 - CROSS-DOMAIN REASONING =====
+    addReasonHeader("bodyNSAI",
+      'Stage 05 · Reason across pricing, claims, and customer-message ontologies <span class="mode-pill">CROSS-DOMAIN</span>',
+      "Confirm the revenue split, decompose pricing by activity, compare to similar historical claim patterns from the same shared ontology, and construct two priced options the customer can choose between."
+    );
+    await wait(700);
+
+    // ---- Confirm revenue allocation (before bind) ----
+    addSolveBlock("bodyNSAI", {
+      label: "Confirm · revenue allocation estimated for quote",
+      headline: 'The system estimates the revenue split from the described activities and confirms it via <em>one follow-up question</em> before bind.',
+      rows: [
+        { k: "Light interior",   calc: "bathroom + kitchen + drywall",                          val: "65%" },
+        { k: "Water-heater",     calc: "plumbing water_heater_replacement",                    val: "20%" },
+        { k: "Roof-surface",     calc: "leak patch + shingle replacement",                    val: "15%" },
+        { k: "Confirmation Q",  calc: '"About what share of your revenue comes from each?"', val: "ASK BEFORE BIND" },
+      ],
+      result: {
+        k: "TOTAL",
+        calc: "Revenue allocation totals 100%",
+        val: "100%  ✓",
+      },
+    });
+    await wait(1200);
+
+    // ---- Source pulls: query the shared ontology ----
+    addReasonHeader("bodyNSAI",
+      'Query shared underwriting + claims ontology <span class="mode-pill">CAUSAL + PATTERN</span>',
+      "The reasoner pulls from rating, coverage, claims-similarity, and customer-communication ontologies — all built on the same activity decomposition from Stage 02."
+    );
+    await wait(500);
+
+    const letters = ['I', 'P', 'R', 'C', 'H', 'M'];
+    for (let i = 0; i < NSAI_SOURCES.length; i++) {
+      const src = NSAI_SOURCES[i];
+      const el = addSourcePull("bodyNSAI", src, letters[i]);
+      await wait(420);
+      el.classList.remove("loading");
+      el.classList.add("loaded");
+      el.querySelector(".sp-val").textContent = src.value;
+      await wait(160);
+    }
+    await wait(400);
+
+    // ---- Claims-similarity reasoning ----
+    addSolveBlock("bodyNSAI", {
+      label: "Claims-similarity layer · indexed under the same activity ontology",
+      headline: 'Marcos isn\'t compared to all "handymen" — he\'s compared to risks with the same activity mix. The claim pattern changes when water-heater and roof-surface work are present.',
+      rows: [
+        { k: "light_interior_repair",  calc: "carrier prior claims",  val: "low-severity GL / tool theft" },
+        { k: "water_heater_replace",   calc: "carrier prior claims",  val: "elevated water-damage frequency" },
+        { k: "roof_surface_work",      calc: "carrier prior claims",  val: "fall-from-height BI severity" },
+      ],
+      result: {
+        k: "IMPLICATION",
+        calc: "Risk is not one homogeneous handyman class",
+        val: "PRICE BY ACTIVITY",
+      },
+    });
+    await wait(1100);
+
+    // ---- Deliberation: weigh options ----
+    addReasonHeader("bodyNSAI",
+      'Construct customer options <span class="mode-pill">COUNTERFACTUAL</span>',
+      "Four paths simulated. Two preserve customer agency — a full-scope referral and a DTC bind with explicit exclusion. Both are presented to the customer."
+    );
+    await wait(500);
+
+    const delibEl = addDeliberation("bodyNSAI", NSAI_DELIBERATION);
+    await wait(1000);
+    const optionEls = delibEl.querySelectorAll(".d-option");
+    const order = [0, 1, 2, 3]; // reject first two, choose last two
+    for (let k = 0; k < order.length; k++) {
+      const idx = order[k];
+      const opt = NSAI_DELIBERATION.options[idx];
+      optionEls[idx].classList.add(opt.status);
+      await wait(480);
+    }
+    await wait(700);
+
+    // ---- Resolve roof-surface appetite breach via two-option construction ----
+    addSolveBlock("bodyNSAI", {
+      label: "Resolve · SC-HAZ-12 via two-option construction",
+      headline: 'The breach is not silently bound and not silently declined. The customer is offered <em>both</em> a full-scope referral and a DTC bind with explicit exclusion.',
+      rows: [
+        { k: "Option A",          calc: "full-scope referral to specialty UW (~5 day cycle)",            val: "$4,100/yr" },
+        { k: "Option B",          calc: "DTC bind handyman + water-heater, roof-surface excluded",      val: "$1,950/yr" },
+        { k: "Customer message",  calc: "scope clarification + two-option presentation + adjacent WC",  val: "COMPOSED" },
+      ],
+      result: {
+        k: "OUTCOME",
+        calc: "Both options preserve customer agency · SC-HAZ-12 resolved",
+        val: "REQUOTE  ✓",
+      },
+    });
+    await wait(700);
+
+    // Flip SC-HAZ-12 from BREACH -> RESOLVED in the rule ticker
+    updateRuleStatus("SC-HAZ-12", "pass", "RESOLVED");
+    await wait(900);
+
+    addReasonHeader("bodyNSAI",
+      'Compose customer-facing message <span class="mode-pill">CUSTOMER-COMM</span>',
+      "All ontologies satisfied. Pricing is derived per-activity, the customer message preserves choice and explains the price difference, and the workers-comp adjacent prompt is queued."
+    );
+    await wait(500);
+
+    addQuoteCard("bodyNSAI", NSAI_QUOTE);
+    await wait(500);
+
+    stopClock("nsai");
+  }
+
+  async function runDemo() {
+    if (running) return;
+    running = true;
+    const btn = $("runBtn");
+    // Reset if re-running
+    $("bodyLLM").innerHTML = "";
+    $("bodyNSAI").innerHTML = "";
+    $("laneLLM").classList.remove("done");
+    $("laneNSAI").classList.remove("done");
+    $("raceSummary").classList.remove("visible");
+    btn.classList.remove("finished");
+    btn.classList.add("running");
+    btn.textContent = "RUNNING BOTH MODELS...";
+    btn.querySelector && (btn.textContent = "RUNNING BOTH MODELS...");
+
+    // Run both concurrently
+    await Promise.all([runLLM(), runNSAI()]);
+
+    // Reveal the summary
+    await wait(400);
+    $("raceSummary").classList.add("visible");
+
+    btn.classList.remove("running");
+    btn.classList.add("finished");
+    btn.textContent = "RUN AGAIN";
+    running = false;
+  }
+  window.runDemo = runDemo;
+
+  // Fade-in on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('section, .hero').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    io.observe(el);
+  });
+
+  // Scroll-spy: highlight current section in the nav
+  (function initScrollSpy() {
+    const sections = ['pc-ontology', 'going-deeper', 'demo']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+    const navLinks = {};
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      const id = a.getAttribute('href').replace('#', '');
+      navLinks[id] = a;
+    });
+
+    function setActive(id) {
+      Object.values(navLinks).forEach(a => a.classList.remove('active'));
+      if (id && navLinks[id]) navLinks[id].classList.add('active');
+    }
+
+    // IntersectionObserver with a narrow detection band across the middle
+    // of the viewport. Whichever section is crossing that band is "active."
+    const spy = new IntersectionObserver((entries) => {
+      // Find the entry most in view (highest intersectionRatio) among intersecting ones
+      const visible = entries.filter(e => e.isIntersecting);
+      if (visible.length > 0) {
+        visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        setActive(visible[0].target.id);
+      }
+    }, {
+      // A band from 30% below top to 60% below top — sections crossing this band
+      // are considered "in view" for spy purposes
+      rootMargin: '-30% 0px -60% 0px',
+      threshold: [0, 0.1, 0.5, 1],
+    });
+
+    sections.forEach(s => spy.observe(s));
+
+    // Clear active state when user is above all sections (e.g., in hero)
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 300) setActive(null);
+    }, { passive: true });
+  })();
+
+
+
+  // Auto-play once the widget is on screen (with a short beat so fonts load)
+  window.addEventListener('load', function() {
+    setTimeout(function() { if (!running) runDemo(); }, 600);
+  });
+</script>
+</body>
+</html>
