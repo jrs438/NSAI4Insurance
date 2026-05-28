@@ -3911,6 +3911,7 @@
     // Flip SC-HAZ-12 from BREACH -> RESOLVED in the rule ticker
     updateRuleStatus("SC-HAZ-12", "pass", "RESOLVED");
     await wait(900);
+    await checkpoint(3);
 
     addReasonHeader("bodyNSAI",
       'Compose customer-facing message <span class="mode-pill">CUSTOMER-COMM</span>',
@@ -3920,7 +3921,7 @@
 
     addQuoteCard("bodyNSAI", NSAI_QUOTE);
     await wait(500);
-    await checkpoint(3);
+    await checkpoint(4);
 
     stopClock("nsai");
   }
@@ -3970,8 +3971,12 @@
       text:'Delgado is compared to claims with the <em>same activity mix</em>, not all &ldquo;handymen&rdquo;: water-heater &rarr; water-damage frequency, roof &rarr; fall-from-height severity.',
       find:function(){ return findSolveBlock('Claims-similarity'); } },
     { color:'#3F5E4A', dim:'llm',
+      title:'Resolved &mdash; and not silently',
+      text:'The breach isn&rsquo;t quietly declined or quietly bound. The reasoner constructs two priced options &mdash; a full-scope referral and a DTC bind with the roof excluded &mdash; so SC-HAZ-12 flips <strong>BREACH &rarr; RESOLVED</strong> in the ticker above.',
+      find:function(){ return findSolveBlock('Resolve'); } },
+    { color:'#3F5E4A', dim:'llm',
       title:'The payoff &mdash; a decision, not just an answer',
-      text:'Two priced options ($1,950 / $4,100) and a customer message that explains the difference. The breach became a re-quote, not a silent coverage gap.',
+      text:'The customer-facing quote: both priced options with a plain-English message explaining the difference. The sale is kept and the coverage gap is closed.',
       find:function(){ return document.querySelector('#bodyNSAI .quote-card'); } },
   ];
   let guideIdx = 0;
