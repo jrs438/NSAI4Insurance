@@ -2559,6 +2559,40 @@
   @media (max-width: 768px) {
     .float-nav { display: none; }
   }
+
+  /* ===== Guided walkthrough ===== */
+  .lane { transition: opacity 0.35s ease; }
+  .lane.dimmed { opacity: 0.30; }
+  .guide-hl { border-radius: 8px; transition: box-shadow 0.3s ease; position: relative; z-index: 3; }
+  .guide-start-btn {
+    margin-top: 22px; display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.05em;
+    background: var(--accent-3); color: var(--ink); border: none; padding: 12px 20px;
+    border-radius: 4px; cursor: pointer; font-weight: 600;
+  }
+  .guide-start-btn:hover { filter: brightness(1.06); }
+  .guide-bar {
+    position: fixed; left: 50%; bottom: 24px; z-index: 300;
+    width: min(900px, 94vw); transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--paper);
+    border: 1px solid rgba(244,239,230,0.14); border-left: 5px solid var(--accent-3);
+    border-radius: 8px; padding: 18px 22px; gap: 18px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.4);
+    display: none; align-items: center;
+    opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .guide-bar.active { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+  .guide-bar .gb-badge { font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; line-height: 1; flex-shrink: 0; width: 42px; text-align: center; }
+  .guide-bar .gb-body { flex: 1; }
+  .guide-bar .gb-progress { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-3); margin-bottom: 5px; }
+  .guide-bar .gb-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 4px; }
+  .guide-bar .gb-text { font-size: 14px; line-height: 1.45; color: rgba(244,239,230,0.82); }
+  .guide-bar .gb-controls { display: flex; gap: 8px; flex-shrink: 0; align-items: center; }
+  .guide-bar .gb-controls button { font-family: 'JetBrains Mono', monospace; font-size: 12px; cursor: pointer; background: transparent; color: var(--paper); border: 1px solid rgba(244,239,230,0.3); padding: 8px 12px; border-radius: 4px; }
+  .guide-bar .gb-controls button:hover { background: rgba(244,239,230,0.1); }
+  .guide-bar .gb-controls button:disabled { opacity: 0.35; cursor: default; }
+  @media (max-width: 680px) { .guide-bar { flex-direction: column; align-items: stretch; gap: 12px; } }
+  .run-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 </style>
 </head>
 <body>
@@ -2875,6 +2909,91 @@
         <div style="font-family: 'JetBrains Mono', monospace; font-style: normal; font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 12px;">Customer message &middot; via web form</div>
         &ldquo;Hi, looking for a quote. I run a handyman business in the Phoenix metro &mdash; been at it about six years. It&rsquo;s me and one helper, and we mostly do small jobs for landlords and property managers around town. Bathroom fixes, kitchen stuff, water heaters when they go out, drywall patching. Sometimes we&rsquo;ll patch leaks or replace a few shingles when a tenant calls. We do maybe $180K a year. Need general liability and probably property coverage for my tools and truck stuff.&rdquo;
       </div>
+    </div>
+
+    <!-- LIVE DEMO -->
+    <div class="live-demo" id="liveDemo">
+      <div class="live-demo-head">
+        <div>
+          <div class="live-demo-eyebrow">LIVE &middot; WATCH BOTH MODELS RUN</div>
+          <h3>See it for <em>yourself</em>.</h3>
+          <p>Press <strong>Run Demo</strong>. Both systems receive Marcos&rsquo;s message. Watch RAG retrieve, cite, and produce a fluent quote &mdash; while the neurosymbolic reasoner extracts, decomposes the described activities, evaluates rules, compares to similar claim patterns, and composes a priced quote with a customer-facing explanation. Every conclusion traced to a rule, fact, or pattern. The demo runs step by step &mdash; it pauses at each key moment, scrolls to it, and explains what just happened, live.</p>
+        </div>
+        <button class="run-btn" id="runDemoBtn" onclick="guidedRun()">Run Demo</button>
+      </div>
+
+      <div class="stage">
+        <!-- LLM LANE -->
+        <div class="lane llm" id="laneLLM">
+          <div class="lane-head">
+            <div>
+              <div class="lane-tag">RAG + LLM &middot; RETRIEVAL-AUGMENTED</div>
+              <div class="lane-title">Generative AI with Retrieval</div>
+            </div>
+            <div class="lane-clock"><span class="status"></span><span id="clockLLM">0.0s</span></div>
+          </div>
+          <div class="lane-body" id="bodyLLM"></div>
+        </div>
+
+        <!-- NSAI LANE -->
+        <div class="lane nsai" id="laneNSAI">
+          <div class="lane-head">
+            <div>
+              <div class="lane-tag">NEUROSYMBOLIC &middot; ONTOLOGY + RULES</div>
+              <div class="lane-title">Hybrid Reasoner</div>
+            </div>
+            <div class="lane-clock"><span class="status"></span><span id="clockNSAI">0.0s</span></div>
+          </div>
+          <div class="lane-body" id="bodyNSAI"></div>
+        </div>
+      </div>
+
+      <div class="race-summary" id="raceSummary">
+        <h4>Same submission. <em>Very different reading.</em></h4>
+        <div class="sub">Side-by-side: what each system produced on this run.</div>
+        <div class="race-stats">
+          <div class="race-stat">
+            <div class="rs-label">Business activities recognized</div>
+            <div class="rs-pair">
+              <div class="rs-llm">1 bundled label: handyman</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">3 activity classes</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Exposure-class accuracy</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Self-classified</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">Decomposed &amp; rule-bound</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Claims-history comparison</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Generic class-level</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">Similar activity-mix pattern</div>
+            </div>
+          </div>
+          <div class="race-stat">
+            <div class="rs-label">Customer message</div>
+            <div class="rs-pair">
+              <div class="rs-llm">Price-only</div>
+              <div class="rs-divider">vs</div>
+              <div class="rs-nsai">Price with rationale</div>
+            </div>
+          </div>
+        </div>
+        <button class="guide-start-btn" id="guideStartBtn" onclick="guidedRun()">&#9654;&nbsp; Run the demo again</button>
+      </div>
+    </div>
+
+    <!-- TRANSITION: under the hood -->
+    <div style="margin-top: 60px; padding-top: 28px; border-top: 1px solid rgba(28,37,48,0.15);">
+      <div class="sec-num">UNDER THE HOOD</div>
+      <h3 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(26px,3.4vw,38px); line-height:1.05; letter-spacing:-0.02em; color:var(--ink); margin:10px 0 14px;">The same three approaches, <em style="font-style:italic; color:var(--accent);">step by step</em>.</h3>
+      <p class="demo-intro" style="margin-bottom:0;">You just watched them run side by side. Here is exactly what each one does with the submission &mdash; the baseline DTC intake, the RAG-augmented LLM, and the neurosymbolic core&rsquo;s five-stage pipeline.</p>
     </div>
 
     <!-- PROCESS TABS -->
@@ -3259,83 +3378,6 @@
       </div>
     </div>
 
-    <!-- LIVE DEMO -->
-    <div class="live-demo" id="liveDemo">
-      <div class="live-demo-head">
-        <div>
-          <div class="live-demo-eyebrow">LIVE &middot; WATCH BOTH MODELS RUN</div>
-          <h3>See it for <em>yourself</em>.</h3>
-          <p>Press <strong>Run</strong>. Both systems receive Marcos&rsquo;s message at the same moment. Watch RAG retrieve, cite, and produce a fluent quote &mdash; while the neurosymbolic reasoner extracts, decomposes the described activities, evaluates rules, compares to similar claim patterns, and composes a priced quote with a customer-facing explanation. Every conclusion traced to a rule, fact, or pattern.</p>
-        </div>
-        <button class="run-btn" id="runBtn" onclick="runDemo()">RUN BOTH MODELS</button>
-      </div>
-
-      <div class="stage">
-        <!-- LLM LANE -->
-        <div class="lane llm" id="laneLLM">
-          <div class="lane-head">
-            <div>
-              <div class="lane-tag">RAG + LLM &middot; RETRIEVAL-AUGMENTED</div>
-              <div class="lane-title">Generative AI with Retrieval</div>
-            </div>
-            <div class="lane-clock"><span class="status"></span><span id="clockLLM">0.0s</span></div>
-          </div>
-          <div class="lane-body" id="bodyLLM"></div>
-        </div>
-
-        <!-- NSAI LANE -->
-        <div class="lane nsai" id="laneNSAI">
-          <div class="lane-head">
-            <div>
-              <div class="lane-tag">NEUROSYMBOLIC &middot; ONTOLOGY + RULES</div>
-              <div class="lane-title">Hybrid Reasoner</div>
-            </div>
-            <div class="lane-clock"><span class="status"></span><span id="clockNSAI">0.0s</span></div>
-          </div>
-          <div class="lane-body" id="bodyNSAI"></div>
-        </div>
-      </div>
-
-      <div class="race-summary" id="raceSummary">
-        <h4>Same submission. <em>Very different reading.</em></h4>
-        <div class="sub">Side-by-side: what each system produced on this run.</div>
-        <div class="race-stats">
-          <div class="race-stat">
-            <div class="rs-label">Business activities recognized</div>
-            <div class="rs-pair">
-              <div class="rs-llm">1 bundled label: handyman</div>
-              <div class="rs-divider">vs</div>
-              <div class="rs-nsai">3 activity classes</div>
-            </div>
-          </div>
-          <div class="race-stat">
-            <div class="rs-label">Exposure-class accuracy</div>
-            <div class="rs-pair">
-              <div class="rs-llm">Self-classified</div>
-              <div class="rs-divider">vs</div>
-              <div class="rs-nsai">Decomposed &amp; rule-bound</div>
-            </div>
-          </div>
-          <div class="race-stat">
-            <div class="rs-label">Claims-history comparison</div>
-            <div class="rs-pair">
-              <div class="rs-llm">Generic class-level</div>
-              <div class="rs-divider">vs</div>
-              <div class="rs-nsai">Similar activity-mix pattern</div>
-            </div>
-          </div>
-          <div class="race-stat">
-            <div class="rs-label">Customer message</div>
-            <div class="rs-pair">
-              <div class="rs-llm">Price-only</div>
-              <div class="rs-divider">vs</div>
-              <div class="rs-nsai">Price with rationale</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- SCORECARD -->
     <div class="scorecard">
       <div class="score-col llm">
@@ -3696,9 +3738,9 @@
     const laneEl = which === "llm" ? $("laneLLM") : $("laneNSAI");
     const clockEl = which === "llm" ? $("clockLLM") : $("clockNSAI");
     laneEl.classList.add("running");
-    const start = performance.now();
+    const start = nowV();
     const ticker = setInterval(() => {
-      const elapsed = (performance.now() - start) / 1000;
+      const elapsed = (nowV() - start) / 1000;
       clockEl.textContent = elapsed.toFixed(1) + "s";
       if (which === "llm") clockLLM = elapsed;
       else clockNSAI = elapsed;
@@ -3725,6 +3767,7 @@
     setVerdict("bodyLLM", "llm", LLM_VERDICT);
     await wait(400);
     stopClock("llm");
+    await checkpoint(0);
   }
 
   async function runNSAI() {
@@ -3748,6 +3791,7 @@
       row.classList.add(rule.result);
       row.classList.add("done");
       await wait(160);
+      if (rule.id === "SC-HAZ-12") await checkpoint(1);
     }
     // Stage 4 - narrative
     addStep("bodyNSAI", {
@@ -3818,6 +3862,7 @@
       },
     });
     await wait(1100);
+    await checkpoint(2);
 
     // ---- Deliberation: weigh options ----
     addReasonHeader("bodyNSAI",
@@ -3858,6 +3903,7 @@
     // Flip SC-HAZ-12 from BREACH -> RESOLVED in the rule ticker
     updateRuleStatus("SC-HAZ-12", "pass", "RESOLVED");
     await wait(900);
+    await checkpoint(3);
 
     addReasonHeader("bodyNSAI",
       'Compose customer-facing message <span class="mode-pill">CUSTOMER-COMM</span>',
@@ -3867,38 +3913,149 @@
 
     addQuoteCard("bodyNSAI", NSAI_QUOTE);
     await wait(500);
+    await checkpoint(4);
 
     stopClock("nsai");
   }
 
-  async function runDemo() {
+  // ===== Live guided run (pauses the animation at each beat) =====
+  const GUIDE_STEPS = [
+    { color:'#B8442E', dim:'nsai',
+      title:'The LLM is done &mdash; and wrong',
+      text:'It accepted &ldquo;handyman&rdquo; and quoted $1,840. The roof-leak/shingle and water-heater work were never classified &mdash; wrong risk, priced with confidence. Now watch the reasoner read the <em>same</em> words.',
+      find:function(){ return document.querySelector('#bodyLLM .verdict'); } },
+    { color:'#B8442E', dim:'llm',
+      title:'There it is &mdash; SC-HAZ-12 just fired',
+      text:'Roof-surface work &sube; height-work exposure &rarr; outside DTC handyman appetite. The breach is caught deterministically, on the exact words the LLM glossed over. Watch what happens to it next.',
+      find:function(){ return findRuleRow('SC-HAZ-12'); } },
+    { color:'#C8A951', dim:'llm',
+      title:'One shared ontology &mdash; underwriting meets claims',
+      text:'Delgado is compared to claims with the <em>same activity mix</em>, not all &ldquo;handymen&rdquo;: water-heater &rarr; water-damage frequency, roof &rarr; fall-from-height severity.',
+      find:function(){ return findSolveBlock('Claims-similarity'); } },
+    { color:'#3F5E4A', dim:'llm',
+      title:'Resolved &mdash; and not silently',
+      text:'The breach isn&rsquo;t quietly declined or quietly bound. The reasoner constructs two priced options &mdash; a full-scope referral and a DTC bind with the roof excluded &mdash; so SC-HAZ-12 flips <strong>BREACH &rarr; RESOLVED</strong> in the ticker above.',
+      find:function(){ return findSolveBlock('Resolve'); } },
+    { color:'#3F5E4A', dim:'llm',
+      title:'The payoff &mdash; a decision, not just an answer',
+      text:'The customer-facing quote: both priced options with a plain-English message explaining the difference. The sale is kept and the coverage gap is closed.',
+      find:function(){ return document.querySelector('#bodyNSAI .quote-card'); } },
+  ];
+  let guideIdx = 0;
+  let guideMode = false;        // true during a guided (paused) run
+  let cpActive = false;         // currently paused at a checkpoint
+  let cpResolve = null;         // resolves the active checkpoint promise
+  let pausedSince = 0, pausedTotal = 0;   // clock-freeze bookkeeping
+  function nowV(){ let t = performance.now() - pausedTotal; if (pausedSince) t -= (performance.now() - pausedSince); return t; }
+
+  function findRuleRow(id){
+    const rows = document.querySelectorAll('#bodyNSAI .rule-row');
+    for (let i=0;i<rows.length;i++){ const e = rows[i].querySelector('.r-id'); if (e && e.textContent.trim() === id) return rows[i]; }
+    return null;
+  }
+  function findSolveBlock(label){
+    const bs = document.querySelectorAll('#bodyNSAI .solve-block');
+    for (let i=0;i<bs.length;i++){ const e = bs[i].querySelector('.sb-label'); if (e && e.textContent.indexOf(label) !== -1) return bs[i]; }
+    return null;
+  }
+  function hexToRgba(hex, a){ const n = parseInt(hex.slice(1),16); return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')'; }
+  function clearGuide(){
+    const hs = document.querySelectorAll('.guide-hl');
+    for (let i=0;i<hs.length;i++){ hs[i].classList.remove('guide-hl'); hs[i].style.boxShadow=''; }
+    const a=$('laneLLM'), b=$('laneNSAI'); if(a) a.classList.remove('dimmed'); if(b) b.classList.remove('dimmed');
+  }
+  function scrollToStageTop(){
+    const stage = document.querySelector('#liveDemo .stage');
+    if (!stage) return;
+    const y = stage.getBoundingClientRect().top + window.pageYOffset - 80;
+    window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'smooth' });
+  }
+  function barPlaying(){
+    $('guideBar').style.borderLeftColor = 'var(--accent-3)';
+    $('gbBadge').textContent = '▸'; $('gbBadge').style.color = 'var(--accent-3)';
+    $('gbProgress').textContent = 'Guided run · live';
+    $('gbTitle').textContent = 'Watch it work…';
+    $('gbText').innerHTML = 'I&rsquo;ll pause at the next key moment.';
+    $('gbNext').disabled = true;
+    $('gbNext').textContent = 'Next ▶';
+  }
+  // Render the callout for beat i (called when the run pauses at a checkpoint).
+  function guideShowBeat(i){
+    guideIdx = i;
+    const g = GUIDE_STEPS[i];
+    clearGuide();
+    const dimLane = g.dim === 'llm' ? $('laneLLM') : $('laneNSAI');
+    if (dimLane) dimLane.classList.add('dimmed');
+    const t = g.find ? g.find() : null;
+    if (t){
+      t.classList.add('guide-hl');
+      t.style.boxShadow = '0 0 0 2.5px '+g.color+', 0 0 26px '+hexToRgba(g.color,0.5);
+      t.scrollIntoView({ behavior:'smooth', block:'center' });
+    }
+    $('guideBar').style.borderLeftColor = g.color;
+    $('gbBadge').textContent = String(i+1); $('gbBadge').style.color = g.color;
+    $('gbProgress').textContent = 'Beat '+(i+1)+' of '+GUIDE_STEPS.length+' · paused';
+    $('gbTitle').innerHTML = g.title;
+    $('gbText').innerHTML = g.text;
+    $('gbNext').disabled = false;
+    $('gbNext').textContent = (i === GUIDE_STEPS.length-1) ? 'Finish ▸' : 'Next ▶';
+  }
+  // Called from inside runLLM / runNSAI at each beat. No-op unless in a guided run.
+  function checkpoint(beatIdx){
+    if (!guideMode) return Promise.resolve();
+    pausedSince = performance.now();   // freeze the lane clocks
+    cpActive = true;
+    guideShowBeat(beatIdx);
+    return new Promise(function(res){ cpResolve = res; });
+  }
+  function guideNext(){
+    if (!cpActive) return;             // ignore while the animation is playing
+    cpActive = false;
+    if (pausedSince){ pausedTotal += performance.now() - pausedSince; pausedSince = 0; }
+    const leaving = guideIdx;
+    clearGuide();
+    barPlaying();
+    if (leaving === 0) scrollToStageTop();   // LLM done -> pop back up to watch NSAI fire
+    const r = cpResolve; cpResolve = null;
+    if (r) r();
+  }
+  function guidePrev(){ /* no rewind in a live run */ }
+  function guideEnd(){
+    guideMode = false;                 // stop narrating; let the run finish on its own
+    if (pausedSince){ pausedTotal += performance.now() - pausedSince; pausedSince = 0; }
+    cpActive = false;
+    $('guideBar').classList.remove('active');
+    clearGuide();
+    const r = cpResolve; cpResolve = null;
+    if (r) r();
+  }
+  async function guidedRun(){
     if (running) return;
     running = true;
-    const btn = $("runBtn");
-    // Reset if re-running
-    $("bodyLLM").innerHTML = "";
-    $("bodyNSAI").innerHTML = "";
-    $("laneLLM").classList.remove("done");
-    $("laneNSAI").classList.remove("done");
+    guideMode = true;
+    cpActive = false; cpResolve = null; pausedSince = 0; pausedTotal = 0;
+    $("bodyLLM").innerHTML = ""; $("bodyNSAI").innerHTML = "";
+    $("laneLLM").classList.remove("done"); $("laneNSAI").classList.remove("done");
     $("raceSummary").classList.remove("visible");
-    btn.classList.remove("finished");
-    btn.classList.add("running");
-    btn.textContent = "RUNNING BOTH MODELS...";
-    btn.querySelector && (btn.textContent = "RUNNING BOTH MODELS...");
-
-    // Run both concurrently
-    await Promise.all([runLLM(), runNSAI()]);
-
-    // Reveal the summary
-    await wait(400);
+    clearGuide();
+    $('guideBar').classList.add('active');
+    $('gbPrev').style.display = 'none';
+    barPlaying();
+    const gb = $("runDemoBtn");
+    if (gb){ gb.classList.add('running'); gb.textContent = 'RUNNING DEMO…'; }
+    scrollToStageTop();   // bring the lanes into view; the LLM fills from the top
+    await runLLM();       // pauses at beat 0 (its verdict)
+    await runNSAI();      // pauses at beats 1-4
+    guideMode = false;
+    $('guideBar').classList.remove('active');
+    clearGuide();
+    await wait(300);
     $("raceSummary").classList.add("visible");
-
-    btn.classList.remove("running");
-    btn.classList.add("finished");
-    btn.textContent = "RUN AGAIN";
+    if (gb){ gb.classList.remove('running'); gb.textContent = 'Run Demo'; }
     running = false;
   }
-  window.runDemo = runDemo;
+  window.guidedRun = guidedRun; window.guideNext = guideNext; window.guidePrev = guidePrev; window.guideEnd = guideEnd;
+
 
   // Fade-in on scroll
   const io = new IntersectionObserver((entries) => {
@@ -3958,6 +4115,21 @@
   })();
 
 </script>
+
+<!-- Guided walkthrough bar -->
+<div class="guide-bar" id="guideBar">
+  <div class="gb-badge" id="gbBadge">1</div>
+  <div class="gb-body">
+    <div class="gb-progress" id="gbProgress">Point 1 of 4</div>
+    <div class="gb-title" id="gbTitle"></div>
+    <div class="gb-text" id="gbText"></div>
+  </div>
+  <div class="gb-controls">
+    <button id="gbPrev" onclick="guidePrev()">&#9664; Prev</button>
+    <button id="gbNext" onclick="guideNext()">Next &#9654;</button>
+    <button id="gbDone" onclick="guideEnd()" title="Close walkthrough">&#10005;</button>
+  </div>
+</div>
 
 </body>
 </html>
