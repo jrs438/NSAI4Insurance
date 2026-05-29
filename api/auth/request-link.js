@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 import { createMagicToken, safeNext } from '../../lib/auth.js';
 
 // How long the emailed sign-in link stays valid.
-const LINK_TTL_MINUTES = 24 * 60; // 24 hours
+const LINK_TTL_MINUTES = 7 * 24 * 60; // 7 days
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       text:
         'NSAI for Insurance — sign-in link\n\n' +
         'Use the link below to sign in to the private NSAI for Insurance site. ' +
-        'It is valid for 24 hours.\n\n' +
+        'It is valid for 7 days.\n\n' +
         link +
         "\n\nIf you didn't request this, you can ignore this email.",
       html: `
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
       <tr><td style="padding:42px 42px 38px;">
         <div style="font-family:'Courier New',Courier,monospace;font-size:11px;letter-spacing:3px;color:#c8a951;text-transform:uppercase;margin-bottom:18px;">NSAI &middot; for Insurance</div>
         <h1 style="margin:0 0 14px;font-family:Georgia,'Times New Roman',serif;font-weight:normal;font-size:28px;line-height:1.2;color:#f4efe6;">Your sign-in link</h1>
-        <p style="margin:0 0 28px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:rgba(244,239,230,0.72);">Use the button below to sign in to the private NSAI for Insurance site. This link is valid for <strong style="color:#f4efe6;">24 hours</strong>.</p>
+        <p style="margin:0 0 28px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:rgba(244,239,230,0.72);">Use the button below to sign in to the private NSAI for Insurance site. This link is valid for <strong style="color:#f4efe6;">7 days</strong>.</p>
         <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
           <td style="border-radius:6px;background:#c8a951;">
             <a href="${link}" style="display:inline-block;padding:15px 32px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;letter-spacing:1.5px;color:#1c2530;text-decoration:none;text-transform:uppercase;">Sign in &rarr;</a>
