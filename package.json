@@ -1,0 +1,13 @@
+{
+  "name": "nsai4insurance-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static NSAI for Insurance site with a Vercel auth gate (magic link + passcode).",
+  "dependencies": {
+    "@upstash/redis": "^1.34.0",
+    "@vercel/edge": "^1.1.0",
+    "jose": "^5.0.0",
+    "resend": "^4.0.0"
+  }
+}
