@@ -24,7 +24,9 @@ export default async function middleware(request) {
   const token = readCookie(request.headers.get('cookie'), SESSION_COOKIE);
   if (token) {
     const payload = await verifyToken(token);
-    if (payload && payload.sub) return next();
+    // Accept sub (this site's payload) OR email (lloyds' payload) — SSO across
+    // *.nsai4insurance.com works when both sides sign with the same AUTH_SECRET.
+    if (payload && (payload.sub || payload.email)) return next();
   }
 
   const loginUrl = new URL('/login.html', url.origin);
