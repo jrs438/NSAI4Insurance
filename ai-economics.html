@@ -422,32 +422,16 @@
   </div>
 </section>
 
-<!-- ========== §04 COST BENEFIT ========== -->
+<!-- ========== §04 COST ASIDE (light) ========== -->
 <section class="block" id="cost">
   <div class="wrap-narrow">
-    <div class="sec-num">04 / A supporting benefit</div>
-    <h2>And, incidentally, the <em>economics</em> also work.</h2>
+    <div class="sec-num">04 / A tailwind</div>
+    <h2>The economics <em>point the same way</em>.</h2>
     <p>
-      The correctness case for the ontology-first architecture stands on its own &mdash; auditability, determinism, regulator defensibility. But the cost case is worth naming, because it is moving in the opposite direction of the industry story most executives have absorbed.
+      One quiet detail worth noting. Per-token prices are falling, but per-<em>query</em> costs for the multi-step reasoning and agentic workflows that insurers actually want have been moving the opposite direction &mdash; reasoning models consume many times more output tokens per task, each billed at the output rate. BCG&rsquo;s <em>Widening AI Value Gap</em> (September 2025) makes the point using an insurance claim as its example: an enterprise-grade agent processing a single claim &ldquo;can use five to 30 times more tokens&rdquo; than a single-shot LLM call.
     </p>
     <p>
-      Per-token prices are down roughly <strong>1,000&times; in three years</strong> (a16z&rsquo;s widely-cited &ldquo;LLMflation&rdquo; figure). But per-<em>query</em> costs for the reasoning and agentic workflows insurers actually want are moving in the other direction. Reasoning models consume 8 to 20&times; more output tokens per task than their predecessors, and every one of those tokens is billed at the (expensive) output rate. OpenAI&rsquo;s o3 on the ARC-AGI benchmark cost roughly <strong>$20 per task at low compute and $3,460 per task at high compute</strong> in December 2024. Fran&ccedil;ois Chollet&rsquo;s framing: a human solves the same task for about $5.
-    </p>
-    <p>
-      BCG&rsquo;s <em>Widening AI Value Gap</em> (September 2025) uses an insurance claim as its worked example: an enterprise-grade agent processing a single claim &ldquo;can use <strong>five to 30 times more tokens</strong> to complete the task&rdquo; than a single-shot LLM call. Multiply that against US P&amp;C direct premiums written &mdash; the industry crossed <strong>$1 trillion</strong> in 2024 &mdash; and the inference-cost line becomes a P&amp;L line.
-    </p>
-
-    <div class="callout">
-      <div class="clbl">The market has started to notice</div>
-      <p>MIT&rsquo;s Project NANDA report in July 2025 &mdash; the widely-cited &ldquo;<strong>95% of enterprise GenAI pilots produce zero return</strong>&rdquo; study &mdash; drew a real methodology debate but is corroborated by independent surveys: Gartner (30% of proofs-of-concept abandoned by end-2025, &gt;40% of agentic projects canceled by 2027), McKinsey (88% of firms adopt AI; only <strong>6%</strong> see &gt;5% EBIT impact).</p>
-      <p>Goldman Sachs&rsquo; head of global equity research Jim Covello put the skeptical case plainly: <em>&ldquo;AI technology is exceptionally expensive, and to justify those costs, the technology must be able to solve complex problems, which it isn&rsquo;t designed to do.&rdquo;</em></p>
-    </div>
-
-    <p>
-      An ontology-first architecture inverts the cost surface. Rules and deterministic reasoning execute in microseconds at near-zero marginal cost. The LLM is invoked once on the way in (to turn language into structured facts) and once on the way out (to turn a structured decision into fluent language). The tokens that don&rsquo;t compound value simply aren&rsquo;t spent.
-    </p>
-    <p class="note">
-      Honest gap flagged: no public source states &ldquo;insurance NSAI is X% cheaper than LLM-only in production.&rdquo; The insurance-specific cost math is a composition of three cited principles &mdash; the per-query cost curve, symbolic execution at near-zero marginal cost, and hybrid systems&rsquo; benchmark efficiency &mdash; not a single vendor headline number.
+      An ontology-first architecture avoids that compounding by design. Rules and deterministic reasoning run at near-zero marginal cost; the LLM is invoked at the edges &mdash; once on ingest, once on output. It is not why AIG built what they built, but it is why the choice holds up as volume grows.
     </p>
   </div>
 </section>
