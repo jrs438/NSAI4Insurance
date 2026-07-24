@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The economics of enterprise AI &mdash; NSAI for Insurance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0F1419;
+    --ink-2: #2A3340;
+    --paper: #F4EFE6;
+    --paper-2: #ECE5D6;
+    --rule: #1C2530;
+    --accent: #B8442E;
+    --accent-2: #3F5E4A;
+    --accent-3: #C8A951;
+    --muted: #6B6458;
+    --soft: #D9D1BF;
+    --cnbc: #cc0000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter Tight', -apple-system, system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  .wrap-narrow { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+
+  /* ============ NAV ============ */
+  nav.top {
+    background: rgba(244,239,230,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(28,37,48,0.12);
+    position: sticky; top: 0; z-index: 100;
+  }
+  nav.top .row {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 64px;
+  }
+  .brand {
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+    display: flex; align-items: center; text-decoration: none;
+  }
+  .brand .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent); display: inline-block; margin-right: 10px;
+  }
+  .brand-sub { font-weight: 400; font-size: 14px; color: var(--muted); }
+  .top-links { display: flex; align-items: center; gap: 22px; font-size: 13px; }
+  .top-links a { color: var(--ink-2); text-decoration: none; transition: color .15s; }
+  .top-links a:hover { color: var(--accent); }
+
+  /* ============ HERO (dark) ============ */
+  header.hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 96px 0 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  header.hero .wrap { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-3);
+    display: flex; align-items: center; margin-bottom: 24px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 26px; height: 2px; background: var(--accent);
+    margin-right: 12px;
+  }
+  header.hero h1 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(40px, 6.4vw, 78px); line-height: 1.02;
+    letter-spacing: -0.02em; margin-bottom: 26px;
+    max-width: 20ch;
+  }
+  header.hero h1 em { font-style: italic; color: var(--accent-3); }
+  .hero-lede {
+    font-size: 20px; line-height: 1.55; color: rgba(244,239,230,0.78);
+    max-width: 62ch; margin-bottom: 8px;
+  }
+
+  /* ============ VIDEO CARD ============ */
+  section.video {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 0 96px;
+  }
+  .video-card {
+    display: block;
+    background: linear-gradient(180deg, #14191f 0%, #0a0d11 100%);
+    border: 1px solid rgba(244,239,230,0.14);
+    border-radius: 8px;
+    padding: 32px 36px;
+    text-decoration: none;
+    color: var(--paper);
+    max-width: 820px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .video-card:hover {
+    border-color: rgba(244,239,230,0.28);
+    transform: translateY(-1px);
+  }
+  .vc-top {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(244,239,230,0.55); margin-bottom: 22px;
+  }
+  .cnbc-tag {
+    background: var(--cnbc); color: #fff; padding: 3px 8px; border-radius: 2px;
+    font-weight: 700; letter-spacing: 0.14em;
+  }
+  .vc-quote {
+    font-family: 'Fraunces', serif; font-weight: 400; font-style: italic;
+    font-size: clamp(22px, 3.2vw, 30px); line-height: 1.2;
+    color: var(--paper); margin-bottom: 18px;
+  }
+  .vc-attrib { font-size: 13px; color: rgba(244,239,230,0.6); margin-bottom: 28px; }
+  .vc-play {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent-3);
+  }
+  .vc-play .play-icon {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--accent-3); color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+
+  /* ============ SECTIONS ============ */
+  section.block { padding: 96px 0; border-bottom: 1px solid rgba(28,37,48,0.12); }
+  section.block.tight { padding: 72px 0; }
+  section.block .sec-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: center; margin-bottom: 28px;
+  }
+  section.block .sec-num::before {
+    content: ''; width: 26px; height: 2px; background: var(--accent);
+    margin-right: 12px;
+  }
+  section.block h2 {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(30px, 4vw, 46px); line-height: 1.08;
+    letter-spacing: -0.015em; margin-bottom: 32px; color: var(--ink);
+    max-width: 22ch;
+  }
+  section.block h2 em { font-style: italic; color: var(--accent); }
+  section.block p {
+    font-size: 17px; line-height: 1.65; color: var(--ink-2);
+    margin-bottom: 20px;
+  }
+  section.block p strong { color: var(--ink); font-weight: 600; }
+  section.block p em { color: var(--ink); font-style: italic; }
+
+  /* stats grid */
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin: 32px 0 8px;
+  }
+  .stat {
+    background: var(--paper-2); border-left: 3px solid var(--accent);
+    padding: 22px 24px; border-radius: 3px;
+  }
+  .stat .num {
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: 32px; line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .stat .lbl {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-top: 10px;
+  }
+  @media (max-width: 720px) { .stats { grid-template-columns: 1fr; } }
+
+  /* pull quote */
+  .pullq {
+    border-left: 3px solid var(--accent-3);
+    padding: 8px 0 8px 28px;
+    margin: 36px 0;
+    max-width: 640px;
+  }
+  .pullq .q {
+    font-family: 'Fraunces', serif; font-weight: 400; font-style: italic;
+    font-size: 24px; line-height: 1.3; color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .pullq .a {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  }
+
+  /* small callout box */
+  .callout {
+    background: var(--rule); color: var(--paper);
+    padding: 28px 32px; border-radius: 4px;
+    margin: 36px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .callout .clbl {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent-3); margin-bottom: 12px;
+  }
+  .callout p { color: rgba(244,239,230,0.85) !important; font-size: 15.5px !important; margin: 0; }
+  .callout p + p { margin-top: 10px !important; }
+  .callout p strong { color: #fff !important; }
+
+  /* dark section variant (used for AIG proof point + payoff) */
+  section.block.dark { background: var(--ink); color: var(--paper); border-bottom: none; }
+  section.block.dark h2 { color: var(--paper); }
+  section.block.dark h2 em { color: var(--accent-3); }
+  section.block.dark p { color: rgba(244,239,230,0.78); }
+  section.block.dark p strong { color: var(--paper); }
+  section.block.dark p em { color: var(--paper); }
+  section.block.dark .sec-num { color: rgba(244,239,230,0.5); }
+  section.block.dark .stat {
+    background: rgba(244,239,230,0.06); border-left-color: var(--accent-3);
+  }
+  section.block.dark .stat .num { color: var(--paper); }
+  section.block.dark .stat .lbl { color: rgba(244,239,230,0.55); }
+  section.block.dark .pullq { border-left-color: var(--accent-3); }
+  section.block.dark .pullq .q { color: var(--paper); }
+  section.block.dark .pullq .a { color: rgba(244,239,230,0.55); }
+
+  /* inline note */
+  .note {
+    font-size: 14px; color: var(--muted); font-style: italic;
+    border-left: 2px solid var(--soft); padding-left: 16px;
+    margin: 28px 0;
+  }
+  section.block.dark .note { color: rgba(244,239,230,0.55); border-left-color: rgba(244,239,230,0.18); }
+
+  /* ============ SOURCES ============ */
+  section.sources { background: var(--paper-2); padding: 72px 0; }
+  section.sources h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 28px;
+  }
+  section.sources ol {
+    list-style: none; counter-reset: src;
+    display: grid; grid-template-columns: 1fr; gap: 12px;
+  }
+  section.sources li {
+    counter-increment: src;
+    font-size: 13.5px; line-height: 1.5; color: var(--ink-2);
+    padding-left: 44px; position: relative;
+    padding-bottom: 12px; border-bottom: 1px solid rgba(28,37,48,0.08);
+  }
+  section.sources li::before {
+    content: counter(src, decimal-leading-zero);
+    position: absolute; left: 0; top: 0;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--accent); font-weight: 600;
+  }
+  section.sources li a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  section.sources li a:hover { text-decoration: underline; }
+  section.sources li .pub { color: var(--muted); }
+
+  footer { background: var(--ink); color: rgba(244,239,230,0.5); padding: 32px 0; font-size: 12px; text-align: center; }
+  footer a { color: var(--accent-3); text-decoration: none; }
+
+  /* ============ Floating nav (matches site pattern) ============ */
+  .float-nav {
+    position: fixed; top: 50%; transform: translateY(-50%);
+    z-index: 500; display: flex; flex-direction: column; gap: 8px;
+  }
+  .float-nav-left { left: 16px; }
+  .float-nav-right { right: 16px; }
+  .float-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(63, 94, 74, 0.88); color: #F4EFE6; border: none;
+    border-radius: 4px; padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em; text-decoration: none; white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    backdrop-filter: blur(6px); opacity: 0.82;
+    transition: opacity .2s;
+  }
+  .float-btn:hover { opacity: 1; }
+  @media (max-width: 900px) { .float-nav { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- floating cross-nav -->
+<div class="float-nav float-nav-left">
+  <a href="index.html" class="float-btn">&larr; NSAI Home</a>
+</div>
+<div class="float-nav float-nav-right">
+  <a href="pc-deepdive.html" class="float-btn">P&amp;C &rarr;</a>
+  <a href="lifedemo.html" class="float-btn">L&amp;A &rarr;</a>
+  <a href="https://lloyds.nsai4insurance.com/lloyds/" class="float-btn">Lloyd&rsquo;s &rarr;</a>
+</div>
+
+<nav class="top">
+  <div class="wrap row">
+    <a href="index.html" class="brand"><span class="dot"></span>NSAI for Insurance<span class="brand-sub">&nbsp;: The Economics of AI</span></a>
+    <div class="top-links">
+      <a href="#paradox">01 Paradox</a>
+      <a href="#working">02 Working</a>
+      <a href="#aig">03 AIG</a>
+      <a href="#named">04 Named</a>
+      <a href="#payoff">05 Payoff</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">The economics of enterprise AI</div>
+    <h1>AI&rsquo;s cost curve is bending &mdash; the <em>wrong way</em> for insurance.</h1>
+    <p class="hero-lede">
+      Per-token prices have fallen ~1,000&times; in three years. But the workloads insurers actually want &mdash; multi-step agents that reason across policies, claims, and coverage &mdash; are moving in the opposite direction. This is a brief on why, on what one top-5 carrier is doing about it, and on what architecture that answer has a name.
+    </p>
+  </div>
+</header>
+
+<!-- ========== VIDEO CARD ========== -->
+<section class="video">
+  <div class="wrap">
+    <a href="https://www.cnbc.com/video/2026/07/01/palantir-ceo-alex-karp-says-something-has-gone-completely-wrong-with-how-ai-is-sold.html" target="_blank" rel="noopener" class="video-card">
+      <div class="vc-top">
+        <span class="cnbc-tag">CNBC</span>
+        <span>Squawk Box &middot; 1 Jul 2026 &middot; 4:12</span>
+      </div>
+      <div class="vc-quote">&ldquo;Something has gone completely wrong with how AI is sold.&rdquo;</div>
+      <div class="vc-attrib">Alex Karp, CEO, Palantir &mdash; on enterprises &ldquo;paying for tokens that create no value&rdquo; while surrendering their &ldquo;weights and alpha.&rdquo;</div>
+      <span class="vc-play"><span class="play-icon">&#9654;</span> Watch on CNBC &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<!-- ========== SECTION 1: THE PARADOX ========== -->
+<section class="block" id="paradox">
+  <div class="wrap-narrow">
+    <div class="sec-num">01 / The paradox</div>
+    <h2>Per-token prices are falling. Per-<em>query</em> costs are exploding.</h2>
+    <p>
+      The headline story is real. Andreessen Horowitz&rsquo;s widely-cited &ldquo;LLMflation&rdquo; note pegs the fall at roughly ten-fold per year: <strong>~1,000&times; over three years</strong> for equal-quality inference. Frontier list prices moved the same direction. GPT-5 launched in August 2025 at $1.25 / $10 per million tokens &mdash; less than half the launch price of GPT-4o a year earlier.
+    </p>
+    <p>
+      But that is the wrong number for the workloads that matter.
+    </p>
+    <p>
+      The reasoning and agentic paradigms that arrived in 2024 &mdash; OpenAI&rsquo;s o-series, Claude extended thinking, Gemini Deep Think &mdash; consume <strong>8 to 20&times; more output tokens per task</strong> than their predecessors, and every one of those tokens is billed at the (expensive) output rate. Artificial Analysis stopped charting reasoning models on per-token axes because the comparison no longer means anything at task level.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">$20 &rarr; $3,460</div>
+        <div class="lbl">Cost per ARC-AGI task<br>o3, low- vs high-compute</div>
+      </div>
+      <div class="stat">
+        <div class="num">5&ndash;30&times;</div>
+        <div class="lbl">Extra tokens per task<br>agentic vs single-shot<br><span style="opacity:.75">BCG, Sept 2025</span></div>
+      </div>
+      <div class="stat">
+        <div class="num">~$5</div>
+        <div class="lbl">Cost per task<br>for a human, on ARC<br><span style="opacity:.75">Chollet, Dec 2024</span></div>
+      </div>
+    </div>
+
+    <p style="margin-top: 32px;">
+      BCG&rsquo;s <em>Widening AI Value Gap</em> (September 2025) uses an insurance claim as its worked example: &ldquo;An enterprise-grade agent that processes an insurance claim by reasoning through the steps, looking up policy details and calling specialized sub-agents can use <strong>five to 30 times more tokens</strong> to complete the task.&rdquo; Enterprises already past 10 billion tokens a month are projected to cross 100 billion by 2028. Multiply either number by the volume of a US P&amp;C book &mdash; the industry crossed <strong>$1 trillion in direct premiums written</strong> in 2024 &mdash; and the inference-cost line item becomes a P&amp;L item.
+    </p>
+
+    <div class="callout">
+      <div class="clbl">And the market has started to notice</div>
+      <p>MIT&rsquo;s Project NANDA report in July 2025 &mdash; the widely-cited &ldquo;<strong>95% of enterprise GenAI pilots produce zero return</strong>&rdquo; study &mdash; drew a real methodology debate but is corroborated by independent surveys: Gartner (30% of PoCs abandoned by end-2025, &gt;40% of agentic projects canceled by 2027), McKinsey (88% of firms adopt AI; only <strong>6%</strong> see &gt;5% EBIT impact).</p>
+      <p>Goldman Sachs&rsquo; head of global equity research Jim Covello put the skeptical case plainly: <em>&ldquo;AI technology is exceptionally expensive, and to justify those costs, the technology must be able to solve complex problems, which it isn&rsquo;t designed to do.&rdquo;</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 2: WHAT'S WORKING ========== -->
+<section class="block" id="working">
+  <div class="wrap-narrow">
+    <div class="sec-num">02 / Where AI actually returns capital in insurance</div>
+    <h2>The wins are all at the <em>linguistic boundary</em>.</h2>
+    <p>
+      Look at the disclosed carrier numbers side-by-side. The pattern is unmistakable.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">$14</div>
+        <div class="lbl">Lemonade cost per claim<br>2025 vs $19 in FY24<br>LAE ratio 13% &rarr; 7%</div>
+      </div>
+      <div class="stat">
+        <div class="num">&pound;60M+</div>
+        <div class="lbl">Aviva motor-claims<br>domain savings, 2024<br><span style="opacity:.75">via McKinsey</span></div>
+      </div>
+      <div class="stat">
+        <div class="num">50,000</div>
+        <div class="lbl">Allstate ALLIE<br>claims messages drafted<br>per day</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 32px;">
+      Submission ingest. Claims triage. First-notice-of-loss automation. Customer-message generation. Document extraction from ACORD forms and loss runs. Every one of these workloads shares the same shape: <strong>the input is unstructured natural language, and the output is a structured decision or a fluent reply</strong>. That is exactly the surface area where an LLM earns its cost &mdash; where language is genuinely irreducible.
+    </p>
+    <p>
+      The workloads where LLM-only economics fall apart are the opposite shape: multi-step reasoning across policies, coverages, appetite rules, treaty terms, and portfolio position. That reasoning is structured. It should not need to be re-derived from prose on every request. That is where enterprises are paying &ldquo;for tokens that create no value.&rdquo;
+    </p>
+  </div>
+</section>
+
+<!-- ========== SECTION 3: THE AIG PROOF POINT (dark) ========== -->
+<section class="block dark" id="aig">
+  <div class="wrap-narrow">
+    <div class="sec-num">03 / The proof point</div>
+    <h2>AIG built an ontology of four million data points &mdash; and put a Lloyd&rsquo;s syndicate under it.</h2>
+    <p>
+      In December 2025, AIG announced Syndicate 2479 at Lloyd&rsquo;s &mdash; a $300M special-purpose syndicate with Amwins and Blackstone, launched underwriting on <strong>1 January 2026</strong>. In March 2026, the same architecture was extended to a strategic collaboration with McGill and Partners for up to <strong>$1.6B in specialty gross written premium</strong>. Both programs run on the same platform: <strong>an AIG-built ontology of &ldquo;more than four million industry data points,&rdquo; wired into Palantir Foundry, with Anthropic&rsquo;s Claude family reading and writing at the edges.</strong>
+    </p>
+    <p>
+      This is the ontology-first architecture at production scale, inside a top-5 P&amp;C carrier. AIG did not point an LLM at a policy repository and hope. They constructed the structured layer &mdash; risks, exposures, coverages, decisions, syndicate appetite &mdash; and gave the LLMs constrained access to it.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">+26%</div>
+        <div class="lbl">YoY submissions<br>Lexington E&amp;S, FY 2025</div>
+      </div>
+      <div class="stat">
+        <div class="num">+35%</div>
+        <div class="lbl">Submit-to-bind ratio<br>Lexington middle market</div>
+      </div>
+      <div class="stat">
+        <div class="num">500K</div>
+        <div class="lbl">Submission target<br>Lexington by 2030<br>= $4B new-business</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 32px;">
+      On the Q4 2025 earnings call in February 2026, Peter Zaffino, AIG&rsquo;s CEO, framed the outcome as a step-change:
+    </p>
+
+    <div class="pullq">
+      <div class="q">&ldquo;We&rsquo;re seeing a massive shift in our ability to process a significant submission flow way beyond our expectations without additional human capital resources. The acceleration and the opportunity is greater than I thought at Investor Day.&rdquo;</div>
+      <div class="a">Peter Zaffino &middot; CEO, AIG &middot; Q4 2025 earnings call, February 2026</div>
+    </div>
+
+    <p>
+      At AIG&rsquo;s Investor Day in April 2025, Zaffino brought both <strong>Alex Karp of Palantir and Dario Amodei of Anthropic</strong> onto the stage, moderated by CNBC&rsquo;s Sara Eisen, to walk through the architecture. It is not often that a top-5 P&amp;C CEO shares a stage with the CEOs of his ontology vendor and his foundation-model vendor to explain that this is his 2030 growth engine. It happened.
+    </p>
+
+    <p>
+      Karp&rsquo;s framing of the same architecture, from Palantir&rsquo;s Q4 2025 shareholder letter (February 2026), reads as the argument in the abstract:
+    </p>
+
+    <div class="pullq">
+      <div class="q">&ldquo;Palantir is alone in choosing to exclusively focus on scaling the operational leverage made possible by the rapid advancements of AI models, a trend that we first called &lsquo;commodity cognition&rsquo; well before others started repeating it.&rdquo;</div>
+      <div class="a">Alex Karp &middot; Palantir Q4 2025 Letter to Shareholders</div>
+    </div>
+
+    <div class="callout">
+      <div class="clbl">And AIG is not a one-off</div>
+      <p><strong>Swiss Re</strong> runs more than 200 projects and <strong>6+ petabytes</strong> of data on Foundry, with one-in-three employees active users. <strong>SOMPO Holdings</strong> runs more than <strong>10,000 agents</strong> on Palantir for dynamic pricing, quoting, and risk flagging. Palantir was named a Leader in the Forrester Wave: AI/ML Platforms, Q3 2024, on the strength of &ldquo;decision-centric Ontology.&rdquo; The pattern is converging.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 4: NAMED ARCHITECTURE ========== -->
+<section class="block" id="named">
+  <div class="wrap-narrow">
+    <div class="sec-num">04 / The architecture has a name</div>
+    <h2>What Karp calls the <em>application layer</em>, the field calls <em>neurosymbolic</em>.</h2>
+    <p>
+      The academic name for the pattern is neurosymbolic AI: a symbolic core &mdash; ontology, rules, explicit reasoning &mdash; with neural models used at the edges where language and pattern-matching are irreducible. It is not new. What is new is the industrial evidence.
+    </p>
+    <p>
+      Every serious reasoning benchmark being won in 2024&ndash;2025 was won by a hybrid, not by a pure LLM. DeepMind&rsquo;s <strong>AlphaGeometry</strong> solved 25 of 30 IMO-level geometry problems by pairing a language model with a symbolic deduction engine (Nature, January 2024). <strong>AlphaProof + AlphaGeometry 2</strong> hit IMO silver-medal level in 2024 by handing formalized problems to a Lean symbolic engine that solved one within <em>nineteen seconds</em>. DeepMind&rsquo;s <strong>FunSearch</strong> discovered new mathematical results on the cap-set and bin-packing problems by combining an LLM with an automated evaluator (Nature, December 2023). Every one of these is a symbolic engine with an LLM in the loop, not the reverse.
+    </p>
+    <p>
+      The independent voices making the case in public are named and specific. Gary Marcus: <em>&ldquo;The biggest advance since the LLM is neurosymbolic.&rdquo;</em> François Chollet, on the o3 result: it &ldquo;comes at a steep cost, and wouldn&rsquo;t quite be economical yet &mdash; you could pay a human to solve ARC-AGI tasks for roughly $5 per task.&rdquo; Yann LeCun on pure scaling: a dead end. Stephen Wolfram on ChatGPT + Wolfram|Alpha as the first large-scale statistical + symbolic system.
+    </p>
+    <p>
+      The analyst class has caught up. Gartner&rsquo;s 2025 Hype Cycle for AI explicitly names Neurosymbolic AI and Composite AI as emerging paradigms for regulated, high-stakes decisions.
+    </p>
+    <p class="note">
+      Honest gap flagged: no public source states &ldquo;insurance NSAI is X% cheaper than LLM-only in production.&rdquo; The insurance-specific cost math is a composition of three cited principles &mdash; the o3 cost curve, symbolic execution at near-zero marginal cost, and hybrid systems&rsquo; benchmark efficiency &mdash; not a single vendor headline number.
+    </p>
+  </div>
+</section>
+
+<!-- ========== SECTION 5: THE PAYOFF (dark) ========== -->
+<section class="block dark" id="payoff">
+  <div class="wrap-narrow">
+    <div class="sec-num">05 / The payoff</div>
+    <h2>You don&rsquo;t have to <em>rent tokens</em> forever.</h2>
+    <p>
+      Here is the argument, condensed. Per-token deflation does not solve the cost problem because the workloads that create value are exactly the ones whose token count is exploding. Enterprises that put an LLM at the center of a decision workflow surrender two things at once: money to the model vendor, and structural leverage over their own reasoning.
+    </p>
+    <p>
+      The alternative &mdash; the one AIG chose, the one Karp has articulated in the loudest public form, the one DeepMind and Wolfram have proved out on the hardest benchmarks &mdash; is to invert the architecture. Put the ontology and the rules at the center. Invoke the LLM only at the linguistic boundary, where language is irreducible. Pay for tokens once, on the way in and on the way out. Compound the value of the ontology over years, on your balance sheet, not the model vendor&rsquo;s.
+    </p>
+    <p>
+      That is what neurosymbolic AI is. It is what NSAI stands for. And, as of the first quarter of 2026, it is the architecture that a top-5 P&amp;C carrier is running a live Lloyd&rsquo;s syndicate on.
+    </p>
+  </div>
+</section>
+
+<!-- ========== SOURCES ========== -->
+<section class="sources">
+  <div class="wrap-narrow">
+    <h3>Sources</h3>
+    <ol>
+      <li>Guido Appenzeller, <em>Welcome to LLMflation</em>. <span class="pub">Andreessen Horowitz, 12 Nov 2024.</span> <a href="https://a16z.com/llmflation-llm-inference-cost/" target="_blank" rel="noopener">a16z.com/llmflation-llm-inference-cost</a></li>
+      <li>OpenAI, <em>New models and developer products announced at DevDay</em>. <span class="pub">OpenAI, 6 Nov 2023.</span> <a href="https://openai.com/index/new-models-and-developer-products-announced-at-devday/" target="_blank" rel="noopener">openai.com</a></li>
+      <li>Kyle Wiggers, <em>OpenAI priced GPT-5 so low, it may spark a price war</em>. <span class="pub">TechCrunch, 8 Aug 2025.</span> <a href="https://techcrunch.com/2025/08/08/openai-priced-gpt-5-so-low-it-may-spark-a-price-war/" target="_blank" rel="noopener">techcrunch.com</a></li>
+      <li>François Chollet et al., <em>OpenAI o3 Breakthrough High Score on ARC-AGI-Pub</em>. <span class="pub">ARC Prize, 20 Dec 2024.</span> <a href="https://arcprize.org/blog/oai-o3-pub-breakthrough" target="_blank" rel="noopener">arcprize.org</a></li>
+      <li>Simon Willison, <em>OpenAI o3 breakthrough high score on ARC-AGI-PUB</em>. <span class="pub">simonwillison.net, 20 Dec 2024.</span> <a href="https://simonwillison.net/2024/Dec/20/openai-o3-breakthrough/" target="_blank" rel="noopener">simonwillison.net</a></li>
+      <li>The Batch, <em>Reasoning LLMs Are Pricey to Test</em>. <span class="pub">DeepLearning.AI, 9 Apr 2025.</span> <a href="https://www.deeplearning.ai/the-batch/reasoning-llms-are-pricey-to-test" target="_blank" rel="noopener">deeplearning.ai/the-batch</a></li>
+      <li>Epoch AI, <em>LLM inference prices have fallen rapidly but unequally across tasks</em>. <span class="pub">Epoch AI, 2025.</span> <a href="https://epoch.ai/data-insights/llm-inference-price-trends" target="_blank" rel="noopener">epoch.ai</a></li>
+      <li>BCG, <em>The Widening AI Value Gap</em>. <span class="pub">Boston Consulting Group, Sept 2025.</span> <a href="https://media-publications.bcg.com/The-Widening-AI-Value-Gap-Sept-2025.pdf" target="_blank" rel="noopener">bcg.com</a> &mdash; source of the insurance-claim 5&ndash;30&times; token example.</li>
+      <li>Aditya Challapally et al., <em>The GenAI Divide: State of AI in Business 2025</em>. <span class="pub">MIT Project NANDA, July 2025.</span> <a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener">mlq.ai (PDF)</a></li>
+      <li>Gartner, <em>Gartner Predicts 30% of Generative AI Projects Will Be Abandoned After Proof of Concept by End of 2025</em>. <span class="pub">Gartner, 29 Jul 2024.</span> <a href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener">gartner.com</a></li>
+      <li>McKinsey Global Institute, <em>The State of AI</em> (2025 edition). <span class="pub">McKinsey &amp; Company, Nov 2025.</span> <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener">mckinsey.com</a></li>
+      <li>Jim Covello, <em>Gen AI: Too Much Spend, Too Little Benefit?</em> <span class="pub">Goldman Sachs <em>Top of Mind</em>, 25 Jun 2024.</span> <a href="https://www.goldmansachs.com/insights/top-of-mind/gen-ai-too-much-spend-too-little-benefit" target="_blank" rel="noopener">goldmansachs.com</a></li>
+      <li>McKinsey, <em>The future of AI for the insurance industry</em>. <span class="pub">McKinsey &amp; Company, Aug 2024.</span> <a href="https://www.mckinsey.com/industries/financial-services/our-insights/the-future-of-ai-in-the-insurance-industry" target="_blank" rel="noopener">mckinsey.com</a> &mdash; source of Aviva &pound;60M+ figure.</li>
+      <li>Lemonade, Q3&rsquo;25 Shareholder Letter. <span class="pub">Lemonade Inc., SEC 8-K, Nov 2025.</span> <a href="https://www.sec.gov/Archives/edgar/data/0001691421/000169142125000146/lmndshareholderletterq32.htm" target="_blank" rel="noopener">sec.gov</a> &mdash; $14 per claim, LAE 7%.</li>
+      <li>Velocity AI Partners, <em>Allstate ALLIE case study</em>. <span class="pub">Carrier Management / Velocity AI, 2025.</span> <a href="https://insights.velocityaipartners.co/case-studies/allstate-allie-ai-insurance-claims" target="_blank" rel="noopener">velocityaipartners.co</a></li>
+      <li>Insurance Journal, <em>AIG Partners With Amwins, Blackstone to Launch Lloyd&rsquo;s Syndicate Using Palantir</em>. <span class="pub">18 Dec 2025.</span> <a href="https://www.insurancejournal.com/news/national/2025/12/18/851716.htm" target="_blank" rel="noopener">insurancejournal.com</a></li>
+      <li>Amwins, <em>Amwins and AIG to launch Syndicate 2479 at Lloyd&rsquo;s</em>. <span class="pub">Amwins press release, 18 Dec 2025.</span> <a href="https://www.amwins.com/who-we-are/newsroom/amwins-and-aig-to-launch-syndicate-2479-at-lloyd-s" target="_blank" rel="noopener">amwins.com</a></li>
+      <li>Coverager, <em>AIG, Amwins and Blackstone to launch Lloyd&rsquo;s Syndicate 2479</em>. <span class="pub">Coverager, 18 Dec 2025.</span> <a href="https://coverager.com/aig-amwins-and-blackstone-to-launch-lloyds-syndicate-2479/" target="_blank" rel="noopener">coverager.com</a> &mdash; source of the four-million-data-point ontology description.</li>
+      <li>Business Wire, <em>McGill and Partners and AIG Launch Long-Term Strategic Collaboration</em>. <span class="pub">16 Mar 2026.</span> <a href="https://www.businesswire.com/news/home/20260316960625/en/" target="_blank" rel="noopener">businesswire.com</a></li>
+      <li>AIG, <em>Investor Day 2025</em> presentation. <span class="pub">AIG Investor Relations, Apr 2025.</span> <a href="https://www.aig.com/content/dam/aig/america-canada/us/documents/investor-relations/aig_investor_day_2025__presentation.pdf" target="_blank" rel="noopener">aig.com (PDF)</a></li>
+      <li>Insurance Journal, <em>AIG&rsquo;s Zaffino: Outcomes From AI Use Went From &lsquo;Aspirational&rsquo; to &lsquo;Beyond Expectations&rsquo;</em>. <span class="pub">13 Feb 2026.</span> <a href="https://www.insurancejournal.com/news/national/2026/02/13/858033.htm" target="_blank" rel="noopener">insurancejournal.com</a></li>
+      <li>Palantir, <em>Q4 2025 Letter to Shareholders</em>. <span class="pub">Palantir Technologies, 2 Feb 2026.</span> <a href="https://www.palantir.com/q4-2025-letter/en/" target="_blank" rel="noopener">palantir.com</a> &mdash; &ldquo;commodity cognition.&rdquo;</li>
+      <li>CNBC, <em>Palantir CEO Alex Karp says &lsquo;something has gone completely wrong&rsquo; with how AI is sold</em>. <span class="pub">CNBC Squawk Box, 1 Jul 2026.</span> <a href="https://www.cnbc.com/video/2026/07/01/palantir-ceo-alex-karp-says-something-has-gone-completely-wrong-with-how-ai-is-sold.html" target="_blank" rel="noopener">cnbc.com/video</a></li>
+      <li>Palantir Impact, <em>Swiss Re: Identifying and Mitigating Risks</em>. <a href="https://www.palantir.com/impact/swiss-re/" target="_blank" rel="noopener">palantir.com/impact/swiss-re</a></li>
+      <li>Trieu H. Trinh et al., <em>Solving olympiad geometry without human demonstrations</em>. <span class="pub">Nature, 17 Jan 2024.</span> <a href="https://www.nature.com/articles/s41586-023-06747-5" target="_blank" rel="noopener">nature.com</a> &mdash; AlphaGeometry.</li>
+      <li>Google DeepMind, <em>AI achieves silver-medal standard solving International Mathematical Olympiad problems</em>. <span class="pub">DeepMind blog, 25 Jul 2024.</span> <a href="https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/" target="_blank" rel="noopener">deepmind.google</a></li>
+      <li>Bernardino Romera-Paredes et al., <em>Mathematical discoveries from program search with large language models</em>. <span class="pub">Nature, 14 Dec 2023.</span> <a href="https://www.nature.com/articles/s41586-023-06924-6" target="_blank" rel="noopener">nature.com</a> &mdash; FunSearch.</li>
+      <li>Gary Marcus, <em>AlphaProof, AlphaGeometry, ChatGPT, and why the future of AI is neurosymbolic</em>. <span class="pub">Marcus on AI, 26 Jul 2024.</span> <a href="https://garymarcus.substack.com/p/alphaproof-alphageometry-chatgpt" target="_blank" rel="noopener">garymarcus.substack.com</a></li>
+      <li>Stephen Wolfram, <em>ChatGPT Gets Its &ldquo;Wolfram Superpowers!&rdquo;</em> <span class="pub">Stephen Wolfram Writings, 23 Mar 2023.</span> <a href="https://writings.stephenwolfram.com/2023/03/chatgpt-gets-its-wolfram-superpowers/" target="_blank" rel="noopener">writings.stephenwolfram.com</a></li>
+      <li>Gartner, <em>Hype Cycle for Artificial Intelligence, 2025</em>. <span class="pub">Gartner, 2025.</span> <a href="https://www.gartner.com/en/articles/hype-cycle-for-artificial-intelligence" target="_blank" rel="noopener">gartner.com</a> &mdash; explicit naming of Neurosymbolic AI + Composite AI.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">NSAI for Insurance &middot; <a href="index.html">Overview</a> &middot; <a href="pc-deepdive.html">P&amp;C Deep Dive</a> &middot; <a href="lifedemo.html">L&amp;A Demo</a> &middot; <a href="https://lloyds.nsai4insurance.com/lloyds/">Lloyd&rsquo;s</a></div>
+</footer>
+
+</body>
+</html>
