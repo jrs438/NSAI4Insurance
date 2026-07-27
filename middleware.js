@@ -13,7 +13,11 @@ function isPublic(pathname) {
     pathname === '/login.html' ||
     pathname === '/login' ||
     pathname.startsWith('/api/auth/') ||
-    pathname === '/robots.txt'
+    pathname === '/robots.txt' ||
+    // Publicly-shareable pages. Remove entries here to put a page back behind
+    // the login gate. Page-level <meta name="robots" content="noindex"> keeps
+    // them out of search results.
+    pathname === '/ai-economics.html'
   );
 }
 
