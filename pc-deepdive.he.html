@@ -2789,22 +2789,22 @@
     <div class="ont-layout">
       <div class="ont-text">
         <p class="def-lede">
-          Think of an ontology as the <em>vocabulary and grammar</em> of your business, written in a form a computer can reason over.
+          חשבו על אונטולוגיה בתור <em>אוצר המילים והדקדוק</em> של העסק שלכם, כתובה בצורה שמחשב יכול להסיק עליה.
         </p>
         <p>
-          When a small business owner says &ldquo;I run a handyman business in Phoenix and we mostly do small jobs for landlords &mdash; bathrooms, kitchens, sometimes I&rsquo;ll patch leaks or replace a few shingles,&rdquo; every phrase is loaded with meaning. &ldquo;Handyman&rdquo; is a self-classification. &ldquo;Bathrooms&rdquo; implies light interior repair. &ldquo;Patch leaks or replace a few shingles&rdquo; implies height work &mdash; a different activity class with a different appetite gate and a different exposure profile. An underwriter&rsquo;s brain decomposes this automatically. An ontology makes the decomposition explicit and machine-readable.
+          כשבעל עסק קטן אומר ״אני מנהל עסק <span dir="ltr">handyman</span> בפיניקס ואנחנו בעיקר עושים עבודות קטנות לבעלי דירות — חדרי אמבטיה, מטבחים, לפעמים אני מטלה דלפים או מחליף כמה רעפים״ — כל ביטוי טעון משמעות. ״<span dir="ltr">Handyman</span>״ הוא סיווג עצמי. ״חדרי אמבטיה״ מרמז על תיקון פנים קל. ״לטלא דלפים או להחליף כמה רעפים״ מרמז על עבודה בגובה — סיווג פעילות אחר עם שער תיאבון אחר ופרופיל חשיפה אחר. המוח של החתם מפרק את זה אוטומטית. אונטולוגיה הופכת את הפירוק למפורש וקריא למכונה.
         </p>
         <p>
-          An ontology names the <em>classes</em> (Business, Activity, Exposure, AppetiteGate, RatingClass, CustomerMessage), the <em>properties</em> (carrier activity class, hazard level, revenue allocation), and the <em>relationships</em> (a Business <em>performs</em> an Activity, which <em>maps to</em> an Exposure, which is <em>rated by</em> a Class, which is <em>gated by</em> an Appetite rule, which surfaces in a Customer Message).
+          אונטולוגיה מגדירה את <em>המחלקות</em> (<span dir="ltr">Business, Activity, Exposure, AppetiteGate, RatingClass, CustomerMessage</span>), את <em>המאפיינים</em> (סיווג פעילות של המבטח, רמת סכנה, הקצאת הכנסה), ואת <em>הקשרים</em> (עסק <em>מבצע</em> פעילות, ש<em>ממופה ל</em>חשיפה, ש<em>מתומחרת על ידי</em> סיווג, ש<em>עוברת בשער</em> של חוק תיאבון, ש<em>מופיע ב</em>מסר ללקוח).
         </p>
         <div class="callout">
-          Without an ontology, the LLM knows the <em>words</em>. With an ontology, the system knows the <em>meaning</em>.
+          ללא אונטולוגיה, ה־<span dir="ltr">LLM</span> יודע את <em>המילים</em>. עם אונטולוגיה, המערכת יודעת את <em>המשמעות</em>.
         </div>
         <p>
-          A public code system is not the underwriting ontology &mdash; it is a reference. The ontology decomposes the customer&rsquo;s description into carrier activity classes and exposure classes first, then maps those to rating, appetite, coverage, and messaging logic. The same activity decomposition is shared across underwriting and claims, so a system that prices a risk can also see how risks with a similar activity mix have actually behaved.
+          מערכת קודים ציבורית איננה האונטולוגיה החיתומית — היא אסמכתא. האונטולוגיה קודם מפרקת את תיאור הלקוח לסיווגי פעילות של המבטח ולסיווגי חשיפה, ורק אז ממפה אותם ללוגיקת תמחור, תיאבון, כיסוי ותקשורת. אותו פירוק פעילות משותף בין חיתום ותביעות, כך שמערכת שמתמחרת סיכון יכולה גם לראות איך סיכונים עם תמהיל פעילויות דומה באמת התנהגו.
         </p>
         <p>
-          Once the world is modeled this way, rules become composable and inheritable. A rule attached to <em>Height_Work_Exposure</em> automatically applies to roof-surface work, gutter installation, exterior painting from ladders, and tree trimming &mdash; without re-authoring. Your appetite guide becomes a small, maintainable concept hierarchy.
+          ברגע שהעולם ממודל כך, חוקים הופכים ניתנים להרכבה ולירושה. חוק המחובר ל־<em><span dir="ltr">Height_Work_Exposure</span></em> חל אוטומטית על עבודות משטח גג, התקנת מרזבים, צביעה חיצונית מסולם, וגיזום עצים — בלי לכתוב מחדש. מדריך התיאבון שלכם הופך להיררכיית מושגים קטנה וניתנת לתחזוקה.
         </p>
       </div>
 
