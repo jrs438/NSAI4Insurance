@@ -17,7 +17,10 @@ function isPublic(pathname) {
     // Publicly-shareable pages. Remove entries here to put a page back behind
     // the login gate. Page-level <meta name="robots" content="noindex"> keeps
     // them out of search results.
-    pathname === '/ai-economics.html'
+    pathname === '/ai-economics.html' ||
+    // Hebrew review prototypes for the Israel team — remove to re-gate.
+    pathname === '/index.he.html' ||
+    pathname === '/pc-deepdive.he.html'
   );
 }
 
