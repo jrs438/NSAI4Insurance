@@ -2681,21 +2681,28 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Preserve English direction for the interactive demo widget so JS-rendered
-     content and rule IDs don't render backwards. */
+  /* Preserve English direction ONLY for the truly interactive demo widget
+     containers (live-demo lanes, submission chat bubble, scorecard, guided-
+     walkthrough bar) and for the code-like traces / rule tables inside the
+     A/B/C explainer panels. The panel headings, intros, and callouts render
+     as normal RTL Hebrew. */
   html[lang="he"] .live-demo,
   html[lang="he"] .live-demo *,
   html[lang="he"] .submission,
   html[lang="he"] .submission *,
-  html[lang="he"] .process-panel,
-  html[lang="he"] .process-panel *,
   html[lang="he"] .scorecard,
   html[lang="he"] .scorecard *,
   html[lang="he"] .guide-bar,
   html[lang="he"] .guide-bar *,
-  html[lang="he"] .process-tabs {
+  html[lang="he"] .trace,
+  html[lang="he"] .trace *,
+  html[lang="he"] .mini-ont-label,
+  html[lang="he"] .rules,
+  html[lang="he"] .rules *,
+  html[lang="he"] code {
     direction: ltr;
     text-align: left;
+    unicode-bidi: isolate;
   }
 
   /* But the section HEADING (03 / DEMO) and intro paragraph OUTSIDE those
@@ -2909,18 +2916,18 @@
     <div class="why-grid">
       <div class="why-cell">
         <div class="why-num">I.</div>
-        <h4>Meaning, not matching</h4>
-        <p>An LLM might see &ldquo;handyman&rdquo; and &ldquo;home services&rdquo; as similar strings. An ontology knows that the activities described &mdash; bathroom repair, water heater replacement, shingle patching &mdash; each map to a specific carrier activity class with specific appetite, rating, and exposure attributes. &ldquo;Handyman&rdquo; is the customer&rsquo;s self-classification. The ontology operates on what they actually do.</p>
+        <h4>משמעות, לא התאמה</h4>
+        <p><span dir="ltr">LLM</span> עלול לראות ״<span dir="ltr">handyman</span>״ ו״<span dir="ltr">home services</span>״ כמחרוזות דומות. אונטולוגיה יודעת שהפעילויות המתוארות — תיקון חדרי אמבטיה, החלפת דוד מים חמים, טלאי רעפים — כל אחת ממופה לסיווג פעילות ספציפי של המבטח עם מאפייני תיאבון, תמחור וחשיפה ספציפיים. ״<span dir="ltr">Handyman</span>״ הוא הסיווג העצמי של הלקוח. האונטולוגיה פועלת על מה שהם באמת עושים.</p>
       </div>
       <div class="why-cell">
         <div class="why-num">II.</div>
-        <h4>Rules follow concepts</h4>
-        <p>A rule attached to <em>Height_Work_Exposure</em> automatically applies to roof-surface work, gutter installation, exterior painting from ladders, and tree trimming &mdash; without re-authoring. Your appetite guide becomes a small, maintainable concept hierarchy instead of a sprawling spreadsheet of class-by-class rules.</p>
+        <h4>חוקים עוקבים אחר מושגים</h4>
+        <p>חוק המחובר ל־<em><span dir="ltr">Height_Work_Exposure</span></em> חל אוטומטית על עבודות משטח גג, התקנת מרזבים, צביעה חיצונית מסולם, וגיזום עצים — בלי לכתוב מחדש. מדריך התיאבון שלכם הופך להיררכיית מושגים קטנה וניתנת לתחזוקה במקום גיליון אלקטרוני משתרע של חוקים סיווג-אחר-סיווג.</p>
       </div>
       <div class="why-cell">
         <div class="why-num">III.</div>
-        <h4>Cross-domain consistency</h4>
-        <p>Underwriting and claims share the same ontology. The activities that price the risk are the same activities that index historical claims. The system doesn&rsquo;t need a separate &ldquo;claims similarity&rdquo; feature &mdash; it just reads from the structured world both functions share. One described activity resolves to one decomposition everywhere &mdash; the foundation of a DTC flow that doesn&rsquo;t leak premium and a customer message that explains itself.</p>
+        <h4>עקביות חוצת-דומיין</h4>
+        <p>חיתום ותביעות חולקים את אותה אונטולוגיה. הפעילויות שמתמחרות את הסיכון הן אותן פעילויות שמאנדקסות תביעות היסטוריות. המערכת לא זקוקה לפיצ׳ר נפרד של ״דמיון תביעות״ — היא פשוט קוראת מהעולם המובנה ששתי הפונקציות חולקות. פעילות מתוארת אחת נפתרת לפירוק אחד בכל מקום — הבסיס לזרם <span dir="ltr">DTC</span> שלא מדליף פרמיה ולמסר ללקוח שמסביר את עצמו.</p>
       </div>
     </div>
   </div>
@@ -3122,65 +3129,65 @@
     <!-- PROCESS TABS -->
     <div class="process-tabs">
       <button class="process-tab active" data-tab="baseline" onclick="switchTab('baseline')">
-        <span class="tab-num">A / BASELINE</span>
-        <span class="tab-title">Traditional DTC Intake</span>
-        <span class="tab-sub">How direct platforms handle this today</span>
+        <span class="tab-num">A / בסיסי</span>
+        <span class="tab-title">קליטת <span dir="ltr">DTC</span> מסורתית</span>
+        <span class="tab-sub">איך פלטפורמות ישירות מטפלות בזה היום</span>
       </button>
       <button class="process-tab" data-tab="llm" onclick="switchTab('llm')">
-        <span class="tab-num">B / RAG + LLM</span>
-        <span class="tab-title">Retrieval-Augmented Generation</span>
-        <span class="tab-sub">Retrieve &rarr; inject &rarr; generate</span>
+        <span class="tab-num">B / <span dir="ltr">RAG + LLM</span></span>
+        <span class="tab-title">יצירה מוגברת-אחזור</span>
+        <span class="tab-sub">אחזר ← הזרק ← ייצר</span>
       </button>
       <button class="process-tab" data-tab="nsai" onclick="switchTab('nsai')">
-        <span class="tab-num">C / NEUROSYMBOLIC</span>
-        <span class="tab-title">Activity Decomposition + Reasoner</span>
-        <span class="tab-sub">Extract &rarr; decompose &rarr; rule &rarr; explain &rarr; reason</span>
+        <span class="tab-num">C / נוירו-סימבולי</span>
+        <span class="tab-title">פירוק פעילות + מסיק</span>
+        <span class="tab-sub">חלץ ← פרק ← החל חוק ← הסבר ← הסק</span>
       </button>
     </div>
 
     <!-- PANEL A: BASELINE -->
     <div class="process-panel active" id="panel-baseline">
       <p class="panel-intro">
-        How DTC platforms typically handle this today. Self-classification flows directly into a rate band; the customer can bind in the same session, with no decomposition of the activities they described.
+        איך פלטפורמות <span dir="ltr">DTC</span> מטפלות בזה בדרך כלל היום. סיווג עצמי זורם ישירות לרצועת תעריפים; הלקוח יכול לכרוך באותו סשן, בלי שום פירוק של הפעילויות שהוא תיאר.
       </p>
 
       <div class="flow">
         <div class="flow-step">
-          <div class="step-n">STEP 01</div>
-          <strong>Self-classification</strong>
-          <p>Customer picks &ldquo;Handyman&rdquo; from a business-type dropdown.</p>
+          <div class="step-n">שלב 01</div>
+          <strong>סיווג עצמי</strong>
+          <p>הלקוח בוחר ״<span dir="ltr">Handyman</span>״ מרשימה נפתחת של סוגי עסק.</p>
         </div>
         <div class="flow-step">
-          <div class="step-n">STEP 02</div>
-          <strong>Revenue tier</strong>
-          <p>Customer enters annual revenue; placed in a small-business rate band.</p>
+          <div class="step-n">שלב 02</div>
+          <strong>רצועת הכנסה</strong>
+          <p>הלקוח מזין הכנסה שנתית; מוצב ברצועת תעריפים של עסק קטן.</p>
         </div>
         <div class="flow-step">
-          <div class="step-n">STEP 03</div>
-          <strong>Auto-eligibility</strong>
-          <p>Platform checks the selected class against appetite; handyman is in appetite.</p>
+          <div class="step-n">שלב 03</div>
+          <strong>זכאות אוטומטית</strong>
+          <p>הפלטפורמה בודקת את הסיווג הנבחר מול התיאבון; <span dir="ltr">handyman</span> בתיאבון.</p>
         </div>
         <div class="flow-step">
-          <div class="step-n">STEP 04</div>
-          <strong>Instant quote</strong>
-          <p>Standard handyman BOP with default limits and deductibles.</p>
+          <div class="step-n">שלב 04</div>
+          <strong>הצעת מחיר מיידית</strong>
+          <p>חבילת <span dir="ltr">BOP</span> סטנדרטית ל־<span dir="ltr">handyman</span> עם מגבלות והשתתפויות עצמיות ברירת מחדל.</p>
         </div>
         <div class="flow-step">
-          <div class="step-n">STEP 05</div>
-          <strong>One-click bind</strong>
-          <p>Customer reviews and binds the quote in the same session.</p>
+          <div class="step-n">שלב 05</div>
+          <strong>כריכה בקליק</strong>
+          <p>הלקוח סוקר וכורך את ההצעה באותו סשן.</p>
         </div>
       </div>
 
       <div class="decision">
-        <div class="decision-label">Observed Pain Points</div>
-        <h4>Fast, frictionless, optimized for conversion &mdash; not for accuracy</h4>
-        <p>The customer&rsquo;s self-classification is the single source of truth. If &ldquo;handyman&rdquo; hides plumbing, roof-surface work, or any height exposure, the wrong class is bound, the wrong rate is applied, and the customer&rsquo;s coverage has gaps that only surface at claim time. Industry research estimates this misclassification produces billions in premium leakage across the small commercial segment.</p>
+        <div class="decision-label">נקודות כאב שנצפו</div>
+        <h4>מהיר, ללא חיכוך, ממוטב להמרה — לא לדיוק</h4>
+        <p>הסיווג העצמי של הלקוח הוא מקור האמת היחיד. אם ״<span dir="ltr">handyman</span>״ מסתיר עבודות אינסטלציה, עבודות משטח גג, או כל חשיפה לגובה — הסיווג הלא נכון נכרך, התעריף הלא נכון מוחל, ולכיסוי של הלקוח יש פערים שיצוצו רק בזמן תביעה. מחקר תעשייתי מעריך שסיווג שגוי כזה מייצר מיליארדים של דליפת פרמיה על פני מגזר המסחרי הקטן.</p>
         <ul class="issue-list">
-          <li>Self-classification is unverified</li>
-          <li>No decomposition of described activities</li>
-          <li>Speed optimizes conversion, not accuracy</li>
-          <li>Coverage gaps surface at claim, not at bind</li>
+          <li>סיווג עצמי אינו מאומת</li>
+          <li>ללא פירוק של הפעילויות המתוארות</li>
+          <li>מהירות ממטבת המרה, לא דיוק</li>
+          <li>פערי כיסוי צצים בתביעה, לא בכריכה</li>
         </ul>
       </div>
     </div>
@@ -3188,7 +3195,7 @@
     <!-- PANEL B: RAG + LLM -->
     <div class="process-panel" id="panel-llm">
       <p class="panel-intro">
-        The realistic LLM-fronted deployment today: the appetite guide, rate manual, and coverage defaults are indexed for retrieval. The LLM is competent and conversion-optimized &mdash; the failure here is structural, not stupid.
+        הפריסה הריאלית עם חזית <span dir="ltr">LLM</span> היום: מדריך התיאבון, ספר התעריפים, וברירות המחדל של הכיסוי מאונדקסים לאחזור. ה־<span dir="ltr">LLM</span> מוכשר וממוטב-המרה — הכשל כאן הוא מבני, לא טיפשי.
       </p>
 
       <div class="trace">
@@ -3211,25 +3218,25 @@
 
       <!-- LLM Customer message -->
       <div style="margin-top: 20px; padding: 22px 26px; background: #fff; border: 1px solid rgba(28,37,48,0.18); border-left: 3px solid var(--llm); border-radius: 4px; font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; line-height: 1.6; color: var(--ink-2);">
-        <div style="font-family: 'JetBrains Mono', monospace; font-style: normal; font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 12px;">Customer message &middot; auto-generated by LLM</div>
-        &ldquo;Hi Marcos! Great news &mdash; we can quote your handyman business right now. Your annual premium is $1,840 with $1M/$2M general liability and $10K tool coverage. Click below to bind today.&rdquo;
+        <div style="font-family: 'JetBrains Mono', monospace; font-style: normal; font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 12px;">מסר ללקוח · נוצר אוטומטית על ידי <span dir="ltr">LLM</span></div>
+        ״שלום <span dir="ltr">Marcos</span>! חדשות טובות — אנחנו יכולים לתת הצעת מחיר לעסק ה־<span dir="ltr">handyman</span> שלך עכשיו. הפרמיה השנתית שלך היא <span dir="ltr">$1,840</span> עם אחריות כללית של <span dir="ltr">$1M/$2M</span> וכיסוי כלי עבודה של <span dir="ltr">$10K</span>. לחץ למטה כדי לכרוך היום.״
       </div>
 
       <div class="decision llm">
-        <div class="decision-label">What RAG got right &mdash; and what it missed</div>
-        <h4>Competent, fluent, conversion-optimized &mdash; and pricing the wrong risk profile.</h4>
-        <p><strong>What RAG got right:</strong></p>
+        <div class="decision-label">מה <span dir="ltr">RAG</span> עשה נכון — ומה הוא פספס</div>
+        <h4>מוכשר, שוטף, ממוטב-המרה — ומתמחר את פרופיל הסיכון הלא נכון.</h4>
+        <p><strong>מה <span dir="ltr">RAG</span> עשה נכון:</strong></p>
         <ul class="issue-list">
-          <li>Correctly identified the business as a small handyman operation</li>
-          <li>Found the relevant appetite and rate references</li>
-          <li>Produced a professional, fluent quote ready to bind</li>
+          <li>זיהה נכון את העסק כפעילות <span dir="ltr">handyman</span> קטנה</li>
+          <li>מצא את הפניות התיאבון והתעריף הרלוונטיות</li>
+          <li>הפיק הצעת מחיר מקצועית ושוטפת מוכנה לכריכה</li>
         </ul>
-        <p style="margin-top: 18px;"><strong>What RAG missed:</strong></p>
+        <p style="margin-top: 18px;"><strong>מה <span dir="ltr">RAG</span> פספס:</strong></p>
         <ul class="issue-list">
-          <li>The leak patching and shingle replacement is roof-surface work &mdash; a different carrier activity class with height/fall exposure that falls outside standard DTC handyman appetite</li>
-          <li>The water heater work involves plumbing exposure (water damage to landlord property) that the standard handyman BOP doesn&rsquo;t fully address</li>
-          <li>The customer&rsquo;s coverage has gaps that will only surface at claim time</li>
-          <li>The premium is competitive &mdash; but it&rsquo;s competitive because it&rsquo;s pricing the wrong risk profile</li>
+          <li>טלאי הדלפים והחלפת הרעפים היא עבודת משטח גג — סיווג פעילות אחר של המבטח עם חשיפה לגובה/נפילה שנופל מחוץ לתיאבון <span dir="ltr">handyman</span> סטנדרטי של <span dir="ltr">DTC</span></li>
+          <li>עבודת דוד המים חמים כרוכה בחשיפת אינסטלציה (נזקי מים לנכס של בעל הבית) שחבילת ה־<span dir="ltr">BOP</span> הסטנדרטית של <span dir="ltr">handyman</span> לא מטפלת בה במלואה</li>
+          <li>לכיסוי של הלקוח יש פערים שיצוצו רק בזמן תביעה</li>
+          <li>הפרמיה תחרותית — אבל היא תחרותית כי היא מתמחרת את פרופיל הסיכון הלא נכון</li>
         </ul>
       </div>
     </div>
@@ -3237,11 +3244,11 @@
     <!-- PANEL C: NSAI -->
     <div class="process-panel" id="panel-nsai">
       <p class="panel-intro">
-        The neurosymbolic system runs the submission through five stages: <em>neural extraction</em> of the customer&rsquo;s described activities, <em>activity decomposition</em> into the shared ontology, <em>rule-engine evaluation</em> of appetite and coverage rules, <em>neural explanation</em> of the derived decision, and <em>cross-domain reasoning</em> across pricing, claims-similarity, and customer-communication ontologies to compose the final quote and message. Every step is inspectable.
+        המערכת הנוירו-סימבולית מריצה את ההצעה דרך חמישה שלבים: <em>חילוץ נוירוני</em> של הפעילויות שהלקוח תיאר, <em>פירוק פעילות</em> לאונטולוגיה המשותפת, <em>הערכת מנוע חוקים</em> של חוקי תיאבון וכיסוי, <em>הסבר נוירוני</em> של ההחלטה שנגזרה, ו<em>הסקה חוצת-דומיין</em> על פני אונטולוגיות תמחור, דמיון-תביעות, ותקשורת עם לקוחות כדי לחבר את ההצעה והמסר הסופיים. כל שלב ניתן לבדיקה.
       </p>
 
       <div class="mini-ont">
-        <div class="mini-ont-label">Stage 01 / Neural extraction &mdash; customer message parsed into ontology instances</div>
+        <div class="mini-ont-label">שלב 01 / חילוץ נוירוני — מסר הלקוח מנותח למופעי אונטולוגיה</div>
         <div class="trace" style="margin-top:0; border:none; background:transparent;">
           <div class="trace-body" style="padding: 8px 0;">
             <div class="trace-line"><span class="num">01</span><span class="code"><span class="trace-key">CustomerMessage</span>(id=M1, channel=<span class="trace-val">"DTC_web"</span>, submitted=2026-05-19)</span></div>
@@ -3265,7 +3272,7 @@
       </div>
 
       <div class="mini-ont">
-        <div class="mini-ont-label">Stage 02 / Activity decomposition &amp; ontology &mdash; each described activity mapped to its carrier class and exposure</div>
+        <div class="mini-ont-label">שלב 02 / פירוק פעילות ואונטולוגיה — כל פעילות מתוארת ממופה לסיווג המבטח ולחשיפה שלה</div>
         <div class="trace" style="margin-top:0; border:none; background:transparent;">
           <div class="trace-body" style="padding: 8px 0;">
             <div class="trace-line"><span class="num">01</span><span class="code"><span class="trace-val">"bathroom fixes"</span> / <span class="trace-val">"kitchen stuff"</span> / <span class="trace-val">"drywall patching"</span></span></div>
@@ -3297,72 +3304,72 @@
       </div>
 
       <div class="mini-ont">
-        <div class="mini-ont-label">Stage 03 / Rule engine evaluation &mdash; every applicable rule fires deterministically</div>
+        <div class="mini-ont-label">שלב 03 / הערכת מנוע חוקים — כל חוק ישים מופעל דטרמיניסטית</div>
         <table class="rules">
           <thead>
             <tr>
-              <th style="width:14%;">Rule</th>
-              <th>Condition</th>
-              <th style="width:28%;">Inputs</th>
-              <th style="width:14%; text-align:right;">Outcome</th>
+              <th style="width:14%;">חוק</th>
+              <th>תנאי</th>
+              <th style="width:28%;">קלטים</th>
+              <th style="width:14%; text-align:right;">תוצאה</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="rule-id">SC-APT-01</td>
-              <td>Customer passes identity and business existence verification</td>
+              <td>הלקוח עובר אימות זהות וקיום עסק</td>
               <td>Delgado Home Services &middot; 6 yrs &middot; AZ registered</td>
               <td class="rule-out"><span class="pill pass">In Appetite</span></td>
             </tr>
             <tr>
               <td class="rule-id">SC-CLS-04</td>
-              <td>Self-classification matches described activities</td>
+              <td>הסיווג העצמי תואם את הפעילויות המתוארות</td>
               <td>Self: handyman. Described: light interior + water-heater + roof-surface work</td>
               <td class="rule-out"><span class="pill fail">Mismatch</span></td>
             </tr>
             <tr>
               <td class="rule-id">SC-HAZ-12</td>
-              <td>Roof-surface or height-work activity excludes standard DTC handyman flow</td>
+              <td>פעילות משטח גג או עבודה בגובה מוציאה את הזרם הסטנדרטי של <span dir="ltr">DTC handyman</span></td>
               <td>&ldquo;patch leaks or replace a few shingles&rdquo; &rarr; roof-surface work</td>
               <td class="rule-out"><span class="pill fail">Breach</span></td>
             </tr>
             <tr>
               <td class="rule-id">SC-COV-08</td>
-              <td>Water-related plumbing requires water-damage terms / sublimit</td>
+              <td>אינסטלציה קשורת-מים דורשת תנאי נזקי-מים / תת-מגבלה</td>
               <td>water heater replacement</td>
               <td class="rule-out"><span class="pill warn">Subject To</span></td>
             </tr>
             <tr>
               <td class="rule-id">SC-EXP-15</td>
-              <td>Annual revenue reconciles against described scope</td>
+              <td>הכנסה שנתית מתיישבת מול ההיקף המתואר</td>
               <td>$180K + multi-activity landlord repair scope</td>
               <td class="rule-out"><span class="pill pass">Pass</span></td>
             </tr>
             <tr>
               <td class="rule-id">SC-LOSS-02</td>
-              <td>Prior-loss evidence reviewed</td>
+              <td>ראיות הפסדים קודמים נסקרו</td>
               <td>No prior GL/property claims disclosed or found in available external prior-loss sources</td>
               <td class="rule-out"><span class="pill pass">Pass</span></td>
             </tr>
             <tr>
               <td class="rule-id">SC-LIM-06</td>
-              <td>Limits adequate for highest-hazard activity</td>
+              <td>מגבלות נאותות לפעילות בעלת הסכנה הגבוהה ביותר</td>
               <td>Standard $1M GL not adequate for roof-surface / height exposure</td>
               <td class="rule-out"><span class="pill warn">Subject To</span></td>
             </tr>
             <tr>
               <td class="rule-id">SC-COMM-09</td>
-              <td>Customer message explains price difference from initial expectation</td>
+              <td>מסר הלקוח מסביר את הפרש המחיר מהציפייה הראשונית</td>
               <td>Full-scope option exceeds typical handyman premium</td>
               <td class="rule-out"><span class="pill warn">Triggered</span></td>
             </tr>
           </tbody>
         </table>
-        <p style="margin-top: 14px; font-size: 13px; color: var(--muted); font-style: italic;">Note on the rule table: The eight rules above are the underwriting engine. The adjacent workers&rsquo; compensation prompt is surfaced by the platform layer, not the rule engine &mdash; it&rsquo;s an adjacent-coverage handoff, not an underwriting decision on this submission.</p>
+        <p style="margin-top: 14px; font-size: 13px; color: var(--muted); font-style: italic;">הערה על טבלת החוקים: שמונת החוקים למעלה הם מנוע החיתום. הצעת ביטוח פועלים סמוכה מוצפת על ידי שכבת הפלטפורמה, לא על ידי מנוע החוקים — זו העברה לכיסוי סמוך, לא החלטה חיתומית על ההצעה הזו.</p>
       </div>
 
       <div class="mini-ont">
-        <div class="mini-ont-label">Stage 04 / Neural explanation &mdash; proof tree narrative, every claim cites a rule ID</div>
+        <div class="mini-ont-label">שלב 04 / הסבר נוירוני — נרטיב עץ הוכחה, כל טענה מצטטת מזהה חוק</div>
         <div class="trace" style="margin-top:0; border:none; background:transparent;">
           <div class="trace-body" style="padding: 8px 0;">
             <div class="trace-line comment"><span class="num">01</span><span class="code"># Narrative generated from rule firings &mdash; every claim cites a rule ID</span></div>
@@ -3382,8 +3389,8 @@
       </div>
 
       <div class="mini-ont">
-        <div class="mini-ont-label">Stage 05 / Cross-domain reasoning &mdash; price, claims similarity, and explain</div>
-        <p style="font-size: 14px; color: var(--ink-2); margin: 10px 0 16px; line-height: 1.55;">Stage 05 reasons across pricing, coverage, claims, and customer-communication ontologies &mdash; all sharing the same activity decomposition from Stage 02. This is where the shared ontology pays off: the same classes that price the risk also index the carrier&rsquo;s historical claims.</p>
+        <div class="mini-ont-label">שלב 05 / הסקה חוצת-דומיין — מחיר, דמיון תביעות, והסבר</div>
+        <p style="font-size: 14px; color: var(--ink-2); margin: 10px 0 16px; line-height: 1.55;">שלב 05 מסיק על פני אונטולוגיות תמחור, כיסוי, תביעות, ותקשורת עם לקוחות — כולן חולקות את אותו פירוק פעילות משלב 02. כאן האונטולוגיה המשותפת משתלמת: אותם סיווגים שמתמחרים את הסיכון גם מאנדקסים את התביעות ההיסטוריות של המבטח.</p>
         <div class="trace" style="margin-top:0; border:none; background:transparent;">
           <div class="trace-body" style="padding: 8px 0;">
             <div class="trace-line comment"><span class="num">01</span><span class="code"># Revenue allocation estimated from the activity description and confirmed</span></div>
@@ -3445,59 +3452,59 @@
 
       <!-- Customer-facing message reveal -->
       <div style="margin-top: 32px; padding: 28px 32px; background: #fff; border: 1px solid rgba(28,37,48,0.18); border-left: 3px solid var(--nsai); border-radius: 4px; line-height: 1.65;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 14px;">Customer message &middot; from BrightSure Direct to Marcos</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 14px;">מסר ללקוח · מ־<span dir="ltr">BrightSure Direct</span> ל־<span dir="ltr">Marcos</span></div>
 
-        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--ink); margin-bottom: 14px;">Hi Marcos &mdash; thanks for the details on Delgado Home Services. Before we bind, we want to make sure your coverage actually matches the work you do.</p>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--ink); margin-bottom: 14px;">שלום <span dir="ltr">Marcos</span> — תודה על הפרטים על <span dir="ltr">Delgado Home Services</span>. לפני שנכרוך, אנחנו רוצים לוודא שהכיסוי שלך באמת תואם לעבודה שאתה עושה.</p>
 
-        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--ink); margin-bottom: 12px;">Based on what you described, your business is a bit more than a standard handyman operation:</p>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--ink); margin-bottom: 12px;">לפי מה שתיארת, העסק שלך הוא קצת יותר מפעילות <span dir="ltr">handyman</span> סטנדרטית:</p>
 
         <ul style="list-style: none; padding-left: 0; margin: 0 0 18px 0;">
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); padding: 6px 0 6px 22px; position: relative;"><span style="position:absolute;left:4px;top:6px;color:var(--accent);">&middot;</span> Most of your work is light interior repair &mdash; that fits our handyman program.</li>
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); padding: 6px 0 6px 22px; position: relative;"><span style="position:absolute;left:4px;top:6px;color:var(--accent);">&middot;</span> The water-heater work creates water-damage exposure at landlord properties, so we would add terms designed for that exposure.</li>
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); padding: 6px 0 6px 22px; position: relative;"><span style="position:absolute;left:4px;top:6px;color:var(--accent);">&middot;</span> The leak patching and shingle replacement is roof-surface work. Even if you only do it occasionally, it carries height and fall exposure that standard handyman coverage does not contemplate.</li>
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); padding: 6px 0 6px 22px; position: relative;"><span style="position:absolute;left:4px;top:6px;color:var(--accent);">&middot;</span> רוב העבודה שלך היא תיקון פנים קל — זה מתאים לתוכנית ה־<span dir="ltr">handyman</span> שלנו.</li>
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); padding: 6px 0 6px 22px; position: relative;"><span style="position:absolute;left:4px;top:6px;color:var(--accent);">&middot;</span> עבודות דוד המים חמים יוצרות חשיפה לנזקי מים בנכסים של בעלי הבתים, לכן נוסיף תנאים המיועדים לחשיפה הזו.</li>
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); padding: 6px 0 6px 22px; position: relative;"><span style="position:absolute;left:4px;top:6px;color:var(--accent);">&middot;</span> טלאי הדלפים והחלפת הרעפים היא עבודת משטח גג. גם אם אתה עושה את זה רק מדי פעם, זה כרוך בחשיפה לגובה ולנפילה שכיסוי <span dir="ltr">handyman</span> סטנדרטי לא מתחשב בה.</li>
         </ul>
 
-        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--ink); margin-bottom: 18px;">We have two ways to handle this:</p>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; color: var(--ink); margin-bottom: 18px;">יש לנו שתי דרכים לטפל בזה:</p>
 
         <div style="background: var(--paper-2); padding: 18px 22px; border-radius: 4px; margin-bottom: 14px;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--accent-2); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">Option A &middot; Full-scope quote for everything you described</div>
-          <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin: 0;">Estimated annual premium: <strong style="font-style: normal;">$4,100</strong>. This route includes the roof-surface work you described, subject to specialty underwriting terms and final review. It usually takes about 5 business days because roof work needs an underwriter to confirm the details.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--accent-2); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">אפשרות A · הצעת מחיר מלאה לכל מה שתיארת</div>
+          <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin: 0;">פרמיה שנתית משוערת: <strong style="font-style: normal;"><span dir="ltr">$4,100</span></strong>. המסלול הזה כולל את עבודות משטח הגג שתיארת, בכפוף לתנאי חיתום מיוחדים וסקירה סופית. זה בדרך כלל לוקח כ־5 ימי עסקים כי עבודת גג דורשת חתם לאישור הפרטים.</p>
         </div>
 
         <div style="background: var(--paper-2); padding: 18px 22px; border-radius: 4px; margin-bottom: 18px;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--accent-2); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">Option B &middot; Bind today as handyman + water-heater work, with roof work excluded</div>
-          <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin: 0;">Annual premium: <strong style="font-style: normal;">$1,950</strong>. This covers your light interior repair and water-heater-related work under the terms shown, but roof-surface work would be excluded. If you continue doing roof work, you should use Option A or arrange separate coverage for that work.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--accent-2); text-transform: uppercase; margin-bottom: 8px; font-weight: 600;">אפשרות B · כרוך היום כ־<span dir="ltr">handyman</span> + עבודת דוד מים חמים, עם החרגה של עבודת גג</div>
+          <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin: 0;">פרמיה שנתית: <strong style="font-style: normal;"><span dir="ltr">$1,950</span></strong>. זה מכסה את תיקוני הפנים הקלים שלך ואת העבודות הקשורות לדוד המים חמים תחת התנאים שהוצגו, אבל עבודת משטח גג תוחרג. אם תמשיך לעשות עבודות גג, כדאי לך להשתמש באפשרות A או לארגן כיסוי נפרד לאותה עבודה.</p>
         </div>
 
-        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin-bottom: 12px;">This quote covers liability and tools/equipment. It does not cover the truck itself or auto liability; we can route that separately if needed.</p>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin-bottom: 12px;">ההצעה הזו מכסה אחריות וכלי עבודה/ציוד. היא לא מכסה את הרכב עצמו או אחריות אוטו; נוכל להפנות את זה בנפרד אם צריך.</p>
 
-        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin-bottom: 12px;">Also, because you mentioned one helper, we should separately check whether you need workers&rsquo; compensation coverage. That is not included in the GL/tools quote.</p>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin-bottom: 12px;">בנוסף, מכיוון שהזכרת עוזר אחד, כדאי שנבדוק בנפרד אם אתה צריך כיסוי ביטוח פועלים. זה לא כלול בהצעת <span dir="ltr">GL</span>/כלי עבודה.</p>
 
-        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin-bottom: 14px;">These options assume the work mix you described; we&rsquo;ll confirm the exact split before bind.</p>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin-bottom: 14px;">האפשרויות האלה מניחות את תמהיל העבודה שתיארת; נאשר את החלוקה המדויקת לפני הכריכה.</p>
 
-        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin: 0;">Most repair businesses that continue doing roof work prefer Option A, because they do not want surprise gaps. But if you rarely do roof work and want to bind today, Option B is available too. Want us to walk through either option?</p>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: var(--ink-2); margin: 0;">רוב עסקי התיקונים שממשיכים לעשות עבודות גג מעדיפים את אפשרות A, כי הם לא רוצים פערים מפתיעים. אבל אם אתה עושה עבודות גג לעיתים רחוקות ורוצה לכרוך היום, אפשרות B זמינה גם. רוצה שנעבור על אחת מהאפשרויות?</p>
       </div>
 
       <div class="decision nsai">
-        <div class="decision-label">What the neurosymbolic system produced</div>
-        <h4>A decomposition, a proof, claims similarity, two priced options, and a customer message.</h4>
-        <p>Unlike the LLM, the NSAI system didn&rsquo;t stop at the customer&rsquo;s self-description. It decomposed the activities, mapped each to its exposure class, compared the activity mix to similar historical claim patterns from the same shared ontology, identified the roof-surface appetite breach, priced each component separately, and produced a customer message that turns a higher quote into an informed choice instead of confused churn.</p>
+        <div class="decision-label">מה המערכת הנוירו-סימבולית הפיקה</div>
+        <h4>פירוק, הוכחה, דמיון תביעות, שתי אפשרויות מתומחרות, ומסר ללקוח.</h4>
+        <p>בשונה מה־<span dir="ltr">LLM</span>, מערכת ה־<span dir="ltr">NSAI</span> לא עצרה בתיאור העצמי של הלקוח. היא פירקה את הפעילויות, מיפתה כל אחת לסיווג החשיפה שלה, השוותה את תמהיל הפעילויות לדפוסי תביעות היסטוריים דומים מאותה אונטולוגיה משותפת, זיהתה את חריגת התיאבון של משטח הגג, תמחרה כל רכיב בנפרד, והפיקה מסר ללקוח שהופך הצעה גבוהה יותר לבחירה מודעת במקום נטישה מבולבלת.</p>
         <ul class="issue-list">
-          <li><strong>Decomposed the activity set</strong> through ontology &mdash; five described activities, three exposure classes</li>
-          <li><strong>Caught the appetite breach</strong> through height-work inheritance</li>
-          <li><strong>Identified the coverage gap</strong> the LLM&rsquo;s quote would have left at claim time</li>
-          <li><strong>Connected to claim patterns</strong> because underwriting and claims share the same activity ontology &mdash; Delgado isn&rsquo;t compared to all &ldquo;handymen,&rdquo; but to risks with the same activity mix</li>
-          <li><strong>Priced each exposure separately</strong> with traceable rating logic</li>
-          <li><strong>Produced two options</strong> so the customer keeps agency</li>
-          <li><strong>Generated the explanation</strong> that closes the conversion gap</li>
+          <li><strong>פירקה את סט הפעילויות</strong> באמצעות אונטולוגיה — חמש פעילויות מתוארות, שלושה סיווגי חשיפה</li>
+          <li><strong>תפסה את חריגת התיאבון</strong> באמצעות ירושת עבודה בגובה</li>
+          <li><strong>זיהתה את פער הכיסוי</strong> שהצעת ה־<span dir="ltr">LLM</span> הייתה משאירה בזמן תביעה</li>
+          <li><strong>התחברה לדפוסי תביעות</strong> כי חיתום ותביעות חולקים את אותה אונטולוגיית פעילות — <span dir="ltr">Delgado</span> לא מושווה לכל ה־״<span dir="ltr">handymen</span>״, אלא לסיכונים עם אותו תמהיל פעילויות</li>
+          <li><strong>תמחרה כל חשיפה בנפרד</strong> עם לוגיקת תמחור ניתנת למעקב</li>
+          <li><strong>הפיקה שתי אפשרויות</strong> כדי שהלקוח שומר על בחירה</li>
+          <li><strong>ייצרה את ההסבר</strong> שסוגר את פער ההמרה</li>
         </ul>
       </div>
 
       <!-- Industry-context callout -->
       <div style="margin-top: 32px; padding: 22px 26px; background: var(--paper-2); border-left: 3px solid var(--accent-3); border-radius: 4px;">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px;">Industry context</div>
-        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; line-height: 1.6; color: var(--ink-2); margin: 0 0 10px 0;">Verisk research estimates that small commercial business misclassification produces up to <strong style="font-style: normal;">$6.5 billion in first-year premium leakage</strong> and more than <strong style="font-style: normal;">$22 billion over four years</strong> in BOP premium alone. The issue isn&rsquo;t that customers lie &mdash; it&rsquo;s that &ldquo;handyman&rdquo; or &ldquo;landscaper&rdquo; or &ldquo;warehouse&rdquo; can hide exposures that don&rsquo;t fit the self-classification. A DTC flow that takes the self-description at face value is the leakage.</p>
-        <p style="font-size: 12px; color: var(--muted); margin: 0; line-height: 1.5;">Source: Verisk LightSpeed Small Commercial materials and Verisk analysis of small commercial SIC/NAICS misclassification.</p>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px;">הקשר תעשייתי</div>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 17px; line-height: 1.6; color: var(--ink-2); margin: 0 0 10px 0;">מחקר של <span dir="ltr">Verisk</span> מעריך שסיווג שגוי של עסקים מסחריים קטנים מייצר עד <strong style="font-style: normal;">6.5 מיליארד דולר של דליפת פרמיה בשנה הראשונה</strong> ויותר מ־<strong style="font-style: normal;">22 מיליארד דולר לאורך ארבע שנים</strong> בפרמיית <span dir="ltr">BOP</span> בלבד. הבעיה איננה שלקוחות משקרים — היא ש״<span dir="ltr">handyman</span>״ או ״<span dir="ltr">landscaper</span>״ או ״<span dir="ltr">warehouse</span>״ יכולים להסתיר חשיפות שלא מתאימות לסיווג העצמי. זרם <span dir="ltr">DTC</span> שלוקח את התיאור העצמי כפשוטו — הוא הדליפה.</p>
+        <p style="font-size: 12px; color: var(--muted); margin: 0; line-height: 1.5;">מקור: חומרי <span dir="ltr">Verisk LightSpeed Small Commercial</span> וניתוח <span dir="ltr">Verisk</span> של סיווג שגוי של <span dir="ltr">SIC/NAICS</span> במסחרי קטן.</p>
       </div>
     </div>
 
