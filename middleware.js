@@ -13,6 +13,9 @@ function isPublic(pathname) {
     pathname === '/login.html' ||
     pathname === '/login' ||
     pathname.startsWith('/api/auth/') ||
+    // Vercel Cron targets — invoked by Vercel's cron with a Bearer token,
+    // not by a session cookie. Endpoints do their own auth via CRON_SECRET.
+    pathname.startsWith('/api/cron/') ||
     pathname === '/robots.txt' ||
     // Publicly-shareable pages. Remove entries here to put a page back behind
     // the login gate. Page-level <meta name="robots" content="noindex"> keeps
